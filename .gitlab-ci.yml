@@ -1,0 +1,15 @@
+# See http://doc.gitlab.com/ce/ci/yaml/README.html
+
+validate:
+  script: validate v1
+
+# Deploy application to a server
+# deploy:
+#   stage: deploy
+#   script: deploy
+#   only: [master]                          # Only deploy on master branch commit
+#   variables:
+#     SERVER: ubuntu@uat.gramener.com       # Deploy to uat.gramener.com/app-name/
+#     URL: app-name                         # Change this to your app-name
+#     SETUP: npm install && bower install   # You can use any setup script here
+#     VERSION: v1                           # v0, v1 or static

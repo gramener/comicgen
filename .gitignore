@@ -1,0 +1,71 @@
+# Ignore files that should not be committed.
+# Do not commit data, passwords, secret information or large files.
+
+# Ignore bower components and npm modules
+node_modules/
+bower_components/
+
+# Filenames should NOT have spaces
+* *
+
+# Ignore byte-compiled / optimised / DLL files
+*.py[cod]
+
+# Do not commit data files
+*.csv
+*.db
+*.sqlite3
+*.sqlite3-journal
+*.dat
+*.mdb
+
+# Ignore compressed files
+*.7z
+*.zip
+
+# Avoid documents
+*.doc*
+*.pdf
+*.ppt*
+*.xls*
+
+# Avoid media files
+*.avi
+*.mp*
+*.wmv
+
+# Ignore Gramex 0.x artefacts and log files
+.cache/
+.gramex-compiled/
+*.xhtml
+*.log
+
+# Ignore backup files
+~$*
+*~
+*.bak*
+
+# Sublime-text workspaces, etc
+*.sublime-*
+.vscode/
+
+# IPython Notebook checkpoints
+.ipynb_checkpoints
+
+# Windows shortcut files
+*.lnk
+
+# Windows / Mac OS junk files
+Desktop.ini
+$RECYCLE.BIN/
+*[Tt]humbs.db
+*.DS_Store
+
+# bash.exe.stackdump on Cygwin
+*.stackdump
+
+# R history files
+.RHistory
+
+# For Linux FUSE file system
+.fuse_hidden*

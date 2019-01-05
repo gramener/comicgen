@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Forbidden</title>
+  <!-- htmllint tag-bans="false" -->
+  <style>
+  * { box-sizing: border-box; }
+  html { width: 100%; height: 100%; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 18px; }
+  .content { margin: 0 auto; width: 20rem;}
+  pre { background-color: #f8f8f8; padding: 0.5em; overflow-x: auto; }
+  </style>
+  <!-- htmllint tag-bans="$previous" -->
+</head>
+<body class="content">
+  <h1>You need access</h1>
+  {% try %}{% set xsrf = handler.check_xsrf_cookie() or True %}{% except %}{% set xsrf = False %}{% end %}
+  {% if handler.request.method not in {'GET', 'HEAD', 'OPTIONS'} and not xsrf %}
+    <p>Your app sent a {{ handler.request.method }} request without an XSRF cookie.</p>
+  {% elif handler.current_user %}
+    <p>You are logged in, but as a user that cannot access this page.</p>
+    {% import yaml %}
+    <pre>{{ yaml.safe_dump(handler.current_user, default_flow_style=False) }}</pre>
+  {% else %}
+    <p>You <strong>are not</strong> logged in.</p>
+  {% end %}
+  {% set login_url = None %}
+  {% try %}
+    {% set login_url = handler.kwargs.auth.login_url %}
+  {% except %}
+    {% try %}
+      {% import gramex %}
+      {% set login_url = gramex.conf.app.settings.login_url %}
+    {% except %}
+    {% end %}
+  {% end %}
+  {% if login_url %}
+  <p><a href="{{ login_url }}">Try logging in again</a>.</p>
+  {% end %}
+  <p>Contact the app owner for more information.</p>
+  <pre>HTTP 403: Forbidden</pre>
+</body>
+</html>
