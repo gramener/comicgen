@@ -7,7 +7,7 @@ url:
     pattern: /$YAMLURL/files/(.*)
     handler: FileHandler
     kwargs:
-      path: D:/seafile/Dee-Dey      # TODO: change to generic path
+      path: D:/seafile/Dee-Dey     # TODO: change to generic path
       index: true
 
   deedey-file-list:

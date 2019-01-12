@@ -51,7 +51,7 @@
     <script type="text/html">
       <svg width="200" height="200">
         <% files.forEach(function(file) { %>
-          <image xlink:href="<%= file %>"/>
+          <image xlink:href="<%= file[0] %>" x="<%= file[1] %>" y="<%= file[2] %>"/>
         <% }) %>
       </svg>
     </script>
