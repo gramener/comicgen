@@ -5,6 +5,6 @@ $.getJSON('filelist')
 
 $('body').on('change', 'input.file', function() {
   $('script.comic').template({
-    files: $('input:checked').map(function (v) { return 'files' + this.name }).get()
+    files: $('input:checked').map(function () { return 'files' + this.name }).get()
   })
 })

@@ -3,20 +3,22 @@
 # Configurations for app: deedey
 # ----------------------------------------------------------------------------
 variables:
-  DEEDAYPATH: D:/seafile/Dee-Dey     # TODO: change to generic path
+  DEEDEYPATH:
+    function: "'D:/seafile/Dee-Dey/200x200' if 'win32' in sys.platform else '/mnt/gramener/seafile/dee-dey/200x200'"
+
 url:
   deedey-files:
     pattern: /$YAMLURL/files/(.*)
     handler: FileHandler
     kwargs:
-      path: $DEEDAYPATH
+      path: $DEEDEYPATH
       index: true
 
   deedey-file-list:
     pattern: /$YAMLURL/filelist
     handler: FormHandler
     kwargs:
-      url: dir:///$DEEDAYPATH
+      url: dir:///$DEEDEYPATH
 
 
 
