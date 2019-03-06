@@ -47,14 +47,31 @@
   </nav>
 
   <div class="container">
+    <div class="d-flex">
+      <div class="filters">
+        <script type="text/html" class="checklist">
+          <% _.filter(files, function (file) { return file.type == '.svg' }).forEach(function(file) { %>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input file"
+                    name="<%- file.dir + file.name %>" value="checkedValue">
+                <%- file.dir %><%- file.name %>
+              </label>
+            </div>
+          <% }) %>
+        </script>
+      </div>
+      <div class="comic">
+        <script type="text/html" class="comic">
+          <svg width="200" height="200">
+            <% files.forEach(function(file) { %>
+              <image xlink:href="<%= file %>"/>
+            <% }) %>
+          </svg>
+        </script>
+      </div>
+    </div>
 
-    <script type="text/html">
-      <svg width="200" height="200">
-        <% files.forEach(function(file) { %>
-          <image xlink:href="<%= file[0] %>" x="<%= file[1] %>" y="<%= file[2] %>"/>
-        <% }) %>
-      </svg>
-    </script>
 
   </div>
 </body>

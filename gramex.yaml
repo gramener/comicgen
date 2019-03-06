@@ -2,19 +2,21 @@
 
 # Configurations for app: deedey
 # ----------------------------------------------------------------------------
+variables:
+  DEEDAYPATH: D:/seafile/Dee-Dey     # TODO: change to generic path
 url:
   deedey-files:
     pattern: /$YAMLURL/files/(.*)
     handler: FileHandler
     kwargs:
-      path: D:/seafile/Dee-Dey     # TODO: change to generic path
+      path: $DEEDAYPATH
       index: true
 
   deedey-file-list:
     pattern: /$YAMLURL/filelist
     handler: FormHandler
     kwargs:
-      url: dir:///D:/seafile/Dee-Dey/
+      url: dir:///$DEEDAYPATH
 
 
 
