@@ -1,3 +1,0 @@
-[flake8]
-exclude=build,dist
-max-line-length=99

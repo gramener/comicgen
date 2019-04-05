@@ -1,0 +1,35 @@
+{
+  "name": "comicgen",
+  "version": "0.0.1",
+  "description": "Create comics for your website or app",
+  "main": "dist/comicgen.min.js",
+  "jsdelivr": "dist/comicgen.min.js",
+  "unpkg": "dist/comicgen.min.js",
+  "repository": "git@code.gramener.com:s.anand/deedey.git",
+  "author": "S Anand <s.anand@gramener.com>",
+  "scripts": {
+    "build": "rimraf dist && rollup -c",
+    "lint": "eclint . && eslint --ext js,html .",
+    "prepublishOnly": "npm test",
+    "pretest": "npm run build && browserify -s tape -r tape -o test/tape.js",
+    "test": "node test/server.js puppeteer | tap-merge | faucet",
+    "test-chrome": "node test/server.js chrome | tap-merge | faucet",
+    "test-edge": "node test/server.js MicrosoftEdge | tap-merge | faucet",
+    "test-firefox": "node test/server.js firefox | tap-merge | faucet"
+  },
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "browserify": "16",
+    "express": "4",
+    "faucet": "0.0",
+    "jquery": "3",
+    "puppeteer": "1",
+    "rimraf": "2",
+    "rollup": "1",
+    "rollup-plugin-uglify": "6",
+    "selenium-webdriver": "3",
+    "tap-merge": "0.3",
+    "tape": "4"
+  }
+}

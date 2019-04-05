@@ -1,89 +1,130 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Dee &amp; Dey</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+  <title>Comicgen: Comic Creator</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="Create comics for your website or app with the comicgen JavaScript library">
+  <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+  <link href="https://learn.gramener.com/ui/bootstraptheme.css?font-family-base=Neucha,cursive&dark=%23675b9e&primary=%238b8ac1" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs@9.12.0/styles/github.css">
 </head>
-<body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-danger py-0">
-    <a class="navbar-brand" href="#">
-      <span class="text-uppercase">Dee &amp; Dey</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- Navbar left -->
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
+<body class="d-flex flex-column h-full">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark text-light border-bottom body-color">
+    <div class="container">
+      <a class="navbar-brand font-weight-bold" href="#">Comicgen</a>
+      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+          aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto">
+          <li class="navbar-item"><i class="far fa-smile"></i></li>
+        </ul>
+        <ul class="navbar-nav">
+          <a class="navbar-brand" href="https://gramener.com/" target="_blank" rel="noopener">
+            <img src="docs/gramener.png" alt="Gramener" height="40">
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-      </ul>
-      <!-- Navbar right -->
-      <div class="navbar-nav mr-2">
-        <a class="nav-item nav-link" href="login/" title="Log in again" data-placement="bottom">User name</a>
-        <a class="nav-item nav-link" href="logout/" title="Log out" data-placement="bottom"><span class="fa fa-sign-out"></span></a>
+        </ul>
       </div>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
-      </form>
     </div>
   </nav>
 
-  <div class="container">
-    <div class="d-flex">
-      <div class="filters">
-        <script type="text/html" class="checklist">
-          <% _.filter(files, function (file) { return file.type == '.svg' }).forEach(function(file) { %>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="checkbox" class="form-check-input file"
-                    name="<%- file.dir + file.name %>" value="checkedValue">
-                <%- file.dir %><%- file.name %>
-              </label>
-            </div>
-          <% }) %>
-        </script>
+  <div class="container my-3">
+    <div class="row">
+      <div class="col-lg-4">
+        <h1>Make your own comic</h1>
+        <md id="introduction"></md>
       </div>
-      <div class="comic">
-        <script type="text/html" class="comic">
-          <svg width="200" height="200">
-            <% files.forEach(function(file) { %>
-              <image xlink:href="<%= file %>"/>
-            <% }) %>
-          </svg>
-        </script>
+      <div class="col-lg-8">
+        <form class="selector form-inline">
+          <div>
+            <select class="form-control mr-2" name="name"></select>
+            <select class="form-control mr-2" name="angle"></select>
+            <select class="form-control mr-2" name="emotion"></select>
+            <select class="form-control mr-2" name="pose"></select>
+          </div>
+        </form>
+        <div class="target bg-light my-2"></div>
+        <pre id="code"></pre>
+        <button type="button" class="btn btn-sm btn-light border copy" data-toggle="tooltip" data-placement="top">
+          <i class="far fa-copy"></i> Copy code
+        </button>
+        <button type="button" class="btn btn-sm btn-light border download">Download as PNG</button>
       </div>
     </div>
+
+    <md id="usage"></md>
+
   </div>
+
+  <footer class="mt-auto text-center pt-3 bg-light border-top">
+    <p>Made by <a href="https://gramener.com/">Gramener</a>.
+      Released under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/g1@0.16.1/dist/g1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.0/dist/showdown.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlightjs@9.12.0/highlight.pack.min.js"></script>
+  <script src="dist/comicgen.min.js"></script>
+  <script>
+    /* globals comicgen, showdown, hljs */
+    $.get('README.md')
+      .done(function (text) {
+        var converter = new showdown.Converter({ ghCodeBlocks: true })
+        text.match(/<!--\s*var\s+\S*\s*-->[\s\S]*?<!--\s*end\s*-->/igm).forEach(function (match) {
+          var lines = match.split(/\n/)
+          var name = lines[0].replace(/^<!--\s*var\s+/, '').replace(/\s*-->$/, '')
+          $('#' + name)
+            .addClass('d-block my-4')
+            .html(converter.makeHtml(lines.slice(1, -1).join('\n')))
+            .find('pre')
+            .each(function () {
+              hljs.highlightBlock(this)
+            })
+        })
+      })
+
+    function options(q, id, data) {
+      data = _.isArray(data) ? data : _.keys(data)
+      // If q[id] is not in data, pick the first item from the data list/dict
+      q[id] = q[id] && data.indexOf(q[id]) > 0 ? q[id] : data[0]
+      var options = data.map(function (v) { return '<option>' + v + '</option>' }).join('')
+      $('.selector select[name="' + id + '"]').html(options).val(q[id])
+    }
+
+    $.getJSON('files/files.json')
+      .done(function (data) {
+        $('.selector :input').on('change', function () {
+          location.hash = '?' + $('.selector').serialize()
+        })
+        $(window).on('#', function (e, url) {
+          var q = url.searchKey
+          options(q, 'name', data)
+          options(q, 'angle', data[q.name])
+          options(q, 'emotion', data[q.name][q.angle].emotion)
+          options(q, 'pose', data[q.name][q.angle].pose)
+          comicgen('.target', q)
+          $('#code').text('comicgen(".target", ' + JSON.stringify(q, null, 2).trim() + ')')
+        }).urlchange()
+      })
+
+    // TODO
+    $('.copy')
+      .tooltip({ trigger: 'click' })
+      .on('click', function() {
+        var $textarea = $('<textarea></textarea>').val(($('.insertcomic').parent().find('pre')).text()).appendTo(document.body).select()
+        document.execCommand('copy')
+        $textarea.remove()
+        // After some time, hide the tooltip
+        setTimeout(function() { $('.copy').tooltip('hide') }, 1000) })
+  </script>
 </body>
-<script src="ui/jquery/dist/jquery.min.js"></script>
-<script src="ui/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="ui/lodash/lodash.min.js"></script>
-<script src="ui/g1/dist/g1.min.js"></script>
-<script src="js/deedey.js"></script>
-<!-- Commonly used libraries:
-  <script src="ui/d3/build/d3.min.js"></script>
-  <script src="ui/moment/min/moment-with-locales.min.js"></script>
-  <script src="ui/noty/lib/noty.min.js"></script>
-  <script src="ui/daterangepicker/daterangepicker.js"></script>
-  <script src="ui/leaflet/dist/leaflet.js"></script>
-  <script src="ui/topojson/dist/topojson.min.js"></script>
--->
 </html>

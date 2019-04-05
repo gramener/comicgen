@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Comicgen tests</title>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../dist/comicgen.min.js"></script>
+  <script src="tape.js"></script>
+  <script src="tape-stream.js"></script>
+</head>
+<body>
+
+  <script>
+    tape('comicgen() is a function', function (t) {
+      t.ok(typeof comicgen == 'function')
+      t.end()
+    })
+  </script>
+
+  <div class="comicgen auto-run" name="dee" angle="straight" emotion="sad" pose="yuhoo"></div>
+  <div class="comicgen auto-fail" name="na" angle="na" emotion="na" pose="na"></div>
+  <script>
+    tape('comicgen() automatically renders all comicgen elements', function (t) {
+      $('.auto-run').each(function () {
+        var children = $(this).children()
+        t.equal(children.length, 1)
+        t.equal(children.attr('width'), '500')
+        t.equal(children.attr('height'), '600')
+        var images = children.find('image')
+        t.equal(images.length, 2)
+        // TODO: check if image has really loaded
+      })
+      t.end()
+    })
+  </script>
+
+  <svg class="svg-container" width="400" height="300">
+    <g class="comicgen" name="dee" angle="straight" emotion="yuhoo" pose="yuhoo"></g>
+  </svg>
+  <script>
+    tape('comicgen() automatically renders all comicgen elements', function (t) {
+      $('.svg-container .comicgen').each(function () {
+        var children = $(this).children()
+        t.equal(children.length, 1)
+        t.equal(children.attr('width'), '500')
+        t.equal(children.attr('height'), '600')
+        var images = children.find('image')
+        t.equal(images.length, 2)
+        // TODO: check if image has really loaded
+      })
+      t.end()
+    })
+  </script>
+
+</body>
+</html>

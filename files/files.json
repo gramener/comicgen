@@ -1,0 +1,47 @@
+{
+  "dee": {
+    "straight": {
+      "emotion": [
+        "smilehappy",
+        "smile",
+        "readinglookingdown",
+        "hmm",
+        "sad",
+        "annoyed",
+        "angryfrustrated",
+        "yuhoo"
+      ],
+      "pose": [
+        "angryfrustrated",
+        "handsfolded",
+        "handsheldback",
+        "handsonhip",
+        "holdingbook",
+        "holdinglaptop",
+        "pointingright",
+        "pointingrightup",
+        "pointingup",
+        "readingpaper",
+        "superperfect",
+        "thinkinghmm",
+        "thumbsup",
+        "yuhoo"
+      ]
+    }
+  },
+  "dey": {
+    "straight": {
+      "emotion": [
+        "normal",
+        "smile"
+      ],
+      "pose": [
+        "handsfolded",
+        "holdingbook",
+        "handsinpocket",
+        "superperfect",
+        "thumbsup"
+      ]
+    }
+  }
+}

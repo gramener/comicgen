@@ -1,16 +1,20 @@
-# See http://doc.gitlab.com/ce/ci/yaml/README.html
+# Don't re-download node_modules every time. Cache it
+cache:
+  paths:
+    - node_modules/
 
 validate:
-  script: builderrors v2
+  script:
+    - eclint check "**/*.html" "**/*.js" "**/*.css" "**/*.md"
+    - yarn install
+    - npm run lint
+    - npm test
 
-# Deploy application to a server
 deploy:
-  stage: deploy
   script: deploy
-  # only: [master, dev]
+  only: [master, dev, /^dev-.*$/]
   variables:
     SERVER: gramener.com
-    URL: deedey
-    SETUP: gramex setup .
-    PORT: '9988'
-    VERSION: v1
+    URL: comicgen
+    VERSION: static
+    SETUP: yarn install && npm run build
