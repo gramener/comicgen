@@ -5,9 +5,8 @@ cache:
 
 validate:
   script:
-    - eclint check "**/*.html" "**/*.js" "**/*.css" "**/*.md"
-    - yarn install
     - npm run lint
+    - yarn install
     - npm test
 
 deploy:

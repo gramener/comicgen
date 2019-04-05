@@ -74,6 +74,7 @@ Comicgen is tested on Chrome, Edge, and Firefox. It does not work on Internet Ex
 To publish a new version on npm:
 
 ```bash
+# Update package.json version
 # Run tests on dev branch
 npm run lint
 npm test
@@ -81,8 +82,6 @@ npm run test-chrome
 npm run test-edge
 npm run test-firefox
 
-# Update package.json version
-# Update CHANGELOG.md
 # Ensure that there are no build errors on the server
 git commit . -m"DOC: Release version x.x.x"
 git push
