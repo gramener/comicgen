@@ -24,7 +24,7 @@ export default function comicgen(selector, options) {
 //  https://cdn.jsdelivr.net/npm/comicgen         -> https://cdn.jsdelivr.net/npm/comicgen
 //  node_modules/comicgen/dist/comicgen.min.js    -> node_modules/comicgen/
 // Handle all scenarios and get the base location
-comicgen.base = (document.currentScript.src + '/').replace(/[a-z]*\/[a-z\.]*\.js\/$/, '')
+comicgen.base = (document.currentScript.src + '/').replace(/[a-z]*\/[a-z.]*\.js\/$/, '')
 
 comicgen.defaults = {
   x: 0,

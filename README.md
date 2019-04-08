@@ -69,6 +69,25 @@ The characters are drawn on a 500 x 600 canvas. You can change this using:
 
 Comicgen is tested on Chrome, Edge, and Firefox. It does not work on Internet Explorer.
 
+## API
+
+To explicitly run comicgen on a selector, run `comicgen(selector, options)`.
+For example:
+
+```js
+comicgen('.comicgen', {
+  name: 'dee',
+  angle: 'straight',
+  emotion: 'smile',
+  pose: 'thumbsup',
+  width: 400,
+  height: 300
+})
+```
+
+... renders all elements with `class="comicgen"` as a comic. It sets the default
+name, angle, etc to the values above.
+
 ## Composition
 
 To combine multiple characters in a panel, embed them in an `<svg>` element.
@@ -118,7 +137,7 @@ and slices the height, preserving the top (YMin) of the image.
 You can embed characters in panels CSS. For example, this defines a panel:
 
 ```css
-.panel {
+.comic-panel {
   height: 200px;          /* Each panel has a height of 200 px */
   margin: 10px;           /* ... and a little bit of spacing around it */
   border: 2px solid grey; /* ... with a thick grey border */
@@ -127,11 +146,11 @@ You can embed characters in panels CSS. For example, this defines a panel:
 }
 ```
 
-Now, `<div class="panel">` draws a thick grey border.
+Now, `<div class="comic-panel">` draws a thick grey border.
 You can insert your character inside that.
 
 ```html
-<div class="panel">
+<div class="comic-panel">
   <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded"
     x="-320" y="-120" scale="2.2" width="200" height="200"></g>
 </div>
@@ -142,23 +161,23 @@ You can insert your character inside that.
 Panels are typically placed inside a row:
 
 ```css
-.row {
+.comic-row {
   display: flex;
   flex-direction: row;
 }
 ```
 
-For rows of panels, embed `.comicgen` inside a `.panel` inside a `.row`.
+For rows of panels, embed `.comicgen` inside a `.comic-panel` inside a `.comic-row`.
 
 Here's an example with 2 panels. The second panel has 2 characters.
 
 ```html
-<div class="row">
-  <div class="panel">
+<div class="comic-row">
+  <div class="comic-panel">
     <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded"
       x="-320" y="-120" scale="2.2" width="200" height="200"></g>
   </div>
-  <div class="panel">
+  <div class="comic-panel">
     <svg width="200" height="200">
       <g class="comicgen" name="dey" angle="straight" emotion="smile" pose="handsinpocket"
         x="-200" y="-120" scale="2.2" width="200" height="200"></g>
@@ -171,7 +190,8 @@ Here's an example with 2 panels. The second panel has 2 characters.
 
 ![Dee and Dey in panels](docs/dee-and-dey-panels.png)
 
-For a panel with multiple, embed your `.comicgen` inside a `.panel` inside a `.row`.
+For a panel with multiple, embed your `.comicgen` inside a `.comic-panel` inside
+a `.comic-row`.
 
 
 ## Captions
@@ -179,7 +199,7 @@ For a panel with multiple, embed your `.comicgen` inside a `.panel` inside a `.r
 You can add captions using CSS. For example, this defines a caption on top:
 
 ```css
-.caption-top {
+.comic-caption-top {
   position: absolute;             /* Caption sits on top of the image */
   width: 100%;                    /* It occupies the full width of the panel */
   top: 0;                         /* Position the panel at the top */
@@ -191,21 +211,21 @@ You can add captions using CSS. For example, this defines a caption on top:
 }
 ```
 
-Adding a `<div class="caption-top">...</div>` inside a `<div class="panel">`
-adds a text caption to the top of the strip.
+Adding a `<div class="comic-caption-top">...</div>` inside a
+`<div class="comic-panel">` adds a text caption to the top of the strip.
 
 ```html
-<div class="row">
-  <div class="panel">
-    <div class="caption-top">Hi! I'm Dee.</div>
+<div class="comic-row">
+  <div class="comic-panel">
+    <div class="comic-caption-top">Hi! I'm Dee.</div>
     <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded" x="-317" y="-119" scale="2.2" width="150" height="200"></g>
   </div>
-  <div class="panel">
-    <div class="caption-top">I'm in a comic strip called Dee & Dey.</div>
+  <div class="comic-panel">
+    <div class="comic-caption-top">I'm in a comic strip called Dee & Dey.</div>
     <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded" x="-150" y="10" scale="1.5" width="150" height="200" mirror="1"></g>
   </div>
-  <div class="panel">
-    <div class="caption-top">And this is Dey, my co-star on this strip.</div>
+  <div class="comic-panel">
+    <div class="comic-caption-top">And this is Dey, my co-star on this strip.</div>
     <svg width="300" height="200">
       <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="pointingright" x="160" y="0" scale="0.88" width="300" height="200" mirror="1"></g>
       <g class="comicgen" name="dey" angle="straight" emotion="smile" pose="handsinpocket" x="-120" y="10" scale="0.88" width="300" height="200"></g>
