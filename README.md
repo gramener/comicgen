@@ -1,5 +1,7 @@
 # comicgen
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
+
 <!-- var introduction -->
 We love comics. We badly wanted to create comic strips. But there was one
 problem. Some of us can't draw a straight line for nuts.
@@ -17,7 +19,7 @@ We are sure you'd love the company of our friends [Dee](#?name=dee) &
 Load the comicgen library by adding this line in your HTML page's `<head>`:
 
 ```html
-<script async src="https://cdn.jsdelivr.net/npm/comicgen/"></script>
+<script async src="https://cdn.jsdelivr.net/npm/comicgen"></script>
 ```
 
 You can also instal comicgen locally using `npm` or `yarn`:
@@ -35,18 +37,18 @@ yarn install comicgen
 
 ## Usage
 
-To embed a comic, add:
+To embed a character, add:
 
 ```html
-<div class="comicgen" name="dee" angle="straight" emotion="smile" pose="thumbsup"></div>
+<g class="comicgen" name="dee" angle="straight" emotion="smile" pose="thumbsup"></g>
 ```
 
-This embeds the following SVG image inside your `<div>`.
-(You can embed the comic inside any tag, including `<svg>`)
+This inserts the following image in your HTML.
+You can embed it anywhere, including inside an `<svg>` element.
 
 ![name=dee angle=straight emotion=smile pose=thumbsup](docs/dee-straight-smile-thumbsup.png)
 
-Each comic accepts 4 attributes:
+The character is defined by 4 attributes:
 
 - `name`: the name of the character (e.g. `dee`, `dey`)
 - `angle`: which angle are they are facing (e.g. `straight`, `side`)
@@ -56,15 +58,163 @@ Each comic accepts 4 attributes:
 The list of valid combinations are available on the
 [comicgen interactive gallery](https://gramener.com/comicgen/).
 
-The comics are drawn on a 500 x 600 canvas. You can change this using:
+The characters are drawn on a 500 x 600 canvas. You can change this using:
 
-- `width`: width of the image
-- `height`: height of the image
-- `x`: x-offset
-- `y`: y-offset
-- `scale`: how much larger to make the image
+- `width`: width of the image. Default: 500
+- `height`: height of the image. Default: 600
+- `x`: left position or x-offset. Default: 0
+- `y`: top position or y-offset. Default: 1
+- `mirror`: shsow mirror image. Value can be empty string or 1. Default: empty string
+- `scale`: how much larger to make the image. Default: 1
 
 Comicgen is tested on Chrome, Edge, and Firefox. It does not work on Internet Explorer.
+
+## Composition
+
+To combine multiple characters in a panel, embed them in an `<svg>` element.
+
+You can change the `x`, `y`, `width`, `height`, `mirror` and `scale` to position each character.
+
+```html
+<svg width="300" height="200">
+  <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="pointingright" x="-120"></g>
+  <g class="comicgen" name="dey" angle="straight" emotion="smile" pose="handsinpocket" x="150"></g>
+</svg>
+```
+
+![Dee and Dey together](docs/dee-and-dey-together.png)
+
+You can resize the combined image by changing the `width` and `height` of the
+SVG container.
+
+```html
+<svg width="300" height="200" viewBox="0 0 500 600">
+  <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="pointingright" x="-120"></g>
+  <g class="comicgen" name="dey" angle="straight" emotion="smile" pose="handsinpocket" x="150"></g>
+</svg>
+```
+
+Set `viewBox` to the width and height of the comicgen elements. Then you can set
+the outer `width` and `height` to anything.
+
+![Dee and Dey scaled down](docs/dee-and-dey-meet.png)
+
+This normally scales the image to fit both the width and height. To fit only one
+side, use [preserveAspectRatio](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/preserveAspectRatio).
+For example, `preserveAspectRatio="xMidYMin slice"` in this case fits to width
+and slices the height, preserving the top (YMin) of the image.
+
+```html
+<svg width="300" height="200" viewBox="0 0 500 600" preserveAspectRatio="xMidYMin slice">
+  <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="pointingright" x="-120"></g>
+  <g class="comicgen" name="dey" angle="straight" emotion="smile" pose="handsinpocket" x="150"></g>
+</svg>
+```
+
+![Dee and Dey fit width](docs/dee-and-dey-slice.png)
+
+## Panels
+
+You can embed characters in panels CSS. For example, this defines a panel:
+
+```css
+.panel {
+  height: 200px;          /* Each panel has a height of 200 px */
+  margin: 10px;           /* ... and a little bit of spacing around it */
+  border: 2px solid grey; /* ... with a thick grey border */
+  overflow: hidden;       /* Comics should not spill out of the border */
+  position: relative;     /* This will be useful when we add captions */
+}
+```
+
+Now, `<div class="panel">` draws a thick grey border.
+You can insert your character inside that.
+
+```html
+<div class="panel">
+  <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded"
+    x="-320" y="-120" scale="2.2" width="200" height="200"></g>
+</div>
+```
+
+![Dee in a panel](docs/dee-panel.png)
+
+Panels are typically placed inside a row:
+
+```css
+.row {
+  display: flex;
+  flex-direction: row;
+}
+```
+
+For rows of panels, embed `.comicgen` inside a `.panel` inside a `.row`.
+
+Here's an example with 2 panels. The second panel has 2 characters.
+
+```html
+<div class="row">
+  <div class="panel">
+    <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded"
+      x="-320" y="-120" scale="2.2" width="200" height="200"></g>
+  </div>
+  <div class="panel">
+    <svg width="200" height="200">
+      <g class="comicgen" name="dey" angle="straight" emotion="smile" pose="handsinpocket"
+        x="-200" y="-120" scale="2.2" width="200" height="200"></g>
+      <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded"
+        x="-250" y="-120" scale="1.4" width="200" height="200"></g>
+    </svg>
+  </div>
+</div>
+```
+
+![Dee and Dey in panels](docs/dee-and-dey-panels.png)
+
+For a panel with multiple, embed your `.comicgen` inside a `.panel` inside a `.row`.
+
+
+## Captions
+
+You can add captions using CSS. For example, this defines a caption on top:
+
+```css
+.caption-top {
+  position: absolute;             /* Caption sits on top of the image */
+  width: 100%;                    /* It occupies the full width of the panel */
+  top: 0;                         /* Position the panel at the top */
+  border-bottom: 2px solid grey;  /* ... and top a bottom below. */
+  background-color: white;        /* Hide anything behind the caption - for legibility */
+  padding: 0.25rem;               /* Give a bit of room for white-space */
+  font-family: Neucha, cursive;   /* Pick a handwriting font from Google Fonts */
+  text-transform: uppercase;      /* Comic lettering is usually uppercase */
+}
+```
+
+Adding a `<div class="caption-top">...</div>` inside a `<div class="panel">`
+adds a text caption to the top of the strip.
+
+```html
+<div class="row">
+  <div class="panel">
+    <div class="caption-top">Hi! I'm Dee.</div>
+    <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded" x="-317" y="-119" scale="2.2" width="150" height="200"></g>
+  </div>
+  <div class="panel">
+    <div class="caption-top">I'm in a comic strip called Dee & Dey.</div>
+    <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded" x="-150" y="10" scale="1.5" width="150" height="200" mirror="1"></g>
+  </div>
+  <div class="panel">
+    <div class="caption-top">And this is Dey, my co-star on this strip.</div>
+    <svg width="300" height="200">
+      <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="pointingright" x="160" y="0" scale="0.88" width="300" height="200" mirror="1"></g>
+      <g class="comicgen" name="dey" angle="straight" emotion="smile" pose="handsinpocket" x="-120" y="10" scale="0.88" width="300" height="200"></g>
+    </svg>
+  </div>
+</div>
+```
+
+![Dee and Dey with captions](docs/dee-and-dey-captions.png)
 
 <!-- end -->
 
@@ -99,8 +249,27 @@ git checkout dev
 ```
 
 
-## Contributions
+<!-- var credits -->
 
-- Designed by Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
+## Credits
+
 - Developed by Kriti Rohilla <kriti.rohilla@gramenerit.com> and S Anand <s.anand@gramener.com>
-- Supported by Richie Lionell <richie.lionell@gramener.com>
+- Conceived & designed by Ramya Mylavarapu <ramya.mylavarapu@gramener.com> & Richie Lionell <richie.lionell@gramener.com>
+
+<!-- end -->
+
+<!-- var social -->
+## Share
+
+<p class="d-flex">
+  <a href="https://twitter.com/intent/tweet?text=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Share on Twitter">
+    <i class="fab fa-twitter-square fa-2x"></i>
+  </a>
+  <a href="https://www.facebook.com/dialog/share?app_id=163328100435225&display=page&href=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&redirect_uri=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&quote=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Share on Facebook">
+    <i class="fab fa-facebook-square fa-2x"></i>
+  </a>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Share on LinkedIn">
+    <i class="fab fa-linkedin fa-2x"></i>
+  </a>
+</p>
+<!-- end -->

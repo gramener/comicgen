@@ -1,4 +1,4 @@
-import { uglify } from 'rollup-plugin-uglify'
+import { terser } from 'rollup-plugin-terser'
 
 export default [
   {
@@ -9,7 +9,7 @@ export default [
       name: 'comicgen'
     },
     plugins: [
-      uglify()
+      terser()
     ]
   }
 ]

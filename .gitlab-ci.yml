@@ -4,12 +4,14 @@ cache:
     - node_modules/
 
 validate:
+  stage: test
   script:
     - npm run lint
     - yarn install
     - npm test
 
 deploy:
+  stage: deploy
   script: deploy
   only: [master, dev, /^dev-.*$/]
   variables:

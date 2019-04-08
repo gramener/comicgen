@@ -5,12 +5,34 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Comicgen: Comic Creator</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="description" content="Create comics for your website or app with the comicgen JavaScript library">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="description" content="Create comics for your website or app with a JavaScript library. Choose a character, angle, emotion and pose. Size the image. Embed in your page.">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:site" content="Gramener">
+  <meta property="og:url" content="https://gramener.com/comicgen/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Comicgen: Comic Creator">
+  <meta property="og:description" content="Create comics for your website or app with a JavaScript library. Choose a character, angle, emotion and pose. Size the image. Embed in your page.">
+  <meta property="og:image" content="https://gramener.com/comicgen/docs/dee-and-dey-panels.png">
+
   <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
   <link href="https://learn.gramener.com/ui/bootstraptheme.css?font-family-base=Neucha,cursive&dark=%23675b9e&primary=%238b8ac1" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs@9.12.0/styles/github.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42126862-1"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42126862-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || []
+    function gtag() { window.dataLayer.push(arguments) }
+    gtag('js', new Date())
+    gtag('config', 'UA-42126862-1')
+  </script>
+  <style>
+    #code { white-space: pre-wrap; }
+    img { max-width: 100%; }
+  </style>
 </head>
 
 <body class="d-flex flex-column h-full">
@@ -38,28 +60,47 @@
     <div class="row">
       <div class="col-lg-4">
         <h1>Make your own comic</h1>
-        <md id="introduction"></md>
+        <md data-target="introduction"></md>
+        <md data-target="social"></md>
       </div>
       <div class="col-lg-8">
         <form class="selector form-inline">
           <div>
-            <select class="form-control mr-2" name="name"></select>
-            <select class="form-control mr-2" name="angle"></select>
-            <select class="form-control mr-2" name="emotion"></select>
-            <select class="form-control mr-2" name="pose"></select>
+            <select class="form-control mr-2 mb-2" name="name"></select>
+            <select class="form-control mr-2 mb-2" name="angle"></select>
+            <select class="form-control mr-2 mb-2" name="emotion"></select>
+            <select class="form-control mr-2 mb-2" name="pose"></select>
+            <select class="form-control mr-2 mb-2" name="mirror">
+              <option value=""></option>
+              <option value="1">mirror</option>
+            </select>
+            <input name="x" type="hidden" value="0">
+            <input name="y" type="hidden" value="0">
+            <input name="scale" type="hidden" value="1">
+            <input name="width" type="hidden" value="500">
+            <input name="height" type="hidden" value="600">
           </div>
         </form>
-        <div class="target bg-light my-2"></div>
-        <pre id="code"></pre>
-        <button type="button" class="btn btn-sm btn-light border copy" data-toggle="tooltip" data-placement="top">
-          <i class="far fa-copy"></i> Copy code
-        </button>
-        <button type="button" class="btn btn-sm btn-light border download">Download as PNG</button>
+        <div class="target-container bg-light my-2" style="overflow:hidden;position:relative;">
+          <div class="target"></div>
+        </div>
+        <div class="mb-3">
+          <button type="button" class="btn btn-sm btn-light border copy" data-clipboard-target="#code">
+            <i class="far fa-copy"></i> Copy code
+          </button>
+          <a class="btn btn-sm btn-light border urlfilter reset" data-target="#" href="#">
+            <i class="fa fa-arrows-alt"></i> Reset position
+          </a>
+        </div>
+        <script type="text/html" class="codegen">
+          <pre id="code">&lt;g class="comicgen"<% _.each(q, function(v, k) { %> <%- k %>="<%- v %>"<% }) %>&gt;&lt;/g&gt;</pre>
+        </script>
       </div>
     </div>
 
-    <md id="usage"></md>
-
+    <md data-target="usage"></md>
+    <md data-target="credits"></md>
+    <md data-target="social"></md>
   </div>
 
   <footer class="mt-auto text-center pt-3 bg-light border-top">
@@ -73,58 +114,100 @@
   <script src="https://cdn.jsdelivr.net/npm/g1@0.16.1/dist/g1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.0/dist/showdown.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/highlightjs@9.12.0/highlight.pack.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/plain-draggable@2.5.12/plain-draggable.min.js"></script>
   <script src="dist/comicgen.min.js"></script>
   <script>
-    /* globals comicgen, showdown, hljs */
+    /* globals comicgen, showdown, hljs, ClipboardJS, PlainDraggable */
+    // Render part of README.md as Markdown. Sections delimited by <!-- var ... !>...<!-- end -->
     $.get('README.md')
       .done(function (text) {
         var converter = new showdown.Converter({ ghCodeBlocks: true })
         text.match(/<!--\s*var\s+\S*\s*-->[\s\S]*?<!--\s*end\s*-->/igm).forEach(function (match) {
           var lines = match.split(/\n/)
           var name = lines[0].replace(/^<!--\s*var\s+/, '').replace(/\s*-->$/, '')
-          $('#' + name)
+          $('md[data-target="' + name + '"]')
             .addClass('d-block my-4')
             .html(converter.makeHtml(lines.slice(1, -1).join('\n')))
             .find('pre')
-            .each(function () {
-              hljs.highlightBlock(this)
-            })
+            .each(function () { hljs.highlightBlock(this) })
         })
       })
 
-    function options(q, id, data) {
-      data = _.isArray(data) ? data : _.keys(data)
-      // If q[id] is not in data, pick the first item from the data list/dict
-      q[id] = q[id] && data.indexOf(q[id]) > 0 ? q[id] : data[0]
-      var options = data.map(function (v) { return '<option>' + v + '</option>' }).join('')
-      $('.selector select[name="' + id + '"]').html(options).val(q[id])
-    }
-
+    // q holds the current state of the application, and the comicgen parameters
+    var q
+    var defaults = comicgen.defaults
     $.getJSON('files/files.json')
       .done(function (data) {
+        // Any change in selection changes the URL
         $('.selector :input').on('change', function () {
           location.hash = '?' + $('.selector').serialize()
         })
+        // Any change in URL re-renders the strip
         $(window).on('#', function (e, url) {
-          var q = url.searchKey
+          q = url.searchKey
           options(q, 'name', data)
           options(q, 'angle', data[q.name])
           options(q, 'emotion', data[q.name][q.angle].emotion)
           options(q, 'pose', data[q.name][q.angle].pose)
           comicgen('.target', q)
-          $('#code').text('comicgen(".target", ' + JSON.stringify(q, null, 2).trim() + ')')
+          $('.target-container').css({ width: q.width + 'px', height: q.height + 'px' })
+          for (var key in defaults) {
+            $('input[name="' + key + '"]').val(q[key] || defaults[key])
+            // If a value is the same as the default, drop it
+            if (q[key] == defaults[key])
+              delete q[key]
+          }
+          $('.codegen').template({q: q})
         }).urlchange()
       })
 
-    // TODO
-    $('.copy')
-      .tooltip({ trigger: 'click' })
-      .on('click', function() {
-        var $textarea = $('<textarea></textarea>').val(($('.insertcomic').parent().find('pre')).text()).appendTo(document.body).select()
-        document.execCommand('copy')
-        $textarea.remove()
-        // After some time, hide the tooltip
-        setTimeout(function() { $('.copy').tooltip('hide') }, 1000) })
-  </script>
+    // Dragging the target image changes the x, y
+    var pos
+    new PlainDraggable($('.target').get(0), {
+      containment: {left: -10000, top: -10000, width: 50000, height: 50000},
+      onDragStart: function () { pos = {left: this.left, top: this.top} },
+      onDragEnd: function () {
+        $('input[name="x"]').val(Math.round(+(q.x || defaults.x) + this.left - pos.left))
+        $('input[name="y"]').val(Math.round(+(q.y || defaults.y) + this.top - pos.top))
+        location.hash = '?' + $('.selector').serialize()
+        this.left = pos.left
+        this.top = pos.top
+      }
+    })
+
+    // Zooming target changes scale
+    $('.target').on('wheel', function (e) {
+      if (!e.ctrlKey)
+        return
+      var scale0 = +(q.scale || defaults.scale)
+      var scale = Math.round(scale0 * (1 - e.originalEvent.deltaY * 0.01) * 100, 2) / 100
+      if (scale == scale0 && e.originalEvent.deltaY < 0)
+        scale = scale0 + 0.01
+      $('input[name="scale"]').val(scale)
+      // Scale around the center
+      $('input[name="x"]').val(Math.round(+(q.x || defaults.x) + (+q.width || defaults.width) * (scale0 - scale) / 2))
+      $('input[name="y"]').val(Math.round(+(q.y || defaults.y) + (+q.height || defaults.height) * (scale0 - scale) / 2))
+      location.hash = '?' + $('.selector').serialize()
+      e.preventDefault()
+    })
+
+    // Reset button reverts to defaults on size, position & scale
+    $('.reset').attr('href', '?' + $.param(defaults))
+    $('body').urlfilter()
+
+    // Click on copy button to copy code
+    new ClipboardJS('.copy')
+
+    // Utility: Set a default value for q[key] using data. Render <select> dropdown using data
+    function options(q, key, data) {
+      data = _.isArray(data) ? data : _.keys(data)
+      // If q[key] is not in data, pick the first item from the data list/dict
+      q[key] = q[key] && data.indexOf(q[key]) > 0 ? q[key] : data[0]
+      var options = data.map(function (v) { return '<option>' + v + '</option>' }).join('')
+      $('.selector select[name="' + key + '"]').html(options).val(q[key])
+    }
+
+</script>
 </body>
 </html>

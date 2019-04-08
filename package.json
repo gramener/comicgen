@@ -27,7 +27,7 @@
     "puppeteer": "1",
     "rimraf": "2",
     "rollup": "1",
-    "rollup-plugin-uglify": "6",
+    "rollup-plugin-terser": "4",
     "selenium-webdriver": "3",
     "tap-merge": "0.3",
     "tape": "4"
