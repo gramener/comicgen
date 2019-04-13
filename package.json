@@ -1,6 +1,6 @@
 {
   "name": "comicgen",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Create comics for your website or app",
   "main": "dist/comicgen.min.js",
   "jsdelivr": "dist/comicgen.min.js",
@@ -8,7 +8,7 @@
   "repository": "git@code.gramener.com:s.anand/deedey.git",
   "author": "S Anand <s.anand@gramener.com>",
   "scripts": {
-    "build": "rimraf dist && rollup -c",
+    "build": "rimraf dist && rollup -c && cleancss -O2 --source-map --output dist/comicgen.min.css src/comicgen.css",
     "lint": "eclint . && eslint --ext js,html .",
     "prepublishOnly": "npm test",
     "pretest": "npm run build && browserify -s tape -r tape -o test/tape.js",
@@ -21,6 +21,7 @@
   "private": false,
   "devDependencies": {
     "browserify": "16",
+    "clean-css-cli": "4",
     "express": "4",
     "faucet": "0.0",
     "jquery": "3",

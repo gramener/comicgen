@@ -35,5 +35,10 @@ comicgen.defaults = {
   mirror: 0
 }
 
-
-document.addEventListener('DOMContentLoaded', function () { comicgen() })
+// This script could be loaded async or not. If async, DOMContentLoaded is already executed.
+// So if readyState is not 'loading' (i.e. 'interactive' or 'complete'), run comicgen directly.
+// https://javascript.info/onload-ondomcontentloaded
+if (document.readyState == 'loading')
+  document.addEventListener('DOMContentLoaded', function () { comicgen() })
+else
+  comicgen()

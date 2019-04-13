@@ -1,0 +1,38 @@
+:root {
+  --comic-background: transparent;
+  --comic-border-color: grey;
+  --comic-border-width: 2px;
+  --comic-caption-background: white;
+  --comic-caption-font: cursive;
+  --comic-caption-padding: 0.25rem;
+}
+
+.comic-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.comic-panel {
+  display: inline-block;
+  overflow: hidden;         /* Comics should not spill out of the border */
+  position: relative;       /* This will be useful when we add captions */
+  background-color: var(--comic-background);
+  border: var(--comic-border-width) solid var(--comic-border-color);
+}
+
+.comic-caption-top, .comic-caption-bottom {
+  position: absolute;
+  width: 100%;
+  background-color: var(--comic-caption-background);
+  padding: var(--comic-caption-padding);
+  font-family: var(--comic-caption-font);
+}
+
+.comic-caption-top {
+  top: 0;
+  border-bottom: var(--comic-border-width) solid var(--comic-border-color);
+}
+.comic-caption-bottom {
+  bottom: 0;
+  border-top: var(--comic-border-width) solid var(--comic-border-color);
+}

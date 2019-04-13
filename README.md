@@ -19,10 +19,11 @@ We are sure you'd love the company of our friends [Dee](#?name=dee) &
 Load the comicgen library by adding this line in your HTML page's `<head>`:
 
 ```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/comicgen/dist/comicgen.min.css">
 <script async src="https://cdn.jsdelivr.net/npm/comicgen"></script>
 ```
 
-You can also instal comicgen locally using `npm` or `yarn`:
+You can also install comicgen locally using `npm` or `yarn`:
 
 ```bash
 npm install comicgen
@@ -32,7 +33,8 @@ yarn install comicgen
 ... and then include:
 
 ```html
-<script src="node_modules/comicgen/dist/comicgen.min.js"></script>
+<link rel="stylesheet" href="node_modules/comicgen/dist/comicgen.min.css">
+<script async src="node_modules/comicgen/dist/comicgen.min.js"></script>
 ```
 
 ## Usage
@@ -69,25 +71,6 @@ The characters are drawn on a 500 x 600 canvas. You can change this using:
 
 Comicgen is tested on Chrome, Edge, and Firefox. It does not work on Internet Explorer.
 
-## API
-
-To explicitly run comicgen on a selector, run `comicgen(selector, options)`.
-For example:
-
-```js
-comicgen('.comicgen', {
-  name: 'dee',
-  angle: 'straight',
-  emotion: 'smile',
-  pose: 'thumbsup',
-  width: 400,
-  height: 300
-})
-```
-
-... renders all elements with `class="comicgen"` as a comic. It sets the default
-name, angle, etc to the values above.
-
 ## Composition
 
 To combine multiple characters in a panel, embed them in an `<svg>` element.
@@ -95,7 +78,7 @@ To combine multiple characters in a panel, embed them in an `<svg>` element.
 You can change the `x`, `y`, `width`, `height`, `mirror` and `scale` to position each character.
 
 ```html
-<svg width="300" height="200">
+<svg width="500" height="600">
   <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="pointingright" x="-120"></g>
   <g class="comicgen" name="dey" angle="straight" emotion="smile" pose="handsinpocket" x="150"></g>
 </svg>
@@ -134,20 +117,13 @@ and slices the height, preserving the top (YMin) of the image.
 
 ## Panels
 
-You can embed characters in panels CSS. For example, this defines a panel:
+[comicgen.css](https://cdn.jsdelivr.net/npm/comicgen/dist/comicgen.min.css)
+provides 2 classes for layout:
 
-```css
-.comic-panel {
-  height: 200px;          /* Each panel has a height of 200 px */
-  margin: 10px;           /* ... and a little bit of spacing around it */
-  border: 2px solid grey; /* ... with a thick grey border */
-  overflow: hidden;       /* Comics should not spill out of the border */
-  position: relative;     /* This will be useful when we add captions */
-}
-```
+- `comic-panel`
+- `comic-row`
 
-Now, `<div class="comic-panel">` draws a thick grey border.
-You can insert your character inside that.
+Use `class="comic-panel"` to can embed characters in a thick grey border. For example
 
 ```html
 <div class="comic-panel">
@@ -158,22 +134,13 @@ You can insert your character inside that.
 
 ![Dee in a panel](docs/dee-panel.png)
 
-Panels are typically placed inside a row:
-
-```css
-.comic-row {
-  display: flex;
-  flex-direction: row;
-}
-```
-
-For rows of panels, embed `.comicgen` inside a `.comic-panel` inside a `.comic-row`.
+Panels are typically placed inside a `class="comic-row"`:
 
 Here's an example with 2 panels. The second panel has 2 characters.
 
 ```html
 <div class="comic-row">
-  <div class="comic-panel">
+  <div class="comic-panel" style="margin-right: 10px">
     <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded"
       x="-320" y="-120" scale="2.2" width="200" height="200"></g>
   </div>
@@ -190,29 +157,71 @@ Here's an example with 2 panels. The second panel has 2 characters.
 
 ![Dee and Dey in panels](docs/dee-and-dey-panels.png)
 
-For a panel with multiple, embed your `.comicgen` inside a `.comic-panel` inside
-a `.comic-row`.
+You can override the panel's background, border width and color using CSS
+variables in your stylesheet.
+
+```css
+:root {
+  --comic-background: #eee;     /* Light grey background. Default: transparent */
+  --comic-border-color: #ccc;   /* Light grey border. Default: grey */
+  --comic-border-width: 1px;    /* Thin border. Default 2px */
+}
+```
+
+![Dee and Dey in panels, with CSS styling](docs/dee-and-dey-panels-styled.png)
 
 
 ## Captions
 
-You can add captions using CSS. For example, this defines a caption on top:
+[comicgen.css](https://cdn.jsdelivr.net/npm/comicgen/dist/comicgen.min.css)
+provides `comic-caption-top` and `comic-caption-bottom` to add captions inside
+a `.comic-panel`.
+
+For example, this defines a caption on top:
+
+```html
+<div class="comic-panel">
+  <div class="comic-caption-top">Hi! I'm Dee.</div>
+  <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded" x="-317" y="-119" scale="2.2" width="150" height="200"></g>
+</div>
+```
+
+![Dee with a caption on top](docs/dee-caption-top.png)
+
+... or the bottom:
+
+```html
+<div class="comic-panel">
+  <div class="comic-caption-bottom">Hi! I'm Dee.</div>
+  <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded" x="-317" y="-119" scale="2.2" width="150" height="200"></g>
+</div>
+```
+
+![Dee with a caption at the bottom](docs/dee-caption-bottom.png)
+
+You can override the caption's background, font and padding using CSS variables
+in your stylesheet.
 
 ```css
-.comic-caption-top {
-  position: absolute;             /* Caption sits on top of the image */
-  width: 100%;                    /* It occupies the full width of the panel */
-  top: 0;                         /* Position the panel at the top */
-  border-bottom: 2px solid grey;  /* ... and top a bottom below. */
-  background-color: white;        /* Hide anything behind the caption - for legibility */
-  padding: 0.25rem;               /* Give a bit of room for white-space */
-  font-family: Neucha, cursive;   /* Pick a handwriting font from Google Fonts */
-  text-transform: uppercase;      /* Comic lettering is usually uppercase */
+:root {
+  --comic-caption-background: #eee;         /* Light grey background. Default: white */
+  --comic-caption-font: Neucha, cursive;    /* Custom Google font. Default: cursive */
+  --comic-caption-padding: 0.25rem 0.5rem;  /* Custom margin. Default: 0.25rem */
+}
+.comic-caption-top, .comic-caption-bottom { /* Apply any custom styles you want */
+  text-transform: uppercase;
 }
 ```
 
-Adding a `<div class="comic-caption-top">...</div>` inside a
-`<div class="comic-panel">` adds a text caption to the top of the strip.
+![Dee with a caption on top, styled with CSS](docs/dee-caption-top-styled.png)
+
+[Google fonts has handwriting fonts](https://fonts.google.com/?category=Handwriting)
+that can be used for the caption lettering.
+
+## Strips
+
+You can combine [captions](#captions) with [panels](#panels) to create a strip
+like this:
 
 ```html
 <div class="comic-row">
@@ -238,6 +247,38 @@ Adding a `<div class="comic-caption-top">...</div>` inside a
 
 <!-- end -->
 
+
+## API
+
+To explicitly run comicgen on a selector, run `comicgen(selector)`. This lets
+you dynamically create or change a a character.
+
+Here's an example in jQuery showing how you can create a character dynamically:
+
+```js
+// Add the character
+$('<g class="new" name="dee" angle="straight" emotion="sad" pose="yuhoo"></g>').appendTo('body')
+// Call comicgen()
+comicgen('.new')
+```
+
+![Dynamic character rendered via JS](docs/dee-sad-yuhoo-400-300.png)
+
+You can pass an `options` parameter to `comicgen()` to provide default values.
+For example:
+
+```js
+$('<g class="new" name="dee" angle="straight"></g>').appendTo('body')
+comicgen('.new', {
+  name: 'dey',      // Set the default name. <g name="dee"> overrides this
+  emotion: 'sad',   // Set the default emotion
+  pose: 'yuhoo',    // Set the default pose, etc
+  width: 400,
+  height: 300
+})
+```
+
+![Dynamic character rendered via JS, with default options](docs/dee-sad-yuhoo-400-300.png)
 
 ## Release
 

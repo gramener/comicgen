@@ -2,11 +2,12 @@ import { terser } from 'rollup-plugin-terser'
 
 export default [
   {
-    input: 'js/comicgen.js',
+    input: 'src/comicgen.js',
     output: {
       file: 'dist/comicgen.min.js',
       format: 'umd',
-      name: 'comicgen'
+      name: 'comicgen',
+      sourcemap: true
     },
     plugins: [
       terser()

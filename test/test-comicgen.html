@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <title>Comicgen tests</title>
+  <link rel="stylesheet" href="../dist/comicgen.min.css">
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
   <script src="../dist/comicgen.min.js"></script>
   <script src="tape.js"></script>
@@ -12,14 +13,15 @@
   <script>
     tape('comicgen() is a function', function (t) {
       t.ok(typeof comicgen == 'function')
+      // TODO: test if CSS is loaded
       t.end()
     })
   </script>
 
-  <div class="comicgen auto-run" name="dee" angle="straight" emotion="sad" pose="yuhoo"></div>
+  <g class="comicgen auto-run" name="dee" angle="straight" emotion="smile" pose="thumbsup"></g>
   <div class="comicgen auto-fail" name="na" angle="na" emotion="na" pose="na"></div>
   <script>
-    tape('comicgen() automatically renders all comicgen elements', function (t) {
+    tape('usage', function (t) {
       $('.auto-run').each(function () {
         var children = $(this).children()
         t.equal(children.length, 1)
@@ -29,27 +31,78 @@
         t.equal(images.length, 2)
         // TODO: check if image has really loaded
       })
+      // TODO: check if auto-fail has failed
       t.end()
     })
   </script>
 
-  <svg class="svg-container" width="400" height="300">
-    <g class="comicgen" name="dee" angle="straight" emotion="yuhoo" pose="yuhoo"></g>
+  <svg class="composition" width="500" height="600">
+    <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="pointingright" x="-120"></g>
+    <g class="comicgen" name="dey" angle="straight" emotion="smile" pose="handsinpocket" x="150"></g>
   </svg>
-  <script>
-    tape('comicgen() automatically renders all comicgen elements', function (t) {
-      $('.svg-container .comicgen').each(function () {
-        var children = $(this).children()
-        t.equal(children.length, 1)
-        t.equal(children.attr('width'), '500')
-        t.equal(children.attr('height'), '600')
-        var images = children.find('image')
-        t.equal(images.length, 2)
-        // TODO: check if image has really loaded
-      })
-      t.end()
-    })
-  </script>
+  <svg class="composition-resize" width="300" height="200" viewBox="0 0 500 600">
+    <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="pointingright" x="-120"></g>
+    <g class="comicgen" name="dey" angle="straight" emotion="smile" pose="handsinpocket" x="150"></g>
+  </svg>
+  <svg class="composition-aspect" width="300" height="200" viewBox="0 0 500 600" preserveAspectRatio="xMidYMin slice">
+    <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="pointingright" x="-120"></g>
+    <g class="comicgen" name="dey" angle="straight" emotion="smile" pose="handsinpocket" x="150"></g>
+  </svg>
+
+  <div class="panels comic-panel">
+    <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded" x="-320" y="-120" scale="2.2"
+      width="200" height="200"></g>
+  </div>
+
+  <div class="rows comic-row">
+    <div class="comic-panel" style="margin-right: 10px">
+      <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded" x="-320" y="-120"
+        scale="2.2" width="200" height="200"></g>
+    </div>
+    <div class="comic-panel">
+      <svg width="200" height="200">
+        <g class="comicgen" name="dey" angle="straight" emotion="smile" pose="handsinpocket" x="-200" y="-120" scale="2.2"
+          width="200" height="200"></g>
+        <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded" x="-250" y="-120"
+          scale="1.4" width="200" height="200"></g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="caption-top comic-panel">
+    <div class="comic-caption-top">Hi! I'm Dee.</div>
+    <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded" x="-317" y="-119" scale="2.2"
+      width="150" height="200"></g>
+  </div>
+
+  <div class="caption-bottom comic-panel">
+    <div class="comic-caption-bottom">Hi! I'm Dee.</div>
+    <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded" x="-317" y="-119" scale="2.2"
+      width="150" height="200"></g>
+  </div>
+
+  <div class="strip comic-row">
+    <div class="comic-panel">
+      <div class="comic-caption-top">Hi! I'm Dee.</div>
+      <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded" x="-317" y="-119"
+        scale="2.2" width="150" height="200"></g>
+    </div>
+    <div class="comic-panel">
+      <div class="comic-caption-top">I'm in a comic strip called Dee & Dey.</div>
+      <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="handsfolded" x="-150" y="10" scale="1.5"
+        width="150" height="200" mirror="1"></g>
+    </div>
+    <div class="comic-panel">
+      <div class="comic-caption-top">And this is Dey, my co-star on this strip.</div>
+      <svg width="300" height="200">
+        <g class="comicgen" name="dee" angle="straight" emotion="smilehappy" pose="pointingright" x="160" y="0"
+          scale="0.88" width="300" height="200" mirror="1"></g>
+        <g class="comicgen" name="dey" angle="straight" emotion="smile" pose="handsinpocket" x="-120" y="10" scale="0.88"
+          width="300" height="200"></g>
+      </svg>
+    </div>
+  </div>
+
 
 </body>
 </html>
