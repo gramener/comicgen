@@ -316,6 +316,8 @@ git checkout dev
 
 - Developed by Kriti Rohilla <kriti.rohilla@gramenerit.com> and S Anand <s.anand@gramener.com>
 - Conceived & designed by Ramya Mylavarapu <ramya.mylavarapu@gramener.com> & Richie Lionell <richie.lionell@gramener.com>
+- Dee & Dey created by Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
+- [Humaaans](https://www.humaaans.com/) created by [Pablo Stanley](https://twitter.com/pablostanley)
 
 <!-- end -->
 

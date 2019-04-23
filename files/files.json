@@ -43,5 +43,64 @@
         "thumbsup"
       ]
     }
+  },
+  "humaaans": {
+    "body": [
+      "hoodie",
+      "jacket-2",
+      "jacket",
+      "lab-coat",
+      "long-sleeve",
+      "pointing-forward",
+      "pointing-up",
+      "pregnant",
+      "trench-coat",
+      "turtle-neck"
+    ],
+    "bottom": [
+      "sitting/baggy-pants",
+      "sitting/skinny-jeans-1",
+      "sitting/sweat-pants",
+      "sitting/wheelchair",
+      "standing/baggy-pants",
+      "standing/jogging",
+      "standing/shorts",
+      "standing/skinny-jeans-walk",
+      "standing/skinny-jeans",
+      "standing/skirt",
+      "standing/sprint",
+      "standing/sweatpants"
+    ],
+    "head": [
+      "front/afro",
+      "front/airy",
+      "front/caesar",
+      "front/chongo",
+      "front/curly",
+      "front/hijab-1",
+      "front/hijab2",
+      "front/long",
+      "front/no-hair",
+      "front/pony",
+      "front/rad",
+      "front/short-1",
+      "front/short-2",
+      "front/short-beard",
+      "front/top",
+      "front/turban-1",
+      "front/turban2",
+      "front/wavy"
+    ],
+    "objects": [
+      "seat/ball",
+      "seat/cube-2",
+      "seat/cube"
+    ],
+    "scene": [
+      "home",
+      "plants",
+      "whiteboard",
+      "wireframe"
+    ]
   }
 }
