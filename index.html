@@ -17,6 +17,14 @@
   <meta property="og:description" content="Create comics for your website or app with a JavaScript library. Choose a character, angle, emotion and pose. Size the image. Embed in your page.">
   <meta property="og:image" content="https://gramener.com/comicgen/docs/dee-and-dey-panels.png">
 
+  <style>
+    /* Ensure that this is the first rule in the first stylesheet. Used by JS */
+    .target-container { background-color: #ffffff; }
+    /* The rest can be any styles */
+    .target-container { overflow: hidden; position: relative; }
+    #code { white-space: pre-wrap; }
+    img { max-width: 100%; }
+  </style>
   <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
   <link href="https://learn.gramener.com/ui/bootstraptheme.css?font-family-base=Neucha,cursive&dark=%23675b9e&primary=%238b8ac1" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
@@ -28,11 +36,6 @@
     gtag('js', new Date())
     gtag('config', 'UA-42126862-1')
   </script>
-  <style>
-    .target-container { overflow: hidden; position: relative; }
-    #code { white-space: pre-wrap; }
-    img { max-width: 100%; }
-  </style>
 </head>
 
 <body class="d-flex flex-column h-full">
@@ -80,13 +83,16 @@
             <input name="height" type="hidden" value="600">
           </div>
         </form>
-        <div class="target-container bg-light my-2">
+        <div class="target-container my-2">
           <div class="target"></div>
         </div>
         <div class="mb-3">
           <button type="button" class="btn btn-sm btn-light border copy" data-clipboard-target="#code">
             <i class="far fa-copy"></i> Copy code
           </button>
+          <label class="mx-1">
+            Background <input type="color" value="#ffffff" class="btn btn-light border p-0 bg-color">
+          </label>
           <a class="btn btn-sm btn-light border urlfilter reset" data-target="#" href="#">
             <i class="fa fa-arrows-alt"></i> Reset position
           </a>
@@ -206,6 +212,12 @@
     // Reset button reverts to defaults on size, position & scale
     $('.reset').attr('href', '?' + $.param(defaults))
     $('body').urlfilter()
+
+    // Change background / stroke colors if requested
+    $('.bg-color').on('input, change', function () {
+      // The first rule in the first sheet defines the background color for the target-container
+      document.styleSheets[0].cssRules[0].style.backgroundColor = $(this).val()
+    })
 
     // Click on copy button to copy code
     new ClipboardJS('.copy')
