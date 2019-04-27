@@ -1,7 +1,5 @@
 # comicgen
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
-
 <!-- var introduction -->
 We love comics. We badly wanted to create comic strips. But there was one
 problem. Some of us can't draw a straight line for nuts.
@@ -314,10 +312,83 @@ git checkout dev
 
 ## Credits
 
-- Developed by Kriti Rohilla <kriti.rohilla@gramenerit.com> and S Anand <s.anand@gramener.com>
+- Library developed by Kriti Rohilla <kriti.rohilla@gramenerit.com> and S Anand <s.anand@gramener.com>
 - Conceived & designed by Ramya Mylavarapu <ramya.mylavarapu@gramener.com> & Richie Lionell <richie.lionell@gramener.com>
-- Dee & Dey created by Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
-- [Humaaans](https://www.humaaans.com/) created by [Pablo Stanley](https://twitter.com/pablostanley)
+
+### Character credits
+
+- Dee: By Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
+  under [CC0 license](https://creativecommons.org/choose/zero/)
+- Dey: By Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
+  under [CC0 license](https://creativecommons.org/choose/zero/)
+- [Humaaans](https://www.humaaans.com/): By [Pablo Stanley](https://twitter.com/pablostanley)
+  under [CC-BY license](https://creativecommons.org/licenses/by/4.0/)
+
+<!-- end -->
+
+<!-- var contributing -->
+## Contributing
+
+We'd love your help in improving Comicgen.
+
+If you're a developer, you could help
+[fix bugs](https://github.com/gramener/comicgen/labels/bug) or
+[add features](https://github.com/gramener/comicgen/labels/enhancements).
+Some issues are marked
+[help wanted](https://github.com/gramener/comicgen/labels/help%20wanted).
+These are a good starting point.
+
+If you're a designer, you could help add new characters.
+
+### Add new characters
+
+Characters are made of 1 or more SVG images.
+
+The easiest way to create a character is to draw a dozen SVGs and save them as
+individual files **of the same dimensions**. For example:
+
+![Series of SVG images for a character](docs/character-single-images.png)
+
+A better way would be to break up the character into different parts. For
+example, you could draw faces with different emotions and save them under an
+`faces/` folder:
+
+![Faces for a character](docs/character-faces.png)
+
+Then you could draw the bodies under a `bodies/` folder:
+
+![Bodies for a character](docs/character-bodies.png)
+
+If you do this, you must make sure that:
+
+- All faces have the **same dimensions**, and are at the **same position** within the SVG
+- All bodies have the **same dimensions**, and are at the **same position** within the SVG
+- When you super-impose any face on any body, the **images should align**.
+
+You can choose to break up the images in any number of ways. For example:
+
+- `faces/`, `bodies/`
+- `face/`, `trunk/`, `leg`, `shoes`
+- `hair`, `face`, `eyes`, `mouth`, `trunk/`, `legs/`
+
+The more combinations you have, the more complex your image becomes. You could
+start small and then add variety.
+
+### Submit new characters
+
+Give your character a name (e.g. "Ant Man"). Save the SVG files under a folder
+with the character name (e.g. "ant-man" - lower-case, use hyphens as separator).
+Add this folder under the
+[files/](https://github.com/gramener/comicgen/tree/master/files/) folder.
+
+Then [send a pull request](https://help.github.com/en/articles/creating-a-pull-request)
+or email S Anand <s.anand@gramener.com>.
+
+When doing this, please mention one of the following:
+
+- "I release these images under the [CC0](https://creativecommons.org/choose/zero/) license", OR
+- "I release these images under the [CC-BY](https://creativecommons.org/licenses/by/4.0/) license"
+
 
 <!-- end -->
 
@@ -334,5 +405,18 @@ git checkout dev
   <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Share on LinkedIn">
     <i class="fab fa-linkedin fa-2x"></i>
   </a>
+  <a href="https://github.com/gramener/comicgen" class="btn btn-link py-0 pl-0 pr-1" target="blank" rel="noopener" title="Fork on Github">
+    <i class="fab fa-github fa-2x"></i>
+  </a>
 </p>
+<!-- end -->
+
+<!-- var social_markdown -->
+<!-- Github README won't display the above share icons. So create links. Don't display this on index.html -->
+<ul>
+  <li><a href="https://twitter.com/intent/tweet?text=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F">Share on Twitter</a></li>
+  <li><a href="https://www.facebook.com/dialog/share?app_id=163328100435225&display=page&href=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&redirect_uri=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&quote=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F">Share on Facebook</a>
+  <li><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/">Share on LinkedIn</a>
+  <li><a href="https://github.com/gramener/comicgen">Fork on Github</a></li>
+</ul>
 <!-- end -->
