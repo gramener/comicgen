@@ -32,15 +32,56 @@
   "dey": {
     "straight": {
       "emotion": [
+        "smile",
+        "angryfrustrated",
+        "hmmconfused",
+        "lookingright",
         "normal",
-        "smile"
+        "readinglookingdown",
+        "rofl",
+        "shocked",
+        "yuhoo"
+      ],
+      "pose": [
+        "angryfrustrated",
+        "handsfolded",
+        "handsinpocket",
+        "handsonhip",
+        "holdingbook",
+        "holdinglaptop",
+        "pointingright",
+        "pointingup",
+        "readingpaper",
+        "superperfect",
+        "thinkinghmm",
+        "thumbsup",
+        "yuhoo"
+      ]
+    },
+    "side": {
+      "emotion": [
+        "smile",
+        "angryfrustrated",
+        "leftturnnormal",
+        "leftturnshocked",
+        "lookingdownshocked",
+        "normal",
+        "rofl",
+        "sad",
+        "shocked",
+        "yuhoo"
       ],
       "pose": [
         "handsfolded",
-        "holdingbook",
         "handsinpocket",
-        "superperfect",
-        "thumbsup"
+        "holdingcoffee",
+        "leftturnhandsfolded",
+        "pointingright",
+        "pointingup",
+        "readingpaper",
+        "thumbsup",
+        "turnedleft",
+        "yuhoo"
       ]
     }
   },
