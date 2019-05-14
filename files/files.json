@@ -143,5 +143,48 @@
       "whiteboard",
       "wireframe"
     ]
+  },
+  "facesketch": {
+    "face": [
+      "face1-ear1",
+      "face1-ear2",
+      "face1-ear3",
+      "face1-ear4",
+      "face2-ear1",
+      "face2-ear2",
+      "face2-ear3",
+      "face2-ear4",
+      "face3-ear1",
+      "face3-ear2",
+      "face3-ear3",
+      "face3-ear4",
+      "face4-ear1",
+      "face4-ear2",
+      "face4-ear3",
+      "face4-ear4"
+    ],
+    "hair": [
+      "hair1",
+      "hair2",
+      "hair3",
+      "hair4"
+    ],
+    "eye": [
+      "eyes1",
+      "eyes2",
+      "eyes3",
+      "eyes4"
+    ],
+    "mouth": [
+      "mouth1",
+      "mouth2",
+      "mouth3"
+    ],
+    "nose": [
+      "nose1",
+      "nose2",
+      "nose3",
+      "nose4"
+    ]
   }
 }

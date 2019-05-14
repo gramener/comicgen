@@ -64,7 +64,8 @@ comicgen.defaults = {
 comicgen.namemap = {
   dee: 'deedey',
   dey: 'deedey',
-  humaaans: 'humaaans'
+  humaaans: 'humaaans',
+  facesketch: 'facesketch'
 }
 
 // Defines the format for characters. Each format has:
@@ -86,7 +87,7 @@ comicgen.formats = {
     dirs: ['angle'],
     files: {
       emotion: { file: '$name/$angle/emotion/$emotion', width: 500, height: 600, x: 0, y: 0 },
-      pose: { file: '$name/$angle/pose/$pose', width: 500, height: 600, x: 0, y: 0 }
+      pose:    { file: '$name/$angle/pose/$pose',       width: 500, height: 600, x: 0, y: 0 }
     }
   },
   humaaans: {
@@ -97,9 +98,21 @@ comicgen.formats = {
       // We don't cover scenes and objects yet.
       // scene: { file: '$name/scene/$scene' },
       // object: { file: '$name/objects/$object', x: 0, y: 0 }
-      head: { file: '$name/head/$head', width: 136, height: 104, x: 63, y: 0 },
+      head:   { file: '$name/head/$head',     width: 136, height: 104, x: 63, y: 0 },
       bottom: { file: '$name/bottom/$bottom', width: 300, height: 238, x: -15, y: 199 },
-      body: { file: '$name/body/$body', width: 256, height: 187, x: 0, y: 85 }
+      body:   { file: '$name/body/$body',     width: 256, height: 187, x: 0, y: 85 }
+    }
+  },
+  facesketch: {
+    width: 180,
+    height: 200,
+    dirs: [],
+    files: {
+      face: { file: '$name/face/$face',    width: 180, height: 200, x: 0, y: 0 },
+      hair: { file: '$name/hair/$hair',    width: 180, height: 200, x: 0, y: 0 },
+      eye: { file: '$name/eye/$eye',       width: 180, height: 200, x: 0, y: 0 },
+      mouth: { file: '$name/mouth/$mouth', width: 180, height: 200, x: 0, y: 0 },
+      nose: { file: '$name/nose/$nose',    width: 180, height: 200, x: 0, y: 0 }
     }
   }
 }
