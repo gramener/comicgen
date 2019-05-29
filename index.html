@@ -132,7 +132,7 @@
     // Render part of README.md as Markdown. Sections delimited by <!-- var ... !>...<!-- end -->
     $.get('README.md')
       .done(function (text) {
-        var converter = new showdown.Converter({ ghCodeBlocks: true })
+        var converter = new showdown.Converter({ ghCodeBlocks: true, tables: true })
         text.match(/<!--\s*var\s+\S*\s*-->[\s\S]*?<!--\s*end\s*-->/igm).forEach(function (match) {
           var lines = match.split(/\n/)
           var name = lines[0].replace(/^<!--\s*var\s+/, '').replace(/\s*-->$/, '')
@@ -142,6 +142,10 @@
             .find('pre')
             .each(function () { hljs.highlightBlock(this) })
         })
+        $('md table').addClass('table table-sm')
+          .find('a').each(function () {
+            $(this).attr('target', '_blank')
+          })
       })
 
     // q holds the current state of the application, and the comicgen parameters

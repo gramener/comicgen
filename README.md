@@ -213,8 +213,32 @@ in your stylesheet.
 
 ![Dee with a caption on top, styled with CSS](docs/dee-caption-top-styled.png)
 
+## Fonts
+
 [Google fonts has handwriting fonts](https://fonts.google.com/?category=Handwriting)
 that can be used for the caption lettering.
+
+Some fonts we like are:
+
+| Font                            | Example text                                                         |
+|---------------------------------|----------------------------------------------------------------------|
+| [Architects Daughter][font-ad]  | [![Architects Daughter](docs/font-architects-daughter.png)][font-ad] |
+| [News Cycle][font-nc]           | [![News Cycle](docs/font-news-cycle.png)][font-nc]                   |
+| [Indie Flower][font-if]         | [![Indie Flower](docs/font-indie-flower.png)][font-if]               |
+| [Amatic SC][font-ac]            | [![Amatic SC](docs/font-amatic-sc.png)][font-ac]                     |
+| [Just Another Hand][font-jah]   | [![Just Another Hand](docs/font-just-another-hand.png)][font-jah]    |
+| [Patrick Hand][font-ph]         | [![Patrick Hand](docs/font-patrick-hand.png)][font-ph]               |
+| [Neucha][font-n]                | [![Neucha](docs/font-neucha.png)][font-n]                            |
+| [Handlee][font-h]               | [![Handlee](docs/font-handlee.png)][font-h]                          |
+
+[font-ad]: https://fonts.google.com/specimen/Architects+Daughter
+[font-nc]: https://fonts.google.com/specimen/News+Cycle
+[font-if]: https://fonts.google.com/specimen/Indie+Flower
+[font-ac]: https://fonts.google.com/specimen/Amatic+SC
+[font-jah]: https://fonts.google.com/specimen/Just+Another+Hand
+[font-ph]: https://fonts.google.com/specimen/Patrick+Hand
+[font-n]: https://fonts.google.com/specimen/Neucha
+[font-h]: https://fonts.google.com/specimen/Handlee
 
 ## Strips
 

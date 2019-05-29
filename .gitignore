@@ -8,5 +8,6 @@ bower_components/
 
 # Ignore other files
 TODO
+NOTES.md
 *.log
 .DS_Store
