@@ -24,8 +24,8 @@ Load the comicgen library by adding this line in your HTML page's `<head>`:
 You can also install comicgen locally using `npm` or `yarn`:
 
 ```bash
-npm install comicgen
-yarn install comicgen
+yarn add comicgen     # Recommended option
+npm install comicgen  # Alternative, if you prefer npm
 ```
 
 ... and then include:
@@ -348,6 +348,12 @@ comicgen('.new', {
 
 ## Release
 
+Compress the characters using [svgo](https://github.com/svg/svgo):
+
+```bash
+svgo -r -f files/
+```
+
 To publish a new version on npm:
 
 ```bash
@@ -385,12 +391,14 @@ git checkout dev
 
 ### Character credits
 
-- Dee: By Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
-  under [CC0 license](https://creativecommons.org/choose/zero/)
-- Dey: By Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
+- Dee, Dey & Ringo: By Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
   under [CC0 license](https://creativecommons.org/choose/zero/)
 - [Humaaans](https://www.humaaans.com/): By [Pablo Stanley](https://twitter.com/pablostanley)
   under [CC-BY license](https://creativecommons.org/licenses/by/4.0/)
+- Facesketch: By Devarani B <devarani.b@gramener.com>
+  under [CC0 license](https://creativecommons.org/choose/zero/)
+- Zoe: By Swetha Mylavarapu
+  under [CC0 license](https://creativecommons.org/choose/zero/)
 
 <!-- end -->
 
@@ -456,7 +464,6 @@ When doing this, please mention one of the following:
 
 - "I release these images under the [CC0](https://creativecommons.org/choose/zero/) license", OR
 - "I release these images under the [CC-BY](https://creativecommons.org/licenses/by/4.0/) license"
-
 
 <!-- end -->
 

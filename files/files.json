@@ -2,13 +2,21 @@
   "dee": {
     "straight": {
       "emotion": [
-        "smilehappy",
-        "smile",
-        "readinglookingdown",
-        "hmm",
-        "sad",
-        "annoyed",
         "angryfrustrated",
+        "angryshouting",
+        "annoyed",
+        "blush",
+        "cry",
+        "hmm",
+        "loudcry",
+        "readinglookingdown",
+        "sad",
+        "shocked",
+        "smile",
+        "smilehappy",
+        "tired",
+        "wink",
+        "worried",
         "yuhoo"
       ],
       "pose": [
@@ -27,20 +35,65 @@
         "thumbsup",
         "yuhoo"
       ]
+    },
+    "side": {
+      "emotion": [
+        "angryfrustrated",
+        "dosingoff",
+        "holdinglaptop",
+        "rofl",
+        "sad",
+        "shocked",
+        "smile",
+        "suprisedshocked"
+      ],
+      "pose": [
+        "handsfolded",
+        "handsinthepocket",
+        "holdingcoffee",
+        "holdinglaptop",
+        "pointingright",
+        "pointingup",
+        "readingpaper",
+        "rightturn",
+        "shrug",
+        "thumbsup"
+      ]
+    },
+    "sitting": {
+      "emotion": [
+        "angryfrustrated",
+        "dosingbackwards",
+        "dosingfront",
+        "lookingdownsmiling",
+        "rofl",
+        "sad",
+        "shocked",
+        "smile",
+        "suprisedshocked",
+        "worried"
+      ],
+      "pose": [
+        "sittingatdesk",
+        "sittingatdeskhandsspread",
+        "sittingatdeskholdingmobile",
+        "sittingonbeanbagholdinglaptop",
+        "sittingonbeanbagholdingmobile"
+      ]
     }
   },
   "dey": {
     "straight": {
       "emotion": [
-        "smile",
-        "angryfrustrated",
         "hmmconfused",
         "lookingright",
         "normal",
         "readinglookingdown",
         "rofl",
         "shocked",
-        "yuhoo"
+        "smile",
+        "tired",
+        "wink"
       ],
       "pose": [
         "angryfrustrated",
@@ -60,7 +113,6 @@
     },
     "side": {
       "emotion": [
-        "smile",
         "angryfrustrated",
         "leftturnnormal",
         "leftturnshocked",
@@ -69,12 +121,14 @@
         "rofl",
         "sad",
         "shocked",
+        "smile",
         "yuhoo"
       ],
       "pose": [
         "handsfolded",
         "handsinpocket",
         "holdingcoffee",
+        "holdingmobile",
         "leftturnhandsfolded",
         "pointingright",
         "pointingup",
@@ -83,7 +137,103 @@
         "turnedleft",
         "yuhoo"
       ]
+    },
+    "sitting": {
+      "emotion": [
+        "angryfrustrated",
+        "dosingleft",
+        "dosingright",
+        "dosingstraight",
+        "leftturnnormal",
+        "lookingdownshocked",
+        "normal",
+        "rofl",
+        "sad",
+        "shocked",
+        "smile",
+        "yuhoo"
+      ],
+      "pose": [
+        "sittingatdesk",
+        "sittingatdeskhandsspread",
+        "sittingatdeskholdingmobile",
+        "sittingonbeanbagholdinglaptop",
+        "sittingonbeanbagholdingmobile"
+      ]
     }
+  },
+  "ringo": {
+    "emotion": [
+      "angry",
+      "hmm",
+      "laugh",
+      "lookingdown",
+      "lookingleft",
+      "lookingright",
+      "sad",
+      "shocked",
+      "shouting",
+      "smile",
+      "tired",
+      "wink",
+      "worried"
+    ],
+    "pose": [
+      "foldinghands",
+      "handsinthepocket",
+      "holdingbook",
+      "holdingcoffee",
+      "holdinglaptop",
+      "lookingatmobile",
+      "pointingup",
+      "running",
+      "sittingonbeanbagexplaining",
+      "sittingonbeanbagholdinglaptop",
+      "thumbsup"
+    ]
+  },
+  "facesketch": {
+    "face": [
+      "face1-ear1",
+      "face1-ear2",
+      "face1-ear3",
+      "face1-ear4",
+      "face2-ear1",
+      "face2-ear2",
+      "face2-ear3",
+      "face2-ear4",
+      "face3-ear1",
+      "face3-ear2",
+      "face3-ear3",
+      "face3-ear4",
+      "face4-ear1",
+      "face4-ear2",
+      "face4-ear3",
+      "face4-ear4"
+    ],
+    "hair": [
+      "hair1",
+      "hair2",
+      "hair3",
+      "hair4"
+    ],
+    "eye": [
+      "eyes1",
+      "eyes2",
+      "eyes3",
+      "eyes4"
+    ],
+    "mouth": [
+      "mouth1",
+      "mouth2",
+      "mouth3"
+    ],
+    "nose": [
+      "nose1",
+      "nose2",
+      "nose3",
+      "nose4"
+    ]
   },
   "humaaans": {
     "body": [
@@ -144,47 +294,13 @@
       "wireframe"
     ]
   },
-  "facesketch": {
-    "face": [
-      "face1-ear1",
-      "face1-ear2",
-      "face1-ear3",
-      "face1-ear4",
-      "face2-ear1",
-      "face2-ear2",
-      "face2-ear3",
-      "face2-ear4",
-      "face3-ear1",
-      "face3-ear2",
-      "face3-ear3",
-      "face3-ear4",
-      "face4-ear1",
-      "face4-ear2",
-      "face4-ear3",
-      "face4-ear4"
+  "zoe": {
+    "emotion": [
+      "angry",
+      "smile"
     ],
-    "hair": [
-      "hair1",
-      "hair2",
-      "hair3",
-      "hair4"
-    ],
-    "eye": [
-      "eyes1",
-      "eyes2",
-      "eyes3",
-      "eyes4"
-    ],
-    "mouth": [
-      "mouth1",
-      "mouth2",
-      "mouth3"
-    ],
-    "nose": [
-      "nose1",
-      "nose2",
-      "nose3",
-      "nose4"
+    "pose": [
+      "holdinglaptop"
     ]
   }
 }

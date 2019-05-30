@@ -75,6 +75,8 @@ comicgen.defaults = {
 comicgen.namemap = {
   dee: 'deedey',
   dey: 'deedey',
+  ringo: 'emotionpose',
+  zoe: 'emotionpose',
   humaaans: 'humaaans',
   facesketch: 'facesketch'
 }
@@ -99,6 +101,15 @@ comicgen.formats = {
     files: {
       emotion: { file: '$name/$angle/emotion/$emotion', width: 500, height: 600, x: 0, y: 0 },
       pose:    { file: '$name/$angle/pose/$pose',       width: 500, height: 600, x: 0, y: 0 }
+    }
+  },
+  emotionpose: {
+    width: 500,
+    height: 600,
+    dirs: [],
+    files: {
+      emotion: { file: '$name/emotion/$emotion', width: 500, height: 600, x: 0, y: 0 },
+      pose: { file: '$name/pose/$pose', width: 500, height: 600, x: 0, y: 0 }
     }
   },
   humaaans: {
