@@ -35,6 +35,9 @@ yarn install comicgen
 <script async src="node_modules/comicgen/dist/comicgen.min.js"></script>
 ```
 
+Comicgen is tested on Chrome, Edge, and Firefox. It does not work on Internet Explorer.
+
+
 ## Usage
 
 To embed a character, add:
@@ -48,26 +51,67 @@ You can embed it anywhere, including inside an `<svg>` element.
 
 ![name=dee angle=straight emotion=smile pose=thumbsup](docs/dee-straight-smile-thumbsup.png)
 
-The character is defined by 4 attributes:
+First, you have to choose a character with the `name="<character>"` attribute.
+For example:
 
-- `name`: the name of the character (e.g. `dee`, `dey`)
-- `angle`: which angle are they are facing (e.g. `straight`, `side`)
-- `emotion`: what emotion their face expresses (e.g. `sad`, `happy`)
-- `pose`: what pose their body shows (e.g. `pointingup`, `holdinglaptop`)
+- `name="dee"`
+- `name="dey"`
+- `name="humaaans"`
+- etc.
 
-The list of valid combinations are available on the
+Each character has one or more attributes. For example, the characters
+`dee` and `dey` use these attributes:
+
+- `angle=`: which angle are they are facing (e.g. `straight`, `side`)
+- `emotion=`: what emotion their face expresses (e.g. `sad`, `happy`)
+- `pose=`: what pose their body shows (e.g. `pointingup`, `holdinglaptop`)
+
+The character `humaaans` uses these attributes:
+
+- `head=`: what head to use (e.g. `front/afro`, `front/airy`)
+- `body=`: what body to use (e.g. `hoodie`, `jacket`)
+- `bottom=`: what bottom to use (e.g. `sitting/baggy-pants`, `standing/shorts`)
+
+The list of all valid combinations are available on the
 [comicgen interactive gallery](https://gramener.com/comicgen/).
 
-The characters are drawn on a 500 x 600 canvas. You can change this using:
+Each character has a pre-defined canvas size. For example, `dee` and `dey` use a
+500 x 600 canvas. `humaaans` uses a 300 x 600 canvas. You can change this using:
 
-- `width`: width of the image. Default: 500
-- `height`: height of the image. Default: 600
-- `x`: left position or x-offset. Default: 0
-- `y`: top position or y-offset. Default: 1
-- `mirror`: shsow mirror image. Value can be empty string or 1. Default: empty string
-- `scale`: how much larger to make the image. Default: 1
+- `width=`: width of the image in px
+- `height=`: height of the image in px
 
-Comicgen is tested on Chrome, Edge, and Firefox. It does not work on Internet Explorer.
+You can also re-position and re-size the canvas using these attributes:
+
+- `x=`: left position or x-offset in px
+- `y=`: top position or y-offset in px
+- `mirror=`: shsow mirror image. Value can be empty string or 1. Default: ""
+- `scale=`: how much larger to make the image. Default: 1
+
+## Layer order
+
+The order of attributes decides the order of the layers. For example, this draws
+`emotion=` first (at the bottom), and then `pose=` (on top)
+
+```html
+<g class="comicgen" name="dee" angle="straight" emotion="yuhoo" pose="yuhoo"></g>
+```
+
+![Dee with emotion below, then pose on top](docs/dee-order-emotion-pose.png)
+
+This draws `pose=` first (at the bottom), and then `emotion=` (on top):
+
+```html
+<g class="comicgen" name="dee" angle="straight" pose="yuhoo" emotion="yuhoo"></g>
+```
+
+![Dee with emotion below, then pose on top](docs/dee-order-pose-emotion.png)
+
+You can re-order the attributes dynamically in the
+[comicgen interactive gallery](https://gramener.com/comicgen/) using the arrows.
+
+![Reorder comicgen attributes](docs/reorder.gif)
+
 
 ## Composition
 

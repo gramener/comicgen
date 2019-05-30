@@ -7,25 +7,34 @@ export default function comicgen(selector, options) {
 
   // Render each node
   Array.from(selector).forEach(function (node) {
-    // attrs has the node attributes. Defaults to options, else comicgen.defaults
-    var attrs = Object.assign({}, comicgen.defaults, options)
-    for (var j=0, n=node.attributes; j<n.length; j++)
+    // Identify the attributes to add from:
+    //    1. attrs = DOM node attributes (#1 priority)
+    //    2. options (#2 priority)
+    //    3. comicgen.defaults (#3 priority)
+    // This ensures that attrs follow the order of the node attribute keys.
+    for (var attrs = {}, j = 0, n = node.attributes; j < n.length; j++)
       attrs[n[j].name] = n[j].value
+    Object.assign(attrs, comicgen.defaults, options, attrs)
+
     // Based on the name= attribute, figure out which format to use from comicgen.formats.
     // If it's an invalid format, report error and continue with the other elements.
     var format = comicgen.formats[comicgen.namemap[attrs.name]]
     if (!format)
       return console.error('Unknown name="' + attrs.name + '" in', node)
+
     // If any dirs variable is not set, report an error and continue
     if (!format.dirs.every(function (attr) { return attr in attrs }))
       return console.error('Missing attr', format.dirs.join(', '), 'in', node)
+
     // Create a mirror image transformation
     var mirror = attrs.mirror ? `translate(${format.width},0)scale(-1,1)` : ''
+
     // Build the SVG header
     var svg = [
       `<svg viewBox="${-attrs.x} ${-attrs.y} ${format.width} ${format.height}" width="${attrs.width || format.width}" height="${attrs.height || format.height}" preserveAspectRatio="xMidYMin slice">`,
       `<g transform="scale(${attrs.scale})${mirror}">`
     ]
+
     // Loop through all attributes (e.g. emotion=, pose=, body=, etc)
     // If the attribute is in format.file, there's an image for it. Add it.
     for (var attr in attrs) {
@@ -36,9 +45,11 @@ export default function comicgen(selector, options) {
         svg.push(`<image width="${row.width}" height="${row.height}" transform="translate(${row.x},${row.y})" xlink:href="${comicgen.base}files/${img}.svg"/>`)
       }
     }
+
     // Add the SVG footer
     svg.push('</g></svg>')
     node.innerHTML = svg.join('')
+
     // TODO: trigger an event
   })
 }
