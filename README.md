@@ -480,6 +480,9 @@ When doing this, please mention one of the following:
   <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Share on LinkedIn">
     <i class="fab fa-linkedin fa-2x"></i>
   </a>
+  <a href="https://news.ycombinator.com/item?id=20049116" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Discuss on Hacker News">
+    <i class="fab fa-hacker-news"></i>
+  </a>
   <a href="https://github.com/gramener/comicgen" class="btn btn-link py-0 pl-0 pr-1" target="blank" rel="noopener" title="Fork on Github">
     <i class="fab fa-github fa-2x"></i>
   </a>
@@ -492,6 +495,7 @@ When doing this, please mention one of the following:
   <li><a href="https://twitter.com/intent/tweet?text=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F">Share on Twitter</a></li>
   <li><a href="https://www.facebook.com/dialog/share?app_id=163328100435225&display=page&href=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&redirect_uri=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&quote=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F">Share on Facebook</a>
   <li><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/">Share on LinkedIn</a>
+  <li><a href="https://news.ycombinator.com/item?id=20049116">Discuss on Hacker News</a>
   <li><a href="https://github.com/gramener/comicgen">Fork on Github</a></li>
 </ul>
 <!-- end -->
