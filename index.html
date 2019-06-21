@@ -25,6 +25,7 @@
     #code { white-space: pre-wrap; }
     img { max-width: 100%; }
     .attr { display: inline-block; }
+    h3 { color: var(--danger); }
   </style>
   <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
   <link href="https://learn.gramener.com/ui/bootstraptheme.css?font-family-base=Neucha,cursive&dark=%23675b9e&primary=%238b8ac1" rel="stylesheet">
@@ -61,45 +62,77 @@
   </nav>
 
   <div class="container my-3">
-    <div class="row">
-      <div class="col-xl-4">
-        <h1>Make your own comic</h1>
-        <md data-target="introduction"></md>
-        <md data-target="social"></md>
-      </div>
-      <div class="col-xl-8">
-        <form class="selector form-inline">
-          <div class="comicgen-attrs d-inline-block"></div>
-          <input name="x" type="hidden" value="0">
-          <input name="y" type="hidden" value="0">
-          <input name="scale" type="hidden" value="1">
-          <input name="width" type="hidden" value="500">
-          <input name="height" type="hidden" value="600">
-        </form>
-        <div class="target-container my-2">
-          <div class="target"></div>
-        </div>
-        <div class="mb-3">
-          <button type="button" class="btn btn-sm btn-light border copy" data-clipboard-target="#code">
-            <i class="far fa-copy"></i> Copy code
-          </button>
-          <label class="mx-1">
-            Background <input type="color" value="#ffffff" class="btn btn-light border p-0 bg-color">
-          </label>
-          <a class="btn btn-sm btn-light border urlfilter reset" data-target="#" href="#">
-            <i class="fa fa-arrows-alt"></i> Reset position
-          </a>
-          <span>Pinch to zoom. Pan to move</span>
-        </div>
-        <script type="text/html" class="codegen">
-          <pre id="code">&lt;g class="comicgen"<% _.each(q, function(v, k) { %> <%- k %>="<%- v %>"<% }) %>&gt;&lt;/g&gt;</pre>
-        </script>
-      </div>
-    </div>
+    <ul class="nav nav-tabs" id="comic-tab" role="tablist">
+      <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a></li>
+      <li class="nav-item"><a class="nav-link" id="usage-tab" data-toggle="tab" href="#usage" role="tab" aria-controls="usage" aria-selected="false">Usage</a></li>
+      <li class="nav-item"><a class="nav-link" id="vision-tab" data-toggle="tab" href="#vision" role="tab" aria-controls="vision" aria-selected="false">Vision</a></li>
+      <li class="nav-item"><a class="nav-link" id="gallery-tab" data-toggle="tab" href="#gallery" role="tab" aria-controls="gallery" aria-selected="false">Gallery</a></li>
+      <li class="nav-item"><a class="nav-link" id="development-tab" data-toggle="tab" href="#development" role="tab" aria-controls="development" aria-selected="false">Development</a></li>
+      <li class="nav-item"><a class="nav-link" id="design-tab" data-toggle="tab" href="#design" role="tab" aria-controls="design" aria-selected="false">Design</a></li>
+    </ul>
+    <div class="tab-content" id="comic-tab-content">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row my-4">
+          <div class="col-xl-4">
+            <h1>Make your own comic</h1>
+            <md data-target="introduction"></md>
+          </div>
+          <div class="col-xl-8">
+            <form class="selector form-inline">
+              <div class="comicgen-attrs d-inline-block"></div>
+              <input name="x" type="hidden" value="0">
+              <input name="y" type="hidden" value="0">
+              <input name="scale" type="hidden" value="1">
+              <input name="width" type="hidden" value="500">
+              <input name="height" type="hidden" value="600">
+            </form>
+            <div class="target-container my-2">
+              <div class="target"></div>
+            </div>
+            <div class="mb-3">
+              <button type="button" class="btn btn-sm btn-light border copy" data-clipboard-target="#code">
+                <i class="far fa-copy"></i> Copy code
+              </button>
+              <label class="mx-1">
+                Background <input type="color" value="#ffffff" class="btn btn-light border p-0 bg-color">
+              </label>
+              <a class="btn btn-sm btn-light border urlfilter reset" data-target="#" href="#">
+                <i class="fa fa-arrows-alt"></i> Reset position
+              </a>
+              <span>Pinch to zoom. Pan to move</span>
+            </div>
+            <script type="text/html" class="codegen">
+              <pre id="code">&lt;g class="comicgen"<% _.each(q, function(v, k) { %> <%- k %>="<%- v %>"<% }) %>&gt;&lt;/g&gt;</pre>
+            </script>
+          </div><!-- .col -->
+        </div><!-- .row -->
+      </div><!-- .tab-pane -->
 
-    <md data-target="usage"></md>
-    <md data-target="contributing"></md>
-    <md data-target="credits"></md>
+      <div class="tab-pane fade" id="usage" role="tabpanel" aria-labelledby="usage-tab">
+        <md data-target="usage"></md>
+        <md data-target="api"></md>
+      </div>
+
+      <div class="tab-pane fade" id="vision" role="tabpanel" aria-labelledby="vision-tab">
+        <md data-target="vision"></md>
+      </div>
+
+      <div class="tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab">
+        <md data-target="gallery"></md>
+      </div>
+
+      <div class="tab-pane fade" id="development" role="tabpanel" aria-labelledby="development-tab">
+        <md data-target="development"></md>
+        <md data-target="release"></md>
+      </div>
+
+      <div class="tab-pane fade" id="design" role="tabpanel" aria-labelledby="design-tab">
+        <md data-target="design"></md>
+        <md data-target="credits"></md>
+      </div>
+
+    </div><!-- .container -->
+
     <md data-target="social"></md>
   </div>
 

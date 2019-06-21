@@ -1,4 +1,4 @@
-# comicgen
+# Comicgen
 
 <!-- var introduction -->
 We love comics. We badly wanted to create comic strips. But there was one
@@ -313,8 +313,9 @@ like this:
 
 <!-- end -->
 
+<!-- var api -->
 
-## API
+## JavaScript API
 
 To explicitly run comicgen on a selector, run `comicgen(selector)`. This lets
 you dynamically create or change a a character.
@@ -346,15 +347,115 @@ comicgen('.new', {
 
 ![Dynamic character rendered via JS, with default options](docs/dee-sad-yuhoo-400-300.png)
 
+<!-- end -->
+
+<!-- var vision -->
+
+# Vision
+
+We created Comicgen to help people write better stories using comic.
+
+Comics attract people. Comics are a signal that the content is simple, interesting and funny.
+
+Comics also make authors make their content simpler, more interesting, and funny, making it a virtuous cycle.
+
+## Comicgen makes storytelling easy
+
+Our vision is to make storytelling with comics easy for everyone. (This includes non-designers, non-programmers, and non-storytellers.)
+
+We do this by:
+
+- [Adding characters](https://github.com/gramener/comicgen/labels/characters).
+  Characters can be split into layers (like face & body). By combining these cleverly, we can create more characters with fewer drawings.
+- [Adding layers](https://github.com/gramener/comicgen/labels/layers). We need objects like speech bubbles, panels, headings, objects, scenery, backgrounds etc.
+- [Integrate into your workflow](https://github.com/gramener/comicgen/labels/integrate). Comicgen should be easy to use in people's current workflow, with their existing tools.
+    - Designers use Illustrator / Sketch
+    - Developers use HTML / JS
+    - Analysts use Tableau /  Power BI
+    - Managers use e-mail / MS Office
+    - We want to make storytelling easy for everyone
+- [API for developers](https://github.com/gramener/comicgen/labels/api). Comicgen automates away the drudgery in creating comics. Developers should be able to create any comic without designing, purely using an API
+- [UI for non-developers](https://github.com/gramener/comicgen/labels/builder). We want users to be able to do this without any programming. This means exposing every feature of the API should be exposed on the UI
+- [Teaching](https://github.com/gramener/comicgen/labels/teach). The ultimate aim is for people to build better stories. Let's teach them
+
+## We measure success by adoption
+
+We succeed when more people create more and better stories with Comicgen. We measure this by
+
+- How many people have used comicgen
+- How many stories have been created using comicgen
+- How many characters are present in comicgen. (Variety drives adoption)
+- TODO: We need more intermediate success metrics -- things that will drive adoption
+
+<!-- end -->
+
+<!-- var gallery -->
+
+## Gallery
+
+Here are examples of where comics have been used effectively in storytelling.
+
+- **Comic based manuals**
+    - Scott Mccloud’s implementation of Comic characters for explaining Google Chrome is one of the finest examples to date. [This](https://www.google.com/googlebooks/chrome/) or [This](http://www.scottmccloud.com/googlechrome/) can be referred.
+    - [Bite-sized command line](https://gumroad.com/l/bite-size-command-line) explains UNIX commands with comics
+    - Using comic books to teach business ethics as researched and published by [Springer journal](https://www.jstor.org/stable/25075560?seq=1#page_scan_tab_contents)
+- **Content marketing**: Comics are eye-catching and noticeable elements, which we hardly find in marketing mailers, product explanation mailers, newsletters.
+    - [Erin Ollila writes](https://www.skyword.com/contentstandard/creativity/are-marketing-comics-a-strong-addition-to-your-storytelling-campaigns/) a fine article on it.
+    - [The awesome adventures of megacorp's marketers](http://238762076847f058c9ec-022016d09c66167d8077b8bd298ba1c4.r36.cf3.rackcdn.com/How-to-use-comics-in-B2B-content-marketing-Radix-Communications-2014-1.pdf).
+- **Comic games for offline screens**: Remember the small-hand dinosaur running across the screen when Google chrome is offline? A comic game or a random conversation about the website being down can make the website interactive even when it is down.
+- **Comic storytelling**: I love how Pablo Stanley, a UI/UX designer, uses comic into storytelling. [Check this out](https://thedesignteam.io/the-devil-is-in-the-details-77996218e5f8).
+
+If you find good examples, please [add a comment](https://github.com/gramener/comicgen/issues/21). We'll include them.
+
+<!-- end -->
+
+<!-- var development -->
+
+## Help wanted (developers)
+
+If you're a developer, we'd love your help in improving comicgen.
+
+1. **Report bugs**. If something doesn't work the way you expect, please [add an issue](https://github.com/gramener/comicgen/issues)
+2. **Ask for features**. Go through the [issues](https://github.com/gramener/comicgen/issues). Add a [Like reaction](https://help.github.com/en/articles/about-conversations-on-github#reacting-to-ideas-in-comments) to what you like. Or add an issue asking for what you want.
+3. **Offer help**. Go through these issues. Pick something interesting. Add a comment saying "I'd like to help." We'll revert in 2-4 days with ideas.
+
+There are 3 areas we're focusing on. Help in these areas would be ideal.
+
+### 1. Integrate comicgen into platforms
+
+People like to use their own platforms, not switch to a new one. So let's integrate comicgen into popular platforms like Excel, PowerPoint, Power BI, Tableau, R, etc as plugins.
+
+[See **integration** issues related &raquo;](https://github.com/gramener/comicgen/labels/integrate)
+
+### 2. Create a comic builder UI
+
+People find it easier to create comics using a UI than programming. So let's create an [interface](https://gramener.com/comicgen/) that let people create an entire graphic novel!
+
+[See **builder** issues &raquo;](https://github.com/gramener/comicgen/labels/builder)
+
+### 3. Improving comicgen API
+
+Developers access comicgen through a JS library. What can we do to make it easier, and feature rich?
+
+[See **API** issues &raquo;](https://github.com/gramener/comicgen/labels/api)
+
+
+
+
+<!-- var release -->
+
 ## Release
 
-Compress the characters using [svgo](https://github.com/svg/svgo):
+New versions of comicgen are released on [Github](https://github.com/gramener/comicgen/)
+and [npm](https://www.npmjs.com/package/comicgen). Here is the release process.
+
+First, compress the characters using [svgo](https://github.com/svg/svgo):
 
 ```bash
 svgo -r -f files/
 ```
 
-To publish a new version on npm:
+Then release on [Github](https://github.com/gramener/comicgen/):
 
 ```bash
 # Update package.json version
@@ -374,13 +475,17 @@ git checkout master
 git merge dev
 git tag -a v0.x.x -m"Add a one-line summary"
 git push --follow-tags
-
-# Publish to https://www.npmjs/package/comicgen maintained by @sanand0
-npm publish
-
 git checkout dev
 ```
 
+Then release on [npm](https://www.npmjs.com/package/comicgen)
+
+```
+# Maintained by @sanand0
+npm publish
+```
+
+<!-- end -->
 
 <!-- var credits -->
 
@@ -402,19 +507,17 @@ git checkout dev
 
 <!-- end -->
 
-<!-- var contributing -->
-## Contributing
+<!-- var design -->
+## Help wanted (designers)
 
-We'd love your help in improving Comicgen.
+Designers, we'd love your help in improving comicgen.
 
-If you're a developer, you could help
-[fix bugs](https://github.com/gramener/comicgen/labels/bug) or
-[add features](https://github.com/gramener/comicgen/labels/enhancements).
-Some issues are marked
-[help wanted](https://github.com/gramener/comicgen/labels/help%20wanted).
-These are a good starting point.
+If you're a designer, you could help by:
 
-If you're a designer, you could help add new characters.
+1. **Designing new characters**. Comicgen characters are open for everyone to use. We [credit the authors](#credits). You can work [freelance](#freelancing) with us, and get paid per character. You can pick your own character, or choose from the [characters people are looking for](https://github.com/gramener/comicgen/labels/characters).
+2. **Adding new layers**. Apart from characters, we need other "layers" -- things we can add to panel, like speech bubbles, background objects, etc. You can design new kinds of objects if you think people will use it. Here are some [layers people have asked for](https://github.com/gramener/comicgen/labels/layers).
+
+Here's a guide to help understand how to design and submit new characters or layers.
 
 ### Add new characters
 
@@ -444,8 +547,8 @@ If you do this, you must make sure that:
 You can choose to break up the images in any number of ways. For example:
 
 - `faces/`, `bodies/`
-- `face/`, `trunk/`, `leg`, `shoes`
-- `hair`, `face`, `eyes`, `mouth`, `trunk/`, `legs/`
+- `face/`, `trunk/`, `leg/`, `shoes/`
+- `hair/`, `face/`, `eyes/`, `mouth/`, `trunk/`, `legs/`
 
 The more combinations you have, the more complex your image becomes. You could
 start small and then add variety.
@@ -465,11 +568,17 @@ When doing this, please mention one of the following:
 - "I release these images under the [CC0](https://creativecommons.org/choose/zero/) license", OR
 - "I release these images under the [CC-BY](https://creativecommons.org/licenses/by/4.0/) license"
 
+
+### Freelancing
+
+Comicgen is free, but their designers' time is not. We pay the designers in our team, and freelancers, for the characters they design.
+
+Please e-mail Anand <s.anand@gramener.com> and Richie <richie.lionell@gramener.com> if you can design characters as a freelancer. We'd love your help.
+
 <!-- end -->
 
 <!-- var social -->
-## Share
-
+<!-- This won't appear on Github. This is just for index.html -->
 <p class="d-flex">
   <a href="https://twitter.com/intent/tweet?text=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Share on Twitter">
     <i class="fab fa-twitter-square fa-2x"></i>
@@ -481,7 +590,7 @@ When doing this, please mention one of the following:
     <i class="fab fa-linkedin fa-2x"></i>
   </a>
   <a href="https://news.ycombinator.com/item?id=20049116" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Discuss on Hacker News">
-    <i class="fab fa-hacker-news"></i>
+    <i class="fab fa-hacker-news fa-2x"></i>
   </a>
   <a href="https://github.com/gramener/comicgen" class="btn btn-link py-0 pl-0 pr-1" target="blank" rel="noopener" title="Fork on Github">
     <i class="fab fa-github fa-2x"></i>
@@ -491,11 +600,11 @@ When doing this, please mention one of the following:
 
 <!-- var social_markdown -->
 <!-- Github README won't display the above share icons. So create links. Don't display this on index.html -->
-<ul>
-  <li><a href="https://twitter.com/intent/tweet?text=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F">Share on Twitter</a></li>
-  <li><a href="https://www.facebook.com/dialog/share?app_id=163328100435225&display=page&href=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&redirect_uri=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&quote=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F">Share on Facebook</a>
-  <li><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/">Share on LinkedIn</a>
-  <li><a href="https://news.ycombinator.com/item?id=20049116">Discuss on Hacker News</a>
-  <li><a href="https://github.com/gramener/comicgen">Fork on Github</a></li>
-</ul>
+## Share
+
+- [Share on Twitter](https://twitter.com/intent/tweet?text=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F)
+- [Share on Facebook](https://www.facebook.com/dialog/share?app_id=163328100435225&display=page&href=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&redirect_uri=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&quote=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F)
+- [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/)
+- [Discuss on Hacker News](https://news.ycombinator.com/item?id=20049116)
+- [Fork on Github](https://github.com/gramener/comicgen)
 <!-- end -->

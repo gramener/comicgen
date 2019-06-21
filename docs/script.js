@@ -1,4 +1,9 @@
 /* globals comicgen, showdown, hljs, ClipboardJS, PlainDraggable */
+
+// If the URL hash has a path, it's a non-home tab. Change to it and exit
+var url = g1.url.parse(location.hash.replace(/^#/, ''))
+$('a[href="#' + url.pathname + '"]').tab('show')
+
 // Render part of README.md as Markdown. Sections delimited by <!-- var ... !>...<!-- end -->
 $.get('README.md')
   .done(function (text) {
@@ -26,6 +31,13 @@ $.getJSON('files/files.json')
     // Any change in selection changes the URL
     $('.selector').on('change', ':input', function () {
       location.hash = '?' + $('.selector').serialize()
+    })
+    // Any tab selection updates the URL path without hashchange
+    $('#comic-tab').on('shown.bs.tab', function (e) {
+      var url = g1.url.parse(location.hash.replace(/^#/, ''))
+      url.pathname = $(e.target).attr('href').replace(/^#/, '')
+      url.pathname = url.pathname == 'home' ? '' : url.pathname
+      location.hash = url.toString()
     })
     // Any change in URL re-renders the strip
     $(window).on('#', function (e, url) {
