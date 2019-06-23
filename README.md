@@ -7,8 +7,8 @@ problem. Some of us can't draw a straight line for nuts.
 But why should that stop us from creating comics? So here's a gift to ourselves
 and the world &mdash; a **Comic Creator**.
 
-We are sure you'd love the company of our friends [Dee](#?name=dee) &
-[Dey](#?name=dey). Go on & have some fun.
+We are sure you'd love the company of our friends [Dee](#?name=dee),
+[Dey](#?name=dey), and our other comic friends. Go on & have some fun.
 <!-- end -->
 
 <!-- var usage -->
@@ -355,9 +355,25 @@ comicgen('.new', {
 
 We created Comicgen to help people write better stories using comic.
 
-Comics attract people. Comics are a signal that the content is simple, interesting and funny.
+## Our audience are storytellers
 
-Comics also make authors make their content simpler, more interesting, and funny, making it a virtuous cycle.
+Storytellers want to share a message and change their audience. But they worry that their content is not engaging or "catchy" enough to drive the change.
+
+Comics are a powerful way of making content "catchy":
+
+- **Comics attract people**. Comics are a signal that the content is simple, interesting and often funny.
+- **Comics nudge authors** into making their content simpler, more interesting, and funny -- making this a virtuous cycle.
+
+Anyone who writes an email, a presentation, or a document, is a storyteller.
+
+Within organizations, we see this in:
+
+- **Executives' analysis**. An analyst created a poster explaining their work using comic characters. It was simple and engaging -- the entire organization understood this deep learning technique.
+- **Managers' reports**. An admin manager sent his status report as a pair of comic characters conversing. Their CEO read this report fully for the first time.
+- **Consultants' workshops**. A consultant runs a culture workshop using [comics in the presentation](https://www.businessillustrator.com/culture-change-with-comics-workshop/) because "... it's a lot less threatening than an official PowerPoint presentation."
+- **Product teams launching features**. Google Chrome was launched using a [comic book](http://scottmccloud.com/googlechrome/).
+- **Marketer emails**
+- **Event manager invites**
 
 ## Comicgen makes storytelling easy
 
@@ -393,8 +409,10 @@ We succeed when more people create more and better stories with Comicgen. We mea
 
 ## Gallery
 
-Here are examples of where comics have been used effectively in storytelling.
+Here are examples or guides of where comics have been used effectively in storytelling.
 
+- **Comics in data visualization**
+  - Martin Telefont's [Data Visualization Comics](https://medium.com/data-visualization-society/data-visualization-comics-68bb2c03fd3e) compiles a mini who's who in data visualization comics: [Matt Hong](https://twitter.com/matthongnet), [Susie Lu](https://twitter.com/datatoviz), [Natalia Kiseleva](https://twitter.com/eolay13), [Martin Telefont](https://twitter.com/martintelefont)
 - **Comic based manuals**
     - Scott Mccloud’s implementation of Comic characters for explaining Google Chrome is one of the finest examples to date. [This](https://www.google.com/googlebooks/chrome/) or [This](http://www.scottmccloud.com/googlechrome/) can be referred.
     - [Bite-sized command line](https://gumroad.com/l/bite-size-command-line) explains UNIX commands with comics
@@ -440,7 +458,21 @@ Developers access comicgen through a JS library. What can we do to make it easie
 [See **API** issues &raquo;](https://github.com/gramener/comicgen/labels/api)
 
 
+<!-- var newchars -->
 
+## Add new characters
+
+To add a new character, or add images for an existing character:
+
+1. Add the SVG images under `<character>/<attr>/.../<file>.svg`
+2. File or folder names must use only lowercase letters
+3. Compress the characters using [svgo](https://github.com/svg/svgo): `svgo -r -f files/`
+4. Update [src/comicgen.js](src/comicgen.js). Add new character specs under `comicgen.namemap` and `comicgen.formats` using the instructions there
+5. Update [files/files.json](files/files.json) to add new files. This is organized as `{character: {attr: [file, file, ...]}}`
+6. Update the [character credits](#character-credits)
+7. Run `npm run build` to recompile files under `dist/`
+
+<!-- end -->
 
 <!-- var release -->
 
@@ -448,14 +480,6 @@ Developers access comicgen through a JS library. What can we do to make it easie
 
 New versions of comicgen are released on [Github](https://github.com/gramener/comicgen/)
 and [npm](https://www.npmjs.com/package/comicgen). Here is the release process.
-
-First, compress the characters using [svgo](https://github.com/svg/svgo):
-
-```bash
-svgo -r -f files/
-```
-
-Then release on [Github](https://github.com/gramener/comicgen/):
 
 ```bash
 # Update package.json version
@@ -502,7 +526,7 @@ npm publish
   under [CC-BY license](https://creativecommons.org/licenses/by/4.0/)
 - Facesketch: By Devarani B <devarani.b@gramener.com>
   under [CC0 license](https://creativecommons.org/choose/zero/)
-- Zoe: By Swetha Mylavarapu
+- Aryan, Zoe: By Swetha Mylavarapu
   under [CC0 license](https://creativecommons.org/choose/zero/)
 
 <!-- end -->

@@ -73,12 +73,13 @@ comicgen.defaults = {
 // comicgen.namemap maps the character name to the format.
 // This is intentionally exposed publicly, and can be changed / extended by others.
 comicgen.namemap = {
+  aryan: 'emotionpose',
   dee: 'deedey',
   dey: 'deedey',
-  ringo: 'emotionpose',
-  zoe: 'emotionpose',
+  facesketch: 'facesketch',
   humaaans: 'humaaans',
-  facesketch: 'facesketch'
+  ringo: 'emotionpose',
+  zoe: 'emotionpose'
 }
 
 // Defines the format for characters. Each format has:
