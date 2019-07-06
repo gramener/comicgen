@@ -359,10 +359,10 @@ We created Comicgen to help people write better stories using comic.
 
 Storytellers want to share a message and change their audience. But they worry that their content is not engaging or "catchy" enough to drive the change.
 
-Comics are a powerful way of making content "catchy":
-
-- **Comics attract people**. Comics are a signal that the content is simple, interesting and often funny.
+- **Comics are "catchy"**. That makes them a powerful way of engaging the audience.
+- **Comics make it simpler**. Comics are a signal that the content is simple, interesting and often funny.
 - **Comics nudge authors** into making their content simpler, more interesting, and funny -- making this a virtuous cycle.
+- **Comics drive emotion**. The pictures convey emotions better than just the words alone. That makes the stories more memorable.
 
 Anyone who writes an email, a presentation, or a document, is a storyteller.
 
@@ -411,19 +411,33 @@ We succeed when more people create more and better stories with Comicgen. We mea
 
 Here are examples or guides of where comics have been used effectively in storytelling.
 
-- **Comics in data visualization**
-  - Martin Telefont's [Data Visualization Comics](https://medium.com/data-visualization-society/data-visualization-comics-68bb2c03fd3e) compiles a mini who's who in data visualization comics: [Matt Hong](https://twitter.com/matthongnet), [Susie Lu](https://twitter.com/datatoviz), [Natalia Kiseleva](https://twitter.com/eolay13), [Martin Telefont](https://twitter.com/martintelefont)
 - **Comic based manuals**
     - Scott Mccloud’s implementation of Comic characters for explaining Google Chrome is one of the finest examples to date. [This](https://www.google.com/googlebooks/chrome/) or [This](http://www.scottmccloud.com/googlechrome/) can be referred.
     - [Bite-sized command line](https://gumroad.com/l/bite-size-command-line) explains UNIX commands with comics
     - Using comic books to teach business ethics as researched and published by [Springer journal](https://www.jstor.org/stable/25075560?seq=1#page_scan_tab_contents)
 - **Content marketing**: Comics are eye-catching and noticeable elements, which we hardly find in marketing mailers, product explanation mailers, newsletters.
+    - [Marketoonist campaigns](https://marketoonist.com/campaigns) creates content marketing campaigns using cartoons
     - [Erin Ollila writes](https://www.skyword.com/contentstandard/creativity/are-marketing-comics-a-strong-addition-to-your-storytelling-campaigns/) a fine article on it.
     - [The awesome adventures of megacorp's marketers](http://238762076847f058c9ec-022016d09c66167d8077b8bd298ba1c4.r36.cf3.rackcdn.com/How-to-use-comics-in-B2B-content-marketing-Radix-Communications-2014-1.pdf).
 - **Comic games for offline screens**: Remember the small-hand dinosaur running across the screen when Google chrome is offline? A comic game or a random conversation about the website being down can make the website interactive even when it is down.
 - **Comic storytelling**: I love how Pablo Stanley, a UI/UX designer, uses comic into storytelling. [Check this out](https://thedesignteam.io/the-devil-is-in-the-details-77996218e5f8).
 
 If you find good examples, please [add a comment](https://github.com/gramener/comicgen/issues/21). We'll include them.
+
+
+## People
+
+People working on storytelling / data visualization through comics include:
+
+- [Martin Telefont](https://twitter.com/martintelefont) (see [Data Visualization Comics](https://medium.com/data-visualization-society/data-visualization-comics-68bb2c03fd3e))
+- [Matt Hong](https://twitter.com/matthongnet)
+- [Natalia Kiseleva](https://twitter.com/eolay13)
+- [Neil Cohn](http://visuallanguagelab.com/)
+- [Susie Lu](https://twitter.com/datatoviz)
+- [Taryn Read](https://twitter.com/indiedataviz)
+
+If you know of more people, please [add a comment](https://github.com/gramener/comicgen/issues/25). We'll include them.
+
 
 <!-- end -->
 
