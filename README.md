@@ -617,31 +617,41 @@ Please e-mail Anand <s.anand@gramener.com> and Richie <richie.lionell@gramener.c
 
 <!-- var social -->
 <!-- This won't appear on Github. This is just for index.html -->
-<p class="d-flex">
-  <a href="https://twitter.com/intent/tweet?text=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Share on Twitter">
-    <i class="fab fa-twitter-square fa-2x"></i>
-  </a>
-  <a href="https://www.facebook.com/dialog/share?app_id=163328100435225&display=page&href=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&redirect_uri=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&quote=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Share on Facebook">
-    <i class="fab fa-facebook-square fa-2x"></i>
-  </a>
-  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Share on LinkedIn">
-    <i class="fab fa-linkedin fa-2x"></i>
-  </a>
-  <a href="https://news.ycombinator.com/item?id=20049116" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Discuss on Hacker News">
-    <i class="fab fa-hacker-news fa-2x"></i>
-  </a>
-  <a href="https://github.com/gramener/comicgen" class="btn btn-link py-0 pl-0 pr-1" target="blank" rel="noopener" title="Fork on Github">
-    <i class="fab fa-github fa-2x"></i>
-  </a>
-</p>
+<div class="d-flex justify-content-between">
+  <div class="align-items-center">
+    <a href="https://twitter.com/search?f=tweets&vertical=default&q=comicgen&src=typd" class="btn btn-primary btn-sm d-flex" target="_blank" rel="noopener" title="Discuss on Twitter">
+      <i class="fab fa-twitter-square fa-2x mr-2"></i>
+      <span class="align-items-center d-none d-md-flex mr-2">Discuss on Twitter:</span>
+      <span class="align-items-center d-flex">#comicgen</span>
+    </a>
+  </div>
+  <div class="d-flex align-items-center">
+    <a href="https://twitter.com/intent/tweet?text=Make%20your%20own%20comics%20with%20the%20%23comicgen%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Share on Twitter">
+      <i class="fab fa-twitter-square fa-2x"></i>
+    </a>
+    <a href="https://www.facebook.com/dialog/share?app_id=163328100435225&display=page&href=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&redirect_uri=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&quote=Make%20your%20own%20comics%20with%20the%20%23comicgen%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Share on Facebook">
+      <i class="fab fa-facebook-square fa-2x"></i>
+    </a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Share on LinkedIn">
+      <i class="fab fa-linkedin fa-2x"></i>
+    </a>
+    <a href="https://news.ycombinator.com/item?id=20049116" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Discuss on Hacker News">
+      <i class="fab fa-hacker-news fa-2x"></i>
+    </a>
+    <a href="https://github.com/gramener/comicgen" class="btn btn-link py-0 pl-0 pr-1" target="blank" rel="noopener" title="Fork on Github">
+      <i class="fab fa-github fa-2x"></i>
+    </a>
+  </div>
+</div>
 <!-- end -->
 
 <!-- var social_markdown -->
 <!-- Github README won't display the above share icons. So create links. Don't display this on index.html -->
 ## Share
 
-- [Share on Twitter](https://twitter.com/intent/tweet?text=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F)
-- [Share on Facebook](https://www.facebook.com/dialog/share?app_id=163328100435225&display=page&href=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&redirect_uri=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&quote=Make%20your%20own%20%23comics%20with%20the%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F)
+- [Discuss on Twitter. Hashtag #comicgen](https://twitter.com/search?f=tweets&vertical=default&q=comicgen&src=typd)
+- [Share on Twitter](https://twitter.com/intent/tweet?text=Make%20your%20own%20comics%20with%20the%20%23comicgen%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F)
+- [Share on Facebook](https://www.facebook.com/dialog/share?app_id=163328100435225&display=page&href=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&redirect_uri=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&quote=Make%20your%20own%20comics%20with%20the%20%23comicgen%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F)
 - [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/)
 - [Discuss on Hacker News](https://news.ycombinator.com/item?id=20049116)
 - [Fork on Github](https://github.com/gramener/comicgen)
