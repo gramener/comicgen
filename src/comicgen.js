@@ -14,7 +14,7 @@ export default function comicgen(selector, options) {
     // This ensures that attrs follow the order of the node attribute keys.
     for (var attrs = {}, j = 0, n = node.attributes; j < n.length; j++)
       attrs[n[j].name] = n[j].value
-    Object.assign(attrs, comicgen.defaults, options, attrs)
+    attrs = Object.assign({}, comicgen.defaults, options, attrs)
 
     // Based on the name= attribute, figure out which format to use from comicgen.formats.
     // If it's an invalid format, report error and continue with the other elements.
