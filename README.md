@@ -368,12 +368,14 @@ Anyone who writes an email, a presentation, or a document, is a storyteller.
 
 Within organizations, we see this in:
 
-- **Executives' analysis**. An analyst created a poster explaining their work using comic characters. It was simple and engaging -- the entire organization understood this deep learning technique.
-- **Managers' reports**. An admin manager sent his status report as a pair of comic characters conversing. Their CEO read this report fully for the first time.
-- **Consultants' workshops**. A consultant runs a culture workshop using [comics in the presentation](https://www.businessillustrator.com/culture-change-with-comics-workshop/) because "... it's a lot less threatening than an official PowerPoint presentation."
-- **Product teams launching features**. Google Chrome was launched using a [comic book](http://scottmccloud.com/googlechrome/).
-- **Marketer emails**
-- **Event manager invites**
+- **Presenting insights**
+  - **Executives' analysis**. An analyst created a poster explaining their work using comic characters. It was simple and engaging -- the entire organization understood this deep learning technique.
+  - **Managers' reports**. An admin manager sent his status report as a pair of comic characters conversing. Their CEO read this report fully for the first time.
+  - **Consultants' workshops**. A consultant runs a culture workshop using [comics in the presentation](https://www.businessillustrator.com/culture-change-with-comics-workshop/) because "... it's a lot less threatening than an official PowerPoint presentation."
+- **Marketing stories**. This could be:
+  - **Product teams launching features**. Google Chrome was launched using a [comic book](http://scottmccloud.com/googlechrome/).
+  - **Marketer emails**
+  - **Event manager invites**
 
 ## Comicgen makes storytelling easy
 
@@ -407,7 +409,7 @@ We succeed when more people create more and better stories with Comicgen. We mea
 
 <!-- var gallery -->
 
-## Gallery
+# Gallery
 
 Here are examples or guides of where comics have been used effectively in storytelling.
 
@@ -437,6 +439,26 @@ People working on storytelling / data visualization through comics include:
 - [Taryn Read](https://twitter.com/indiedataviz)
 
 If you know of more people, please [add a comment](https://github.com/gramener/comicgen/issues/25). We'll include them.
+
+
+## Resources
+
+Here are other tools and resources to create comic stories:
+
+- [Pixton](https://www.pixton.com/) has an [online app](https://app.pixton.com/#/)
+  and content packs for educators and students to create comics. There's also a
+  [PowerPoint Add-In](https://appsource.microsoft.com/en-us/product/office/WA104380907) and a
+  [Pixton Comic Maker](https://appsource.microsoft.com/en-us/product/office/SA000000020?tab=Overview)
+- [Canva Comic Strips](https://www.canva.com/en_in/create/comic-strips/)
+- [Write comics](http://writecomics.com/)
+- [ToonyTool](https://www.toonytool.com/)
+- [SummitSoft's ComicCreator](https://summitsoft.com/products/comic-creator/)
+- [Make Beliefs Comix](https://www.makebeliefscomix.com/)
+- [StoryboardThat](https://www.storyboardthat.com/storyboard-creator)
+
+If you know of any others, please [add a comment](https://github.com/gramener/comicgen/issues/26). We'll include them.
+
+We haven't yet found tools that expose an API. This should enable developers to integrate with existing tools and workflows, as well as build new ones. Hopefully comicgen will enable that.
 
 
 <!-- end -->
