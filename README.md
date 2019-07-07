@@ -385,6 +385,7 @@ We do this by:
 
 - [Adding characters](https://github.com/gramener/comicgen/labels/characters).
   Characters can be split into layers (like face & body). By combining these cleverly, we can create more characters with fewer drawings.
+  If you have a character idea, please [add a comment](https://github.com/gramener/comicgen/issues/27).
 - [Adding layers](https://github.com/gramener/comicgen/labels/layers). We need objects like speech bubbles, panels, headings, objects, scenery, backgrounds etc.
 - [Integrate into your workflow](https://github.com/gramener/comicgen/labels/integrate). Comicgen should be easy to use in people's current workflow, with their existing tools.
     - Designers use Illustrator / Sketch
