@@ -17,9 +17,12 @@ We are sure you'd love the company of our friends [Dee](#?name=dee),
 Load the comicgen library by adding this line in your HTML page's `<head>`:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/comicgen/dist/comicgen.min.css">
-<script async src="https://cdn.jsdelivr.net/npm/comicgen"></script>
+<link rel="stylesheet" href="https://unpkg.com/comicgen/dist/comicgen.min.css">
+<script async src="https://unpkg.com/comicgen"></script>
 ```
+
+You can use [cdn.jsdelivr.net/npm](https://cdn.jsdelivr.net/npm/comicgen/) instead of
+[unpkg.com](https://unpkg.com/comicgen/) if you wish.
 
 You can also install comicgen locally using `npm` or `yarn`:
 
@@ -81,12 +84,17 @@ Each character has a pre-defined canvas size. For example, `dee` and `dey` use a
 - `width=`: width of the image in px
 - `height=`: height of the image in px
 
-You can also re-position and re-size the canvas using these attributes:
+You can also re-position and re-size the canvas using these optional attributes:
 
 - `x=`: left position or x-offset in px
 - `y=`: top position or y-offset in px
-- `mirror=`: shsow mirror image. Value can be empty string or 1. Default: ""
+- `mirror=`: show mirror image. Value can be "" (no mirroring) or "1" (to mirror the image). Default: ""
 - `scale=`: how much larger to make the image. Default: 1
+
+The images are rendered as SVG by default. You can use PNGs instead with `ext="png"`:
+
+- `ext=`: choose file format. Value can be `svg` (default) or `png`
+
 
 ## Layer order
 
@@ -159,7 +167,7 @@ and slices the height, preserving the top (YMin) of the image.
 
 ## Panels
 
-[comicgen.css](https://cdn.jsdelivr.net/npm/comicgen/dist/comicgen.min.css)
+[comicgen.css](https://unpkg.com/comicgen/dist/comicgen.min.css)
 provides 2 classes for layout:
 
 - `comic-panel`
@@ -215,7 +223,7 @@ variables in your stylesheet.
 
 ## Captions
 
-[comicgen.css](https://cdn.jsdelivr.net/npm/comicgen/dist/comicgen.min.css)
+[comicgen.css](https://unpkg.com/comicgen/dist/comicgen.min.css)
 provides `comic-caption-top` and `comic-caption-bottom` to add captions inside
 a `.comic-panel`.
 
@@ -314,6 +322,17 @@ like this:
 <!-- end -->
 
 <!-- var api -->
+
+## File API
+
+The raw SVGs and PNGs are at
+[unpkg.com/comicgen/](https://unpkg.com/comicgen/). Look under:
+
+- [files.json](https://unpkg.com/comicgen/files.json) - list of files for each character
+- [svg/](https://unpkg.com/comicgen/svg/) - SVG files for each character
+- [png/](https://unpkg.com/comicgen/png/) - PNG files for each character
+
+You can create comics by directly linking to these files.
 
 ## JavaScript API
 
@@ -419,7 +438,7 @@ Here are examples or guides of where comics have been used effectively in storyt
     - [Bite-sized command line](https://gumroad.com/l/bite-size-command-line) explains UNIX commands with comics
     - Using comic books to teach business ethics as researched and published by [Springer journal](https://www.jstor.org/stable/25075560?seq=1#page_scan_tab_contents)
 - **Content marketing**: Comics are eye-catching and noticeable elements, which we hardly find in marketing mailers, product explanation mailers, newsletters.
-    - [Marketoonist campaigns](https://marketoonist.com/campaigns) creates content marketing campaigns using cartoons
+    - [Marketoonist](https://marketoonist.com/campaigns) creates content marketing campaigns using cartoons
     - [Erin Ollila writes](https://www.skyword.com/contentstandard/creativity/are-marketing-comics-a-strong-addition-to-your-storytelling-campaigns/) a fine article on it.
     - [The awesome adventures of megacorp's marketers](http://238762076847f058c9ec-022016d09c66167d8077b8bd298ba1c4.r36.cf3.rackcdn.com/How-to-use-comics-in-B2B-content-marketing-Radix-Communications-2014-1.pdf).
 - **Comic games for offline screens**: Remember the small-hand dinosaur running across the screen when Google chrome is offline? A comic game or a random conversation about the website being down can make the website interactive even when it is down.
@@ -450,6 +469,7 @@ Here are other tools and resources to create comic stories:
   and content packs for educators and students to create comics. There's also a
   [PowerPoint Add-In](https://appsource.microsoft.com/en-us/product/office/WA104380907) and a
   [Pixton Comic Maker](https://appsource.microsoft.com/en-us/product/office/SA000000020?tab=Overview)
+- [Powtoon](https://www.powtoon.com/)
 - [Canva Comic Strips](https://www.canva.com/en_in/create/comic-strips/)
 - [Write comics](http://writecomics.com/)
 - [ToonyTool](https://www.toonytool.com/)
@@ -503,9 +523,9 @@ To add a new character, or add images for an existing character:
 
 1. Add the SVG images under `<character>/<attr>/.../<file>.svg`
 2. File or folder names must use only lowercase letters
-3. Compress the characters using [svgo](https://github.com/svg/svgo): `svgo -r -f files/`
+3. Compress the characters and create PNGs: `bash png.sh`. This requires [ImageMagick](https://imagemagick.org/script/convert.php) and [pngquant](https://pngquant.org/).
 4. Update [src/comicgen.js](src/comicgen.js). Add new character specs under `comicgen.namemap` and `comicgen.formats` using the instructions there
-5. Update [files/files.json](files/files.json) to add new files. This is organized as `{character: {attr: [file, file, ...]}}`
+5. Update [files.json](files.json) to add new files. This is organized as `{character: {attr: [file, file, ...]}}`
 6. Update the [character credits](#character-credits)
 7. Run `npm run build` to recompile files under `dist/`
 
@@ -519,7 +539,10 @@ New versions of comicgen are released on [Github](https://github.com/gramener/co
 and [npm](https://www.npmjs.com/package/comicgen). Here is the release process.
 
 ```bash
-# Update package.json version
+# Update package.json version and build
+npm run build
+bash png.sh
+
 # Run tests on dev branch
 npm run lint
 npm test
@@ -619,7 +642,7 @@ start small and then add variety.
 Give your character a name (e.g. "Ant Man"). Save the SVG files under a folder
 with the character name (e.g. "ant-man" - lower-case, use hyphens as separator).
 Add this folder under the
-[files/](https://github.com/gramener/comicgen/tree/master/files/) folder.
+[svg/](https://github.com/gramener/comicgen/tree/master/svg/) folder.
 
 Then [send a pull request](https://help.github.com/en/articles/creating-a-pull-request)
 or email S Anand <s.anand@gramener.com>.

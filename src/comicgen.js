@@ -42,7 +42,7 @@ export default function comicgen(selector, options) {
         var row = format.files[attr]
         // Substitute any $variable with the corresponding attribute value
         var img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
-        svg.push(`<image width="${row.width}" height="${row.height}" transform="translate(${row.x},${row.y})" xlink:href="${comicgen.base}files/${img}.svg"/>`)
+        svg.push(`<image width="${row.width}" height="${row.height}" transform="translate(${row.x},${row.y})" xlink:href="${comicgen.base}${attrs.ext}/${img}.${attrs.ext}"/>`)
       }
     }
 
@@ -66,7 +66,8 @@ comicgen.defaults = {
   x: 0,
   y: 0,
   scale: 1,
-  mirror: ''
+  ext: 'svg',
+  mirror: '',
 }
 
 // We pick characters from multiple sources / people, and each have their format.
@@ -86,7 +87,7 @@ comicgen.namemap = {
 //  width: default width of the SVG container
 //  height: default height of the SVG container
 //  dirs: list of directory tree attrs. For example, ["angle"] means
-//      that the file is under files/$name/$angle/...
+//      that the file is under svg/$name/$angle/...
 //  files: dict of {attr: filespec}. If the attr is set, draw the image
 //  filespec is a dict of:
 //      file: file template, where $<var> is replaced by the value of var="..."

@@ -26,7 +26,7 @@ $.get('README.md')
 // q holds the current state of the application, and the comicgen parameters
 var q
 var defaults = comicgen.defaults
-$.getJSON('files/files.json')
+$.getJSON('files.json')
   .done(function (data) {
     // Any change in selection changes the URL
     $('.selector').on('change', ':input', function () {
@@ -58,7 +58,8 @@ $.getJSON('files/files.json')
         if (attr in format.files)
           options(q, attr, node[attr])
       })
-      options(q, 'mirror', { '': '', 'mirror': '1'})
+      options(q, 'ext', ['svg', 'png'])
+      options(q, 'mirror', { '': '', 'mirror': '1' })
       $('.comicgen-attrs .wip').remove()
       comicgen('.target', q)
       $('.target-container').css({ width: q.width + 'px', height: q.height + 'px' })
