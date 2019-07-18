@@ -18,4 +18,4 @@ deploy:
     SERVER: gramener.com
     URL: comicgen
     VERSION: static
-    SETUP: yarn install && npm run build
+    SETUP: yarn install && npm run build && bash png.sh

@@ -54,6 +54,8 @@ You can embed it anywhere, including inside an `<svg>` element.
 
 ![name=dee angle=straight emotion=smile pose=thumbsup](docs/dee-straight-smile-thumbsup.png)
 
+<a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/YMGMbw">Try it on Codepen</a>
+
 First, you have to choose a character with the `name="<character>"` attribute.
 For example:
 
@@ -136,6 +138,9 @@ You can change the `x`, `y`, `width`, `height`, `mirror` and `scale` to position
 
 ![Dee and Dey together](docs/dee-and-dey-together.png)
 
+<a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/eqYmer">Try it on Codepen</a>
+
+
 You can resize the combined image by changing the `width` and `height` of the
 SVG container.
 
@@ -207,6 +212,8 @@ Here's an example with 2 panels. The second panel has 2 characters.
 
 ![Dee and Dey in panels](docs/dee-and-dey-panels.png)
 
+<a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/ZgEYvx">Try it on Codepen</a>
+
 You can override the panel's background, border width and color using CSS
 variables in your stylesheet.
 
@@ -237,6 +244,8 @@ For example, this defines a caption on top:
 ```
 
 ![Dee with a caption on top](docs/dee-caption-top.png)
+
+<a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/XvWJEP">Try it on Codepen</a>
 
 ... or the bottom:
 
@@ -318,6 +327,8 @@ like this:
 ```
 
 ![Dee and Dey with captions](docs/dee-and-dey-captions.png)
+
+<a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/dxyPex">Try it on Codepen</a>
 
 <!-- end -->
 
@@ -523,7 +534,7 @@ To add a new character, or add images for an existing character:
 
 1. Add the SVG images under `<character>/<attr>/.../<file>.svg`
 2. File or folder names must use only lowercase letters
-3. Compress the characters and create PNGs: `bash png.sh`. This requires [ImageMagick](https://imagemagick.org/script/convert.php) and [pngquant](https://pngquant.org/).
+3. Compress the characters and create PNGs: `bash png.sh`. This requires [svgo](https://github.com/svg/svgo), [ImageMagick](https://imagemagick.org/script/convert.php) and [pngquant](https://pngquant.org/).
 4. Update [src/comicgen.js](src/comicgen.js). Add new character specs under `comicgen.namemap` and `comicgen.formats` using the instructions there
 5. Update [files.json](files.json) to add new files. This is organized as `{character: {attr: [file, file, ...]}}`
 6. Update the [character credits](#character-credits)
