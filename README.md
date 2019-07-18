@@ -440,6 +440,26 @@ We succeed when more people create more and better stories with Comicgen. We mea
 
 <!-- var gallery -->
 
+# Examples
+
+Here are some examples of Comicgen usage
+
+- [Using Comicgen: Free comic creator](https://blog.gramener.com/using-comicgen-free-comic-creator/)
+- [Why Game of Thrones?](https://www.behance.net/gallery/66745841/Why-Game-of-Thrones)
+- [How Big is the Data?](https://www.behance.net/gallery/66954873/How-big-is-the-Data)
+- [More work by Ramya](https://www.behance.net/RamyaSMylavarapu)
+- [Comic narrative + a line chart](https://twitter.com/richielionell/status/1151803880922968066) #cricket
+- [India vs Afghanistan, World Cup 2019](https://twitter.com/richielionell/status/1142472430599847938) ([version 2](https://twitter.com/richielionell/status/1142472932800659457))
+- [Wasting time on IMDb](https://twitter.com/mvark/status/1147467581361537024)
+- [Coding memes](https://twitter.com/quantum0fcosmos/status/1134801569470242817)
+
+Technique examples
+
+- [Character narrating a story for The World Bank](https://gramener.com/playground/datacomics/wbl)
+- [A tweet embedded in a 3-panel comic strip](https://codepen.io/richielionell/pen/Lvxxyy)
+- [A video embedded in a 3-panel comic strip](https://codepen.io/richielionell/pen/ROKodg)
+- [Character reacting to changing data live](https://codepen.io/richielionell/pen/jRmjOY)
+
 # Gallery
 
 Here are examples or guides of where comics have been used effectively in storytelling.
