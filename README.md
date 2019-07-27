@@ -500,6 +500,7 @@ Here are other tools and resources to create comic stories:
   and content packs for educators and students to create comics. There's also a
   [PowerPoint Add-In](https://appsource.microsoft.com/en-us/product/office/WA104380907) and a
   [Pixton Comic Maker](https://appsource.microsoft.com/en-us/product/office/SA000000020?tab=Overview)
+- [Joe Schmoe](https://joeschmoe.io/) is an image API an avatar collection
 - [Powtoon](https://www.powtoon.com/)
 - [Canva Comic Strips](https://www.canva.com/en_in/create/comic-strips/)
 - [Write comics](http://writecomics.com/)
