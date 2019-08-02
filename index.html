@@ -30,7 +30,7 @@
   <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
   <link href="https://learn.gramener.com/ui/bootstraptheme.css?font-family-base=Neucha,cursive&dark=%23675b9e&primary=%238b8ac1" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs@9.12.0/styles/github.css">
+  <link rel="stylesheet" href="https://unpkg.com/highlightjs@9.12.0/styles/github.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42126862-1"></script>
   <script>
     window.dataLayer = window.dataLayer || []
@@ -91,6 +91,9 @@
               <div class="target"></div>
             </div>
             <div class="mb-3">
+              <button type="button" class="btn btn-sm btn-light border download" data-clipboard-target="#code">
+                <i class="far fa-arrow-alt-circle-down"></i> Save image
+              </button>
               <button type="button" class="btn btn-sm btn-light border copy" data-clipboard-target="#code">
                 <i class="far fa-copy"></i> Copy code
               </button>
@@ -157,14 +160,15 @@
     </div>
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/g1@0.17.0/dist/g1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.0/dist/showdown.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/highlightjs@9.12.0/highlight.pack.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/plain-draggable@2.5.12/plain-draggable.min.js"></script>
+  <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/lodash@4.17.11/lodash.min.js"></script>
+  <script src="https://unpkg.com/g1@0.17.0/dist/g1.min.js"></script>
+  <script src="https://unpkg.com/showdown@1.9.0/dist/showdown.min.js"></script>
+  <script src="https://unpkg.com/highlightjs@9.12.0/highlight.pack.min.js"></script>
+  <script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js"></script>
+  <script src="https://unpkg.com/plain-draggable@2.5.12/plain-draggable.min.js"></script>
+  <script src="https://unpkg.com/save-svg-as-png@1.4.14/lib/saveSvgAsPng.js"></script>
   <script src="dist/comicgen.min.js"></script>
   <script src="docs/script.js"></script>
 </body>

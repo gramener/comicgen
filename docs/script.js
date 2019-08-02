@@ -1,4 +1,4 @@
-/* globals comicgen, showdown, hljs, ClipboardJS, PlainDraggable */
+/* globals comicgen, showdown, hljs, ClipboardJS, PlainDraggable, saveSvgAsPng */
 
 // If the URL hash has a path, it's a non-home tab. Change to it and exit
 var url = g1.url.parse(location.hash.replace(/^#/, ''))
@@ -115,6 +115,42 @@ $('.bg-color').on('input, change', function () {
 
 // Click on copy button to copy code
 new ClipboardJS('.copy')
+
+// Click on download button to download in the current format (SVG or PNG)
+$('.download').on('click', function () {
+  var ext = $(':input[name="ext"]').val()
+  var $target = $('.target > svg')
+  // filename = all character attributes ...
+  var filename = $('.comicgen-attrs select').map(function () { return $(this).val() })
+  // ... except the last 2 (ext, mirror)
+  filename = filename.get().slice(0, -2).join('-')
+  if (ext == 'png')
+    saveSvgAsPng($target.get(0), filename + '.png')
+  else if (ext == 'svg') {
+    // Create a copy of the SVG and replace the <image>s with the actual HTML
+    var $svg = $target.clone()
+    $svg.attr('xmlns', 'http://www.w3.org/2000/svg')
+    // Replace each image with the actual SVG
+    var $images = $svg.find('image')
+    $.when.apply($, $images.map(function () { return this.href.baseVal }).get().map($.get))
+      .done(function () {
+        var docs = _.map(arguments, function (v) { return v[2].responseText })
+        $images.each(function (i) {
+          var $this = $(this)
+          $this.replaceWith('<g transform="' + $this.attr('transform') + '">' + docs[i] + '</g>')
+        })
+        var link = document.createElement('a')
+        link.href = URL.createObjectURL(new Blob([
+          '<?xml version="1.0" standalone="no"?>\r\n',
+          $svg.get(0).outerHTML
+        ], { type: 'image/svg+xml;charset=utf-8' }))
+        link.download = filename + '.svg'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      })
+  }
+})
 
 var template_arrows = _.template($('.arrows').html())
 

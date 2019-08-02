@@ -596,9 +596,22 @@ git checkout dev
 
 Then release on [npm](https://www.npmjs.com/package/comicgen)
 
-```
+```bash
 # Maintained by @sanand0
 npm publish
+```
+
+The PNG conversion on [Gramener.com](https://gramener.com/comicgen/) with ImageMagick 6.8.9 is poor. It works well on Cygwin's ImageMagick 6.9.10. So upload the files locally using:
+
+```bash
+rsync -avzP png ubuntu@gramener.com:/mnt/gramener/apps/static/comicgen/
+```
+
+Deploy on <https://comicgen.surge.sh/> via:
+
+```bash
+# Log in as s.anand@gramener.com
+surge . comicgen.surge.sh
 ```
 
 <!-- end -->
