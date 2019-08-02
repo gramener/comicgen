@@ -390,9 +390,8 @@ We created Comicgen to help people write better stories using comic.
 Storytellers want to share a message and change their audience. But they worry that their content is not engaging or "catchy" enough to drive the change.
 
 - **Comics are "catchy"**. That makes them a powerful way of engaging the audience.
-- **Comics make it simpler**. Comics are a signal that the content is simple, interesting and often funny.
-- **Comics nudge authors** into making their content simpler, more interesting, and funny -- making this a virtuous cycle.
-- **Comics drive emotion**. The pictures convey emotions better than just the words alone. That makes the stories more memorable.
+- **Comics are simple**. Comics are a signal that the content is simple, interesting and often funny. Authors also make comic content simpler, interesting, and funny -- making this a virtuous cycle.
+- **Comics drive emotion**. The pictures convey emotions better than just the words alone. They're funny. That helps learning, and makes the stories more memorable.
 
 Anyone who writes an email, a presentation, or a document, is a storyteller.
 
@@ -452,6 +451,7 @@ Here are some examples of Comicgen usage
 - [India vs Afghanistan, World Cup 2019](https://twitter.com/richielionell/status/1142472430599847938) ([version 2](https://twitter.com/richielionell/status/1142472932800659457))
 - [Wasting time on IMDb](https://twitter.com/mvark/status/1147467581361537024)
 - [Coding memes](https://twitter.com/quantum0fcosmos/status/1134801569470242817)
+- [That Pesky P38 Map Kinase](https://twitter.com/ant0ninja/status/1052981203555545088)
 
 Technique examples
 
@@ -553,7 +553,7 @@ Developers access comicgen through a JS library. What can we do to make it easie
 
 To add a new character, or add images for an existing character:
 
-1. Add the SVG images under `<character>/<attr>/.../<file>.svg`
+1. Add the SVG images under `svg/<character>/<attr>/.../<file>.svg`
 2. File or folder names must use only lowercase letters
 3. Compress the characters and create PNGs: `bash png.sh`. This requires [svgo](https://github.com/svg/svgo), [ImageMagick](https://imagemagick.org/script/convert.php) and [pngquant](https://pngquant.org/).
 4. Update [src/comicgen.js](src/comicgen.js). Add new character specs under `comicgen.namemap` and `comicgen.formats` using the instructions there
