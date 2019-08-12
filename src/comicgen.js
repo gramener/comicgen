@@ -75,6 +75,7 @@ comicgen.defaults = {
 // This is intentionally exposed publicly, and can be changed / extended by others.
 comicgen.namemap = {
   aryan: 'emotionpose',
+  ayo: 'ayo',
   dee: 'deedey',
   dey: 'deedey',
   facesketch: 'facesketch',
@@ -126,6 +127,17 @@ comicgen.formats = {
       head:   { file: '$name/head/$head',     width: 136, height: 104, x: 63, y: 0 },
       bottom: { file: '$name/bottom/$bottom', width: 300, height: 238, x: -15, y: 199 },
       body:   { file: '$name/body/$body',     width: 256, height: 187, x: 0, y: 85 }
+    }
+  },
+  ayo: {
+    width: 300,
+    height: 600,
+    dirs: [],
+    files: {
+      head:   { file: '$name/head/$head',     width: 336, height: 304, x: 25, y: 20 },
+      body:   { file: '$name/body/$body',     width: 456, height: 387, x: -36, y: -8 },
+      arms:   { file: '$name/arms/$arms',      width: 336, height: 304, x: 24, y: 5   },
+      emotion:   { file: '$name/emotion/$emotion',   width: 436, height: 404, x: -25, y: 0 }
     }
   },
   facesketch: {

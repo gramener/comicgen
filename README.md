@@ -662,6 +662,8 @@ Developers access comicgen through a JS library. What can we do to make it easie
   under [CC0 license](https://creativecommons.org/choose/zero/)
 - Aryan, Zoe: By Swetha Mylavarapu
   under [CC0 license](https://creativecommons.org/choose/zero/)
+- Ayo: By Lisa
+  under [CC-BY license](https://creativecommons.org/licenses/by/4.0/)
 
 <!-- end -->
 
