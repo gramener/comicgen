@@ -12,6 +12,216 @@ We are sure you'd love the company of our friends [Dee](#?name=dee),
 <!-- end -->
 
 <!-- var usage -->
+## Usage
+
+A simple way to use Comicgen is from [gramener.com/comicgen/](https://gramener.com/comicgen/).
+
+- Choose your character
+- Save the image
+- Insert it into your favorite editor - Illustrator, PowerPoint, Photoshop, etc.
+
+## Plugins
+
+You can also use Comicgen using the [plugins](#plugins) below.
+(We're planning [more plugins](https://github.com/gramener/comicgen/labels/integrate). Your help is welcome!)
+
+### Power BI plugin
+
+The [Comicgen Power BI](https://github.com/gramener/comicgen-powerbi) plugin
+lets you control the characters, emotions, poses, etc from data. Happy people
+can accompany good news on charts.
+
+![Power BI Plugin example](docs/power-bi-plugin.gif)
+
+<!-- end -->
+
+<!-- var api -->
+
+## File API
+
+The raw SVGs and PNGs are at
+[unpkg.com/comicgen/](https://unpkg.com/comicgen/). Look under:
+
+- [files.json](https://unpkg.com/comicgen/files.json) - list of files for each character
+- [svg/](https://unpkg.com/comicgen/svg/) - SVG files for each character
+- [png/](https://unpkg.com/comicgen/png/) - PNG files for each character
+
+You can create comics by directly linking to these files.
+
+## JavaScript API
+
+To explicitly run comicgen on a selector, run `comicgen(selector)`. This lets
+you dynamically create or change a a character.
+
+Here's an example in jQuery showing how you can create a character dynamically:
+
+```js
+// Add the character
+$('<g class="new" name="dee" angle="straight" emotion="sad" pose="yuhoo"></g>').appendTo('body')
+// Call comicgen()
+comicgen('.new')
+```
+
+![Dynamic character rendered via JS](docs/dee-sad-yuhoo-400-300.png)
+
+You can pass an `options` parameter to `comicgen()` to provide default values.
+For example:
+
+```js
+$('<g class="new" name="dee" angle="straight"></g>').appendTo('body')
+comicgen('.new', {
+  name: 'dey',      // Set the default name. <g name="dee"> overrides this
+  emotion: 'sad',   // Set the default emotion
+  pose: 'yuhoo',    // Set the default pose, etc
+  width: 400,
+  height: 300
+})
+```
+
+![Dynamic character rendered via JS, with default options](docs/dee-sad-yuhoo-400-300.png)
+
+<!-- end -->
+
+<!-- var vision -->
+
+# Vision
+
+We created Comicgen to help people write better stories using comic.
+
+## Our audience are storytellers
+
+Storytellers want to share a message and change their audience. But they worry that their content is not engaging or "catchy" enough to drive the change.
+
+- **Comics are "catchy"**. That makes them a powerful way of engaging the audience.
+- **Comics are simple**. Comics are a signal that the content is simple, interesting and often funny. Authors also make comic content simpler, interesting, and funny -- making this a virtuous cycle.
+- **Comics drive emotion**. The pictures convey emotions better than just the words alone. They're funny. That helps learning, and makes the stories more memorable.
+
+Anyone who writes an email, a presentation, or a document, is a storyteller.
+
+Within organizations, we see this in:
+
+- **Presenting insights**
+  - **Executives' analysis**. An analyst created a poster explaining their work using comic characters. It was simple and engaging -- the entire organization understood this deep learning technique.
+  - **Managers' reports**. An admin manager sent his status report as a pair of comic characters conversing. Their CEO read this report fully for the first time.
+  - **Consultants' workshops**. A consultant runs a culture workshop using [comics in the presentation](https://www.businessillustrator.com/culture-change-with-comics-workshop/) because "... it's a lot less threatening than an official PowerPoint presentation."
+- **Marketing stories**. This could be:
+  - **Product teams launching features**. Google Chrome was launched using a [comic book](http://scottmccloud.com/googlechrome/).
+  - **Marketer emails**
+  - **Event manager invites**
+
+## Comicgen makes storytelling easy
+
+Our vision is to make storytelling with comics easy for everyone. (This includes non-designers, non-programmers, and non-storytellers.)
+
+We do this by:
+
+- [Adding characters](https://github.com/gramener/comicgen/labels/characters).
+  Characters can be split into layers (like face & body). By combining these cleverly, we can create more characters with fewer drawings.
+  If you have a character idea, please [add a comment](https://github.com/gramener/comicgen/issues/27).
+- [Adding layers](https://github.com/gramener/comicgen/labels/layers). We need objects like speech bubbles, panels, headings, objects, scenery, backgrounds etc.
+- [Integrate into your workflow](https://github.com/gramener/comicgen/labels/integrate). Comicgen should be easy to use in people's current workflow, with their existing tools.
+    - Designers use Illustrator / Sketch
+    - Developers use HTML / JS
+    - Analysts use Tableau /  Power BI
+    - Managers use e-mail / MS Office
+    - We want to make storytelling easy for everyone
+- [API for developers](https://github.com/gramener/comicgen/labels/api). Comicgen automates away the drudgery in creating comics. Developers should be able to create any comic without designing, purely using an API
+- [UI for non-developers](https://github.com/gramener/comicgen/labels/builder). We want users to be able to do this without any programming. This means exposing every feature of the API should be exposed on the UI
+- [Teaching](https://github.com/gramener/comicgen/labels/teach). The ultimate aim is for people to build better stories. Let's teach them
+
+## We measure success by adoption
+
+We succeed when more people create more and better stories with Comicgen. We measure this by
+
+- How many people have used comicgen
+- How many stories have been created using comicgen
+- How many characters are present in comicgen. (Variety drives adoption)
+- TODO: We need more intermediate success metrics -- things that will drive adoption
+
+<!-- end -->
+
+<!-- var gallery -->
+
+# Examples
+
+Here are some examples of Comicgen usage
+
+- [Using Comicgen: Free comic creator](https://blog.gramener.com/using-comicgen-free-comic-creator/)
+- [Why Game of Thrones?](https://www.behance.net/gallery/66745841/Why-Game-of-Thrones)
+- [How Big is the Data?](https://www.behance.net/gallery/66954873/How-big-is-the-Data)
+- [More work by Ramya](https://www.behance.net/RamyaSMylavarapu)
+- [Comic narrative + a line chart](https://twitter.com/richielionell/status/1151803880922968066) #cricket
+- [India vs Afghanistan, World Cup 2019](https://twitter.com/richielionell/status/1142472430599847938) ([version 2](https://twitter.com/richielionell/status/1142472932800659457))
+- [Wasting time on IMDb](https://twitter.com/mvark/status/1147467581361537024)
+- [Coding memes](https://twitter.com/quantum0fcosmos/status/1134801569470242817)
+
+Technique examples
+
+- [Character narrating a story for The World Bank](https://gramener.com/playground/datacomics/wbl)
+- [A tweet embedded in a 3-panel comic strip](https://codepen.io/richielionell/pen/Lvxxyy)
+- [A video embedded in a 3-panel comic strip](https://codepen.io/richielionell/pen/ROKodg)
+- [Character reacting to changing data live](https://codepen.io/richielionell/pen/jRmjOY)
+
+# Gallery
+
+Here are examples or guides of where comics have been used effectively in storytelling.
+
+- **Comic based manuals**
+    - Scott Mccloud’s implementation of Comic characters for explaining Google Chrome is one of the finest examples to date. [This](https://www.google.com/googlebooks/chrome/) or [This](http://www.scottmccloud.com/googlechrome/) can be referred.
+    - [Bite-sized command line](https://gumroad.com/l/bite-size-command-line) explains UNIX commands with comics
+    - Using comic books to teach business ethics as researched and published by [Springer journal](https://www.jstor.org/stable/25075560?seq=1#page_scan_tab_contents)
+    - Antonija Kuzmanic explains [That Pesky P38 Map Kinase](https://twitter.com/ant0ninja/status/1052981203555545088) with comics
+- **Content marketing**: Comics are eye-catching and noticeable elements, which we hardly find in marketing mailers, product explanation mailers, newsletters.
+    - [Marketoonist](https://marketoonist.com/campaigns) creates content marketing campaigns using cartoons
+    - [Erin Ollila writes](https://www.skyword.com/contentstandard/creativity/are-marketing-comics-a-strong-addition-to-your-storytelling-campaigns/) a fine article on it.
+    - [The awesome adventures of megacorp's marketers](http://238762076847f058c9ec-022016d09c66167d8077b8bd298ba1c4.r36.cf3.rackcdn.com/How-to-use-comics-in-B2B-content-marketing-Radix-Communications-2014-1.pdf).
+- **Comic games for offline screens**: Remember the small-hand dinosaur running across the screen when Google chrome is offline? A comic game or a random conversation about the website being down can make the website interactive even when it is down.
+- **Comic storytelling**: I love how Pablo Stanley, a UI/UX designer, uses comic into storytelling. [Check this out](https://thedesignteam.io/the-devil-is-in-the-details-77996218e5f8).
+
+If you find good examples, please [add a comment](https://github.com/gramener/comicgen/issues/21). We'll include them.
+
+
+## People
+
+People working on storytelling / data visualization through comics include:
+
+- [Martin Telefont](https://twitter.com/martintelefont) (see [Data Visualization Comics](https://medium.com/data-visualization-society/data-visualization-comics-68bb2c03fd3e))
+- [Matt Hong](https://twitter.com/matthongnet)
+- [Natalia Kiseleva](https://twitter.com/eolay13)
+- [Neil Cohn](http://visuallanguagelab.com/)
+- [Susie Lu](https://twitter.com/datatoviz)
+- [Taryn Read](https://twitter.com/indiedataviz)
+
+If you know of more people, please [add a comment](https://github.com/gramener/comicgen/issues/25). We'll include them.
+
+
+## Resources
+
+Here are other tools and resources to create comic stories:
+
+- [Pixton](https://www.pixton.com/) has an [online app](https://app.pixton.com/#/)
+  and content packs for educators and students to create comics. There's also a
+  [PowerPoint Add-In](https://appsource.microsoft.com/en-us/product/office/WA104380907) and a
+  [Pixton Comic Maker](https://appsource.microsoft.com/en-us/product/office/SA000000020?tab=Overview)
+- [Joe Schmoe](https://joeschmoe.io/) is an image API an avatar collection
+- [Powtoon](https://www.powtoon.com/)
+- [Canva Comic Strips](https://www.canva.com/en_in/create/comic-strips/)
+- [Chart.xkcd](https://timqian.com/chart.xkcd/) - a library for XKCD-like sketchy, handhand-drawn charts
+- [Write comics](http://writecomics.com/)
+- [ToonyTool](https://www.toonytool.com/)
+- [SummitSoft's ComicCreator](https://summitsoft.com/products/comic-creator/)
+- [Make Beliefs Comix](https://www.makebeliefscomix.com/)
+- [StoryboardThat](https://www.storyboardthat.com/storyboard-creator)
+
+If you know of any others, please [add a comment](https://github.com/gramener/comicgen/issues/26). We'll include them.
+
+We haven't yet found tools that expose an API. This should enable developers to integrate with existing tools and workflows, as well as build new ones. Hopefully comicgen will enable that.
+
+
+<!-- end -->
+
+<!-- var development -->
+
 ## Installation
 
 Load the comicgen library by adding this line in your HTML page's `<head>`:
@@ -41,7 +251,7 @@ npm install comicgen  # Alternative, if you prefer npm
 Comicgen is tested on Chrome, Edge, and Firefox. It does not work on Internet Explorer.
 
 
-## Usage
+## Embed
 
 To embed a character, add:
 
@@ -330,224 +540,6 @@ like this:
 
 <a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/dxyPex">Try it on Codepen</a>
 
-<!-- end -->
-
-<!-- var api -->
-
-## File API
-
-The raw SVGs and PNGs are at
-[unpkg.com/comicgen/](https://unpkg.com/comicgen/). Look under:
-
-- [files.json](https://unpkg.com/comicgen/files.json) - list of files for each character
-- [svg/](https://unpkg.com/comicgen/svg/) - SVG files for each character
-- [png/](https://unpkg.com/comicgen/png/) - PNG files for each character
-
-You can create comics by directly linking to these files.
-
-## JavaScript API
-
-To explicitly run comicgen on a selector, run `comicgen(selector)`. This lets
-you dynamically create or change a a character.
-
-Here's an example in jQuery showing how you can create a character dynamically:
-
-```js
-// Add the character
-$('<g class="new" name="dee" angle="straight" emotion="sad" pose="yuhoo"></g>').appendTo('body')
-// Call comicgen()
-comicgen('.new')
-```
-
-![Dynamic character rendered via JS](docs/dee-sad-yuhoo-400-300.png)
-
-You can pass an `options` parameter to `comicgen()` to provide default values.
-For example:
-
-```js
-$('<g class="new" name="dee" angle="straight"></g>').appendTo('body')
-comicgen('.new', {
-  name: 'dey',      // Set the default name. <g name="dee"> overrides this
-  emotion: 'sad',   // Set the default emotion
-  pose: 'yuhoo',    // Set the default pose, etc
-  width: 400,
-  height: 300
-})
-```
-
-![Dynamic character rendered via JS, with default options](docs/dee-sad-yuhoo-400-300.png)
-
-<!-- end -->
-
-<!-- var vision -->
-
-# Vision
-
-We created Comicgen to help people write better stories using comic.
-
-## Our audience are storytellers
-
-Storytellers want to share a message and change their audience. But they worry that their content is not engaging or "catchy" enough to drive the change.
-
-- **Comics are "catchy"**. That makes them a powerful way of engaging the audience.
-- **Comics are simple**. Comics are a signal that the content is simple, interesting and often funny. Authors also make comic content simpler, interesting, and funny -- making this a virtuous cycle.
-- **Comics drive emotion**. The pictures convey emotions better than just the words alone. They're funny. That helps learning, and makes the stories more memorable.
-
-Anyone who writes an email, a presentation, or a document, is a storyteller.
-
-Within organizations, we see this in:
-
-- **Presenting insights**
-  - **Executives' analysis**. An analyst created a poster explaining their work using comic characters. It was simple and engaging -- the entire organization understood this deep learning technique.
-  - **Managers' reports**. An admin manager sent his status report as a pair of comic characters conversing. Their CEO read this report fully for the first time.
-  - **Consultants' workshops**. A consultant runs a culture workshop using [comics in the presentation](https://www.businessillustrator.com/culture-change-with-comics-workshop/) because "... it's a lot less threatening than an official PowerPoint presentation."
-- **Marketing stories**. This could be:
-  - **Product teams launching features**. Google Chrome was launched using a [comic book](http://scottmccloud.com/googlechrome/).
-  - **Marketer emails**
-  - **Event manager invites**
-
-## Comicgen makes storytelling easy
-
-Our vision is to make storytelling with comics easy for everyone. (This includes non-designers, non-programmers, and non-storytellers.)
-
-We do this by:
-
-- [Adding characters](https://github.com/gramener/comicgen/labels/characters).
-  Characters can be split into layers (like face & body). By combining these cleverly, we can create more characters with fewer drawings.
-  If you have a character idea, please [add a comment](https://github.com/gramener/comicgen/issues/27).
-- [Adding layers](https://github.com/gramener/comicgen/labels/layers). We need objects like speech bubbles, panels, headings, objects, scenery, backgrounds etc.
-- [Integrate into your workflow](https://github.com/gramener/comicgen/labels/integrate). Comicgen should be easy to use in people's current workflow, with their existing tools.
-    - Designers use Illustrator / Sketch
-    - Developers use HTML / JS
-    - Analysts use Tableau /  Power BI
-    - Managers use e-mail / MS Office
-    - We want to make storytelling easy for everyone
-- [API for developers](https://github.com/gramener/comicgen/labels/api). Comicgen automates away the drudgery in creating comics. Developers should be able to create any comic without designing, purely using an API
-- [UI for non-developers](https://github.com/gramener/comicgen/labels/builder). We want users to be able to do this without any programming. This means exposing every feature of the API should be exposed on the UI
-- [Teaching](https://github.com/gramener/comicgen/labels/teach). The ultimate aim is for people to build better stories. Let's teach them
-
-## We measure success by adoption
-
-We succeed when more people create more and better stories with Comicgen. We measure this by
-
-- How many people have used comicgen
-- How many stories have been created using comicgen
-- How many characters are present in comicgen. (Variety drives adoption)
-- TODO: We need more intermediate success metrics -- things that will drive adoption
-
-<!-- end -->
-
-<!-- var gallery -->
-
-# Examples
-
-Here are some examples of Comicgen usage
-
-- [Using Comicgen: Free comic creator](https://blog.gramener.com/using-comicgen-free-comic-creator/)
-- [Why Game of Thrones?](https://www.behance.net/gallery/66745841/Why-Game-of-Thrones)
-- [How Big is the Data?](https://www.behance.net/gallery/66954873/How-big-is-the-Data)
-- [More work by Ramya](https://www.behance.net/RamyaSMylavarapu)
-- [Comic narrative + a line chart](https://twitter.com/richielionell/status/1151803880922968066) #cricket
-- [India vs Afghanistan, World Cup 2019](https://twitter.com/richielionell/status/1142472430599847938) ([version 2](https://twitter.com/richielionell/status/1142472932800659457))
-- [Wasting time on IMDb](https://twitter.com/mvark/status/1147467581361537024)
-- [Coding memes](https://twitter.com/quantum0fcosmos/status/1134801569470242817)
-- [That Pesky P38 Map Kinase](https://twitter.com/ant0ninja/status/1052981203555545088)
-
-Technique examples
-
-- [Character narrating a story for The World Bank](https://gramener.com/playground/datacomics/wbl)
-- [A tweet embedded in a 3-panel comic strip](https://codepen.io/richielionell/pen/Lvxxyy)
-- [A video embedded in a 3-panel comic strip](https://codepen.io/richielionell/pen/ROKodg)
-- [Character reacting to changing data live](https://codepen.io/richielionell/pen/jRmjOY)
-
-# Gallery
-
-Here are examples or guides of where comics have been used effectively in storytelling.
-
-- **Comic based manuals**
-    - Scott Mccloud’s implementation of Comic characters for explaining Google Chrome is one of the finest examples to date. [This](https://www.google.com/googlebooks/chrome/) or [This](http://www.scottmccloud.com/googlechrome/) can be referred.
-    - [Bite-sized command line](https://gumroad.com/l/bite-size-command-line) explains UNIX commands with comics
-    - Using comic books to teach business ethics as researched and published by [Springer journal](https://www.jstor.org/stable/25075560?seq=1#page_scan_tab_contents)
-- **Content marketing**: Comics are eye-catching and noticeable elements, which we hardly find in marketing mailers, product explanation mailers, newsletters.
-    - [Marketoonist](https://marketoonist.com/campaigns) creates content marketing campaigns using cartoons
-    - [Erin Ollila writes](https://www.skyword.com/contentstandard/creativity/are-marketing-comics-a-strong-addition-to-your-storytelling-campaigns/) a fine article on it.
-    - [The awesome adventures of megacorp's marketers](http://238762076847f058c9ec-022016d09c66167d8077b8bd298ba1c4.r36.cf3.rackcdn.com/How-to-use-comics-in-B2B-content-marketing-Radix-Communications-2014-1.pdf).
-- **Comic games for offline screens**: Remember the small-hand dinosaur running across the screen when Google chrome is offline? A comic game or a random conversation about the website being down can make the website interactive even when it is down.
-- **Comic storytelling**: I love how Pablo Stanley, a UI/UX designer, uses comic into storytelling. [Check this out](https://thedesignteam.io/the-devil-is-in-the-details-77996218e5f8).
-
-If you find good examples, please [add a comment](https://github.com/gramener/comicgen/issues/21). We'll include them.
-
-
-## People
-
-People working on storytelling / data visualization through comics include:
-
-- [Martin Telefont](https://twitter.com/martintelefont) (see [Data Visualization Comics](https://medium.com/data-visualization-society/data-visualization-comics-68bb2c03fd3e))
-- [Matt Hong](https://twitter.com/matthongnet)
-- [Natalia Kiseleva](https://twitter.com/eolay13)
-- [Neil Cohn](http://visuallanguagelab.com/)
-- [Susie Lu](https://twitter.com/datatoviz)
-- [Taryn Read](https://twitter.com/indiedataviz)
-
-If you know of more people, please [add a comment](https://github.com/gramener/comicgen/issues/25). We'll include them.
-
-
-## Resources
-
-Here are other tools and resources to create comic stories:
-
-- [Pixton](https://www.pixton.com/) has an [online app](https://app.pixton.com/#/)
-  and content packs for educators and students to create comics. There's also a
-  [PowerPoint Add-In](https://appsource.microsoft.com/en-us/product/office/WA104380907) and a
-  [Pixton Comic Maker](https://appsource.microsoft.com/en-us/product/office/SA000000020?tab=Overview)
-- [Joe Schmoe](https://joeschmoe.io/) is an image API an avatar collection
-- [Powtoon](https://www.powtoon.com/)
-- [Canva Comic Strips](https://www.canva.com/en_in/create/comic-strips/)
-- [Write comics](http://writecomics.com/)
-- [ToonyTool](https://www.toonytool.com/)
-- [SummitSoft's ComicCreator](https://summitsoft.com/products/comic-creator/)
-- [Make Beliefs Comix](https://www.makebeliefscomix.com/)
-- [StoryboardThat](https://www.storyboardthat.com/storyboard-creator)
-
-If you know of any others, please [add a comment](https://github.com/gramener/comicgen/issues/26). We'll include them.
-
-We haven't yet found tools that expose an API. This should enable developers to integrate with existing tools and workflows, as well as build new ones. Hopefully comicgen will enable that.
-
-
-<!-- end -->
-
-<!-- var development -->
-
-## Help wanted (developers)
-
-If you're a developer, we'd love your help in improving comicgen.
-
-1. **Report bugs**. If something doesn't work the way you expect, please [add an issue](https://github.com/gramener/comicgen/issues)
-2. **Ask for features**. Go through the [issues](https://github.com/gramener/comicgen/issues). Add a [Like reaction](https://help.github.com/en/articles/about-conversations-on-github#reacting-to-ideas-in-comments) to what you like. Or add an issue asking for what you want.
-3. **Offer help**. Go through these issues. Pick something interesting. Add a comment saying "I'd like to help." We'll revert in 2-4 days with ideas.
-
-There are 3 areas we're focusing on. Help in these areas would be ideal.
-
-### 1. Integrate comicgen into platforms
-
-People like to use their own platforms, not switch to a new one. So let's integrate comicgen into popular platforms like Excel, PowerPoint, Power BI, Tableau, R, etc as plugins.
-
-[See **integration** issues related &raquo;](https://github.com/gramener/comicgen/labels/integrate)
-
-### 2. Create a comic builder UI
-
-People find it easier to create comics using a UI than programming. So let's create an [interface](https://gramener.com/comicgen/) that let people create an entire graphic novel!
-
-[See **builder** issues &raquo;](https://github.com/gramener/comicgen/labels/builder)
-
-### 3. Improving comicgen API
-
-Developers access comicgen through a JS library. What can we do to make it easier, and feature rich?
-
-[See **API** issues &raquo;](https://github.com/gramener/comicgen/labels/api)
-
-
-<!-- var newchars -->
 
 ## Add new characters
 
@@ -561,9 +553,6 @@ To add a new character, or add images for an existing character:
 6. Update the [character credits](#character-credits)
 7. Run `npm run build` to recompile files under `dist/`
 
-<!-- end -->
-
-<!-- var release -->
 
 ## Release
 
@@ -613,6 +602,35 @@ Deploy on <https://comicgen.surge.sh/> via:
 # Log in as s.anand@gramener.com
 surge . comicgen.surge.sh
 ```
+
+
+## Help wanted (developers)
+
+If you're a developer, we'd love your help in improving comicgen.
+
+1. **Report bugs**. If something doesn't work the way you expect, please [add an issue](https://github.com/gramener/comicgen/issues)
+2. **Ask for features**. Go through the [issues](https://github.com/gramener/comicgen/issues). Add a [Like reaction](https://help.github.com/en/articles/about-conversations-on-github#reacting-to-ideas-in-comments) to what you like. Or add an issue asking for what you want.
+3. **Offer help**. Go through these issues. Pick something interesting. Add a comment saying "I'd like to help." We'll revert in 2-4 days with ideas.
+
+There are 3 areas we're focusing on. Help in these areas would be ideal.
+
+### 1. Integrate comicgen into platforms
+
+People like to use their own platforms, not switch to a new one. So let's integrate comicgen into popular platforms like Excel, PowerPoint, Power BI, Tableau, R, etc as plugins.
+
+[See **integration** issues related &raquo;](https://github.com/gramener/comicgen/labels/integrate)
+
+### 2. Create a comic builder UI
+
+People find it easier to create comics using a UI than programming. So let's create an [interface](https://gramener.com/comicgen/) that let people create an entire graphic novel!
+
+[See **builder** issues &raquo;](https://github.com/gramener/comicgen/labels/builder)
+
+### 3. Improving comicgen API
+
+Developers access comicgen through a JS library. What can we do to make it easier, and feature rich?
+
+[See **API** issues &raquo;](https://github.com/gramener/comicgen/labels/api)
 
 <!-- end -->
 
