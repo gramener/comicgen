@@ -190,3 +190,68 @@ _.each(
       }
     })
   })
+
+var allurls = []
+function emotionposecombinations(basestr, emotionarr, posarr){
+  posarr.forEach(function(p){
+    emotionarr.forEach(function(e){
+      var q = '#' + g1.url.parse(basestr).update({pose: p, emotion: e, ext:'svg', mirror:'',
+        x:'0', y:'0', scale:'1', width:'500', height:'600'}).toString()
+      allurls.push([q, e])
+    })
+  })
+  for (var i=allurls.length-1; i>0; i--){
+    var j = Math.floor(Math.random() * (i + 1))
+    var temp = allurls[i]
+    allurls[i] = allurls[j]
+    allurls[j] = temp
+  }
+}
+
+$.getJSON('files.json')
+  .done(function (data) {
+    var node = data
+    var namearr = Object.keys(node)
+
+    namearr.forEach(function(character_name){
+      var q = g1.url.parse('').update({name: character_name}).toString()
+
+      if (['aryan', 'ringo', 'zoe'].includes(character_name)){  
+        var allemotions = node[character_name]['emotion']
+        var allposes = node[character_name]['pose']
+        emotionposecombinations(q, allemotions, allposes)
+      }
+      else if (['dee', 'dey'].includes(character_name)){
+        var angles = ['straight', 'side', 'sitting']
+        angles.forEach(function(a){
+          q = g1.url.parse(q).update({angle: a}).toString()
+          var allemotions = node[character_name][a]['emotion']
+          var allposes = node[character_name][a]['pose']
+          emotionposecombinations(q, allemotions, allposes)
+        })
+      }
+    })
+  })
+
+$.getJSON( 'docs/synonym.json' )
+  .done(function (synonym)
+  {
+    var linktemplate = _.template($('.search-links').html())
+    var result = linktemplate({links : allurls})
+    $('.target-search-panel').html(result)
+
+    allurls.forEach(function(url, index) {
+      var q = g1.url.parse(url[0].replace(/#/, ''))
+      comicgen('#comicgen'+index, Object.assign({}, q.searchKey, {width: 200, height: 300}))
+    })
+
+    // TODO LATER: Replace with a fuzzy string matching library
+    jQuery.fn.search.changes['synonymsearch'] = function (word) {
+      if (synonym[word]) {
+        return synonym[word].join('~').replace(/~/g, '|').replace(/\s+/g, '|')
+      }
+      return word.replace(/\s+/g, '.*')
+    }
+
+    $('body').search({ change: 'synonymsearch' })
+  })

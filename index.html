@@ -70,6 +70,7 @@
       <li class="nav-item"><a class="nav-link" id="gallery-tab" data-toggle="tab" href="#gallery" role="tab" aria-controls="gallery" aria-selected="false">Gallery</a></li>
       <li class="nav-item"><a class="nav-link" id="development-tab" data-toggle="tab" href="#development" role="tab" aria-controls="development" aria-selected="false">Development</a></li>
       <li class="nav-item"><a class="nav-link" id="design-tab" data-toggle="tab" href="#design" role="tab" aria-controls="design" aria-selected="false">Design</a></li>
+      <li class="nav-item"><a class="nav-link" id="search-tab" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="false">Search</a></li>
     </ul>
     <div class="tab-content" id="comic-tab-content">
       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -137,6 +138,15 @@
         <md data-target="credits"></md>
       </div>
 
+      <div class="tab-pane fade" id="search" role="tabpanel" aria-labelledby="search-tab">
+        <input class="form-control mr-sm-2 mt-3" type="search" data-search="data-emotion" data-target=".target-search-panel .item"
+          data-hide-class="d-none" placeholder="Search" aria-label="Search">
+        <div class="flex-container">
+          <div class="target-search-panel d-flex flex-wrap">
+          </div>
+        </div>
+      </div>
+
     </div><!-- .container -->
 
     <md data-target="social"></md>
@@ -156,6 +166,12 @@
       <span><%= key %></span>
       <button class="btn btn-xs move-right" type="button" title="Move layer above" tabindex="-1"><i class="fa fa-xs fa-arrow-right"></i></button>
     </div>
+  </script>
+
+  <script type="text/html" class="search-links">
+    <% _.each(links, function(link, index) { %>
+      <a class="item" target="_blank" href="<%- link[0] %>" data-emotion="<%- link[1] %>" ><div id=<%= 'comicgen'.concat(index) %>></div></a>
+    <% }) %>
   </script>
 
   <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
