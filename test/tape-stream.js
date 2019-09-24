@@ -1,4 +1,3 @@
-/* globals tape */
 /* eslint no-console: 0 */
 
 // geckodriver does not support accessing logs
