@@ -20,6 +20,10 @@ A simple way to use Comicgen is from [gramener.com/comicgen/](https://gramener.c
 - Save the image
 - Insert it into your favorite editor - Illustrator, PowerPoint, Photoshop, etc.
 
+Here's a 3-minute video explaining how to create your own comic strip.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/E_2hdZuugI8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Plugins
 
 You can also use Comicgen using the [plugins](#plugins) below.
