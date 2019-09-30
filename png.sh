@@ -8,12 +8,12 @@ do
   png="${svg//svg/png}"
   # Check if the SVG is older than the PNG. If so, the SVG has been updated
   if [ "$svg" -nt "$png" ]; then
-    # Compress the SVG
-    node_modules/.bin/svgo -q --multipass "$svg"
     # Create the PNG
     mkdir -p $(dirname "$png")
     convert -background none "$svg" "$png"
     # Compress the PNG
     pngquant --force --ext .png "$png"
+    # Compress the SVG
+    node_modules/.bin/svgo -q --multipass "$svg"
   fi
 done

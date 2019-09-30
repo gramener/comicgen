@@ -22,6 +22,7 @@
   "dee": {
     "straight": {
       "emotion": [
+        "afraid",
         "angryfrustrated",
         "angryshouting",
         "annoyed",
@@ -30,6 +31,7 @@
         "hmm",
         "loudcry",
         "readinglookingdown",
+        "rofl",
         "sad",
         "shocked",
         "smile",
@@ -45,11 +47,15 @@
         "handsheldback",
         "handsonhip",
         "holdingbook",
+        "holdingcoffee",
         "holdinglaptop",
+        "holdingumbrella",
+        "lookingatmobile",
         "pointingright",
         "pointingrightup",
         "pointingup",
         "readingpaper",
+        "shrug",
         "superperfect",
         "thinkinghmm",
         "thumbsup",
@@ -94,26 +100,43 @@
         "worried"
       ],
       "pose": [
+        "ridingbicycle",
+        "ridingbike",
         "sittingatdesk",
         "sittingatdeskhandsspread",
         "sittingatdeskholdingmobile",
         "sittingonbeanbagholdinglaptop",
-        "sittingonbeanbagholdingmobile"
+        "sittingonbeanbagholdingmobile",
+        "sittingonthefloorexplaining",
+        "sittingonthefloorholdinglaptop",
+        "sittingonthefloorshrug"
       ]
     }
   },
   "dey": {
     "straight": {
       "emotion": [
+        "afraid",
+        "angryfrustrated",
+        "angryshouting",
+        "annoyed",
+        "blush",
+        "cry",
+        "curious",
+        "fightmode",
         "hmmconfused",
+        "lookingleft",
         "lookingright",
+        "lookingup",
+        "loudcry",
         "normal",
         "readinglookingdown",
         "rofl",
         "shocked",
         "smile",
         "tired",
-        "wink"
+        "wink",
+        "worried"
       ],
       "pose": [
         "angryfrustrated",
@@ -121,10 +144,14 @@
         "handsinpocket",
         "handsonhip",
         "holdingbook",
+        "holdingcoffee",
         "holdinglaptop",
+        "holdingumbrella",
+        "lookingatmobile",
         "pointingright",
         "pointingup",
         "readingpaper",
+        "shrug",
         "superperfect",
         "thinkinghmm",
         "thumbsup",
@@ -174,43 +201,167 @@
         "yuhoo"
       ],
       "pose": [
+        "ridingbicycle",
+        "ridingbike",
         "sittingatdesk",
         "sittingatdeskhandsspread",
         "sittingatdeskholdingmobile",
         "sittingonbeanbagholdinglaptop",
-        "sittingonbeanbagholdingmobile"
+        "sittingonbeanbagholdingmobile",
+        "sittingonthefloorexplaining",
+        "sittingonthefloorholdinglaptop",
+        "sittingonthefloorshrug"
+      ]
+    }
+  },
+  "priya": {
+    "straight": {
+      "emotion": [
+        "afraid",
+        "angryfrustrated",
+        "angryshouting",
+        "annoyed",
+        "blush",
+        "cry",
+        "curious",
+        "fightmode",
+        "hmm",
+        "lookingdown",
+        "lookingleft",
+        "lookingright",
+        "lookingup",
+        "loudcry",
+        "rofl",
+        "sad",
+        "shocked",
+        "smile",
+        "smilehappy",
+        "tired",
+        "wink",
+        "worried",
+        "yuhoo"
+      ],
+      "pose": [
+        "angryfrustrated",
+        "handsfolded",
+        "handsheldback",
+        "handsonhip",
+        "hmmshrug",
+        "holdingbook",
+        "holdingcoffee",
+        "holdinglaptop",
+        "holdingumbrella",
+        "lookingatmobile",
+        "pointingleft",
+        "pointingright",
+        "pointingup",
+        "readingpaper",
+        "shrug",
+        "superperfect",
+        "thinkinghmm",
+        "thumbsup",
+        "yuhoo"
+      ]
+    },
+    "sitting": {
+      "emotion": [
+        "angryfrustrated",
+        "annoyed",
+        "hmm",
+        "lookingdown",
+        "sad",
+        "smilehappy",
+        "yuhoo"
+      ],
+      "pose": [
+        "ridingbicycle",
+        "ridingbike",
+        "sittingonbeanbagholdinglaptop",
+        "sittingonbeanbagholdingmobile",
+        "sittingonthefloorexplaining",
+        "sittingonthefloorholdinglaptop",
+        "sittingonthefloorshrug"
       ]
     }
   },
   "ringo": {
-    "emotion": [
-      "angry",
-      "hmm",
-      "laugh",
-      "lookingdown",
-      "lookingleft",
-      "lookingright",
-      "sad",
-      "shocked",
-      "shouting",
-      "smile",
-      "tired",
-      "wink",
-      "worried"
-    ],
-    "pose": [
-      "foldinghands",
-      "handsinthepocket",
-      "holdingbook",
-      "holdingcoffee",
-      "holdinglaptop",
-      "lookingatmobile",
-      "pointingup",
-      "running",
-      "sittingonbeanbagexplaining",
-      "sittingonbeanbagholdinglaptop",
-      "thumbsup"
-    ]
+    "straight": {
+      "emotion": [
+        "afraid",
+        "angry",
+        "annoyed",
+        "blush",
+        "cry",
+        "curious",
+        "fightmode",
+        "hmm",
+        "laugh",
+        "lookingdown",
+        "lookingleft",
+        "lookingright",
+        "lookingup",
+        "loudcry",
+        "rofl",
+        "sad",
+        "shocked",
+        "shouting",
+        "smile",
+        "tired",
+        "wink",
+        "worried",
+        "yuhoo"
+      ],
+      "pose": [
+        "angryfrustrated",
+        "foldinghands",
+        "handsinthepocket",
+        "handsonhip",
+        "holdingbook",
+        "holdingcoffee",
+        "holdinglaptop",
+        "holdingumbrella",
+        "lookingatmobile",
+        "pointingright",
+        "pointingup",
+        "readingpaper",
+        "running",
+        "shrug",
+        "superperfect",
+        "thinkinghmm",
+        "thumbsup",
+        "yuhoo"
+      ]
+    },
+    "sitting": {
+      "emotion": [
+        "angry",
+        "hmm",
+        "laugh",
+        "lookingdown",
+        "lookingleft",
+        "lookingright",
+        "sad",
+        "shocked",
+        "shouting",
+        "smile",
+        "tired",
+        "wink",
+        "worried"
+      ],
+      "pose": [
+        "drivecar",
+        "ridingbicycle",
+        "ridingbike",
+        "sittingatdesk",
+        "sittingatdeskhandsspread",
+        "sittingatdeskholdingmobile",
+        "sittingonbeanbagexplaining",
+        "sittingonbeanbagholdinglaptop",
+        "sittingonthefloorexplaining",
+        "sittingonthefloorholdinglaptop",
+        "sittingonthefloorshrug"
+      ]
+    }
   },
   "facesketch": {
     "face": [
