@@ -79,7 +79,8 @@ comicgen.namemap = {
   dey: 'deedey',
   facesketch: 'facesketch',
   humaaans: 'humaaans',
-  ringo: 'emotionpose',
+  priya: 'deedey',
+  ringo: 'deedey',
   zoe: 'emotionpose'
 }
 

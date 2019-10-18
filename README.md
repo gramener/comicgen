@@ -654,7 +654,7 @@ Developers access comicgen through a JS library. What can we do to make it easie
 
 ### Character credits
 
-- Dee, Dey & Ringo: By Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
+- Dee, Dey, Priya & Ringo: By Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
   under [CC0 license](https://creativecommons.org/choose/zero/)
 - [Humaaans](https://www.humaaans.com/): By [Pablo Stanley](https://twitter.com/pablostanley)
   under [CC-BY license](https://creativecommons.org/licenses/by/4.0/)
