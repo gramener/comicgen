@@ -216,13 +216,22 @@ $.getJSON('files.json')
     namearr.forEach(function(character_name){
       var q = g1.url.parse('').update({name: character_name}).toString()
 
-      if (['aryan', 'ringo', 'zoe'].includes(character_name)){  
+      if (['aryan', 'zoe'].includes(character_name)){  
         var allemotions = node[character_name]['emotion']
         var allposes = node[character_name]['pose']
         emotionposecombinations(q, allemotions, allposes)
       }
       else if (['dee', 'dey'].includes(character_name)){
         var angles = ['straight', 'side', 'sitting']
+        angles.forEach(function(a){
+          q = g1.url.parse(q).update({angle: a}).toString()
+          var allemotions = node[character_name][a]['emotion']
+          var allposes = node[character_name][a]['pose']
+          emotionposecombinations(q, allemotions, allposes)
+        })
+      }
+      else if (['priya', 'ringo'].includes(character_name)){
+        var angles = ['straight', 'sitting']
         angles.forEach(function(a){
           q = g1.url.parse(q).update({angle: a}).toString()
           var allemotions = node[character_name][a]['emotion']
