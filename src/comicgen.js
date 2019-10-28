@@ -134,10 +134,10 @@ comicgen.formats = {
     height: 600,
     dirs: [],
     files: {
-      head:   { file: '$name/head/$head',     width: 336, height: 304, x: 25, y: 20 },
-      body:   { file: '$name/body/$body',     width: 456, height: 387, x: -36, y: -8 },
-      arms:   { file: '$name/arms/$arms',      width: 336, height: 304, x: 24, y: 5   },
-      emotion:   { file: '$name/emotion/$emotion',   width: 436, height: 404, x: -25, y: 0 }
+      head: { file: '$name/head/$head', width: 215, height: 365, x: 29, y: -5 },
+      body: { file: '$name/body/$body', width: 215, height: 365, x: 29, y: -5 },
+      arms: { file: '$name/arms/$arms', width: 215, height: 365, x: 29, y: -5 },
+      emotion: { file: '$name/emotion/$emotion', width: 215, height: 365, x: 29, y: -5 }
     }
   },
   facesketch: {
