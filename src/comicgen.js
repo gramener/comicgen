@@ -146,7 +146,7 @@ comicgen.formats = {
     height: 600,
     dirs: [],
     files: {
-      speechbubble: { file: '$name/$speechbubble', width: 200, height: 200, x: 0, y:0 }
+      speechbubble: { file: '$name/$speechbubble', width: 200, height: 200, x: 40, y:110 }
     }
   }
 }
