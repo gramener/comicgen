@@ -81,6 +81,7 @@ comicgen.namemap = {
   humaaans: 'humaaans',
   priya: 'deedey',
   ringo: 'deedey',
+  speechbubbles: 'speechbubbles',
   zoe: 'emotionpose'
 }
 
@@ -138,6 +139,14 @@ comicgen.formats = {
       eye: { file: '$name/eye/$eye',       width: 180, height: 200, x: 0, y: 0 },
       mouth: { file: '$name/mouth/$mouth', width: 180, height: 200, x: 0, y: 0 },
       nose: { file: '$name/nose/$nose',    width: 180, height: 200, x: 0, y: 0 }
+    }
+  },
+  speechbubbles: {
+    width: 500,
+    height: 600,
+    dirs: [],
+    files: {
+      speechbubble: { file: '$name/$speechbubble', width: 200, height: 200, x: 0, y:0 }
     }
   }
 }

@@ -363,6 +363,36 @@
       ]
     }
   },
+  "speechbubbles": {
+    "speechbubble": [
+      "speechbubble1",
+      "speechbubble2",
+      "speechbubble3",
+      "speechbubble4",
+      "speechbubble5",
+      "speechbubble6",
+      "speechbubble7",
+      "speechbubble8",
+      "speechbubble9",
+      "speechbubble10",
+      "speechbubble11",
+      "speechbubble12",
+      "speechbubble13",
+      "speechbubble14",
+      "speechbubble16",
+      "speechbubble17",
+      "speechbubble18",
+      "speechbubble19",
+      "speechbubble20",
+      "speechbubble21",
+      "speechbubble22",
+      "speechbubble23",
+      "speechbubble24",
+      "speechbubble25",
+      "speechbubble26",
+      "speechbubble27"
+    ]
+  },
   "facesketch": {
     "face": [
       "face1-ear1",
