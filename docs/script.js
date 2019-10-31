@@ -214,22 +214,20 @@ $.getJSON('files.json')
     var namearr = Object.keys(node)
 
     namearr.forEach(function(character_name){
-      var q = g1.url.parse('').update({name: character_name}).toString()
-
-      if (['aryan', 'ringo', 'zoe'].includes(character_name)){  
-        var allemotions = node[character_name]['emotion']
-        var allposes = node[character_name]['pose']
-        emotionposecombinations(q, allemotions, allposes)
-      }
-      else if (['dee', 'dey'].includes(character_name)){
-        var angles = ['straight', 'side', 'sitting']
-        angles.forEach(function(a){
-          q = g1.url.parse(q).update({angle: a}).toString()
-          var allemotions = node[character_name][a]['emotion']
-          var allposes = node[character_name][a]['pose']
-          emotionposecombinations(q, allemotions, allposes)
-        })
-      }
+      arr_obj = []
+      arr_obj = _.concat(arr_obj, character_name)
+      Object.keys(node[character_name]).forEach(function(nextkey){
+        arr_obj = _.concat(arr_obj, nextkey)
+        // console.log(arr_obj)
+        nextnow = node[character_name][nextkey]
+        if (Array.isArray(nextnow)){
+            nextnow.forEach(function(val){
+              arr_obj = _.concat(arr_obj, val)
+              console.log(arr_obj)
+              arr_obj.pop()
+            })
+        }
+      })
     })
   })
 
