@@ -208,27 +208,23 @@ function emotionposecombinations(basestr, emotionarr, posarr){
   }
 }
 
-$.getJSON('files.json')
-  .done(function (data) {
-    var node = data
-    var namearr = Object.keys(node)
+function getallcharacters(obj, q) {
+  if (Array.isArray(obj)) return
+  if (_.includes(Object.keys(obj), 'emotion') || _.includes(Object.keys(obj), 'pose')){
+    var baseurl = g1.url.parse(location.href).update({name: q[0], angle:q[1]}).toString()
+    emotionposecombinations(baseurl, obj['emotion'], obj['pose'])
+    return
+  }
+  Object.keys(obj).forEach(function (key){
+    q.push(key)
+    getallcharacters(obj[key], q)
+    q.pop()
+  })
+}
 
-    namearr.forEach(function(character_name){
-      arr_obj = []
-      arr_obj = _.concat(arr_obj, character_name)
-      Object.keys(node[character_name]).forEach(function(nextkey){
-        arr_obj = _.concat(arr_obj, nextkey)
-        // console.log(arr_obj)
-        nextnow = node[character_name][nextkey]
-        if (Array.isArray(nextnow)){
-            nextnow.forEach(function(val){
-              arr_obj = _.concat(arr_obj, val)
-              console.log(arr_obj)
-              arr_obj.pop()
-            })
-        }
-      })
-    })
+$.getJSON('files.json')
+  .done(function(data){
+    getallcharacters(data, [])
   })
 
 $.getJSON( 'docs/synonym.json' )
