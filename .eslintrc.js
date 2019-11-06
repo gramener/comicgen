@@ -30,6 +30,7 @@ module.exports = {
     "linebreak-style": ["error", "unix"],           // Force UNIX style line
     "semi": ["error", "never"],                     // Force no-semicolon style
     "no-cond-assign": ["off", "always"],            // Allow this for loops
+    "space-before-blocks": ["error", "always"],     // Space must precede brace
     "quotes": ["error", "single"]                   // We may go for a double-quotes style
   }
 };
