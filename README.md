@@ -37,6 +37,16 @@ can accompany good news on charts.
 
 ![Power BI Plugin example](docs/power-bi-plugin.gif)
 
+[Power BI Custom Visual Privacy Policy](#powerbipolicy)
+<!-- end -->
+
+<!-- var privacypolicy -->
+
+### Power BI Custom Visual Privacy Policy
+
+Gramener visuals do not externally collect any information, personal or otherwise.
+If you have any questions, please contact us at comicgen.powerbi@gramener.com
+
 <!-- end -->
 
 <!-- var api -->

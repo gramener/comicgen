@@ -10,7 +10,7 @@ $.get('README.md')
     var converter = new showdown.Converter({ ghCodeBlocks: true, tables: true })
     text.match(/<!--\s*var\s+\S*\s*-->[\s\S]*?<!--\s*end\s*-->/igm).forEach(function (match) {
       var lines = match.split(/\n/)
-      var name = lines[0].replace(/^<!--\s*var\s+/, '').replace(/\s*-->$/, '')
+      var name = lines[0].replace(/^<!--\s*var\s+/, '').replace(/\s*-->/, '')
       $('md[data-target="' + name + '"]')
         .addClass('d-block my-4')
         .html(converter.makeHtml(lines.slice(1, -1).join('\n')))
