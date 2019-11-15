@@ -765,6 +765,16 @@ Please e-mail Anand <s.anand@gramener.com> and Richie <richie.lionell@gramener.c
 </div>
 <!-- end -->
 
+<!-- var privacypolicy -->
+
+### Privacy Policy
+
+Gramener visuals do not externally collect any information, personal or otherwise.
+If you have any questions, please contact us at [comicgen.powerbi@gramener.com](mailto:comicgen.powerbi@gramener.com)
+
+<!-- end -->
+
+
 <!-- var social_markdown -->
 <!-- Github README won't display the above share icons. So create links. Don't display this on index.html -->
 ## Share
