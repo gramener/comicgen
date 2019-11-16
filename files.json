@@ -19,6 +19,53 @@
       "handsfolded"
     ]
   },
+  "ayo": {
+    "arms": [
+      "asking",
+      "crossed",
+      "dancing",
+      "down",
+      "openside",
+      "pointingside",
+      "pointingup",
+      "sidestraight",
+      "up",
+      "waving"
+    ],
+    "body": [
+      "crossedlegs",
+      "dancing",
+      "onelegup",
+      "pirouette",
+      "running",
+      "squat",
+      "standing",
+      "tuckeduplegs"
+    ],
+    "emotion": [
+      "anger",
+      "book",
+      "duck",
+      "exclamationmark",
+      "foodplate",
+      "heart",
+      "idea",
+      "music",
+      "questionmark",
+      "rabbit"
+    ],
+    "head": [
+      "cupdown",
+      "cupup",
+      "ovalhorizontal",
+      "ovalvertical",
+      "rectanglehorizontal",
+      "rectanglevertical",
+      "square",
+      "triangledown",
+      "triangleup"
+    ]
+  },
   "dee": {
     "straight": {
       "emotion": [
