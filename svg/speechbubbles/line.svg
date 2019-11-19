@@ -1,10 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
-    <title>speechbubble27</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="speechbubble27" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-        <path d="M34.9579607,154.601374 C53.2755017,111.326184 127.829871,65.7471948 171,50.8386525" id="Path-2" stroke="#212121" stroke-width="3"></path>
-    </g>
-</svg>
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><path d="M34.958 154.601C53.276 111.326 127.83 65.747 171 50.84" stroke="#212121" stroke-width="3" fill="none" stroke-linecap="round"/></svg>

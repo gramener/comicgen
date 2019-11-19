@@ -12,7 +12,7 @@ do
     mkdir -p $(dirname "$png")
     convert -background none "$svg" "$png"
     # Compress the PNG
-    pngquant --force --ext .png "$png"
+    # pngquant --force --ext .png "$png"
     # Compress the SVG last.
     # Compressed SVGs don't convert well into PNGs sometimes.
     # Note: Dey's hair needs to be compressed manually (dozingleft, etc)
