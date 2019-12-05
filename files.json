@@ -363,6 +363,37 @@
       ]
     }
   },
+  "speechbubbles": {
+    "speechbubble": [
+      "bottombubble",
+      "cloud",
+      "double",
+      "downpointing",
+      "downpointinginverted",
+      "electro",
+      "invertedlongsentence",
+      "line",
+      "longsentence",
+      "ouch",
+      "re",
+      "reinverted",
+      "rere",
+      "rethoughtbubble",
+      "screem",
+      "sharp",
+      "sharpbubble",
+      "sharpshiver",
+      "speechone",
+      "speechtwo",
+      "speedblast",
+      "star",
+      "thoughtbubbles",
+      "timelapse",
+      "vroom",
+      "whoom",
+      "zhoom"
+    ]
+  },
   "facesketch": {
     "face": [
       "face1-ear1",

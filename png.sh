@@ -16,6 +16,6 @@ do
     # Compress the SVG last.
     # Compressed SVGs don't convert well into PNGs sometimes.
     # Note: Dey's hair needs to be compressed manually (dozingleft, etc)
-    node_modules/.bin/svgo -q --multipass "$svg"
+    node_modules/.bin/svgo -q "$svg" --multipass --disable="convertPathData"
   fi
 done
