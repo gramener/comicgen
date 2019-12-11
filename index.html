@@ -26,6 +26,7 @@
     img { max-width: 100%; }
     .attr { display: inline-block; }
     h3 { color: var(--danger); }
+    #contextmenu { height: 30px; width: 200px; position: absolute;}
   </style>
   <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
   <link href="https://learn.gramener.com/ui/bootstraptheme.css?font-family-base=Neucha,cursive&dark=%23675b9e&primary=%238b8ac1" rel="stylesheet">
@@ -89,12 +90,15 @@
               <input name="width" type="hidden" value="500">
               <input name="height" type="hidden" value="600">
             </form>
-            <div class="target-container my-2">
+            <div class="target-container my-2 border">
               <div class="target"></div>
             </div>
             <div class="mb-3">
-              <button type="button" class="btn btn-sm btn-light border download" data-clipboard-target="#code">
-                <i class="far fa-arrow-alt-circle-down"></i> Save image
+              <button type="button" title="Download as PNG" class="btn btn-sm btn-light border download-png" data-clipboard-target="#code">
+                <i class="fas fa-arrow-alt-circle-down"></i> PNG
+              </button>
+              <button type="button" title="Download as SVG" class="btn btn-sm btn-light border download-svg" data-clipboard-target="#code">
+                <i class="fas fa-arrow-alt-circle-down"></i> SVG
               </button>
               <button type="button" class="btn btn-sm btn-light border copy" data-clipboard-target="#code">
                 <i class="far fa-copy"></i> Copy code
@@ -165,14 +169,6 @@
     </p>
   </footer>
 
-  <script type="text/html" class="arrows">
-    <div class="d-flex justify-content-between">
-      <button class="btn btn-xs move-left" type="button" title="Move layer below" tabindex="-1"><i class="fa fa-xs fa-arrow-left"></i></button>
-      <span><%= key %></span>
-      <button class="btn btn-xs move-right" type="button" title="Move layer above" tabindex="-1"><i class="fa fa-xs fa-arrow-right"></i></button>
-    </div>
-  </script>
-
   <script type="text/html" class="search-links">
     <% _.each(links, function(link, index) { %>
       <a class="item m-4" target="_blank" href="<%- link[0] %>" data-emotion="<%- link[1] %>" ><div id=<%= 'comicgen'.concat(index) %>></div></a>
@@ -183,12 +179,11 @@
   <script src="https://unpkg.com/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/lodash@4.17.11/lodash.min.js"></script>
   <script src="https://unpkg.com/g1@0.17.0/dist/g1.min.js"></script>
-  <script src="https://unpkg.com/showdown@1.9.0/dist/showdown.min.js"></script>
-  <script src="https://unpkg.com/highlightjs@9.12.0/highlight.pack.min.js"></script>
-  <script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js"></script>
-  <script src="https://unpkg.com/plain-draggable@2.5.12/plain-draggable.min.js"></script>
-  <script src="https://unpkg.com/save-svg-as-png@1.4.14/lib/saveSvgAsPng.js"></script>
-  <script src="dist/comicgen.min.js"></script>
-  <script src="docs/script.js"></script>
+  <script src="https://unpkg.com/showdown@1.9.0/dist/showdown.min.js" defer></script>
+  <script src="https://unpkg.com/highlightjs@9.12.0/highlight.pack.min.js" defer></script>
+  <script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+  <script src="dist/comicgen.min.js" defer></script>
+  <script src="node_modules/fabric/dist/fabric.js" defer></script>
+  <script src="docs/script.js" defer></script>
 </body>
 </html>
