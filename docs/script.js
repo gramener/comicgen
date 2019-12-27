@@ -210,7 +210,7 @@ function emotionposecombinations(basestr, emotionarr, posarr) {
 
 function getallcharacters(obj, q) {
   if (Array.isArray(obj)) return
-  if (obj['emotion'] || obj['pose']) {
+  if (obj['emotion'] && obj['pose']) {
     var baseurl = g1.url.parse(location.href).update({name: q[0], angle:q[1]}).toString()
     emotionposecombinations(baseurl, obj['emotion'], obj['pose'])
     return
