@@ -27,10 +27,13 @@
     .attr { display: inline-block; }
     h3 { color: var(--danger); }
   </style>
-  <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Neucha" rel="prefetch" as="style"
+      onload="this.onload=null;this.rel='stylesheet'">
   <link href="https://learn.gramener.com/ui/bootstraptheme.css?font-family-base=Neucha,cursive&dark=%23675b9e&primary=%238b8ac1" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://unpkg.com/highlightjs@9.12.0/styles/github.css">
+  <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous" rel="prefetch"  as="style"
+      onload="this.onload=null;this.rel='stylesheet'">
+  <link href="https://unpkg.com/highlightjs@9.12.0/styles/github.css" rel="prefetch" as="style"
+      onload="this.onload=null;this.rel='stylesheet'">
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42126862-1"></script>
   <script>
     window.dataLayer = window.dataLayer || []
@@ -183,11 +186,11 @@
   <script src="https://unpkg.com/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/lodash@4.17.11/lodash.min.js"></script>
   <script src="https://unpkg.com/g1@0.17.0/dist/g1.min.js"></script>
-  <script src="https://unpkg.com/showdown@1.9.0/dist/showdown.min.js"></script>
+  <script src="https://unpkg.com/showdown@1.9.0/dist/showdown.min.js" defer></script>
   <script src="https://unpkg.com/highlightjs@9.12.0/highlight.pack.min.js"></script>
   <script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js"></script>
   <script src="https://unpkg.com/plain-draggable@2.5.12/plain-draggable.min.js"></script>
-  <script src="https://unpkg.com/save-svg-as-png@1.4.14/lib/saveSvgAsPng.js"></script>
+  <script src="https://unpkg.com/save-svg-as-png@1.4.14/lib/saveSvgAsPng.js" defer></script>
   <script src="dist/comicgen.min.js"></script>
   <script src="docs/script.js"></script>
 </body>
