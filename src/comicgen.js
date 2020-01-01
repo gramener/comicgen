@@ -75,10 +75,14 @@ comicgen.defaults = {
 // This is intentionally exposed publicly, and can be changed / extended by others.
 comicgen.namemap = {
   aryan: 'emotionpose',
+  ava: 'emotionpose',
+  bean: 'deedey',
   dee: 'deedey',
   dey: 'deedey',
+  evan: 'emotionpose',
   facesketch: 'facesketch',
   humaaans: 'humaaans',
+  jaya: 'emotionpose',
   priya: 'deedey',
   ringo: 'deedey',
   speechbubbles: 'speechbubbles',

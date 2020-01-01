@@ -19,6 +19,116 @@
       "handsfolded"
     ]
   },
+  "ava": {
+    "emotion": [
+      "angryfrustrated",
+      "angryshouting",
+      "annoyed",
+      "blush",
+      "cry",
+      "curious",
+      "hmm",
+      "lookingup",
+      "normal",
+      "readinglookingdown",
+      "sad",
+      "shocked",
+      "smile",
+      "tired",
+      "wink",
+      "worried",
+      "yuhoo"
+    ],
+    "pose": [
+      "angryfrustrated",
+      "handsfolded",
+      "handsheldback",
+      "handsonhip",
+      "holdingbook",
+      "holdinglaptop",
+      "pointingright",
+      "pointingup",
+      "readingpaper",
+      "superperfect",
+      "thinkinghmm",
+      "thumbsup",
+      "yuhoo"
+    ]
+  },
+  "bean": {
+    "straight": {
+      "emotion": [
+        "angryfrustrated",
+        "angryshouting",
+        "annoyed",
+        "blush",
+        "cry",
+        "curious",
+        "hmm",
+        "lookingup",
+        "normal",
+        "readinglookingdown",
+        "sad",
+        "shocked",
+        "smile",
+        "tired",
+        "wink",
+        "worried",
+        "yuhoo"
+      ],
+      "pose": [
+        "angryfrustrated",
+        "handsfolded",
+        "handsheldback",
+        "handsonhip",
+        "holdingbook",
+        "holdinglaptop",
+        "pointingright",
+        "pointingup",
+        "readingpaper",
+        "superperfect",
+        "thinkinghmm",
+        "thumbsup",
+        "yuhoo"
+      ]
+    },
+    "side": {
+      "emotion": [
+        "angryfrustrated",
+        "angryshouting",
+        "annoyed",
+        "blush",
+        "cry",
+        "curious",
+        "hmm",
+        "lookingup",
+        "normal",
+        "readinglookingdown",
+        "sad",
+        "shocked",
+        "smile",
+        "tired",
+        "wink",
+        "worried",
+        "yuhoo"
+      ],
+      "pose": [
+        "angryfrustrated",
+        "handsfolded",
+        "handsheldback",
+        "handsonhip",
+        "holdingbook",
+        "holdinglaptop",
+        "pointingright",
+        "pointingup",
+        "readingpaper",
+        "superperfect",
+        "thinkinghmm",
+        "thumbsup",
+        "yuhoo"
+      ]
+    }
+  },
   "dee": {
     "straight": {
       "emotion": [
@@ -213,6 +323,76 @@
         "sittingonthefloorshrug"
       ]
     }
+  },
+  "evan": {
+    "emotion": [
+      "angryfrustrated",
+      "angryshouting",
+      "annoyed",
+      "blush",
+      "cry",
+      "curious",
+      "hmm",
+      "lookingup",
+      "normal",
+      "readinglookingdown",
+      "sad",
+      "shocked",
+      "smile",
+      "tired",
+      "wink",
+      "worried",
+      "yuhoo"
+    ],
+    "pose": [
+      "angryfrustrated",
+      "handsfolded",
+      "handsheldback",
+      "handsonhip",
+      "holdingbook",
+      "holdinglaptop",
+      "pointingright",
+      "pointingup",
+      "readingpaper",
+      "superperfect",
+      "thinkinghmm",
+      "thumbsup",
+      "yuhoo"
+    ]
+  },
+  "jaya": {
+    "emotion": [
+      "angry",
+      "blush",
+      "cry",
+      "grimacing",
+      "hmm",
+      "normal",
+      "ooh",
+      "sad",
+      "shocked",
+      "shy",
+      "smile",
+      "what",
+      "whatever",
+      "wink",
+      "worried",
+      "yuhoo"
+    ],
+    "pose": [
+      "angryfrustrated",
+      "explaining",
+      "handsfolded",
+      "handsonhip",
+      "hi",
+      "holdingcoffee",
+      "normal",
+      "pointingup",
+      "readingpaper",
+      "shrug",
+      "superperfect",
+      "thumbsup"
+    ]
   },
   "priya": {
     "straight": {
