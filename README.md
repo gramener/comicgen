@@ -166,6 +166,13 @@ Technique examples
 - [A video embedded in a 3-panel comic strip](https://codepen.io/richielionell/pen/ROKodg)
 - [Character reacting to changing data live](https://codepen.io/richielionell/pen/jRmjOY)
 
+Webcomics examples
+- [The Movie](https://codepen.io/RamyaMylavarapu/pen/ZEYJbLP)
+- [This New Year](https://codepen.io/RamyaMylavarapu/pen/vYEZvqM)
+- [Netflix & Chill](https://codepen.io/RamyaMylavarapu/pen/wvBewwz)
+- [Handwritten](https://codepen.io/RamyaMylavarapu/pen/vYEZPEX)
+- [Happy New Year](https://codepen.io/RamyaMylavarapu/pen/rNawPwK)
+
 # Gallery
 
 Here are examples or guides of where comics have been used effectively in storytelling.
