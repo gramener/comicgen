@@ -170,28 +170,7 @@ $.getJSON('files.json')
 
       function onload(row) {
         return function (res) {
-          $('body').append('<template></template>')
-          $('template').append(res.documentElement)
-          var temp_svg_jquery = $('template svg')
-          $('template').remove()
-          var temp_children = temp_svg_jquery.children()
-          var grouped_elm = temp_children.is('g') ? temp_children : $(document.createElement('g')).append(temp_children)
-          temp_svg_jquery.children().remove()
-          temp_svg_jquery.append(grouped_elm)
-
-          if ('getBBox' in temp_svg_jquery.get(0).querySelector('g')) {
-            var bbox = { x: 0, y: 0 }
-            bbox = temp_svg_jquery.get(0).querySelector('g').getBBox()
-            var svg_attrs = {
-              width: bbox.width,
-              height: bbox.height,
-              viewBox: [bbox.x, bbox.y, bbox.width, bbox.height].join(' ')
-            }
-            for (var prop in svg_attrs) {
-              temp_svg_jquery.get(0).setAttribute(prop, svg_attrs[prop])
-            }
-          }
-          var svg_string = temp_svg_jquery.get(0).outerHTML
+          var svg_string = getSVGstring(res)
           fabric.loadSVGFromString(svg_string, function (objects, options) {
             var obj = fabric.util.groupSVGElements(objects, options)
             obj.set({ top: row.y + obj.top + 40, left: row.x + obj.left })
@@ -386,19 +365,27 @@ function repositionContextMenu(canvas, contextMenu) {
   })
 }
 
-function cascade(root, offset) {
-  const x = new Map;
-  const y = new Map;
-  return root.eachAfter(d => {
-    if (d.children) {
-      x.set(d, 1 + d3.max(d.children, c => c.x1 === d.x1 - offset ? x.get(c) : NaN));
-      y.set(d, 1 + d3.max(d.children, c => c.y1 === d.y1 - offset ? y.get(c) : NaN));
-    } else {
-      x.set(d, 0);
-      y.set(d, 0);
+function getSVGstring(res) {
+  $('body').append('<template></template>')
+  $('template').append(res.documentElement)
+  var temp_svg_jquery = $('template svg')
+  $('template').remove()
+  var temp_children = temp_svg_jquery.children()
+  var grouped_elm = temp_children.is('g') ? temp_children : $(document.createElement('g')).append(temp_children)
+  temp_svg_jquery.children().remove()
+  temp_svg_jquery.append(grouped_elm)
+
+  if ('getBoundingClientRect' in grouped_elm.get(0)) {
+    var bbox = { x: 0, y: 0 }
+    bbox = grouped_elm.get(0).getBoundingClientRect()
+    var svg_attrs = {
+      width: bbox.width,
+      height: bbox.height,
+      viewBox: [bbox.x, bbox.y, bbox.width, bbox.height].join(' ')
     }
-  }).eachBefore(d => {
-    d.x1 = d.x1 - 2 * offset * x.get(d);
-    d.y1 -= 2 * offset * y.get(d);
-  });
+    for (var prop in svg_attrs) {
+      temp_svg_jquery.get(0).setAttribute(prop, svg_attrs[prop])
+    }
+  }
+  return temp_svg_jquery.get(0).outerHTML
 }
