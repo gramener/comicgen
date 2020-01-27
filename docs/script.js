@@ -49,6 +49,7 @@ $.getJSON('files.json')
       options(q, 'name', node)
       node = node[q.name]
       var format = comicgen.formats[comicgen.namemap[q.name]]
+      if (format.parametric) q.parametric = true
       format.dirs.forEach(function (attr) {
         options(q, attr, node)
         node = node[q[attr]]
@@ -154,8 +155,38 @@ $('.download').on('click', function () {
 
 var template_arrows = _.template($('.arrows').html())
 
-// Utility: Set a default value for q[key] using data. Render <select> dropdown using data
 function options(q, key, data) {
+  if (!q.parametric) {
+    dropdown_options(q, key, data)
+  } else {
+    slider_options(q, key, data)
+  }
+}
+
+function slider_options(q, key, data) {
+  if (key in comicgen.defaults) return
+  data = _.isArray(data) ? data : _.keys(data)
+  q[key] = q[key] ? q[key] : 0
+  var $el = $('.comicgen-attrs .attr[name="' + key + '"]').removeClass('wip')
+
+  if (!$el.length) {
+    $el = $('<div>').addClass('attr mr-2 mb-2').attr('name', key)
+    $el.append($(template_arrows({key: key})))
+
+    $el.append($('<input type="range" min="0" max="1" step="0.1">').addClass('form-control').attr('name', key))
+    var $after = $('.comicgen-attrs .attr:not(.wip):last')
+
+    if ($after.length)
+      $el.insertAfter($after)
+    else
+      $el.appendTo('.comicgen-attrs')
+
+    $('.attr[name="'+ key +'"] input').val(q[key])
+  }
+}
+
+// Utility: Set a default value for q[key] using data. Render <select> dropdown using data
+function dropdown_options(q, key, data) {
   data = _.isArray(data) ? data : _.keys(data)
   // If q[key] is not in data, pick the first item from the data list/dict
   q[key] = q[key] && data.indexOf(q[key]) > 0 ? q[key] : data[0]

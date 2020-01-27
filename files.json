@@ -693,5 +693,19 @@
       "holdinglaptop",
       "pointingleft"
     ]
+  },
+  "chini": {
+    "face-kid-teen": {
+    }
+  },
+  "panda": {
+    "face-smile-ohoh": {
+    }
+  },
+  "zoozoo": {
+    "face-meh-surprise": {
+    },
+    "body-normal-handup": {
+    }
   }
 }
