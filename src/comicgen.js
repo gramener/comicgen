@@ -35,27 +35,24 @@ export default function comicgen(selector, options) {
       `<g transform="scale(${attrs.scale})${mirror}">`
     ]
 
-    if (attrs['parametric']) {
+    if (format['parametric']) {
       var parametric_svg_urls = []
       for (var attr in attrs) {
         // loop through all attributes (e.g. emotion=, pose=, body=, etc)
         if(attr in format.files) {
+          // attrs are updated ?face=teen-kid&face-teen-kid=0.7
+          var [filename1, filename2] = attrs[attr].split('-')
+          var slider_val = attrs[attr + '-' + attrs[attr]]
           var row = format.files[attr]
-          var img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
-          // row.file will be of format /chini/face/kid-teen-0
-          // parse it to two files based on last occurence of /
-          // TODO: improve file name parsing to use Regex
-          var except_last = img.split('/').slice(0, img.split('/').length-1).join('/')
-          var [_, filename1, filename2] = attr.split('-')
-          var slider_val = attrs[attr]
+          var img_dir = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
 
           parametric_svg_urls.push({
-            get_request: $.get(`${comicgen.base}${attrs.ext}/${except_last +'/'+ filename1}.svg`, undefined, undefined, 'text'),
+            get_request: $.get(`${comicgen.base}${attrs.ext}/${img_dir + filename1}.svg`, undefined, undefined, 'text'),
             filename: filename1,
             slider_val: slider_val
           })
           parametric_svg_urls.push({
-            get_request: $.get(`${comicgen.base}${attrs.ext}/${except_last +'/'+ filename2}.svg`, undefined, undefined, 'text'),
+            get_request: $.get(`${comicgen.base}${attrs.ext}/${img_dir + filename2}.svg`, undefined, undefined, 'text'),
             filename: filename2,
             slider_val: slider_val
           })
@@ -254,7 +251,7 @@ comicgen.formats = {
     parametric: true,
     dirs: [],
     files: {
-      "face-kid-teen": { file: '$name/face/$face', width: 200, height: 200, x: 40, y:110 }
+      "face": { file: '$name/face/', width: 200, height: 200, x: 40, y:110 }
     }
   },
   panda: {
@@ -263,7 +260,7 @@ comicgen.formats = {
     parametric: true,
     dirs: [],
     files: {
-      "face-smile-ohoh": { file: '$name/face/$face', width: 200, height: 200, x: 40, y:110 }
+      "face": { file: '$name/face/', parametric: true, width: 200, height: 200, x: 40, y:110 }
     }
   },
   zoozoo: {
@@ -272,8 +269,8 @@ comicgen.formats = {
     parametric: true,
     dirs: [],
     files: {
-      "face-meh-surprise": { file: '$name/face/$face', width: 200, height: 200, x: 40, y:110 },
-      "body-normal-handup": { file: '$name/body/$body', width: 200, height: 200, x: 40, y:110 }
+      "face": { file: '$name/face/', width: 200, height: 200, x: 40, y:110 },
+      "body": { file: '$name/body/', width: 200, height: 200, x: 40, y:110 }
     }
   }
 }
