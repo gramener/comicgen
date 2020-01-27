@@ -24,6 +24,42 @@ Here's a 3-minute video explaining how to create your own comic strip.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/E_2hdZuugI8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+## Fonts
+
+For lettering, you can use comic fonts from
+[Google fonts](https://fonts.google.com/?category=Handwriting) or
+[Fonts.com](https://www.fonts.com/search/all-fonts?Classification=Comic).
+
+Some fonts we like are:
+
+| Font                              | Example text                                                         |
+|-----------------------------------|----------------------------------------------------------------------|
+| [Architects Daughter][font-ad]    | [![Architects Daughter](docs/font-architects-daughter.png)][font-ad] |
+| [Cavolini][font-ca] (Windows)     | [![Cavolini](docs/font-cavolini.png)][font-cavolini]                 |
+| [Segoe Script][font-ss] (Windows) | [![Segoe Script](docs/font-segoe-script.png)][font-ss]               |
+| [Segoe Print][font-sp] (Windows)  | [![Segoe Print](docs/font-segoe-print.png)][font-sp]                 |
+| [News Cycle][font-nc]             | [![News Cycle](docs/font-news-cycle.png)][font-nc]                   |
+| [Indie Flower][font-if]           | [![Indie Flower](docs/font-indie-flower.png)][font-if]               |
+| [Amatic SC][font-ac]              | [![Amatic SC](docs/font-amatic-sc.png)][font-ac]                     |
+| [Schoolbell][font-sb]             | [![Schoolbell](docs/font-schoolbell.png)][font-sb]                   |
+| [Just Another Hand][font-jah]     | [![Just Another Hand](docs/font-just-another-hand.png)][font-jah]    |
+| [Patrick Hand][font-ph]           | [![Patrick Hand](docs/font-patrick-hand.png)][font-ph]               |
+| [Neucha][font-n]                  | [![Neucha](docs/font-neucha.png)][font-n]                            |
+| [Handlee][font-h]                 | [![Handlee](docs/font-handlee.png)][font-h]                          |
+
+[font-ca]: https://www.fonts.com/font/monotype/cavolini
+[font-ad]: https://fonts.google.com/specimen/Architects+Daughter
+[font-ss]: https://www.fonts.com/font/microsoft-corporation/segoe-script
+[font-sp]: https://www.fonts.com/font/microsoft-corporation/segoe-print
+[font-nc]: https://fonts.google.com/specimen/News+Cycle
+[font-if]: https://fonts.google.com/specimen/Indie+Flower
+[font-ac]: https://fonts.google.com/specimen/Amatic+SC
+[font-sb]: https://fonts.google.com/specimen/Schoolbell
+[font-jah]: https://fonts.google.com/specimen/Just+Another+Hand
+[font-ph]: https://fonts.google.com/specimen/Patrick+Hand
+[font-n]: https://fonts.google.com/specimen/Neucha
+[font-h]: https://fonts.google.com/specimen/Handlee
+
 ## Plugins
 
 You can also use Comicgen using the [plugins](#plugins) below.
@@ -208,6 +244,8 @@ If you know of more people, please [add a comment](https://github.com/gramener/c
 
 ## Resources
 
+### Comics tools
+
 Here are other tools and resources to create comic stories:
 
 - [Pixton](https://www.pixton.com/) has an [online app](https://app.pixton.com/#/)
@@ -227,6 +265,10 @@ Here are other tools and resources to create comic stories:
 If you know of any others, please [add a comment](https://github.com/gramener/comicgen/issues/26). We'll include them.
 
 We haven't yet found tools that expose an API. This should enable developers to integrate with existing tools and workflows, as well as build new ones. Hopefully comicgen will enable that.
+
+### Comics resources
+
+- [Teaching comics](https://www.cartoonstudies.org/teachingcomics/) has resources on teaching how to create comics
 
 
 <!-- end -->
@@ -495,32 +537,6 @@ in your stylesheet.
 
 ![Dee with a caption on top, styled with CSS](docs/dee-caption-top-styled.png)
 
-## Fonts
-
-[Google fonts has handwriting fonts](https://fonts.google.com/?category=Handwriting)
-that can be used for the caption lettering.
-
-Some fonts we like are:
-
-| Font                            | Example text                                                         |
-|---------------------------------|----------------------------------------------------------------------|
-| [Architects Daughter][font-ad]  | [![Architects Daughter](docs/font-architects-daughter.png)][font-ad] |
-| [News Cycle][font-nc]           | [![News Cycle](docs/font-news-cycle.png)][font-nc]                   |
-| [Indie Flower][font-if]         | [![Indie Flower](docs/font-indie-flower.png)][font-if]               |
-| [Amatic SC][font-ac]            | [![Amatic SC](docs/font-amatic-sc.png)][font-ac]                     |
-| [Just Another Hand][font-jah]   | [![Just Another Hand](docs/font-just-another-hand.png)][font-jah]    |
-| [Patrick Hand][font-ph]         | [![Patrick Hand](docs/font-patrick-hand.png)][font-ph]               |
-| [Neucha][font-n]                | [![Neucha](docs/font-neucha.png)][font-n]                            |
-| [Handlee][font-h]               | [![Handlee](docs/font-handlee.png)][font-h]                          |
-
-[font-ad]: https://fonts.google.com/specimen/Architects+Daughter
-[font-nc]: https://fonts.google.com/specimen/News+Cycle
-[font-if]: https://fonts.google.com/specimen/Indie+Flower
-[font-ac]: https://fonts.google.com/specimen/Amatic+SC
-[font-jah]: https://fonts.google.com/specimen/Just+Another+Hand
-[font-ph]: https://fonts.google.com/specimen/Patrick+Hand
-[font-n]: https://fonts.google.com/specimen/Neucha
-[font-h]: https://fonts.google.com/specimen/Handlee
 
 ## Strips
 
