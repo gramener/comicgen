@@ -49,7 +49,6 @@ $.getJSON('files.json')
       options(q, 'name', node)
       node = node[q.name]
       var format = comicgen.formats[comicgen.namemap[q.name]]
-      if (format.parametric) q.parametric = true
       format.dirs.forEach(function (attr) {
         options(q, attr, node)
         node = node[q[attr]]
@@ -278,5 +277,3 @@ $.getJSON( 'docs/synonym.json' )
 
     $('body').search({ change: 'synonymsearch' })
   })
-
-

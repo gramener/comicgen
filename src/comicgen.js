@@ -260,7 +260,7 @@ comicgen.formats = {
     parametric: true,
     dirs: [],
     files: {
-      "face": { file: '$name/face/', parametric: true, width: 200, height: 200, x: 40, y:110 }
+      "face": { file: '$name/face/', width: 200, height: 200, x: 40, y:110 }
     }
   },
   zoozoo: {
