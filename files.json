@@ -693,5 +693,27 @@
       "holdinglaptop",
       "pointingleft"
     ]
+  },
+  "chini": {
+    "face": {
+      "parametric": true,
+      "keyframes": ["kid", "teen"]
+    }
+  },
+  "panda": {
+    "face": {
+      "parametric": true,
+      "keyframes": ["smile", "ohoh"]
+    }
+  },
+  "zoozoo": {
+    "face": {
+      "parametric": true,
+      "keyframes": ["meh", "surprise"]
+    },
+    "body": {
+      "parametric": true,
+      "keyframes": ["normal", "handup"]
+    }
   }
 }

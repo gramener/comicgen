@@ -156,6 +156,34 @@ var template_arrows = _.template($('.arrows').html())
 
 // Utility: Set a default value for q[key] using data. Render <select> dropdown using data
 function options(q, key, data) {
+  data.parametric ? slider_options(q, key, data) : dropdown_options(q, key, data)
+}
+
+function slider_options(q, key, data) {
+  if (key in comicgen.defaults) return
+  q[key] = data["keyframes"].join('-')
+  var modified_key = key + '-' + data["keyframes"].join('-')
+  q[modified_key] = q[modified_key] ? q[modified_key] : 0
+  var $el = $('.comicgen-attrs .attr[name="' + key + '"]').removeClass('wip')
+
+  if (!$el.length) {
+    $el = $('<div>').addClass('attr mr-2 mb-2').attr('name', modified_key)
+    $el.append($(template_arrows({key: modified_key})))
+
+    $el.append($('<input type="range" min="0" max="1" step="0.01">').addClass('form-control').attr('name', modified_key))
+    var $after = $('.comicgen-attrs .attr:not(.wip):last')
+
+    if ($after.length)
+      $el.insertAfter($after)
+    else
+      $el.appendTo('.comicgen-attrs')
+
+    $('.attr[name="'+ modified_key +'"] input').val(q[modified_key])
+  }
+}
+
+
+function dropdown_options(q, key, data) {
   data = _.isArray(data) ? data : _.keys(data)
   // If q[key] is not in data, pick the first item from the data list/dict
   q[key] = q[key] && data.indexOf(q[key]) > 0 ? q[key] : data[0]

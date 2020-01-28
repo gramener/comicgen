@@ -35,22 +35,111 @@ export default function comicgen(selector, options) {
       `<g transform="scale(${attrs.scale})${mirror}">`
     ]
 
-    // Loop through all attributes (e.g. emotion=, pose=, body=, etc)
-    // If the attribute is in format.file, there's an image for it. Add it.
-    for (var attr in attrs) {
-      if (attr in format.files) {
-        var row = format.files[attr]
-        // Substitute any $variable with the corresponding attribute value
-        var img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
-        svg.push(`<image width="${row.width}" height="${row.height}" transform="translate(${row.x},${row.y})" xlink:href="${comicgen.base}${attrs.ext}/${img}.${attrs.ext}"/>`)
+    if (format['parametric']) {
+      var parametric_svg_urls = []
+      for (var attr in attrs) {
+        // loop through all attributes (e.g. emotion=, pose=, body=, etc)
+        if(attr in format.files) {
+          // attrs are updated ?face=teen-kid&face-teen-kid=0.7
+          var [filename1, filename2] = attrs[attr].split('-')
+          var slider_val = attrs[attr + '-' + attrs[attr]]
+          var row = format.files[attr]
+          var img_dir = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
+
+          parametric_svg_urls.push({
+            get_request: $.get(`${comicgen.base}${attrs.ext}/${img_dir + filename1}.svg`, undefined, undefined, 'text'),
+            filename: filename1,
+            slider_val: slider_val
+          })
+          parametric_svg_urls.push({
+            get_request: $.get(`${comicgen.base}${attrs.ext}/${img_dir + filename2}.svg`, undefined, undefined, 'text'),
+            filename: filename2,
+            slider_val: slider_val
+          })
+        }
       }
+
+      $.when(
+        ...parametric_svg_urls.map(function(d) {return d.get_request})
+      ).done(function(...svg_responses) {
+        // svg_responses length is always even. Each consecutive pair is one body part.
+        for (var i=0; i<parametric_svg_urls.length; i=i+2) {
+          var filename1 = parametric_svg_urls[i]['filename'], filename2 = parametric_svg_urls[i+1]['filename']
+          svg.push(`<g id="visible-${filename1}">${svg_responses[i][0]}</g>`)
+          svg.push(`<template id="template-${filename1}">${svg_responses[i][0]}</template>`)
+          svg.push(`<template id="template-${filename2}">${svg_responses[i+1][0]}</template>`)
+        }
+
+        svg.push('</g></svg>')
+        node.innerHTML = svg.join('')
+
+        for (var i=0; i<parametric_svg_urls.length; i=i+2) {
+          var filename1 = parametric_svg_urls[i]['filename'], filename2 = parametric_svg_urls[i+1]['filename']
+          create_parametric_svg(filename1, filename2, parametric_svg_urls[i]['slider_val'])
+        }
+      })
+    } else {
+      // Loop through all attributes (e.g. emotion=, pose=, body=, etc)
+      // If the attribute is in format.file, there's an image for it. Add it.
+      for (var attr in attrs) {
+        if (attr in format.files) {
+          var row = format.files[attr]
+          // Substitute any $variable with the corresponding attribute value
+          var img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
+          svg.push(`<image width="${row.width}" height="${row.height}" transform="translate(${row.x},${row.y})" xlink:href="${comicgen.base}${attrs.ext}/${img}.${attrs.ext}"/>`)
+        }
+      }
+      // Add the SVG footer
+      svg.push('</g></svg>')
+      node.innerHTML = svg.join('')
     }
 
-    // Add the SVG footer
-    svg.push('</g></svg>')
-    node.innerHTML = svg.join('')
-
     // TODO: trigger an event
+  })
+}
+
+
+function create_parametric_svg(filename1, filename2, slider_val) {
+  var original_id = document.querySelector(`.target #visible-${filename1} svg g`).id
+
+  var all_character_tags = document.querySelectorAll('#'+original_id + ' *')
+
+  function get_path_d(start_element, end_element) {
+    var start_path_d = start_element.getAttribute('d')
+    var end_path_d = end_element.getAttribute('d')
+    return flubber.interpolate(start_path_d, end_path_d, { maxSegmentLength: 5 })(slider_val)
+  }
+
+  all_character_tags.forEach(function (character_tag) {
+    if(!character_tag.id) return
+
+    var visible_svg_element = document.querySelector('#'+character_tag.id)
+    var start_element = document.querySelector(`template#template-${filename1} #${character_tag.id}`)
+    var end_element = document.querySelector(`template#template-${filename2} #${character_tag.id}`)
+
+    function get_non_path_attr_val(attr) {
+      return ($(end_element).attr(attr) - $(start_element).attr(attr))*slider_val + +$(start_element).attr(attr)
+    }
+
+    if (start_element.tagName == 'path' && end_element.tagName == 'path') {
+      visible_svg_element.setAttribute('d', get_path_d(start_element, end_element))
+    } else if (start_element.tagName == 'circle' && end_element.tagName == 'circle') {
+      ['cx', 'cy', 'r'].forEach(function(attr) {
+        visible_svg_element.setAttribute(attr, get_non_path_attr_val(attr))
+      })
+    } else if (start_element.tagName == 'ellipse' && end_element.tagName == 'ellipse') {
+      ['cx', 'cy', 'rx', 'ry'].forEach(function(attr) {
+        visible_svg_element.setAttribute(attr, get_non_path_attr_val(attr))
+      })
+    }
+
+    var attrNames = ['transform', 'fill', 'stroke', 'stroke-width']
+    attrNames.forEach(function (attrName) {
+      visible_svg_element.getAttribute(attrName) &&
+      end_element.getAttribute(attrName) &&
+      visible_svg_element
+        .setAttribute(attrName, d3.interpolate($(start_element).attr(attrName), $(end_element).attr(attrName))(slider_val))
+    })
   })
 }
 
@@ -74,6 +163,9 @@ comicgen.defaults = {
 // comicgen.namemap maps the character name to the format.
 // This is intentionally exposed publicly, and can be changed / extended by others.
 comicgen.namemap = {
+  chini: 'chini',
+  panda: 'panda',
+  zoozoo: 'zoozoo',
   aryan: 'emotionpose',
   ava: 'emotionpose',
   bean: 'deedey',
@@ -151,6 +243,34 @@ comicgen.formats = {
     dirs: [],
     files: {
       speechbubble: { file: '$name/$speechbubble', width: 200, height: 200, x: 40, y:110 }
+    }
+  },
+  chini: {
+    width: 500,
+    height: 600,
+    parametric: true,
+    dirs: [],
+    files: {
+      "face": { file: '$name/face/', width: 200, height: 200, x: 40, y:110 }
+    }
+  },
+  panda: {
+    width: 500,
+    height: 600,
+    parametric: true,
+    dirs: [],
+    files: {
+      "face": { file: '$name/face/', parametric: true, width: 200, height: 200, x: 40, y:110 }
+    }
+  },
+  zoozoo: {
+    width: 500,
+    height: 600,
+    parametric: true,
+    dirs: [],
+    files: {
+      "face": { file: '$name/face/', width: 200, height: 200, x: 40, y:110 },
+      "body": { file: '$name/body/', width: 200, height: 200, x: 40, y:110 }
     }
   }
 }
