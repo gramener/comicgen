@@ -56,9 +56,8 @@ $.getJSON('files.json')
       })
       // Render dropdowns for each of the files. Use order in URL
       _.each(Object.assign({}, q, format.files), function (val, attr) {
-        if (attr in format.files) {
-          format.files[attr].parametric ? options(q, attr, format.files[attr]) : options(q, attr, node[attr])
-        }
+        if (attr in format.files)
+          options(q, attr, node[attr])
       })
       options(q, 'ext', ['svg', 'png'])
       options(q, 'mirror', { '': '', 'mirror': '1' })
@@ -158,11 +157,7 @@ var template_arrows = _.template($('.arrows').html())
 
 // Utility: Set a default value for q[key] using data. Render <select> dropdown using data
 function options(q, key, data) {
-  if (!q.parametric) {
-    dropdown_options(q, key, data)
-  } else {
-    slider_options(q, key, data)
-  }
+  data.parametric ? slider_options(q, key, data) : dropdown_options(q, key, data)
 }
 
 function slider_options(q, key, data) {
@@ -283,3 +278,5 @@ $.getJSON( 'docs/synonym.json' )
 
     $('body').search({ change: 'synonymsearch' })
   })
+
+
