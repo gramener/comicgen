@@ -40,21 +40,17 @@ export default function comicgen(selector, options) {
       for (var attr in attrs) {
         // loop through all attributes (e.g. emotion=, pose=, body=, etc)
         if(attr in format.files) {
-          // attrs are updated ?face=teen-kid&face-teen-kid=0.7
-          var [filename1, filename2] = attrs[attr].split('-')
+          // attrs are updated with both face and face-teen-kid as keys ?face=teen-kid&face-teen-kid=0.7
           var slider_val = attrs[attr + '-' + attrs[attr]]
           var row = format.files[attr]
           var img_dir = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
 
-          parametric_svg_urls.push({
-            get_request: $.get(`${comicgen.base}svg/${img_dir + filename1}.svg`, undefined, undefined, 'text'),
-            filename: filename1,
-            slider_val: slider_val
-          })
-          parametric_svg_urls.push({
-            get_request: $.get(`${comicgen.base}svg/${img_dir + filename2}.svg`, undefined, undefined, 'text'),
-            filename: filename2,
-            slider_val: slider_val
+          attrs[attr].split('-').forEach(function(filename) {
+            parametric_svg_urls.push({
+              get_request: $.get(`${comicgen.base}svg/${img_dir + filename}.svg`, undefined, undefined, 'text'),
+              filename: filename,
+              slider_val: slider_val
+            }) 
           })
         }
       }
