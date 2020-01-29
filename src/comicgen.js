@@ -47,12 +47,12 @@ export default function comicgen(selector, options) {
           var img_dir = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
 
           parametric_svg_urls.push({
-            get_request: $.get(`${comicgen.base}${attrs.ext}/${img_dir + filename1}.svg`, undefined, undefined, 'text'),
+            get_request: $.get(`${comicgen.base}svg/${img_dir + filename1}.svg`, undefined, undefined, 'text'),
             filename: filename1,
             slider_val: slider_val
           })
           parametric_svg_urls.push({
-            get_request: $.get(`${comicgen.base}${attrs.ext}/${img_dir + filename2}.svg`, undefined, undefined, 'text'),
+            get_request: $.get(`${comicgen.base}svg/${img_dir + filename2}.svg`, undefined, undefined, 'text'),
             filename: filename2,
             slider_val: slider_val
           })
