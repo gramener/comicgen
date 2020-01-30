@@ -41,7 +41,7 @@ export default function comicgen(selector, options) {
         // loop through all attributes (e.g. emotion=, pose=, body=, etc)
         if(attr in format.files) {
           // attrs are updated with both face and face-teen-kid as keys ?face=teen-kid&face-teen-kid=0.7
-          var slider_val = attrs[attr + '-' + attrs[attr]]
+          var slider_val = +attrs[attr + '-' + attrs[attr]]
           var row = format.files[attr]
           var img_dir = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
 
@@ -71,7 +71,7 @@ export default function comicgen(selector, options) {
 
         for (var i=0; i<parametric_svg_urls.length; i=i+2) {
           var filename1 = parametric_svg_urls[i]['filename'], filename2 = parametric_svg_urls[i+1]['filename']
-          create_parametric_svg(filename1, filename2, parametric_svg_urls[i]['slider_val'])
+          create_parametric_svg(node, filename1, filename2, parametric_svg_urls[i]['slider_val'])
         }
       })
     } else {
@@ -95,10 +95,10 @@ export default function comicgen(selector, options) {
 }
 
 
-function create_parametric_svg(filename1, filename2, slider_val) {
-  var original_id = document.querySelector(`.target #visible-${filename1} svg g`).id
+function create_parametric_svg(node, filename1, filename2, slider_val) {
+  var original_id = node.querySelector(`#visible-${filename1} svg g`).id
 
-  var all_character_tags = document.querySelectorAll('#'+original_id + ' *')
+  var all_character_tags = node.querySelectorAll('#'+original_id + ' *')
 
   function get_path_d(start_element, end_element) {
     var start_path_d = start_element.getAttribute('d')
@@ -109,9 +109,9 @@ function create_parametric_svg(filename1, filename2, slider_val) {
   all_character_tags.forEach(function (character_tag) {
     if(!character_tag.id) return
 
-    var visible_svg_element = document.querySelector('#'+character_tag.id)
-    var start_element = document.querySelector(`template#template-${filename1} #${character_tag.id}`)
-    var end_element = document.querySelector(`template#template-${filename2} #${character_tag.id}`)
+    var visible_svg_element = node.querySelector('#'+character_tag.id)
+    var start_element = node.querySelector(`template#template-${filename1} #${character_tag.id}`)
+    var end_element = node.querySelector(`template#template-${filename2} #${character_tag.id}`)
 
     function get_non_path_attr_val(attr) {
       return ($(end_element).attr(attr) - $(start_element).attr(attr))*slider_val + +$(start_element).attr(attr)
