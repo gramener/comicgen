@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+// TODO: import "../files.json" as files
 
 export default function comicgen(selector, options) {
   // Selector can be false-y, string selector or DOM node. Defaults to ".comicgen"
@@ -41,8 +42,20 @@ export default function comicgen(selector, options) {
       if (attr in format.files) {
         var row = format.files[attr]
         // Substitute any $variable with the corresponding attribute value
-        var img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
-        svg.push(`<image width="${row.width}" height="${row.height}" transform="translate(${row.x},${row.y})" xlink:href="${comicgen.base}${attrs.ext}/${img}.${attrs.ext}"/>`)
+        if (param) {
+          var id = generate_unique_id()
+          svg.push(`<g id=`${id}` width="${row.width}" height="${row.height}" transform="translate(${row.x},${row.y})"></g>`)
+          // Interpolate between
+          run_async_code_that_populates(id, img0, img1) {
+            var img0 = row.file.replace(/\$([a-z]*)/g, function (match, group) { return group == row.param ? 'kid' : attrs[group] })    // TODO: get kid from files.json
+            var img1 = row.file.replace(/\$([a-z]*)/g, function (match, group) { return group == row.param ? 'teen' : attrs[group] })   // TODO: get teen from files.json
+            // Do whatever
+          }
+        }
+        else {
+          var img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
+          svg.push(`<image width="${row.width}" height="${row.height}" transform="translate(${row.x},${row.y})" xlink:href="${comicgen.base}${attrs.ext}/${img}.${attrs.ext}"/>`)
+        }
       }
     }
 
@@ -77,6 +90,7 @@ comicgen.namemap = {
   aryan: 'emotionpose',
   ava: 'emotionpose',
   bean: 'deedey',
+  chini: 'paramface',
   dee: 'deedey',
   dey: 'deedey',
   evan: 'emotionpose',
@@ -102,6 +116,14 @@ comicgen.namemap = {
 //      x: x-offset of the SVG image
 //      y: y-offset of the SVG image
 comicgen.formats = {
+  paramface: {
+    width: 200,
+    height: 200,
+    dirs: [],
+    files: {
+      face: { param: 'face', file: '$name/face/$face', width: 500, height: 600, x:0, y:0 }
+    }
+  },
   deedey: {
     width: 500,
     height: 600,

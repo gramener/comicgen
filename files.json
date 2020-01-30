@@ -129,6 +129,12 @@
       ]
     }
   },
+  "chini": {
+    "face": [
+      "kid",
+      "teen"
+    ]
+  },
   "dee": {
     "straight": {
       "emotion": [
