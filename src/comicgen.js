@@ -1,4 +1,11 @@
 /* eslint-disable no-console */
+import files from './../files.json'
+console.log('files', files)
+
+var unique_id_counter = 0
+function generate_unique_id(attr_key) {
+  return 'gcontainer-' + attr_key + unique_id_counter++ 
+}
 
 export default function comicgen(selector, options) {
   // Selector can be false-y, string selector or DOM node. Defaults to ".comicgen"
@@ -35,22 +42,104 @@ export default function comicgen(selector, options) {
       `<g transform="scale(${attrs.scale})${mirror}">`
     ]
 
+    var parametricUrls = []
     // Loop through all attributes (e.g. emotion=, pose=, body=, etc)
     // If the attribute is in format.file, there's an image for it. Add it.
     for (var attr in attrs) {
       if (attr in format.files) {
         var row = format.files[attr]
         // Substitute any $variable with the corresponding attribute value
-        var img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
-        svg.push(`<image width="${row.width}" height="${row.height}" transform="translate(${row.x},${row.y})" xlink:href="${comicgen.base}${attrs.ext}/${img}.${attrs.ext}"/>`)
+        if (row.param) {
+          files['name'][attr].forEach(function(filename) {
+            var id = generate_unique_id(attr)
+            svg.push(`<g id="${id}" width="${row.width}" height="${row.height}" transform="translate(${row.x},${row.y})"></g>`)
+
+            var img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return group == row.param ? filename : attrs[group] })
+            parametricUrls.push({
+              getRequest: $.get(`${comicgen.base}svg/${img}.svg`, undefined, undefined, 'text'),
+              id: id,
+              attr: attr,
+              filename: filename,
+              sliderVal: sliderVal
+            })
+          })
+        }
+        else {
+          var img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
+          svg.push(`<image width="${row.width}" height="${row.height}" transform="translate(${row.x},${row.y})" xlink:href="${comicgen.base}${attrs.ext}/${img}.${attrs.ext}"/>`)
+        }
       }
     }
+
+    $.when(...parametricUrls.map(function(d) {return d.getRequest}))
+      .done(function(...svg_responses) {
+          // svg_responses length is always even. Each consecutive pair is one body part.
+          for (var i=0; i<parametricUrls.length; i=i+2) {
+            var filename1 = parametricUrls[i]['filename'], filename2 = parametricUrls[i+1]['filename']
+            $(parametricUrls[i]['id']).append(svg_responses[i][0])
+            $(parametricUrls[i]['id']).append(`<template id="template-${filename1}">${svg_responses[i][0]}</template>`)
+            $(parametricUrls[i]['id']).append(`<template id="template-${filename2}">${svg_responses[i+1][0]}</template>`)
+          }
+
+          svg.push('</g></svg>')
+          node.innerHTML = svg.join('')
+
+          for (var i=0; i<parametricUrls.length; i=i+2) {
+            var filename1 = parametricUrls[i]['filename'], filename2 = parametricUrls[i+1]['filename']
+            create_parametric_svg(node, filename1, filename2, parametricUrls[i])
+          }
+        })
 
     // Add the SVG footer
     svg.push('</g></svg>')
     node.innerHTML = svg.join('')
 
     // TODO: trigger an event
+  })
+}
+
+
+function create_parametric_svg(node, filename1, filename2, paramUrl) {
+  var original_id = node.querySelector(`#${paramUrl.id} svg g`).id
+
+  var all_character_tags = node.querySelectorAll('#'+original_id + ' *')
+
+  function get_path_d(start_element, end_element) {
+    var start_path_d = start_element.getAttribute('d')
+    var end_path_d = end_element.getAttribute('d')
+    return flubber.interpolate(start_path_d, end_path_d, { maxSegmentLength: 5 })(slider_val)
+  }
+
+  all_character_tags.forEach(function (character_tag) {
+    if(!character_tag.id) return
+
+    var visible_svg_element = node.querySelector('#'+character_tag.id)
+    var start_element = node.querySelector(`template#template-${filename1} #${character_tag.id}`)
+    var end_element = node.querySelector(`template#template-${filename2} #${character_tag.id}`)
+
+    function get_non_path_attr_val(attr) {
+      return ($(end_element).attr(attr) - $(start_element).attr(attr))*slider_val + +$(start_element).attr(attr)
+    }
+
+    if (start_element.tagName == 'path' && end_element.tagName == 'path') {
+      visible_svg_element.setAttribute('d', get_path_d(start_element, end_element))
+    } else if (start_element.tagName == 'circle' && end_element.tagName == 'circle') {
+      ['cx', 'cy', 'r'].forEach(function(attr) {
+        visible_svg_element.setAttribute(attr, get_non_path_attr_val(attr))
+      })
+    } else if (start_element.tagName == 'ellipse' && end_element.tagName == 'ellipse') {
+      ['cx', 'cy', 'rx', 'ry'].forEach(function(attr) {
+        visible_svg_element.setAttribute(attr, get_non_path_attr_val(attr))
+      })
+    }
+
+    var attrNames = ['transform', 'fill', 'stroke', 'stroke-width']
+    attrNames.forEach(function (attrName) {
+      visible_svg_element.getAttribute(attrName) &&
+      end_element.getAttribute(attrName) &&
+      visible_svg_element
+        .setAttribute(attrName, d3.interpolate($(start_element).attr(attrName), $(end_element).attr(attrName))(slider_val))
+    })
   })
 }
 
@@ -77,6 +166,9 @@ comicgen.namemap = {
   aryan: 'emotionpose',
   ava: 'emotionpose',
   bean: 'deedey',
+  chini: 'paramface',
+  panda: 'paramface',
+  zoozoo: 'paramfacebody',
   dee: 'deedey',
   dey: 'deedey',
   evan: 'emotionpose',
@@ -102,6 +194,23 @@ comicgen.namemap = {
 //      x: x-offset of the SVG image
 //      y: y-offset of the SVG image
 comicgen.formats = {
+  paramface: {
+    width: 200,
+    height: 200,
+    dirs: [],
+    files: {
+      face: { param: 'face', file: '$name/face/$face', width: 500, height: 600, x:0, y:0 }
+    }
+  },
+  paramfacebody: {
+    width: 200,
+    height: 200,
+    dirs: [],
+    files: {
+      face: { param: 'face', file: '$name/face/$face', width: 500, height: 600, x:0, y:0 },
+      body: { param: 'body', file: '$name/body/$body', width: 500, height: 600, x:0, y:0 }
+    }
+  },
   deedey: {
     width: 500,
     height: 600,

@@ -156,6 +156,32 @@ var template_arrows = _.template($('.arrows').html())
 
 // Utility: Set a default value for q[key] using data. Render <select> dropdown using data
 function options(q, key, data) {
+  data.parametric ? slider_options(q, key, data) : dropdown_options(q, key, data)
+}
+
+function slider_options(q, key, data) {
+  if (key in comicgen.defaults) return
+  q[key] = q[key] ? q[key] : 0
+  var $el = $('.comicgen-attrs .attr[name="' + key + '"]').removeClass('wip')
+
+  if (!$el.length) {
+    $el = $('<div>').addClass('attr mr-2 mb-2').attr('name', key)
+    $el.append($(template_arrows({key: key + '-' + data["keyframes"].join('-')})))
+
+    $el.append($('<input type="range" min="0" max="1" step="0.01">').addClass('form-control-range').attr('name', key))
+    var $after = $('.comicgen-attrs .attr:not(.wip):last')
+
+    if ($after.length)
+      $el.insertAfter($after)
+    else
+      $el.appendTo('.comicgen-attrs')
+
+    $('.attr[name="'+ key +'"] input').val(q[key])
+  }
+}
+
+
+function dropdown_options(q, key, data) {
   data = _.isArray(data) ? data : _.keys(data)
   // If q[key] is not in data, pick the first item from the data list/dict
   q[key] = q[key] && data.indexOf(q[key]) > 0 ? q[key] : data[0]
@@ -222,30 +248,30 @@ function getallcharacters(obj, q) {
   })
 }
 
-$.getJSON('files.json')
-  .done(function(data) {
-    getallcharacters(data, [])
-  })
+// $.getJSON('files.json')
+//   .done(function(data) {
+//     getallcharacters(data, [])
+//   })
 
-$.getJSON( 'docs/synonym.json' )
-  .done(function (synonym)
-  {
-    var linktemplate = _.template($('.search-links').html())
-    var result = linktemplate({links : allurls})
-    $('.target-search-panel').html(result)
+// $.getJSON( 'docs/synonym.json' )
+//   .done(function (synonym)
+//   {
+//     var linktemplate = _.template($('.search-links').html())
+//     var result = linktemplate({links : allurls})
+//     $('.target-search-panel').html(result)
 
-    allurls.forEach(function(url, index) {
-      var q = g1.url.parse(url[0].replace(/#/, ''))
-      comicgen('#comicgen'+index, Object.assign({}, q.searchKey, {width: 200, height: 300}))
-    })
+//     allurls.forEach(function(url, index) {
+//       var q = g1.url.parse(url[0].replace(/#/, ''))
+//       comicgen('#comicgen'+index, Object.assign({}, q.searchKey, {width: 200, height: 300}))
+//     })
 
-    // TODO LATER: Replace with a fuzzy string matching library
-    jQuery.fn.search.changes['synonymsearch'] = function (word) {
-      if (synonym[word]) {
-        return synonym[word].join('~').replace(/~/g, '|').replace(/\s+/g, '|')
-      }
-      return word.replace(/\s+/g, '.*')
-    }
+//     // TODO LATER: Replace with a fuzzy string matching library
+//     jQuery.fn.search.changes['synonymsearch'] = function (word) {
+//       if (synonym[word]) {
+//         return synonym[word].join('~').replace(/~/g, '|').replace(/\s+/g, '|')
+//       }
+//       return word.replace(/\s+/g, '.*')
+//     }
 
-    $('body').search({ change: 'synonymsearch' })
-  })
+//     $('body').search({ change: 'synonymsearch' })
+//   })
