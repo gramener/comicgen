@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import files from './../files.json'
-console.log('files', files)
 
 var unique_id_counter = 0
 function generate_unique_id(attr_key) {
@@ -50,9 +49,11 @@ export default function comicgen(selector, options) {
         var row = format.files[attr]
         // Substitute any $variable with the corresponding attribute value
         if (row.param) {
-          files['name'][attr].forEach(function(filename) {
+          var sliderVal = attrs[attr]
+
+          files[attrs['name']][attr].forEach(function(filename) {
             var id = generate_unique_id(attr)
-            svg.push(`<g id="${id}" width="${row.width}" height="${row.height}" transform="translate(${row.x},${row.y})"></g>`)
+            svg.push(`<g id="${id}"></g>`)
 
             var img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return group == row.param ? filename : attrs[group] })
             parametricUrls.push({
@@ -72,23 +73,19 @@ export default function comicgen(selector, options) {
     }
 
     $.when(...parametricUrls.map(function(d) {return d.getRequest}))
-      .done(function(...svg_responses) {
-          // svg_responses length is always even. Each consecutive pair is one body part.
-          for (var i=0; i<parametricUrls.length; i=i+2) {
-            var filename1 = parametricUrls[i]['filename'], filename2 = parametricUrls[i+1]['filename']
-            $(parametricUrls[i]['id']).append(svg_responses[i][0])
-            $(parametricUrls[i]['id']).append(`<template id="template-${filename1}">${svg_responses[i][0]}</template>`)
-            $(parametricUrls[i]['id']).append(`<template id="template-${filename2}">${svg_responses[i+1][0]}</template>`)
-          }
+      .done(function (...svg_responses) {
+        // svg_responses length is always even. Each consecutive pair is one body part.
+        for (var i = 0; i < parametricUrls.length; i = i + 2) {
+          var filename1 = parametricUrls[i]['filename'], filename2 = parametricUrls[i + 1]['filename']
+          $('#'+parametricUrls[i]['id']).append(svg_responses[i][0])
+          $('#'+parametricUrls[i]['id']).append(`<template id="template-${filename1}">${svg_responses[i][0]}</template>`)
+          $('#'+parametricUrls[i]['id']).append(`<template id="template-${filename2}">${svg_responses[i + 1][0]}</template>`)
+        }
 
-          svg.push('</g></svg>')
-          node.innerHTML = svg.join('')
-
-          for (var i=0; i<parametricUrls.length; i=i+2) {
-            var filename1 = parametricUrls[i]['filename'], filename2 = parametricUrls[i+1]['filename']
-            create_parametric_svg(node, filename1, filename2, parametricUrls[i])
-          }
-        })
+        for (i = 0; i < parametricUrls.length; i = i + 2) {
+          create_parametric_svg(node, parametricUrls[i])
+        }
+      })
 
     // Add the SVG footer
     svg.push('</g></svg>')
@@ -99,26 +96,28 @@ export default function comicgen(selector, options) {
 }
 
 
-function create_parametric_svg(node, filename1, filename2, paramUrl) {
-  var original_id = node.querySelector(`#${paramUrl.id} svg g`).id
+function create_parametric_svg(node, param) {
+  var original_id = node.querySelector(`#${param.id} svg g`).id
 
   var all_character_tags = node.querySelectorAll('#'+original_id + ' *')
 
   function get_path_d(start_element, end_element) {
     var start_path_d = start_element.getAttribute('d')
     var end_path_d = end_element.getAttribute('d')
-    return flubber.interpolate(start_path_d, end_path_d, { maxSegmentLength: 5 })(slider_val)
+    return flubber.interpolate(start_path_d, end_path_d, { maxSegmentLength: 5 })(param.sliderVal)
   }
 
   all_character_tags.forEach(function (character_tag) {
     if(!character_tag.id) return
 
-    var visible_svg_element = node.querySelector('#'+character_tag.id)
-    var start_element = node.querySelector(`template#template-${filename1} #${character_tag.id}`)
-    var end_element = node.querySelector(`template#template-${filename2} #${character_tag.id}`)
+    var visible_svg_element = node.querySelector(`#${param.id} #${character_tag.id}`)
+    var start_element = node.querySelector(`#${param.id} template:nth-child(2)`).content
+      .cloneNode(true).querySelector(`#${character_tag.id}`)
+    var end_element = node.querySelector(`#${param.id} template:nth-child(3)`).content
+      .cloneNode(true).querySelector(`#${character_tag.id}`)
 
     function get_non_path_attr_val(attr) {
-      return ($(end_element).attr(attr) - $(start_element).attr(attr))*slider_val + +$(start_element).attr(attr)
+      return ($(end_element).attr(attr) - $(start_element).attr(attr)) * param.sliderVal + +$(start_element).attr(attr)
     }
 
     if (start_element.tagName == 'path' && end_element.tagName == 'path') {
@@ -138,7 +137,7 @@ function create_parametric_svg(node, filename1, filename2, paramUrl) {
       visible_svg_element.getAttribute(attrName) &&
       end_element.getAttribute(attrName) &&
       visible_svg_element
-        .setAttribute(attrName, d3.interpolate($(start_element).attr(attrName), $(end_element).attr(attrName))(slider_val))
+        .setAttribute(attrName, d3.interpolate($(start_element).attr(attrName), $(end_element).attr(attrName))(param.sliderVal))
     })
   })
 }
@@ -195,16 +194,16 @@ comicgen.namemap = {
 //      y: y-offset of the SVG image
 comicgen.formats = {
   paramface: {
-    width: 200,
-    height: 200,
+    width: 500,
+    height: 600,
     dirs: [],
     files: {
       face: { param: 'face', file: '$name/face/$face', width: 500, height: 600, x:0, y:0 }
     }
   },
   paramfacebody: {
-    width: 200,
-    height: 200,
+    width: 500,
+    height: 600,
     dirs: [],
     files: {
       face: { param: 'face', file: '$name/face/$face', width: 500, height: 600, x:0, y:0 },

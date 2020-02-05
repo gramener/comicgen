@@ -46,20 +46,21 @@ $.getJSON('files.json')
       q = url.searchKey
       $('.comicgen-attrs .attr').addClass('wip')
       // Everything starts with a name
-      options(q, 'name', node)
+      dropdown_options(q, 'name', node)
       node = node[q.name]
       var format = comicgen.formats[comicgen.namemap[q.name]]
       format.dirs.forEach(function (attr) {
-        options(q, attr, node)
+        dropdown_options(q, attr, node)
         node = node[q[attr]]
       })
       // Render dropdowns for each of the files. Use order in URL
       _.each(Object.assign({}, q, format.files), function (val, attr) {
-        if (attr in format.files)
-          options(q, attr, node[attr])
+        if (attr in format.files) {
+          format.files[attr]['param'] ? slider_options(q, attr, node[attr]) : dropdown_options(q, attr, node[attr])
+        }
       })
-      options(q, 'ext', ['svg', 'png'])
-      options(q, 'mirror', { '': '', 'mirror': '1' })
+      dropdown_options(q, 'ext', ['svg', 'png'])
+      dropdown_options(q, 'mirror', { '': '', 'mirror': '1' })
       $('.comicgen-attrs .wip').remove()
       comicgen('.target', q)
       $('.target-container').css({ width: q.width + 'px', height: q.height + 'px' })
@@ -155,32 +156,6 @@ $('.download').on('click', function () {
 var template_arrows = _.template($('.arrows').html())
 
 // Utility: Set a default value for q[key] using data. Render <select> dropdown using data
-function options(q, key, data) {
-  data.parametric ? slider_options(q, key, data) : dropdown_options(q, key, data)
-}
-
-function slider_options(q, key, data) {
-  if (key in comicgen.defaults) return
-  q[key] = q[key] ? q[key] : 0
-  var $el = $('.comicgen-attrs .attr[name="' + key + '"]').removeClass('wip')
-
-  if (!$el.length) {
-    $el = $('<div>').addClass('attr mr-2 mb-2').attr('name', key)
-    $el.append($(template_arrows({key: key + '-' + data["keyframes"].join('-')})))
-
-    $el.append($('<input type="range" min="0" max="1" step="0.01">').addClass('form-control-range').attr('name', key))
-    var $after = $('.comicgen-attrs .attr:not(.wip):last')
-
-    if ($after.length)
-      $el.insertAfter($after)
-    else
-      $el.appendTo('.comicgen-attrs')
-
-    $('.attr[name="'+ key +'"] input').val(q[key])
-  }
-}
-
-
 function dropdown_options(q, key, data) {
   data = _.isArray(data) ? data : _.keys(data)
   // If q[key] is not in data, pick the first item from the data list/dict
@@ -189,7 +164,7 @@ function dropdown_options(q, key, data) {
   var $el = $('.comicgen-attrs .attr[name="' + key + '"]').removeClass('wip')
   if (!$el.length) {
     $el = $('<div>').addClass('attr mr-2 mb-2').attr('name', key)
-    $el.append($(template_arrows({key: key})))
+    $el.append($(template_arrows({ key: key })))
     $el.append($('<select>').addClass('form-control').attr('name', key))
     var $after = $('.comicgen-attrs .attr:not(.wip):last')
     if ($after.length)
@@ -198,6 +173,23 @@ function dropdown_options(q, key, data) {
       $el.appendTo('.comicgen-attrs')
   }
   $el.find('select').html(options).val(q[key])
+}
+
+function slider_options(q, key, data) {
+  q[key] = q[key] ? q[key] : 0
+  var $el = $('.comicgen-attrs .attr[name="' + key + '"]').removeClass('wip')
+
+  if (!$el.length) {
+    $el = $('<div>').addClass('attr mr-2 mb-2').attr('name', key)
+    $el.append($(template_arrows({ key: key + '-' + data.join('-') })))
+    $el.append($('<input type="range" min="0" max="1" step="0.01">').addClass('form-control-range').attr('name', key))
+    var $after = $('.comicgen-attrs .attr:not(.wip):last')
+    if ($after.length)
+      $el.insertAfter($after)
+    else
+      $el.appendTo('.comicgen-attrs')
+  }
+  $('.attr[name="' + key + '"] input').val(q[key])
 }
 
 // Arrow buttons move
