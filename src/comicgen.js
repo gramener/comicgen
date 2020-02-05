@@ -59,8 +59,6 @@ export default function comicgen(selector, options) {
             parametricUrls.push({
               getRequest: $.get(`${comicgen.base}svg/${img}.svg`, undefined, undefined, 'text'),
               id: id,
-              attr: attr,
-              filename: filename,
               sliderVal: sliderVal
             })
           })
@@ -76,10 +74,9 @@ export default function comicgen(selector, options) {
       .done(function (...svg_responses) {
         // svg_responses length is always even. Each consecutive pair is one body part.
         for (var i = 0; i < parametricUrls.length; i = i + 2) {
-          var filename1 = parametricUrls[i]['filename'], filename2 = parametricUrls[i + 1]['filename']
           $('#'+parametricUrls[i]['id']).append(svg_responses[i][0])
-          $('#'+parametricUrls[i]['id']).append(`<template id="template-${filename1}">${svg_responses[i][0]}</template>`)
-          $('#'+parametricUrls[i]['id']).append(`<template id="template-${filename2}">${svg_responses[i + 1][0]}</template>`)
+          $('#'+parametricUrls[i]['id']).append(`<template>${svg_responses[i][0]}</template>`)
+          $('#'+parametricUrls[i]['id']).append(`<template>${svg_responses[i + 1][0]}</template>`)
         }
 
         for (i = 0; i < parametricUrls.length; i = i + 2) {
