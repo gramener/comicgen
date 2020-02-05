@@ -178,7 +178,6 @@ function dropdown_options(q, key, data) {
 function slider_options(q, key, data) {
   q[key] = q[key] ? q[key] : 0
   var $el = $('.comicgen-attrs .attr[name="' + key + '"]').removeClass('wip')
-
   if (!$el.length) {
     $el = $('<div>').addClass('attr mr-2 mb-2').attr('name', key)
     $el.append($(template_arrows({ key: key + '-' + data.join('-') })))
@@ -240,30 +239,30 @@ function getallcharacters(obj, q) {
   })
 }
 
-// $.getJSON('files.json')
-//   .done(function(data) {
-//     getallcharacters(data, [])
-//   })
+$.getJSON('files.json')
+  .done(function(data) {
+    getallcharacters(data, [])
+  })
 
-// $.getJSON( 'docs/synonym.json' )
-//   .done(function (synonym)
-//   {
-//     var linktemplate = _.template($('.search-links').html())
-//     var result = linktemplate({links : allurls})
-//     $('.target-search-panel').html(result)
+$.getJSON( 'docs/synonym.json' )
+  .done(function (synonym)
+  {
+    var linktemplate = _.template($('.search-links').html())
+    var result = linktemplate({links : allurls})
+    $('.target-search-panel').html(result)
 
-//     allurls.forEach(function(url, index) {
-//       var q = g1.url.parse(url[0].replace(/#/, ''))
-//       comicgen('#comicgen'+index, Object.assign({}, q.searchKey, {width: 200, height: 300}))
-//     })
+    allurls.forEach(function(url, index) {
+      var q = g1.url.parse(url[0].replace(/#/, ''))
+      comicgen('#comicgen'+index, Object.assign({}, q.searchKey, {width: 200, height: 300}))
+    })
 
-//     // TODO LATER: Replace with a fuzzy string matching library
-//     jQuery.fn.search.changes['synonymsearch'] = function (word) {
-//       if (synonym[word]) {
-//         return synonym[word].join('~').replace(/~/g, '|').replace(/\s+/g, '|')
-//       }
-//       return word.replace(/\s+/g, '.*')
-//     }
+    // TODO LATER: Replace with a fuzzy string matching library
+    jQuery.fn.search.changes['synonymsearch'] = function (word) {
+      if (synonym[word]) {
+        return synonym[word].join('~').replace(/~/g, '|').replace(/\s+/g, '|')
+      }
+      return word.replace(/\s+/g, '.*')
+    }
 
-//     $('body').search({ change: 'synonymsearch' })
-//   })
+    $('body').search({ change: 'synonymsearch' })
+  })

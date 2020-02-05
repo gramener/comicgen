@@ -98,13 +98,16 @@ export default function comicgen(selector, options) {
 
 function create_parametric_svg(node, param) {
   var original_id = node.querySelector(`#${param.id} svg g`).id
-
   var all_character_tags = node.querySelectorAll('#'+original_id + ' *')
 
   function get_path_d(start_element, end_element) {
     var start_path_d = start_element.getAttribute('d')
     var end_path_d = end_element.getAttribute('d')
-    return flubber.interpolate(start_path_d, end_path_d, { maxSegmentLength: 5 })(param.sliderVal)
+    return flubber.interpolate(start_path_d, end_path_d, { maxSegmentLength: 0.2 })(param.sliderVal)
+  }
+
+  function get_non_path_attr_val(attr, start_element, end_element) {
+    return ($(end_element).attr(attr) - $(start_element).attr(attr)) * param.sliderVal + +$(start_element).attr(attr)
   }
 
   all_character_tags.forEach(function (character_tag) {
@@ -116,19 +119,15 @@ function create_parametric_svg(node, param) {
     var end_element = node.querySelector(`#${param.id} template:nth-child(3)`).content
       .cloneNode(true).querySelector(`#${character_tag.id}`)
 
-    function get_non_path_attr_val(attr) {
-      return ($(end_element).attr(attr) - $(start_element).attr(attr)) * param.sliderVal + +$(start_element).attr(attr)
-    }
-
     if (start_element.tagName == 'path' && end_element.tagName == 'path') {
       visible_svg_element.setAttribute('d', get_path_d(start_element, end_element))
     } else if (start_element.tagName == 'circle' && end_element.tagName == 'circle') {
       ['cx', 'cy', 'r'].forEach(function(attr) {
-        visible_svg_element.setAttribute(attr, get_non_path_attr_val(attr))
+        visible_svg_element.setAttribute(attr, get_non_path_attr_val(attr, start_element, end_element))
       })
     } else if (start_element.tagName == 'ellipse' && end_element.tagName == 'ellipse') {
       ['cx', 'cy', 'rx', 'ry'].forEach(function(attr) {
-        visible_svg_element.setAttribute(attr, get_non_path_attr_val(attr))
+        visible_svg_element.setAttribute(attr, get_non_path_attr_val(attr, start_element, end_element))
       })
     }
 

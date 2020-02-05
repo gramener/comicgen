@@ -9,7 +9,6 @@
   "author": "S Anand <s.anand@gramener.com>",
   "scripts": {
     "build": "rimraf dist && rollup -c && cleancss -O2 --source-map --output dist/comicgen.min.css src/comicgen.css",
-    "dev": "rimraf dist && rollup -c -w && cleancss -O2 --source-map --output dist/comicgen.min.css src/comicgen.css",
     "lint": "eclint . && eslint --ext js,html .",
     "prepublishOnly": "npm run lint && npm test",
     "test": "npm run build && browserify -s tape -r tape -o test/tape.js && node test/server.js puppeteer | tap-merge | faucet",
