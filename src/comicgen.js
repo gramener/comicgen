@@ -77,9 +77,6 @@ export default function comicgen(selector, options) {
           $('#'+parametricUrls[i]['id']).append(svg_responses[i][0])
           $('#'+parametricUrls[i]['id']).append(`<template>${svg_responses[i][0]}</template>`)
           $('#'+parametricUrls[i]['id']).append(`<template>${svg_responses[i + 1][0]}</template>`)
-        }
-
-        for (i = 0; i < parametricUrls.length; i = i + 2) {
           create_parametric_svg(node, parametricUrls[i])
         }
       })
