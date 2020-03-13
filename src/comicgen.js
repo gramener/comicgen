@@ -81,11 +81,13 @@ comicgen.namemap = {
   dey: 'deedey',
   evan: 'emotionpose',
   facesketch: 'facesketch',
+  holmes: 'emotionpose',
   humaaans: 'humaaans',
   jaya: 'emotionpose',
   priya: 'deedey',
   ringo: 'deedey',
   speechbubbles: 'speechbubbles',
+  watson: 'emotionpose',
   zoe: 'emotionpose'
 }
 
