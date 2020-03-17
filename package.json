@@ -19,6 +19,7 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
+    "@rollup/plugin-json": "4",
     "browserify": "16",
     "clean-css-cli": "4",
     "eslint-plugin-template": "0.3",
@@ -28,7 +29,7 @@
     "puppeteer": "1",
     "rimraf": "2",
     "rollup": "1",
-    "rollup-plugin-terser": "4",
+    "rollup-plugin-terser": "5",
     "selenium-webdriver": "3",
     "svgo": "1",
     "tap-merge": "0.3",
