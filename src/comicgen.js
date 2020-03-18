@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import characters from './characters.json'
+import { version } from '../package.json'
+import { defaults, namemap, formats } from './characters.json'
 
 export default function comicgen(selector, options) {
   // Selector can be false-y, string selector or DOM node. Defaults to ".comicgen"
@@ -61,10 +62,13 @@ export default function comicgen(selector, options) {
 // Handle all scenarios and get the base location
 comicgen.base = (document.currentScript.src + '/').replace(/[a-z]*\/[a-z.]*\.js\/$/, '')
 
-// Import comicgen character configurations from characters.json
-comicgen.defaults = characters.defaults
-comicgen.namemap = characters.namemap
-comicgen.formats = characters.formats
+// Import comicgen version from package.json
+comicgen.version = version
+
+// Import character configurations from characters.json
+comicgen.defaults = defaults
+comicgen.namemap = namemap
+comicgen.formats = formats
 
 // This script could be loaded async or not. If async, DOMContentLoaded is already executed.
 // So if readyState is not 'loading' (i.e. 'interactive' or 'complete'), run comicgen directly.
