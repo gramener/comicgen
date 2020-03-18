@@ -617,6 +617,29 @@
       "nose4"
     ]
   },
+  "holmes": {
+    "emotion": [
+      "angry",
+      "curious",
+      "normal",
+      "raiseaneyebrow",
+      "rofl",
+      "smile",
+      "success",
+      "think",
+      "thinking",
+      "worried"
+    ],
+    "pose": [
+      "explaining",
+      "handsfolded",
+      "handsinpocket",
+      "holdingstick",
+      "lookingatmobile",
+      "observing",
+      "pointingright"
+    ]
+  },
   "humaaans": {
     "body": [
       "hoodie",
@@ -674,6 +697,25 @@
       "plants",
       "whiteboard",
       "wireframe"
+    ]
+  },
+  "watson": {
+    "emotion": [
+      "excited",
+      "hmm",
+      "rofl",
+      "shocked",
+      "smile",
+      "worried"
+    ],
+    "pose": [
+      "handsfolded",
+      "handsinpocket",
+      "holdingmobile",
+      "holdingsomething",
+      "normal",
+      "pointingright",
+      "shrug"
     ]
   },
   "zoe": {
