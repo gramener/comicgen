@@ -26,7 +26,7 @@ $.get('README.md')
 // q holds the current state of the application, and the comicgen parameters
 var q
 var defaults = comicgen.defaults
-$.getJSON('files.json')
+$.getJSON('src/files.json')
   .done(function (data) {
     // Any change in selection changes the URL
     $('.selector').on('change', ':input', function () {
