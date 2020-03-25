@@ -8,7 +8,7 @@
   "repository": "git@code.gramener.com:s.anand/deedey.git",
   "author": "S Anand <s.anand@gramener.com>",
   "scripts": {
-    "build": "rimraf dist && rollup -c && cleancss -O2 --source-map --output dist/comicgen.min.css src/comicgen.css",
+    "build": "rimraf dist && rollup -c -w && cleancss -O2 --source-map --output dist/comicgen.min.css src/comicgen.css",
     "lint": "eclint . && eslint --ext js,html .",
     "prepublishOnly": "npm run lint && npm test",
     "test": "npm run build && browserify -s tape -r tape -o test/tape.js && node test/server.js puppeteer | tap-merge | faucet",
@@ -21,6 +21,7 @@
   "devDependencies": {
     "browserify": "16",
     "clean-css-cli": "4",
+    "cli-progress": "^3.6.0",
     "express": "4",
     "fabric": "3",
     "faucet": "0.0",
@@ -35,5 +36,6 @@
     "svgo": "1",
     "tap-merge": "0.3",
     "tape": "4"
-  }
+  },
+  "dependencies": {}
 }

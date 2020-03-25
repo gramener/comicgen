@@ -552,10 +552,10 @@ To add a new character, or add images for an existing character:
 1. Add the SVG images under `svg/<character>/<attr>/.../<file>.svg`
 2. File or folder names must use only lowercase letters
     - Avoid numbers or special characters
-3. Compress the characters and create PNGs: `bash png.sh`
-    - This requires [svgo](https://github.com/svg/svgo), [ImageMagick](https://imagemagick.org/script/convert.php) and [pngquant](https://pngquant.org/)
-    - To regenerate a character, remove the corresponding PNG folder and re-run `bash png.sh`
-    - For example, `rm -rf png/dee/ && bash png.sh` re-creates PNGs for Dee
+3. Create PNGs and compress the characters: `node scripts/png.js && bash scripts/compress.sh`
+    - This requires [svgo](https://github.com/svg/svgo) and [pngquant](https://pngquant.org/)
+    - To regenerate a character, remove the corresponding PNG folder and re-run `node scripts/png.js`
+    - For example, `rm -rf png/dee/ && node scripts/png.js` re-creates PNGs for Dee
 4. Update [src/comicgen.js](src/comicgen.js)
     - Add new character specs under `comicgen.namemap` and `comicgen.formats` using the instructions there
 5. Update [files.json](files.json) to add new files
@@ -573,7 +573,7 @@ and [npm](https://www.npmjs.com/package/comicgen). Here is the release process.
 ```bash
 # Update package.json version and build
 npm run build
-bash png.sh
+node scripts/png.js && bash scripts/compress.sh
 
 # Run tests on dev branch
 npm run lint

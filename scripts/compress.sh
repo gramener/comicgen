@@ -4,7 +4,7 @@
 for svg in $(find svg -name "*.svg")
 do
   echo "$svg"
-  # Convert svg/.../file.svg to png/.../file.png
+  # Compress PNG files
   png="${svg//svg/png}"
   pngquant --force --ext .png "$png"
   # Compress the SVG. Enabling convertPathData may fail fabricjs to load SVGs.
