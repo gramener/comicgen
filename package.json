@@ -19,11 +19,7 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
-<<<<<<< HEAD
-    "@rollup/plugin-json": "^4.0.2",
-=======
     "@rollup/plugin-json": "4",
->>>>>>> dev
     "browserify": "16",
     "clean-css-cli": "4",
     "eslint-plugin-template": "0.3",

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import files from './../files.json'
+import files from './files.json'
 import { version } from '../package.json'
 import { defaults, namemap, formats } from './characters.json'
 
