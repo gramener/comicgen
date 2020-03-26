@@ -64,7 +64,6 @@
   <div class="container my-3">
     <ul class="nav nav-tabs" id="comic-tab" role="tablist">
       <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a></li>
-      <li class="nav-item"><a class="nav-link" id="search-tab" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="false">Search</a></li>
       <li class="nav-item"><a class="nav-link" id="usage-tab" data-toggle="tab" href="#usage" role="tab" aria-controls="usage" aria-selected="false">Usage</a></li>
       <li class="nav-item"><a class="nav-link" id="api-tab" data-toggle="tab" href="#api" role="tab" aria-controls="api" aria-selected="false">API</a></li>
       <li class="nav-item"><a class="nav-link" id="vision-tab" data-toggle="tab" href="#vision" role="tab" aria-controls="vision" aria-selected="false">Vision</a></li>
@@ -143,15 +142,6 @@
         <md data-target="privacypolicy"></md>
       </div>
 
-      <div class="tab-pane fade" id="search" role="tabpanel" aria-labelledby="search-tab">
-        <input class="form-control mr-sm-2 mt-3" type="search" data-search="data-emotion" data-target=".target-search-panel .item"
-          data-hide-class="d-none" placeholder="Search" aria-label="Search">
-        <div class="flex-container">
-          <div class="target-search-panel d-flex flex-wrap">
-          </div>
-        </div>
-      </div>
-
     </div><!-- .container -->
 
     <md data-target="social"></md>
@@ -173,12 +163,6 @@
     </div>
   </script>
 
-  <script type="text/html" class="search-links">
-    <% _.each(links, function(link, index) { %>
-      <a class="item m-4" target="_blank" href="<%- link[0] %>" data-emotion="<%- link[1] %>" ><div id=<%= 'comicgen'.concat(index) %>></div></a>
-    <% }) %>
-  </script>
-
   <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
   <script src="https://unpkg.com/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/lodash@4.17.11/lodash.min.js"></script>
@@ -188,6 +172,9 @@
   <script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js"></script>
   <script src="https://unpkg.com/plain-draggable@2.5.12/plain-draggable.min.js"></script>
   <script src="https://unpkg.com/save-svg-as-png@1.4.14/lib/saveSvgAsPng.js"></script>
+  <script src="https://unpkg.com/flubber@0.3.0"></script>
+  <script src="https://d3js.org/d3-color.v1.min.js"></script>
+  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
   <script src="dist/comicgen.min.js"></script>
   <script src="docs/script.js"></script>
 </body>

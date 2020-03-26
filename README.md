@@ -82,11 +82,13 @@ can accompany good news on charts.
 The raw SVGs and PNGs are at
 [unpkg.com/comicgen/](https://unpkg.com/comicgen/). Look under:
 
-- [files.json](https://unpkg.com/comicgen/files.json) - list of files for each character
+- [src/characters.json](https://unpkg.com/comicgen/src/characters.json) - list of characters.
+- [src/files.json](https://unpkg.com/comicgen/src/files.json) - list of files for each character
 - [svg/](https://unpkg.com/comicgen/svg/) - SVG files for each character
 - [png/](https://unpkg.com/comicgen/png/) - PNG files for each character
 
 You can create comics by directly linking to these files.
+You can embed these files directly in your plugin.
 
 ## JavaScript API
 
@@ -119,6 +121,28 @@ comicgen('.new', {
 ```
 
 ![Dynamic character rendered via JS, with default options](docs/dee-sad-yuhoo-400-300.png)
+
+To render a parametric character (examples: zoozoo, panda, chini), 
+```js
+// Add the character
+$('<g class="new" name="zoozoo" face="0.66" body="0.50" width="500" height="600"></g>').appendTo('body')
+// Call comicgen()
+comicgen('.new')
+```
+
+![Dynamic parametric character rendered via JS](docs/dee-sad-yuhoo-400-300.png)
+
+You can pass an `options` parameter to `comicgen()` to provide default values.
+For example:
+
+```js
+$('<g class="new" name="chini"></g>').appendTo('body')
+comicgen('.new', {
+  name: 'zoozoo',  // Set the default name. <g name="chini"> overrides this
+  face: '0.75',    // Set the face emotion to between meh and surprise (0.75).
+  body: '0.50'     // Set the body to exactly intermediate pose between normal and handup (0.50)
+})
+```
 
 <!-- end -->
 
@@ -232,10 +256,15 @@ If you find good examples, please [add a comment](https://github.com/gramener/co
 
 People working on storytelling / data visualization through comics include:
 
+- [Chris Lysy](https://freshspectrum.com/blog/)
 - [Martin Telefont](https://twitter.com/martintelefont) (see [Data Visualization Comics](https://medium.com/data-visualization-society/data-visualization-comics-68bb2c03fd3e))
 - [Matt Hong](https://twitter.com/matthongnet)
 - [Natalia Kiseleva](https://twitter.com/eolay13)
 - [Neil Cohn](http://visuallanguagelab.com/)
+- [Pablo Stanley](https://www.instagram.com/pablostanley/) - see
+    [OpenPeeps](https://www.openpeeps.com/),
+    [Humaans](https://www.humaaans.com/),
+    [OpenDoodles](https://www.opendoodles.com/)
 - [Susie Lu](https://twitter.com/datatoviz)
 - [Taryn Read](https://twitter.com/indiedataviz)
 
@@ -269,6 +298,7 @@ We haven't yet found tools that expose an API. This should enable developers to 
 ### Comics resources
 
 - [Teaching comics](https://www.cartoonstudies.org/teachingcomics/) has resources on teaching how to create comics
+- [DataComics.net](https://www.datacomics.net/) has good examples of data comics
 
 
 <!-- end -->
@@ -579,9 +609,9 @@ To add a new character, or add images for an existing character:
     - This requires [svgo](https://github.com/svg/svgo), [ImageMagick](https://imagemagick.org/script/convert.php) and [pngquant](https://pngquant.org/)
     - To regenerate a character, remove the corresponding PNG folder and re-run `bash png.sh`
     - For example, `rm -rf png/dee/ && bash png.sh` re-creates PNGs for Dee
-4. Update [src/comicgen.js](src/comicgen.js)
-    - Add new character specs under `comicgen.namemap` and `comicgen.formats` using the instructions there
-5. Update [files.json](files.json) to add new files
+4. Update [src/characters.json](src/characters.json)
+    - Add new character specs under `namemap` and `formats` using the instructions there
+5. Update [src/files.json](src/files.json) to add new files
     - This is organized as `{character: {attr: [file, file, ...]}}`
     - We maintain the characters alphabetically (e.g. `dee` appears before `dey`)
 6. Update the [character credits](#character-credits)
@@ -677,7 +707,7 @@ Developers access comicgen through a JS library. What can we do to make it easie
 
 ### Character credits
 
-- Ava, Bean, Dee, Dey, Evan, Jaya Priya, Ringo & Speechbubbles: By Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
+- Ava, Bean, Dee, Dey, Evan, Holmes, Jaya, Priya, Ringo, Speechbubbles & Watson: By Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
   under [CC0 license](https://creativecommons.org/choose/zero/)
 - [Humaaans](https://www.humaaans.com/): By [Pablo Stanley](https://twitter.com/pablostanley)
   under [CC-BY license](https://creativecommons.org/licenses/by/4.0/)

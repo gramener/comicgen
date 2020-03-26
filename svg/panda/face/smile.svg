@@ -1,0 +1,15 @@
+<svg width="500" height="600" viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="panda_face_1">
+<path id="Ellipse_1" stroke-width="2" d="M361 264C361 325.304 343.5 375 250 375C156.5 375 139 325.304 139 264C139 202.696 188.696 153 250 153C311.304 153 361 202.696 361 264Z" fill="#ECE8E8"/>
+<circle id="Ellipse_2" cx="218.5" cy="237.5" r="31.5" fill="#020202"/>
+<ellipse id="Ellipse_4" cx="219" cy="251.5" rx="13" ry="12.5" fill="#F2F2F2"/>
+<circle id="Ellipse_3" cx="281.5" cy="237.5" r="31.5" fill="#020202"/>
+<ellipse id="Ellipse_5" cx="282" cy="251.5" rx="13" ry="12.5" fill="#F2F2F2"/>
+<ellipse id="Ellipse_10" cx="281.5" cy="258" rx="6.5" ry="6" fill="#020202"/>
+<ellipse id="Ellipse_11" cx="218.5" cy="258" rx="6.5" ry="6" fill="#020202"/>
+<path id="Ellipse_6" d="M301 304.937C301 328.444 279.734 347.5 253.5 347.5C227.266 347.5 206 328.444 206 304.937C206 281.429 227.266 304.937 253.5 304.937C279.734 304.937 301 281.429 301 304.937Z" fill="black"/>
+<ellipse id="Ellipse_7" cx="350" cy="181.5" rx="41" ry="39.5" fill="#020202"/>
+<ellipse id="Ellipse_8" cx="146" cy="181.5" rx="41" ry="39.5" fill="#020202"/>
+<ellipse id="Ellipse_9" cx="250" cy="281.5" rx="9" ry="7.5" fill="#020202"/>
+</g>
+</svg>
