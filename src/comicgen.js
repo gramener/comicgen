@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-// TODO: import "../files.json" as files
 import files from './files.json'
 import { version } from '../package.json'
 import { defaults, namemap, formats } from './characters.json'
