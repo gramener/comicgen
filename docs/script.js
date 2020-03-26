@@ -26,7 +26,7 @@ $.get('README.md')
 // q holds the current state of the application, and the comicgen parameters
 var q
 var defaults = comicgen.defaults
-$.getJSON('files.json')
+$.getJSON('src/files.json')
   .done(function (data) {
     // Any change in selection changes the URL
     $('.selector').on('change', ':input', function () {
@@ -206,63 +206,4 @@ _.each(
         $(window).trigger('#', g1.url.parse(location.hash.replace(/^#/, '')))
       }
     })
-  })
-
-var allurls = []
-function emotionposecombinations(basestr, emotionarr, posarr) {
-  posarr.forEach(function(p) {
-    emotionarr.forEach(function(e) {
-      var q = '#' + g1.url.parse(basestr).update({pose: p, emotion: e, ext:'svg', mirror:'',
-        x:'0', y:'0', scale:'1', width:'500', height:'600'}).toString()
-      allurls.push([q, e])
-    })
-  })
-  for (var i=allurls.length-1; i>0; i--) {
-    var j = Math.floor(Math.random() * (i + 1))
-    var temp = allurls[i]
-    allurls[i] = allurls[j]
-    allurls[j] = temp
-  }
-}
-
-function getallcharacters(obj, q) {
-  if (Array.isArray(obj)) return
-  if (obj['emotion'] && obj['pose']) {
-    var baseurl = g1.url.parse(location.href).update({name: q[0], angle:q[1]}).toString()
-    emotionposecombinations(baseurl, obj['emotion'], obj['pose'])
-    return
-  }
-  Object.keys(obj).forEach(function (key) {
-    q.push(key)
-    getallcharacters(obj[key], q)
-    q.pop()
-  })
-}
-
-$.getJSON('files.json')
-  .done(function(data) {
-    getallcharacters(data, [])
-  })
-
-$.getJSON( 'docs/synonym.json' )
-  .done(function (synonym)
-  {
-    var linktemplate = _.template($('.search-links').html())
-    var result = linktemplate({links : allurls})
-    $('.target-search-panel').html(result)
-
-    allurls.forEach(function(url, index) {
-      var q = g1.url.parse(url[0].replace(/#/, ''))
-      comicgen('#comicgen'+index, Object.assign({}, q.searchKey, {width: 200, height: 300}))
-    })
-
-    // TODO LATER: Replace with a fuzzy string matching library
-    jQuery.fn.search.changes['synonymsearch'] = function (word) {
-      if (synonym[word]) {
-        return synonym[word].join('~').replace(/~/g, '|').replace(/\s+/g, '|')
-      }
-      return word.replace(/\s+/g, '.*')
-    }
-
-    $('body').search({ change: 'synonymsearch' })
   })
