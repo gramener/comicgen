@@ -96,31 +96,29 @@ function create_parametric_svg(node, param) {
   var original_id = node.querySelector(`#${param.id} svg g`).id
   var all_character_tags = node.querySelectorAll('#'+original_id + ' *')
 
-  function get_path_d(attr, start_element, end_element) {
-    var start_path_d = start_element.getAttribute(attr)
-    var end_path_d = end_element.getAttribute(attr)
-    return flubber.interpolate(start_path_d, end_path_d, { maxSegmentLength: 0.2 })(param.sliderVal)
+  function interpolate_path_d(attr, start_element, end_element) {
+    return flubber.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr), { maxSegmentLength: 0.2 })(param.sliderVal)
   }
 
-  function get_non_path_attr_val(attr, start_element, end_element) {
+  function interpolate_shape_attrs(attr, start_element, end_element) {
     return ($(end_element).attr(attr) - $(start_element).attr(attr)) * param.sliderVal + +$(start_element).attr(attr)
   }
 
-  function cosmetic_props(attr, start_element, end_element) {
+  function interpolate_generic_attrs(attr, start_element, end_element) {
     return d3.interpolate($(start_element).attr(attr), $(end_element).attr(attr))(param.sliderVal)
   }
 
   var interpolatorMap = {
-    'transform': cosmetic_props, 
-    'fill': cosmetic_props, 
-    'stroke': cosmetic_props, 
-    'stroke-width': cosmetic_props,
-    'd': get_path_d,
-    'cx': get_non_path_attr_val,
-    'cy': get_non_path_attr_val,
-    'r': get_non_path_attr_val,
-    'rx': get_non_path_attr_val,
-    'ry': get_non_path_attr_val,
+    'transform': interpolate_generic_attrs, 
+    'fill': interpolate_generic_attrs, 
+    'stroke': interpolate_generic_attrs, 
+    'stroke-width': interpolate_generic_attrs,
+    'd': interpolate_path_d,
+    'cx': interpolate_shape_attrs,
+    'cy': interpolate_shape_attrs,
+    'r': interpolate_shape_attrs,
+    'rx': interpolate_shape_attrs,
+    'ry': interpolate_shape_attrs,
   }
   var elementTypes = {
     path: {
