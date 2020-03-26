@@ -94,9 +94,9 @@ function create_parametric_svg(node, param) {
   var original_id = node.querySelector(`#${param.id} svg g`).id
   var all_character_tags = node.querySelectorAll('#'+original_id + ' *')
 
-  function get_path_d(start_element, end_element) {
-    var start_path_d = start_element.getAttribute('d')
-    var end_path_d = end_element.getAttribute('d')
+  function get_path_d(attr, start_element, end_element) {
+    var start_path_d = start_element.getAttribute(attr)
+    var end_path_d = end_element.getAttribute(attr)
     return flubber.interpolate(start_path_d, end_path_d, { maxSegmentLength: 0.2 })(param.sliderVal)
   }
 
@@ -104,34 +104,48 @@ function create_parametric_svg(node, param) {
     return ($(end_element).attr(attr) - $(start_element).attr(attr)) * param.sliderVal + +$(start_element).attr(attr)
   }
 
+  function cosmetic_props(attr, start_element, end_element) {
+    return d3.interpolate($(start_element).attr(attr), $(end_element).attr(attr))(param.sliderVal)
+  }
+
+  var interpolatorMap = {
+    'transform': cosmetic_props, 
+    'fill': cosmetic_props, 
+    'stroke': cosmetic_props, 
+    'stroke-width': cosmetic_props,
+    'd': get_path_d,
+    'cx': get_non_path_attr_val,
+    'cy': get_non_path_attr_val,
+    'r': get_non_path_attr_val,
+    'rx': get_non_path_attr_val,
+    'ry': get_non_path_attr_val,
+  }
+  var elementTypes = {
+    path: {
+      attributes: ['d']
+    },
+    circle: {
+      attributes: ['cx', 'cy', 'r']
+    },
+    ellipse: {
+      attributes: ['cx', 'cy', 'rx', 'ry']
+    }
+  }
+
   all_character_tags.forEach(function (character_tag) {
     if(!character_tag.id) return
 
-    var visible_svg_element = node.querySelector(`#${param.id} #${character_tag.id}`)
+    var real_element = node.querySelector(`#${param.id} #${character_tag.id}`)
     var start_element = node.querySelector(`#${param.id} template:nth-child(2)`).content
       .cloneNode(true).querySelector(`#${character_tag.id}`)
     var end_element = node.querySelector(`#${param.id} template:nth-child(3)`).content
       .cloneNode(true).querySelector(`#${character_tag.id}`)
 
-    if (start_element.tagName == 'path' && end_element.tagName == 'path') {
-      visible_svg_element.setAttribute('d', get_path_d(start_element, end_element))
-    } else if (start_element.tagName == 'circle' && end_element.tagName == 'circle') {
-      ['cx', 'cy', 'r'].forEach(function(attr) {
-        visible_svg_element.setAttribute(attr, get_non_path_attr_val(attr, start_element, end_element))
-      })
-    } else if (start_element.tagName == 'ellipse' && end_element.tagName == 'ellipse') {
-      ['cx', 'cy', 'rx', 'ry'].forEach(function(attr) {
-        visible_svg_element.setAttribute(attr, get_non_path_attr_val(attr, start_element, end_element))
-      })
-    }
-
-    var attrNames = ['transform', 'fill', 'stroke', 'stroke-width']
-    attrNames.forEach(function (attrName) {
-      visible_svg_element.getAttribute(attrName) &&
-      end_element.getAttribute(attrName) &&
-      visible_svg_element
-        .setAttribute(attrName, d3.interpolate($(start_element).attr(attrName), $(end_element).attr(attrName))(param.sliderVal))
-    })
+    let elementType = elementTypes[start_element.tagName]
+    elementType && elementType['attributes'].concat(['transform', 'fill', 'stroke', 'stroke-width'])
+      .forEach(d => real_element.getAttribute(d) && 
+        real_element.setAttribute(d, interpolatorMap[d](d, start_element, end_element))
+        )
   })
 }
 
