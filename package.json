@@ -9,6 +9,7 @@
   "author": "S Anand <s.anand@gramener.com>",
   "scripts": {
     "build": "rimraf dist && rollup -c && cleancss -O2 --source-map --output dist/comicgen.min.css src/comicgen.css",
+    "build-png": "node scripts/png.js && bash scripts/compress.sh",
     "lint": "eclint . && eslint --ext js,html .",
     "prepublishOnly": "npm run lint && npm test",
     "test": "npm run build && browserify -s tape -r tape -o test/tape.js && node test/server.js puppeteer | tap-merge | faucet",
@@ -22,6 +23,7 @@
     "@rollup/plugin-json": "4",
     "browserify": "16",
     "clean-css-cli": "4",
+    "cli-progress": "^3.6.0",
     "eslint-plugin-template": "0.3",
     "express": "4",
     "faucet": "0.0",
