@@ -122,7 +122,7 @@ comicgen('.new', {
 
 ![Dynamic character rendered via JS, with default options](docs/dee-sad-yuhoo-400-300.png)
 
-To render a parametric character (examples: zoozoo, panda, chini), 
+To render a parametric character (examples: zoozoo, panda, chini),
 ```js
 // Add the character
 $('<g class="new" name="zoozoo" face="0.66" body="0.50" width="500" height="600"></g>').appendTo('body')

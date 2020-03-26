@@ -5,7 +5,7 @@ import { defaults, namemap, formats } from './characters.json'
 
 var unique_id_counter = 0
 function generate_unique_id(attr_key) {
-  return 'gcontainer-' + attr_key + unique_id_counter++ 
+  return 'gcontainer-' + attr_key + unique_id_counter++
 }
 
 export default function comicgen(selector, options) {
@@ -96,31 +96,29 @@ function create_parametric_svg(node, param) {
   var original_id = node.querySelector(`#${param.id} svg g`).id
   var all_character_tags = node.querySelectorAll('#'+original_id + ' *')
 
-  function get_path_d(attr, start_element, end_element) {
-    var start_path_d = start_element.getAttribute(attr)
-    var end_path_d = end_element.getAttribute(attr)
-    return flubber.interpolate(start_path_d, end_path_d, { maxSegmentLength: 0.2 })(param.sliderVal)
+  function interpolate_path_d(attr, start_element, end_element) {
+    return flubber.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr), { maxSegmentLength: 0.2 })(param.sliderVal)
   }
 
-  function get_non_path_attr_val(attr, start_element, end_element) {
+  function interpolate_shape_attr(attr, start_element, end_element) {
     return ($(end_element).attr(attr) - $(start_element).attr(attr)) * param.sliderVal + +$(start_element).attr(attr)
   }
 
-  function cosmetic_props(attr, start_element, end_element) {
+  function interpolate_generic_attr(attr, start_element, end_element) {
     return d3.interpolate($(start_element).attr(attr), $(end_element).attr(attr))(param.sliderVal)
   }
 
   var interpolatorMap = {
-    'transform': cosmetic_props, 
-    'fill': cosmetic_props, 
-    'stroke': cosmetic_props, 
-    'stroke-width': cosmetic_props,
-    'd': get_path_d,
-    'cx': get_non_path_attr_val,
-    'cy': get_non_path_attr_val,
-    'r': get_non_path_attr_val,
-    'rx': get_non_path_attr_val,
-    'ry': get_non_path_attr_val,
+    'transform': interpolate_generic_attr,
+    'fill': interpolate_generic_attr,
+    'stroke': interpolate_generic_attr,
+    'stroke-width': interpolate_generic_attr,
+    'd': interpolate_path_d,
+    'cx': interpolate_shape_attr,
+    'cy': interpolate_shape_attr,
+    'r': interpolate_shape_attr,
+    'rx': interpolate_shape_attr,
+    'ry': interpolate_shape_attr,
   }
   var elementTypes = {
     path: {
@@ -143,11 +141,10 @@ function create_parametric_svg(node, param) {
     var end_element = node.querySelector(`#${param.id} template:nth-child(3)`).content
       .cloneNode(true).querySelector(`#${character_tag.id}`)
 
-    let elementType = elementTypes[start_element.tagName]
+    var elementType = elementTypes[start_element.tagName]
     elementType && elementType['attributes'].concat(['transform', 'fill', 'stroke', 'stroke-width'])
-      .forEach(d => real_element.getAttribute(d) && 
-        real_element.setAttribute(d, interpolatorMap[d](d, start_element, end_element))
-        )
+      .forEach(d => real_element.getAttribute(d) &&
+                    real_element.setAttribute(d, interpolatorMap[d](d, start_element, end_element)))
   })
 }
 
