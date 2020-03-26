@@ -4,7 +4,7 @@ module.exports = {
     "sourceType": "module",
   },
   "overrides": [{
-    "files": ["test/server.js"],
+    "files": ["test/server.js", "scripts/png.js"],
     "parserOptions": {
       "ecmaVersion": 8
     }

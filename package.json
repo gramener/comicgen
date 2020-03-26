@@ -1,6 +1,6 @@
 {
   "name": "comicgen",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "description": "Create comics for your website or app",
   "main": "dist/comicgen.min.js",
   "jsdelivr": "dist/comicgen.min.js",
@@ -9,6 +9,7 @@
   "author": "S Anand <s.anand@gramener.com>",
   "scripts": {
     "build": "rimraf dist && rollup -c && cleancss -O2 --source-map --output dist/comicgen.min.css src/comicgen.css",
+    "build-png": "node scripts/png.js && bash scripts/compress.sh",
     "lint": "eclint . && eslint --ext js,html .",
     "prepublishOnly": "npm run lint && npm test",
     "test": "npm run build && browserify -s tape -r tape -o test/tape.js && node test/server.js puppeteer | tap-merge | faucet",
@@ -19,9 +20,10 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
-    "@rollup/plugin-json": "^4.0.2",
+    "@rollup/plugin-json": "4",
     "browserify": "16",
     "clean-css-cli": "4",
+    "cli-progress": "^3.6.0",
     "eslint-plugin-template": "0.3",
     "express": "4",
     "faucet": "0.0",
@@ -29,7 +31,7 @@
     "puppeteer": "1",
     "rimraf": "2",
     "rollup": "1",
-    "rollup-plugin-terser": "4",
+    "rollup-plugin-terser": "5",
     "selenium-webdriver": "3",
     "svgo": "1",
     "tap-merge": "0.3",
