@@ -129,6 +129,12 @@
       ]
     }
   },
+  "chini": {
+    "face": [
+      "kid",
+      "teen"
+    ]
+  },
   "dee": {
     "straight": {
       "emotion": [
@@ -392,6 +398,12 @@
       "shrug",
       "superperfect",
       "thumbsup"
+    ]
+  },
+  "panda": {
+    "face": [
+      "smile",
+      "ohoh"
     ]
   },
   "priya": {
@@ -734,6 +746,16 @@
       "holdingbag",
       "holdinglaptop",
       "pointingleft"
+    ]
+  },
+  "zoozoo": {
+    "face": [
+      "meh",
+      "surprise"
+    ],
+    "body": [
+      "normal",
+      "handup"
     ]
   }
 }
