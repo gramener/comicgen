@@ -97,7 +97,7 @@ function create_parametric_svg(node, param) {
   var all_character_tags = node.querySelectorAll('#'+original_id + ' *')
 
   function interpolate_path_d(attr, start_element, end_element) {
-    return flubber.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr), { maxSegmentLength: 0.2 })(param.sliderVal)
+    return flubber.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr), { maxSegmentLength: 5 })(param.sliderVal)
   }
 
   function interpolate_shape_attr(attr, start_element, end_element) {
