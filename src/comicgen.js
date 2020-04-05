@@ -76,9 +76,11 @@ export default function comicgen(selector, options) {
       .done(function (...svg_responses) {
         // svg_responses length is always even. Each consecutive pair is one body part.
         for (var i = 0; i < parametricUrls.length; i = i + 2) {
-          $('#'+parametricUrls[i]['id']).append(svg_responses[i][0])
-          $('#'+parametricUrls[i]['id']).append(`<template>${svg_responses[i][0]}</template>`)
-          $('#'+parametricUrls[i]['id']).append(`<template>${svg_responses[i + 1][0]}</template>`)
+          $('#'+parametricUrls[i]['id']).append([
+            svg_responses[i][0],
+            `<template>${svg_responses[i][0]}</template>`,
+            `<template>${svg_responses[i + 1][0]}</template>`
+          ])
           create_parametric_svg(node, parametricUrls[i])
         }
       })
