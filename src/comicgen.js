@@ -3,10 +3,6 @@ import files from './files.json'
 import { version } from '../package.json'
 import { defaults, namemap, formats } from './characters.json'
 
-var unique_id_counter = 0
-function generate_unique_id(attr_key) {
-  return 'gcontainer-' + attr_key + unique_id_counter++
-}
 
 export default function comicgen(selector, options) {
   // Selector can be false-y, string selector or DOM node. Defaults to ".comicgen"
@@ -54,13 +50,9 @@ export default function comicgen(selector, options) {
           var sliderVal = attrs[attr]
 
           files[attrs['name']][attr].forEach(function(filename) {
-            var id = generate_unique_id(attr)
-            svg.push(`<g id="${id}"></g>`)
-
             var img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return group == row.param ? filename : attrs[group] })
             parametricUrls.push({
               getRequest: $.get(`${comicgen.base}svg/${img}.svg`, undefined, undefined, 'text'),
-              id: id,
               sliderVal: sliderVal
             })
           })
@@ -76,12 +68,13 @@ export default function comicgen(selector, options) {
       .done(function (...svg_responses) {
         // svg_responses length is always even. Each consecutive pair is one body part.
         for (var i = 0; i < parametricUrls.length; i = i + 2) {
-          $('#'+parametricUrls[i]['id']).append([
-            svg_responses[i][0],
-            `<template>${svg_responses[i][0]}</template>`,
-            `<template>${svg_responses[i + 1][0]}</template>`
-          ])
-          create_parametric_svg(node, parametricUrls[i])
+          var unit_node = node.querySelector('svg g').appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'g'))
+          $(unit_node).append([
+              svg_responses[i][0],
+              `<template>${svg_responses[i][0]}</template>`,
+              `<template>${svg_responses[i + 1][0]}</template>`
+            ])
+          create_parametric_svg(unit_node, parametricUrls[i])
         }
       })
 
@@ -95,7 +88,7 @@ export default function comicgen(selector, options) {
 
 
 function create_parametric_svg(node, param) {
-  var original_id = node.querySelector(`#${param.id} svg g`).id
+  var original_id = node.querySelector(`svg g`).id
   var all_character_tags = node.querySelectorAll('#'+original_id + ' *')
 
   function interpolate_path_d(attr, start_element, end_element) {
@@ -137,10 +130,10 @@ function create_parametric_svg(node, param) {
   all_character_tags.forEach(function (character_tag) {
     if(!character_tag.id) return
 
-    var real_element = node.querySelector(`#${param.id} #${character_tag.id}`)
-    var start_element = node.querySelector(`#${param.id} template:nth-child(2)`).content
+    var real_element = node.querySelector(`#${character_tag.id}`)
+    var start_element = node.querySelector(`template:nth-of-type(1)`).content
       .cloneNode(true).querySelector(`#${character_tag.id}`)
-    var end_element = node.querySelector(`#${param.id} template:nth-child(3)`).content
+    var end_element = node.querySelector(`template:nth-of-type(2)`).content
       .cloneNode(true).querySelector(`#${character_tag.id}`)
 
     var elementType = elementTypes[start_element.tagName]
