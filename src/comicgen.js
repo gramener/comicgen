@@ -47,13 +47,11 @@ export default function comicgen(selector, options) {
         var row = format.files[attr]
         // Substitute any $variable with the corresponding attribute value
         if (row.param) {
-          var sliderVal = attrs[attr]
-
-          files[attrs['name']][attr].forEach(function(filename) {
-            var img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return group == row.param ? filename : attrs[group] })
+          files[attrs['name']][attr].forEach(function (filename) {
+            const img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return group === row.param ? filename : attrs[group] })
             parametricUrls.push({
-              getRequest: $.get(`${comicgen.base}svg/${img}.svg`, undefined, undefined, 'text'),
-              sliderVal: sliderVal
+              fetch: fetch(`${comicgen.base}svg/${img}.svg`).then(res => res.text()),
+              sliderVal: attrs[attr]
             })
           })
         }
@@ -64,17 +62,16 @@ export default function comicgen(selector, options) {
       }
     }
 
-    $.when(...parametricUrls.map(function(d) {return d.getRequest}))
-      .done(function (...svg_responses) {
-        // svg_responses length is always even. Each consecutive pair is one body part.
-        for (var i = 0; i < parametricUrls.length; i = i + 2) {
-          var unit_node = node.querySelector('svg g').appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'g'))
-          $(unit_node).append([
-              svg_responses[i][0],
-              `<template>${svg_responses[i][0]}</template>`,
-              `<template>${svg_responses[i + 1][0]}</template>`
-            ])
-          create_parametric_svg(unit_node, parametricUrls[i])
+    Promise.all(parametricUrls.map((d) => d.fetch))
+      .then(function (svg_responses) {
+        const character_svg_container = node.querySelector('svg g')
+        character_svg_container.innerHTML = ''
+        // Each consecutive pair is one body part.
+        for (let i = 0; i < parametricUrls.length; i = i + 2) {
+          character_svg_container.innerHTML += `<g>${svg_responses[i]}
+            <template>${svg_responses[i]}</template>
+            <template>${svg_responses[i + 1]}</template></g>`
+          create_parametric_svg(character_svg_container.querySelector(`svg g:nth-of-type(${i/2+1})`), parametricUrls[i].sliderVal)
         }
       })
 
@@ -87,59 +84,23 @@ export default function comicgen(selector, options) {
 }
 
 
-function create_parametric_svg(node, param) {
-  var original_id = node.querySelector(`svg g`).id
-  var all_character_tags = node.querySelectorAll('#'+original_id + ' *')
-
-  function interpolate_path_d(attr, start_element, end_element) {
-    return flubber.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr), { maxSegmentLength: 5 })(param.sliderVal)
-  }
-
-  function interpolate_shape_attr(attr, start_element, end_element) {
-    return ($(end_element).attr(attr) - $(start_element).attr(attr)) * param.sliderVal + +$(start_element).attr(attr)
-  }
-
-  function interpolate_generic_attr(attr, start_element, end_element) {
-    return d3.interpolate($(start_element).attr(attr), $(end_element).attr(attr))(param.sliderVal)
-  }
-
-  var interpolatorMap = {
-    'transform': interpolate_generic_attr,
-    'fill': interpolate_generic_attr,
-    'stroke': interpolate_generic_attr,
-    'stroke-width': interpolate_generic_attr,
-    'd': interpolate_path_d,
-    'cx': interpolate_shape_attr,
-    'cy': interpolate_shape_attr,
-    'r': interpolate_shape_attr,
-    'rx': interpolate_shape_attr,
-    'ry': interpolate_shape_attr,
-  }
-  var elementTypes = {
-    path: {
-      attributes: ['d']
-    },
-    circle: {
-      attributes: ['cx', 'cy', 'r']
-    },
-    ellipse: {
-      attributes: ['cx', 'cy', 'rx', 'ry']
-    }
-  }
-
-  all_character_tags.forEach(function (character_tag) {
-    if(!character_tag.id) return
-
-    var real_element = node.querySelector(`#${character_tag.id}`)
-    var start_element = node.querySelector(`template:nth-of-type(1)`).content
-      .cloneNode(true).querySelector(`#${character_tag.id}`)
-    var end_element = node.querySelector(`template:nth-of-type(2)`).content
-      .cloneNode(true).querySelector(`#${character_tag.id}`)
-
-    var elementType = elementTypes[start_element.tagName]
-    elementType && elementType['attributes'].concat(['transform', 'fill', 'stroke', 'stroke-width'])
-      .forEach(d => real_element.getAttribute(d) &&
-                    real_element.setAttribute(d, interpolatorMap[d](d, start_element, end_element)))
+function create_parametric_svg(node, sliderVal) {
+  const character_svg_nodes = node.querySelector('svg g').querySelectorAll('*')
+  Array.from(character_svg_nodes).forEach(character_svg_node => {
+    const start_element = node.querySelector(`template:nth-of-type(1) #${character_svg_node.id}`)
+    const end_element = node.querySelector(`template:nth-of-type(2) #${character_svg_node.id}`)
+    Array.from(character_svg_node.attributes)
+      .map(d => d.nodeName)
+      .forEach(attr => character_svg_node.setAttribute(attr,
+        attr === 'd'
+          ? flubber.interpolate(
+            start_element.getAttribute(attr),
+            end_element.getAttribute(attr),
+            { maxSegmentLength: 5 } // For smoother paths, lower this number at cost of performance
+          )(sliderVal)
+          : d3.interpolate($(start_element).attr(attr), $(end_element).attr(attr))(sliderVal)
+      )
+      )
   })
 }
 

@@ -8,7 +8,7 @@
   "repository": "git@code.gramener.com:s.anand/deedey.git",
   "author": "S Anand <s.anand@gramener.com>",
   "scripts": {
-    "build": "rimraf dist && rollup -c && cleancss -O2 --source-map --output dist/comicgen.min.css src/comicgen.css",
+    "build": "rimraf dist && rollup -c -w && cleancss -O2 --source-map --output dist/comicgen.min.css src/comicgen.css",
     "build-png": "node scripts/png.js && bash scripts/compress.sh",
     "lint": "eclint . && eslint --ext js,html .",
     "prepublishOnly": "npm run lint && npm test",
@@ -20,6 +20,10 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
+    "@babel/core": "7",
+    "@babel/preset-env": "7",
+    "@rollup/plugin-commonjs": "11",
+    "@rollup/plugin-node-resolve": "7",
     "@rollup/plugin-json": "4",
     "browserify": "16",
     "clean-css-cli": "4",
@@ -31,10 +35,15 @@
     "puppeteer": "1",
     "rimraf": "2",
     "rollup": "1",
+    "rollup-plugin-babel": "4",
     "rollup-plugin-terser": "5",
     "selenium-webdriver": "3",
     "svgo": "1",
     "tap-merge": "0.3",
     "tape": "4"
+  },
+  "dependencies": {
+    "@babel/polyfill": "7",
+    "core-js": "3"
   }
 }
