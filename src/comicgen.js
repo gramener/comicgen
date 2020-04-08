@@ -46,9 +46,10 @@ export default function comicgen(selector, options) {
       if (attr in format.files) {
         var row = format.files[attr]
         // Substitute any $variable with the corresponding attribute value
-        if (row.param) {
+        if (row.continous) {
           files[attrs['name']][attr].forEach(function (filename) {
-            const img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return group === row.param ? filename : attrs[group] })
+            // replace row.continous (ex: face, body) with filename (ex: meh, surprise)
+            const img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return group === row.continous ? filename : attrs[group] })
             parametricUrls.push({
               fetch: fetch(`${comicgen.base}svg/${img}.svg`).then(res => res.text()),
               sliderVal: attrs[attr]
@@ -62,7 +63,7 @@ export default function comicgen(selector, options) {
       }
     }
 
-    Promise.all(parametricUrls.map((d) => d.fetch))
+    Promise.all(parametricUrls.map(d => d.fetch))
       .then(function (svg_responses) {
         const character_svg_container = node.querySelector('svg g')
         character_svg_container.innerHTML = ''
@@ -98,7 +99,7 @@ function create_parametric_svg(node, sliderVal) {
             end_element.getAttribute(attr),
             { maxSegmentLength: 5 } // For smoother paths, lower this number at cost of performance
           )(sliderVal)
-          : d3.interpolate($(start_element).attr(attr), $(end_element).attr(attr))(sliderVal)
+          : d3.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr))(sliderVal)
       )
       )
   })

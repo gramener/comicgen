@@ -56,7 +56,7 @@ $.getJSON('src/files.json')
       // Render dropdowns for each of the files. Use order in URL
       _.each(Object.assign({}, q, format.files), function (val, attr) {
         if (attr in format.files) {
-          format.files[attr]['param'] ? slider_options(q, attr, node[attr]) : dropdown_options(q, attr, node[attr])
+          format.files[attr]['continous'] ? slider_options(q, attr, node[attr]) : dropdown_options(q, attr, node[attr])
         }
       })
       dropdown_options(q, 'ext', ['svg', 'png'])
