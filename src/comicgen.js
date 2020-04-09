@@ -10,7 +10,7 @@ export default function comicgen(selector, options) {
   selector = selector instanceof Element ? [selector] : document.querySelectorAll(selector || '.comicgen')
 
   // Render each node
-  Array.from(selector).forEach(function (node) {
+  Array.from(selector).forEach(node => {
     // Identify the attributes to add from:
     //    1. attrs = DOM node attributes (#1 priority)
     //    2. options (#2 priority)
@@ -27,7 +27,7 @@ export default function comicgen(selector, options) {
       return console.error('Unknown name="' + attrs.name + '" in', node)
 
     // If any dirs variable is not set, report an error and continue
-    if (!format.dirs.every(function (attr) { return attr in attrs }))
+    if (!format.dirs.every(attr => attr in attrs))
       return console.error('Missing attr', format.dirs.join(', '), 'in', node)
 
     // Create a mirror image transformation
@@ -47,9 +47,9 @@ export default function comicgen(selector, options) {
         var row = format.files[attr]
         // Substitute any $variable with the corresponding attribute value
         if (row.continuous) {
-          files[attrs['name']][attr].forEach(function (filename) {
+          files[attrs['name']][attr].forEach(filename => {
             // replace row.continuous (ex: face, body) with filename (ex: meh, surprise)
-            const img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return group === row.continuous ? filename : attrs[group] })
+            let img = row.file.replace(/\$([a-z]*)/g, (match, group) => group === row.continuous ? filename : attrs[group])
             continuousUrls.push({
               fetch: fetch(`${comicgen.base}svg/${img}.svg`).then(res => res.text()),
               sliderVal: attrs[attr]
@@ -57,14 +57,14 @@ export default function comicgen(selector, options) {
           })
         }
         else {
-          var img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return attrs[group] })
+          var img = row.file.replace(/\$([a-z]*)/g, (match, group) => attrs[group])
           svg.push(`<image width="${row.width}" height="${row.height}" transform="translate(${row.x},${row.y})" xlink:href="${comicgen.base}${attrs.ext}/${img}.${attrs.ext}"/>`)
         }
       }
     }
 
     continuousUrls.length && Promise.all(continuousUrls.map(d => d.fetch))
-      .then(function (svg_responses) {
+      .then(svg_responses => {
         const character_svg_container = node.querySelector('svg g')
         character_svg_container.innerHTML = ''
         // One body part is interpolated with 2 consecutive svg responses.
@@ -86,21 +86,19 @@ export default function comicgen(selector, options) {
 
 
 function create_parametric_svg(node, sliderVal) {
-  const character_svg_nodes = node.querySelector('svg g').querySelectorAll('*')
+  const character_svg_nodes = node.querySelectorAll(':scope > svg g *')
   Array.from(character_svg_nodes).forEach(character_svg_node => {
+    // TODO: Refactor to remove use of IDs
     const start_element = node.querySelector(`template:nth-of-type(1) #${character_svg_node.id}`)
     const end_element = node.querySelector(`template:nth-of-type(2) #${character_svg_node.id}`)
     Array.from(character_svg_node.attributes)
       .map(d => d.nodeName)
       .forEach(attr => character_svg_node.setAttribute(attr,
         attr === 'd'
-          ? flubber.interpolate(
-            start_element.getAttribute(attr),
-            end_element.getAttribute(attr),
-            { maxSegmentLength: 5 } // For smoother paths, lower this number at cost of performance
-          )(sliderVal)
+          ? flubber.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr), { maxSegmentLength: 5 })(sliderVal)
+          // For smoother paths and lower performance, reduce "maxSegmentLength" value. 
           : d3.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr))(sliderVal)
-      )
+        )
       )
   })
 }
@@ -124,6 +122,6 @@ comicgen.formats = formats
 // https://javascript.info/onload-ondomcontentloaded
 // https://github.com/jquery/jquery/blob/master/src/core/ready.js
 if (document.readyState == 'loading')
-  document.addEventListener('DOMContentLoaded', function () { comicgen() })
+  document.addEventListener('DOMContentLoaded', () => comicgen())
 else
   window.setTimeout(comicgen)
