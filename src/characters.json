@@ -59,7 +59,7 @@
       "height": 600,
       "dirs": [],
       "files": {
-        "face": { "continous": "face", "file": "$name/face/$face", "width": 500, "height": 600, "x":0, "y":0 }
+        "face": { "continuous": "face", "file": "$name/face/$face", "width": 500, "height": 600, "x":0, "y":0 }
       }
     },
     "paramfacebody": {
@@ -67,8 +67,8 @@
       "height": 600,
       "dirs": [],
       "files": {
-        "face": { "continous": "face", "file": "$name/face/$face", "width": 500, "height": 600, "x":0, "y":0 },
-        "body": { "continous": "body", "file": "$name/body/$body", "width": 500, "height": 600, "x":0, "y":0 }
+        "face": { "continuous": "face", "file": "$name/face/$face", "width": 500, "height": 600, "x":0, "y":0 },
+        "body": { "continuous": "body", "file": "$name/body/$body", "width": 500, "height": 600, "x":0, "y":0 }
       }
     },
     "deedey": {

@@ -122,7 +122,7 @@ comicgen('.new', {
 
 ![Dynamic character rendered via JS, with default options](docs/dee-sad-yuhoo-400-300.png)
 
-To render a continous character (examples: zoozoo, panda, chini),
+To render a continuous character (examples: zoozoo, panda, chini),
 ```js
 // Add the character
 $('<g class="new" name="zoozoo" face="0.66" body="0.50" width="500" height="600"></g>').appendTo('body')
@@ -130,7 +130,7 @@ $('<g class="new" name="zoozoo" face="0.66" body="0.50" width="500" height="600"
 comicgen('.new')
 ```
 
-![Dynamic continous character rendered via JS](docs/dee-sad-yuhoo-400-300.png)
+![Dynamic continuous character rendered via JS](docs/dee-sad-yuhoo-400-300.png)
 
 You can pass an `options` parameter to `comicgen()` to provide default values.
 For example:
