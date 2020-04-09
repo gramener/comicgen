@@ -72,8 +72,8 @@ export default function comicgen(selector, options) {
           character_svg_container.innerHTML += `<g>${svg_responses[i]}
             <template>${svg_responses[i]}</template>
             <template>${svg_responses[i + 1]}</template></g>`
-            create_parametric_svg(character_svg_container.querySelector(`svg g:nth-of-type(${i/2+1})`), continuousUrls[i].sliderVal)
-          }
+          create_parametric_svg(character_svg_container.querySelector(`svg g:nth-of-type(${i/2+1})`), continuousUrls[i].sliderVal)
+        }
       })
 
     // Add the SVG footer
