@@ -39,7 +39,7 @@ export default function comicgen(selector, options) {
       `<g transform="scale(${attrs.scale})${mirror}">`
     ]
 
-    var parametricUrls = []
+    let continousUrls = []
     // Loop through all attributes (e.g. emotion=, pose=, body=, etc)
     // If the attribute is in format.file, there's an image for it. Add it.
     for (var attr in attrs) {
@@ -50,7 +50,7 @@ export default function comicgen(selector, options) {
           files[attrs['name']][attr].forEach(function (filename) {
             // replace row.continous (ex: face, body) with filename (ex: meh, surprise)
             const img = row.file.replace(/\$([a-z]*)/g, function (match, group) { return group === row.continous ? filename : attrs[group] })
-            parametricUrls.push({
+            continousUrls.push({
               fetch: fetch(`${comicgen.base}svg/${img}.svg`).then(res => res.text()),
               sliderVal: attrs[attr]
             })
@@ -63,17 +63,17 @@ export default function comicgen(selector, options) {
       }
     }
 
-    Promise.all(parametricUrls.map(d => d.fetch))
+    Promise.all(continousUrls.map(d => d.fetch))
       .then(function (svg_responses) {
         const character_svg_container = node.querySelector('svg g')
         character_svg_container.innerHTML = ''
-        // Each consecutive pair is one body part.
-        for (let i = 0; i < parametricUrls.length; i = i + 2) {
+        // One body part is interpolated with 2 consecutive svg responses.
+        for (let i = 0; i < continousUrls.length; i = i + 2) {
           character_svg_container.innerHTML += `<g>${svg_responses[i]}
             <template>${svg_responses[i]}</template>
             <template>${svg_responses[i + 1]}</template></g>`
-          create_parametric_svg(character_svg_container.querySelector(`svg g:nth-of-type(${i/2+1})`), parametricUrls[i].sliderVal)
-        }
+            create_parametric_svg(character_svg_container.querySelector(`svg g:nth-of-type(${i/2+1})`), continousUrls[i].sliderVal)
+          }
       })
 
     // Add the SVG footer
