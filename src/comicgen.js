@@ -69,9 +69,9 @@ export default function comicgen(selector, options) {
         character_svg_container.innerHTML = ''
         // One body part is interpolated with 2 consecutive svg responses.
         for (let i = 0; i < continuousUrls.length; i = i + 2) {
-          character_svg_container.innerHTML += `<g>${svg_responses[i]}
-            <template>${svg_responses[i]}</template>
+          character_svg_container.innerHTML += `<g>${svg_responses[i]}<template>${svg_responses[i]}</template>
             <template>${svg_responses[i + 1]}</template></g>`
+          // pass the just inserted svg node to function create_parametric_svg
           create_parametric_svg(character_svg_container.querySelector(`svg g:nth-of-type(${i/2+1})`), continuousUrls[i].sliderVal)
         }
       })
@@ -89,17 +89,17 @@ function create_parametric_svg(node, sliderVal) {
   let character_svg_nodes = node.querySelectorAll(':scope > svg g *')
   Array.from(character_svg_nodes).forEach(character_svg_node => {
     // TODO: Refactor to remove use of IDs
-    let start_element = node.querySelector(`template:nth-of-type(1) #${character_svg_node.id}`)
-    let end_element = node.querySelector(`template:nth-of-type(2) #${character_svg_node.id}`)
+    let startnode = node.querySelector(`template:nth-of-type(1) #${character_svg_node.id}`)
+    let endnode = node.querySelector(`template:nth-of-type(2) #${character_svg_node.id}`)
     Array.from(character_svg_node.attributes)
       .map(d => d.nodeName)
       .forEach(attr =>
         character_svg_node.setAttribute(attr,
           attr === 'd' ?
             // For smoother paths and worse performance, reduce "maxSegmentLength" value (defaults to 10).
-            flubber.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr), { maxSegmentLength: 5 })(sliderVal)
+            flubber.interpolate(startnode.getAttribute(attr), endnode.getAttribute(attr), { maxSegmentLength: 5 })(sliderVal)
             :
-            d3.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr))(sliderVal)
+            d3.interpolate(startnode.getAttribute(attr), endnode.getAttribute(attr))(sliderVal)
         )
       )
   })
