@@ -93,12 +93,13 @@ function create_parametric_svg(node, sliderVal) {
     let end_element = node.querySelector(`template:nth-of-type(2) #${character_svg_node.id}`)
     Array.from(character_svg_node.attributes)
       .map(d => d.nodeName)
-      .forEach(attr => character_svg_node.setAttribute(attr,
-        attr === 'd' ?
-        // For smoother paths and worse performance, reduce "maxSegmentLength" value (defaults to 10).
-        flubber.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr), { maxSegmentLength: 5 })(sliderVal)
-        :
-        d3.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr))(sliderVal)
+      .forEach(attr =>
+        character_svg_node.setAttribute(attr,
+          attr === 'd' ?
+            // For smoother paths and worse performance, reduce "maxSegmentLength" value (defaults to 10).
+            flubber.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr), { maxSegmentLength: 5 })(sliderVal)
+            :
+            d3.interpolate(start_element.getAttribute(attr), end_element.getAttribute(attr))(sliderVal)
         )
       )
   })
