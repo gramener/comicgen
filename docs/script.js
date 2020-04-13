@@ -161,9 +161,9 @@ function dropdown_options(q, key, data) {
   // If q[key] is not in data, pick the first item from the data list/dict
   q[key] = q[key] && data.indexOf(q[key]) > 0 ? q[key] : data[0]
   var options = data.map(function (v) { return '<option>' + v + '</option>' }).join('')
-  var $el = $('.comicgen-attrs .attr[name="' + key + '"]').removeClass('wip')
+  var $el = $('.comicgen-attrs .attr.input[name="' + key + '"]').removeClass('wip')
   if (!$el.length) {
-    $el = $('<div>').addClass('attr mr-2 mb-2').attr('name', key)
+    $el = $('<div>').addClass('attr input mr-2 mb-2').attr('name', key)
     $el.append($(template_arrows({ key: key })))
     $el.append($('<select>').addClass('form-control').attr('name', key))
     var $after = $('.comicgen-attrs .attr:not(.wip):last')
@@ -176,10 +176,10 @@ function dropdown_options(q, key, data) {
 }
 
 function slider_options(q, key, data) {
-  q[key] = q[key] ? q[key] : 0
-  var $el = $('.comicgen-attrs .attr[name="' + key + '"]').removeClass('wip')
+  q[key] = isNaN(q[key]) ? 0 : +q[key]
+  var $el = $('.comicgen-attrs .attr.slider[name="' + key + '"]').removeClass('wip')
   if (!$el.length) {
-    $el = $('<div>').addClass('attr mr-2 mb-2').attr('name', key)
+    $el = $('<div>').addClass('attr slider mr-2 mb-2').attr('name', key)
     $el.append($(template_arrows({ key: key + '-' + data.join('-') })))
     $el.append($('<input type="range" min="0" max="1" step="0.01">').addClass('form-control-range').attr('name', key))
     var $after = $('.comicgen-attrs .attr:not(.wip):last')
