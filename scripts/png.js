@@ -1,5 +1,5 @@
 const fs = require('fs')
-const util = require("util")
+const util = require('util')
 const glob = require('glob')
 const puppeteer = require('puppeteer')
 const cliProgress = require('cli-progress')
