@@ -1,4 +1,5 @@
 const fs = require('fs')
+const util = require("util")
 const glob = require('glob')
 const puppeteer = require('puppeteer')
 const cliProgress = require('cli-progress')
@@ -30,8 +31,8 @@ async function run_puppeteer() {
         continue
 
       const png_dir = png_file.replace(/\/[^/]+$/, '')
-      await fs.promises.mkdir(png_dir, { recursive: true })
-      const svg = (await fs.promises.readFile(svg_file)).toString()
+      await util.promisify(fs.mkdir)(png_dir, { recursive: true })
+      const svg = (await util.promisify(fs.readFile)(svg_file)).toString()
       await page.setContent(`<html><body>${svg}</body></html>`)
       const svgElement = await page.$('svg')
       await page.setViewport({

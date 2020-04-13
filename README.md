@@ -122,6 +122,28 @@ comicgen('.new', {
 
 ![Dynamic character rendered via JS, with default options](docs/dee-sad-yuhoo-400-300.png)
 
+To render a continuous character (examples: zoozoo, panda, chini),
+```js
+// Add the character
+$('<g class="new" name="zoozoo" face="0.66" body="0.50" width="500" height="600"></g>').appendTo('body')
+// Call comicgen()
+comicgen('.new')
+```
+
+![Dynamic continuous character rendered via JS](docs/dee-sad-yuhoo-400-300.png)
+
+You can pass an `options` parameter to `comicgen()` to provide default values.
+For example:
+
+```js
+$('<g class="new" name="chini"></g>').appendTo('body')
+comicgen('.new', {
+  name: 'zoozoo',  // Set the default name. <g name="chini"> overrides this
+  face: '0.75',    // Set the face emotion to between meh and surprise (0.75).
+  body: '0.50'     // Set the body to exactly intermediate pose between normal and handup (0.50)
+})
+```
+
 <!-- end -->
 
 <!-- var vision -->
@@ -603,7 +625,7 @@ and [npm](https://www.npmjs.com/package/comicgen). Here is the release process.
 ```bash
 # Update package.json version and build
 npm run build
-node scripts/png.js && bash scripts/compress.sh
+npm run build-png
 
 # Run tests on dev branch
 npm run lint

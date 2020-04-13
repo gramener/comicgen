@@ -1,0 +1,16 @@
+<svg width="500" height="600" viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="panda-lineart1">
+<path id="Ellipse_1" stoke-width="4" d="M361 272C361 337.722 330 391 250 391C170 391 139 337.722 139 272C139 206.278 188.696 153 250 153C311.304 153 361 206.278 361 272Z" fill="#ECE8E8"/>
+<!-- <path id="Ellipse_1_Stroke" fill-rule="evenodd" clip-rule="evenodd" d="M333.185 354.238C350.342 333.422 358 304.444 358 272C358 207.735 309.454 156 250 156C190.546 156 142 207.735 142 272C142 304.444 149.658 333.422 166.815 354.238C183.891 374.955 210.719 388 250 388C289.281 388 316.109 374.955 333.185 354.238ZM250 391C330 391 361 337.722 361 272C361 206.278 311.304 153 250 153C188.696 153 139 206.278 139 272C139 337.722 170 391 250 391Z" fill="black"/> -->
+<circle id="Ellipse_2" cx="218.5" cy="237.5" r="31.5" fill="#020202"/>
+<ellipse id="Ellipse_4" cx="219" cy="222.5" rx="13" ry="16.5" fill="#F2F2F2"/>
+<circle id="Ellipse_3" cx="281.5" cy="237.5" r="31.5" fill="#020202"/>
+<ellipse id="Ellipse_5" cx="282" cy="222.5" rx="13" ry="16.5" fill="#F2F2F2"/>
+<ellipse id="Ellipse_10" cx="281.5" cy="214" rx="6.5" ry="8" fill="#020202"/>
+<ellipse id="Ellipse_11" cx="218.5" cy="214" rx="6.5" ry="8" fill="#020202"/>
+<path id="Ellipse_6" d="M293 330.099C293 341.09 284.27 350 273.5 350C262.73 350 254 341.09 254 330.099C254 319.108 262.73 300 273.5 300C284.27 300 293 319.108 293 330.099Z" fill="black"/>
+<ellipse id="Ellipse_7" cx="336" cy="166.5" rx="41" ry="39.5" fill="#020202"/>
+<ellipse id="Ellipse_8" cx="151" cy="174.5" rx="41" ry="39.5" fill="#020202"/>
+<ellipse id="Ellipse_9" cx="252.5" cy="280.5" rx="16.5" ry="11.5" fill="#020202"/>
+</g>
+</svg>

@@ -23,6 +23,7 @@
     "aryan": "emotionpose",
     "ava": "emotionpose",
     "bean": "deedey",
+    "chini": "paramface",
     "dee": "deedey",
     "dey": "deedey",
     "evan": "emotionpose",
@@ -30,11 +31,13 @@
     "holmes": "emotionpose",
     "humaaans": "humaaans",
     "jaya": "emotionpose",
+    "panda": "paramface",
     "priya": "deedey",
     "ringo": "deedey",
     "speechbubbles": "speechbubbles",
     "watson": "emotionpose",
-    "zoe": "emotionpose"
+    "zoe": "emotionpose",
+    "zoozoo": "paramfacebody"
   },
   "_comment_formats": [
     "Defines the format for characters. Each format has:",
@@ -51,6 +54,23 @@
     "     y: y-offset of the SVG image"
   ],
   "formats": {
+    "paramface": {
+      "width": 500,
+      "height": 600,
+      "dirs": [],
+      "files": {
+        "face": { "continuous": "face", "file": "$name/face/$face", "width": 500, "height": 600, "x":0, "y":0 }
+      }
+    },
+    "paramfacebody": {
+      "width": 500,
+      "height": 600,
+      "dirs": [],
+      "files": {
+        "face": { "continuous": "face", "file": "$name/face/$face", "width": 500, "height": 600, "x":0, "y":0 },
+        "body": { "continuous": "body", "file": "$name/body/$body", "width": 500, "height": 600, "x":0, "y":0 }
+      }
+    },
     "deedey": {
       "width": 500,
       "height": 600,

@@ -21,6 +21,8 @@ module.exports = {
   "globals": {
     "_": true,
     "g1": true,
+    "d3": true,
+    "flubber": true,
     "tape": true
   },
   "extends": "eslint:recommended",

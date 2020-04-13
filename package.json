@@ -23,7 +23,7 @@
     "@rollup/plugin-json": "4",
     "browserify": "16",
     "clean-css-cli": "4",
-    "cli-progress": "^3.6.0",
+    "cli-progress": "3",
     "eslint-plugin-template": "0.3",
     "express": "4",
     "faucet": "0.0",
