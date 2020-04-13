@@ -1,5 +1,6 @@
 const fs = require('fs')
 const util = require('util')
+const path = require('path')
 const glob = require('glob')
 const puppeteer = require('puppeteer')
 const cliProgress = require('cli-progress')
@@ -19,7 +20,7 @@ async function run_puppeteer() {
       args: ['--no-sandbox'],
     })
     const page = await browser.newPage()
-    const files = glob.sync('./svg/**/*.svg')
+    const files = glob.sync(path.resolve(__dirname, '../svg/**/*.svg'))
     progressBar.start(files.length, 0)
     for (let i=0; i < files.length; i++) {
       const svg_file = files[i]
@@ -29,8 +30,8 @@ async function run_puppeteer() {
       // Skip if PNG exists and PNG is newer than SVG
       if (fs.existsSync(png_file) && (fs.statSync(png_file).mtime >= fs.statSync(svg_file).mtime))
         continue
-
       const png_dir = png_file.replace(/\/[^/]+$/, '')
+      console.log(png_dir, png_file)
       await util.promisify(fs.mkdir)(png_dir, { recursive: true })
       const svg = (await util.promisify(fs.readFile)(svg_file)).toString()
       await page.setContent(`<html><body>${svg}</body></html>`)
