@@ -31,7 +31,6 @@ async function run_puppeteer() {
       if (fs.existsSync(png_file) && (fs.statSync(png_file).mtime >= fs.statSync(svg_file).mtime))
         continue
       const png_dir = png_file.replace(/\/[^/]+$/, '')
-      console.log(png_dir, png_file)
       await util.promisify(fs.mkdir)(png_dir, { recursive: true })
       const svg = (await util.promisify(fs.readFile)(svg_file)).toString()
       await page.setContent(`<html><body>${svg}</body></html>`)
