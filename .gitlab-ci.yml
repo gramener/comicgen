@@ -19,3 +19,4 @@ deploy:
     URL: comicgen
     VERSION: static
     SETUP: yarn install && npm run build && npm run build-png
+    CORS: enabled

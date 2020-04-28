@@ -80,10 +80,10 @@ can accompany good news on charts.
 ## File API
 
 The raw SVGs and PNGs are at
-[unpkg.com/comicgen/](https://unpkg.com/comicgen/). Look under:
+[gramener.com/comicgen/](https://gramener.com/comicgen/). Look under:
 
-- [src/characters.json](https://unpkg.com/comicgen/src/characters.json) - list of characters.
-- [src/files.json](https://unpkg.com/comicgen/src/files.json) - list of files for each character
+- [src/characters.json](https://gramener.com/comicgen/src/characters.json) - list of characters.
+- [src/files.json](https://gramener.com/comicgen/src/files.json) - list of files for each character
 - [svg/](https://unpkg.com/comicgen/svg/) - SVG files for each character
 - [png/](https://unpkg.com/comicgen/png/) - PNG files for each character
 
@@ -310,12 +310,12 @@ We haven't yet found tools that expose an API. This should enable developers to 
 Load the comicgen library by adding this line in your HTML page's `<head>`:
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/comicgen/dist/comicgen.min.css">
-<script async src="https://unpkg.com/comicgen"></script>
+<link rel="stylesheet" href="https://gramener.com/comicgen/dist/comicgen.min.css">
+<script async src="https://gramener.com/comicgen/dist/comicgen.min.js"></script>
 ```
 
-You can use [cdn.jsdelivr.net/npm](https://cdn.jsdelivr.net/npm/comicgen/) instead of
-[unpkg.com](https://unpkg.com/comicgen/) if you wish.
+You can use [unpkg.com/comicgen/](https://unpkg.com/comicgen/) instead of
+[gramener.com](https://gramener.com/comicgen/) if you wish.
 
 You can also install comicgen locally using `npm` or `yarn`:
 
@@ -465,7 +465,7 @@ and slices the height, preserving the top (YMin) of the image.
 
 ## Panels
 
-[comicgen.css](https://unpkg.com/comicgen/dist/comicgen.min.css)
+[comicgen.css](https://gramener.com/comicgen/dist/comicgen.min.css)
 provides 2 classes for layout:
 
 - `comic-panel`
@@ -523,7 +523,7 @@ variables in your stylesheet.
 
 ## Captions
 
-[comicgen.css](https://unpkg.com/comicgen/dist/comicgen.min.css)
+[comicgen.css](https://gramener.com/comicgen/dist/comicgen.min.css)
 provides `comic-caption-top` and `comic-caption-bottom` to add captions inside
 a `.comic-panel`.
 
@@ -651,12 +651,6 @@ Then release on [npm](https://www.npmjs.com/package/comicgen)
 ```bash
 # Maintained by @sanand0
 npm publish
-```
-
-The PNG conversion on [Gramener.com](https://gramener.com/comicgen/) with ImageMagick 6.8.9 is poor. It works well on Cygwin's ImageMagick 6.9.10. So upload the files locally using:
-
-```bash
-rsync -avzP png ubuntu@gramener.com:/mnt/gramener/apps/static/comicgen/
 ```
 
 Deploy on <https://comicgen.surge.sh/> via:
