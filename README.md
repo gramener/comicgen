@@ -136,9 +136,9 @@ You can pass an `options` parameter to `comicgen()` to provide default values.
 For example:
 
 ```js
-$('<g class="new" name="chini"></g>').appendTo('body')
+$('<g class="new"></g>').appendTo('body')
 comicgen('.new', {
-  name: 'zoozoo',  // Set the default name. <g name="chini"> overrides this
+  name: 'zoozoo',  // Set the continuous character name.
   face: '0.75',    // Set the face emotion to between meh and surprise (0.75).
   body: '0.50'     // Set the body to exactly intermediate pose between normal and handup (0.50)
 })
