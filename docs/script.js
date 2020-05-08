@@ -181,7 +181,7 @@ function slider_options(q, key, data) {
   if (!$el.length) {
     $el = $('<div>').addClass('attr slider mr-2 mb-2').attr('name', key)
     $el.append($(template_arrows({ key: key + '-' + data.join('-') })))
-    $el.append($('<input type="range" min="0" max="1" step="0.01">').addClass('form-control-range').attr('name', key))
+    $el.append($('<input type="range" min="0" max="1" step="0.01" list="slider-ticks">').addClass('form-control-range').attr('name', key))
     var $after = $('.comicgen-attrs .attr:not(.wip):last')
     if ($after.length)
       $el.insertAfter($after)
