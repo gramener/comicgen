@@ -106,6 +106,19 @@ comicgen('.new')
 
 ![Dynamic character rendered via JS](docs/dee-sad-yuhoo-400-300.png)
 
+If you want to show only face of a comic character, you can do it by skipping `pose` attribute.
+For example:
+
+```js
+// Add only face of character
+$('<g class="only-face" name="dee" angle="straight" emotion="smile"></g>').appendTo('body')
+// Call comicgen()
+comicgen('.only-face')
+```
+
+![Only face of character rendered via JS](docs/dee-smile-face-only-200-200.png)
+
+
 You can pass an `options` parameter to `comicgen()` to provide default values.
 For example:
 
