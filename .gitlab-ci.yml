@@ -13,17 +13,10 @@ validate:
 deploy:
   stage: deploy
   script: deploy
-  # only: [master, dev, /^dev-.*$/]
-  # variables:
-  #   SERVER: gramener.com
-  #   URL: comicgen
-  #   VERSION: static
-  #   SETUP: yarn install && npm run build && npm run build-png
-  #   CORS: enabled
-  only: [ramya]                          # Only deploy on master branch commit
+  only: [master, dev, /^dev-.*$/]
   variables:
-    SERVER: ubuntu@uat.gramener.com       # Deploy to uat.gramener.com/app-name/
-    URL: colorcomics                         # Change this to your app-name
-    SETUP: npm install   # You can use any setup script here
-    VERSION: py3v1                           # v0, v1 or static
-    PORT: 8030
+    SERVER: gramener.com
+    URL: comicgen
+    VERSION: static
+    SETUP: yarn install && npm run build && npm run build-png
+    CORS: enabled
