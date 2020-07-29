@@ -24,6 +24,6 @@ deploy:
   variables:
     SERVER: ubuntu@uat.gramener.com       # Deploy to uat.gramener.com/app-name/
     URL: colorcomics                         # Change this to your app-name
-    SETUP: npm install   # You can use any setup script here
+    SETUP: yarn install && npm run build   # You can use any setup script here
     VERSION: py3v1                           # v0, v1 or static
     PORT: 8030
