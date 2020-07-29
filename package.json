@@ -8,7 +8,7 @@
   "repository": "git@code.gramener.com:s.anand/deedey.git",
   "author": "S Anand <s.anand@gramener.com>",
   "scripts": {
-    "build": "rimraf dist && rollup -c && cleancss -O2 --source-map --output dist/comicgen.min.css src/comicgen.css",
+    "build": "rimraf dist && rollup -c -w && cleancss -O2 --source-map --output dist/comicgen.min.css src/comicgen.css",
     "build-png": "node scripts/png.js && bash scripts/compress.sh",
     "lint": "eclint . && eslint --ext js,html .",
     "prepublishOnly": "npm run lint && npm test",
