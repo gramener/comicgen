@@ -9,7 +9,7 @@ do
     continue
   fi
   echo "$svg"
-  # pngquant --force --ext .png "${svg//svg/png}"
+  pngquant --force --ext .png "${svg//svg/png}"
   # # Compress the SVG. Enabling convertPathData may fail fabricjs to load SVGs.
   node_modules/.bin/svgo -q --multipass "$svg"
 done
