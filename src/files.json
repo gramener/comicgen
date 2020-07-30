@@ -1413,11 +1413,20 @@
         "worried"
       ],
       "pose": [
+        "handsinpocket",
         "handsfolded",
-        "normal",
+        "readingpaper",
+        "holdinglaptop",
         "pointingright",
+        "thinking",
+        "pointingup",
+        "holdingmobile",
+        "holdingcoffee",
         "shrug",
-        "thumbsup"
+        "holdingstick",
+        "explaining",
+        "observing",
+        "handsclasped"
       ]
     }
   },
