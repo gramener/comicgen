@@ -109,7 +109,7 @@ function create_parametric_svg(node, sliderVal) {
 //  https://cdn.jsdelivr.net/npm/comicgen         -> https://cdn.jsdelivr.net/npm/comicgen/
 //  node_modules/comicgen/dist/comicgen.min.js    -> node_modules/comicgen/
 // Handle all scenarios and get the base location
-comicgen.base = (document.currentScript.src + '/').replace(/[a-z]*\/[a-z.]*\.js\/$/, '')
+comicgen.base = ((document.currentScript || {src: 'https://gramener.com/comicgen'}).src + '/').replace(/[a-z]*\/[a-z.]*\.js\/$/, '')
 
 // Import comicgen version from package.json
 comicgen.version = version
