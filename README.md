@@ -32,20 +32,20 @@ For lettering, you can use comic fonts from
 
 Some fonts we like are:
 
-| Font                              | Example text                                                         |
-|-----------------------------------|----------------------------------------------------------------------|
-| [Architects Daughter][font-ad]    | [![Architects Daughter](docs/font-architects-daughter.png)][font-ad] |
-| [Cavolini][font-ca] (Windows)     | [![Cavolini](docs/font-cavolini.png)][font-cavolini]                 |
-| [Segoe Script][font-ss] (Windows) | [![Segoe Script](docs/font-segoe-script.png)][font-ss]               |
-| [Segoe Print][font-sp] (Windows)  | [![Segoe Print](docs/font-segoe-print.png)][font-sp]                 |
-| [News Cycle][font-nc]             | [![News Cycle](docs/font-news-cycle.png)][font-nc]                   |
-| [Indie Flower][font-if]           | [![Indie Flower](docs/font-indie-flower.png)][font-if]               |
-| [Amatic SC][font-ac]              | [![Amatic SC](docs/font-amatic-sc.png)][font-ac]                     |
-| [Schoolbell][font-sb]             | [![Schoolbell](docs/font-schoolbell.png)][font-sb]                   |
-| [Just Another Hand][font-jah]     | [![Just Another Hand](docs/font-just-another-hand.png)][font-jah]    |
-| [Patrick Hand][font-ph]           | [![Patrick Hand](docs/font-patrick-hand.png)][font-ph]               |
-| [Neucha][font-n]                  | [![Neucha](docs/font-neucha.png)][font-n]                            |
-| [Handlee][font-h]                 | [![Handlee](docs/font-handlee.png)][font-h]                          |
+| Font                              | Example text                                                                             |
+|-----------------------------------|------------------------------------------------------------------------------------------|
+| [Architects Daughter][font-ad]    | [![Specimen](https://gramener.com/comicgen/docs/font-architects-daughter.png)][font-ad]  |
+| [Cavolini][font-ca] (Windows)     | [![Specimen](https://gramener.com/comicgen/docs/font-cavolini.png)][font-cavolini]       |
+| [Segoe Script][font-ss] (Windows) | [![Specimen](https://gramener.com/comicgen/docs/font-segoe-script.png)][font-ss]         |
+| [Segoe Print][font-sp] (Windows)  | [![Specimen](https://gramener.com/comicgen/docs/font-segoe-print.png)][font-sp]          |
+| [News Cycle][font-nc]             | [![Specimen](https://gramener.com/comicgen/docs/font-news-cycle.png)][font-nc]           |
+| [Indie Flower][font-if]           | [![Specimen](https://gramener.com/comicgen/docs/font-indie-flower.png)][font-if]         |
+| [Amatic SC][font-ac]              | [![Specimen](https://gramener.com/comicgen/docs/font-amatic-sc.png)][font-ac]            |
+| [Schoolbell][font-sb]             | [![Specimen](https://gramener.com/comicgen/docs/font-schoolbell.png)][font-sb]           |
+| [Just Another Hand][font-jah]     | [![Specimen](https://gramener.com/comicgen/docs/font-just-another-hand.png)][font-jah]   |
+| [Patrick Hand][font-ph]           | [![Specimen](https://gramener.com/comicgen/docs/font-patrick-hand.png)][font-ph]         |
+| [Neucha][font-n]                  | [![Specimen](https://gramener.com/comicgen/docs/font-neucha.png)][font-n]                |
+| [Handlee][font-h]                 | [![Specimen](https://gramener.com/comicgen/docs/font-handlee.png)][font-h]               |
 
 [font-ca]: https://www.fonts.com/font/monotype/cavolini
 [font-ad]: https://fonts.google.com/specimen/Architects+Daughter
@@ -71,7 +71,7 @@ The [Comicgen Power BI](https://github.com/gramener/comicgen-powerbi) plugin
 lets you control the characters, emotions, poses, etc from data. Happy people
 can accompany good news on charts.
 
-![Power BI Plugin example](docs/power-bi-plugin.gif)
+![Power BI Plugin example](https://gramener.com/comicgen/docs/power-bi-plugin.gif)
 
 <!-- end -->
 
@@ -104,7 +104,7 @@ $('<g class="new" name="dee" angle="straight" emotion="sad" pose="yuhoo"></g>').
 comicgen('.new')
 ```
 
-![Dynamic character rendered via JS](docs/dee-sad-yuhoo-400-300.png)
+![Dynamic character rendered via JS](https://gramener.com/comicgen/docs/dee-sad-yuhoo-400-300.png)
 
 If you want to show only the face of a comic character, you can do it by skipping `pose` attribute. For example:
 
@@ -115,7 +115,7 @@ $('<g class="only-face" name="dee" angle="straight" emotion="smile"></g>').appen
 comicgen('.only-face')
 ```
 
-![Only face of character rendered via JS](docs/dee-smile-face-only-200-200.png)
+![Only face of character rendered via JS](https://gramener.com/comicgen/docs/dee-smile-face-only-200-200.png)
 
 
 You can pass an `options` parameter to `comicgen()` to provide default values.
@@ -132,7 +132,7 @@ comicgen('.new', {
 })
 ```
 
-![Dynamic character rendered via JS, with default options](docs/dee-sad-yuhoo-400-300.png)
+![Dynamic character rendered via JS, with default options](https://gramener.com/comicgen/docs/dee-sad-yuhoo-400-300.png)
 
 To render a continuous character (examples: zoozoo, panda, chini),
 ```js
@@ -142,7 +142,7 @@ $('<g class="new" name="zoozoo" face="0.75" body="0.50" width="500" height="600"
 comicgen('.new')
 ```
 
-![Continuous continuous character rendered via JS](docs/zoozoo-api-300-400.png)
+![Continuous continuous character rendered via JS](https://gramener.com/comicgen/docs/zoozoo-api-300-400.png)
 <!-- end -->
 
 <!-- var vision -->
@@ -344,7 +344,7 @@ To embed a character, add:
 This inserts the following image in your HTML.
 You can embed it anywhere, including inside an `<svg>` element.
 
-![name=dee angle=straight emotion=smile pose=thumbsup](docs/dee-straight-smile-thumbsup.png)
+![name=dee angle=straight emotion=smile pose=thumbsup](https://gramener.com/comicgen/docs/dee-straight-smile-thumbsup.png)
 
 <a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/YMGMbw">Try it on Codepen</a>
 
@@ -399,7 +399,7 @@ The order of attributes decides the order of the layers. For example, this draws
 <g class="comicgen" name="dee" angle="straight" emotion="yuhoo" pose="yuhoo"></g>
 ```
 
-![Dee with emotion below, then pose on top](docs/dee-order-emotion-pose.png)
+![Dee with emotion below, then pose on top](https://gramener.com/comicgen/docs/dee-order-emotion-pose.png)
 
 This draws `pose=` first (at the bottom), and then `emotion=` (on top):
 
@@ -407,12 +407,12 @@ This draws `pose=` first (at the bottom), and then `emotion=` (on top):
 <g class="comicgen" name="dee" angle="straight" pose="yuhoo" emotion="yuhoo"></g>
 ```
 
-![Dee with emotion below, then pose on top](docs/dee-order-pose-emotion.png)
+![Dee with emotion below, then pose on top](https://gramener.com/comicgen/docs/dee-order-pose-emotion.png)
 
 You can re-order the attributes dynamically in the
 [comicgen interactive gallery](https://gramener.com/comicgen/) using the arrows.
 
-![Reorder comicgen attributes](docs/reorder.gif)
+![Reorder comicgen attributes](https://gramener.com/comicgen/docs/reorder.gif)
 
 
 ## Composition
@@ -428,7 +428,7 @@ You can change the `x`, `y`, `width`, `height`, `mirror` and `scale` to position
 </svg>
 ```
 
-![Dee and Dey together](docs/dee-and-dey-together.png)
+![Dee and Dey together](https://gramener.com/comicgen/docs/dee-and-dey-together.png)
 
 <a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/eqYmer">Try it on Codepen</a>
 
@@ -446,7 +446,7 @@ SVG container.
 Set `viewBox` to the width and height of the comicgen elements. Then you can set
 the outer `width` and `height` to anything.
 
-![Dee and Dey scaled down](docs/dee-and-dey-meet.png)
+![Dee and Dey scaled down](https://gramener.com/comicgen/docs/dee-and-dey-meet.png)
 
 This normally scales the image to fit both the width and height. To fit only one
 side, use [preserveAspectRatio](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/preserveAspectRatio).
@@ -460,7 +460,7 @@ and slices the height, preserving the top (YMin) of the image.
 </svg>
 ```
 
-![Dee and Dey fit width](docs/dee-and-dey-slice.png)
+![Dee and Dey fit width](https://gramener.com/comicgen/docs/dee-and-dey-slice.png)
 
 ## Panels
 
@@ -479,7 +479,7 @@ Use `class="comic-panel"` to can embed characters in a thick grey border. For ex
 </div>
 ```
 
-![Dee in a panel](docs/dee-panel.png)
+![Dee in a panel](https://gramener.com/comicgen/docs/dee-panel.png)
 
 Panels are typically placed inside a `class="comic-row"`:
 
@@ -502,7 +502,7 @@ Here's an example with 2 panels. The second panel has 2 characters.
 </div>
 ```
 
-![Dee and Dey in panels](docs/dee-and-dey-panels.png)
+![Dee and Dey in panels](https://gramener.com/comicgen/docs/dee-and-dey-panels.png)
 
 <a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/ZgEYvx">Try it on Codepen</a>
 
@@ -517,7 +517,7 @@ variables in your stylesheet.
 }
 ```
 
-![Dee and Dey in panels, with CSS styling](docs/dee-and-dey-panels-styled.png)
+![Dee and Dey in panels, with CSS styling](https://gramener.com/comicgen/docs/dee-and-dey-panels-styled.png)
 
 
 ## Captions
@@ -535,7 +535,7 @@ For example, this defines a caption on top:
 </div>
 ```
 
-![Dee with a caption on top](docs/dee-caption-top.png)
+![Dee with a caption on top](https://gramener.com/comicgen/docs/dee-caption-top.png)
 
 <a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/XvWJEP">Try it on Codepen</a>
 
@@ -548,7 +548,7 @@ For example, this defines a caption on top:
 </div>
 ```
 
-![Dee with a caption at the bottom](docs/dee-caption-bottom.png)
+![Dee with a caption at the bottom](https://gramener.com/comicgen/docs/dee-caption-bottom.png)
 
 You can override the caption's background, font and padding using CSS variables
 in your stylesheet.
@@ -564,7 +564,7 @@ in your stylesheet.
 }
 ```
 
-![Dee with a caption on top, styled with CSS](docs/dee-caption-top-styled.png)
+![Dee with a caption on top, styled with CSS](https://gramener.com/comicgen/docs/dee-caption-top-styled.png)
 
 
 ## Strips
@@ -592,7 +592,7 @@ like this:
 </div>
 ```
 
-![Dee and Dey with captions](docs/dee-and-dey-captions.png)
+![Dee and Dey with captions](https://gramener.com/comicgen/docs/dee-and-dey-captions.png)
 
 <a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/dxyPex">Try it on Codepen</a>
 
@@ -729,17 +729,17 @@ Characters are made of 1 or more SVG images.
 The easiest way to create a character is to draw a dozen SVGs and save them as
 individual files **of the same dimensions**. For example:
 
-![Series of SVG images for a character](docs/character-single-images.png)
+![Series of SVG images for a character](https://gramener.com/comicgen/docs/character-single-images.png)
 
 A better way would be to break up the character into different parts. For
 example, you could draw faces with different emotions and save them under an
 `faces/` folder:
 
-![Faces for a character](docs/character-faces.png)
+![Faces for a character](https://gramener.com/comicgen/docs/character-faces.png)
 
 Then you could draw the bodies under a `bodies/` folder:
 
-![Bodies for a character](docs/character-bodies.png)
+![Bodies for a character](https://gramener.com/comicgen/docs/character-bodies.png)
 
 If you do this, you must make sure that:
 

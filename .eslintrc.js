@@ -1,3 +1,4 @@
+// We specify ESLint config as JS rather than JSON to enable comments
 module.exports = {
   'parserOptions': {
     'ecmaVersion': 6,
