@@ -623,6 +623,7 @@ and [npm](https://www.npmjs.com/package/comicgen). Here is the release process.
 
 ```bash
 # Update package.json version and build
+yarn upgrade
 npm run build
 npm run build-png
 
