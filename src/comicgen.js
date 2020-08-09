@@ -105,11 +105,14 @@ function create_parametric_svg(node, sliderVal) {
   })
 }
 
-// This script may be sourced from:
-//  https://cdn.jsdelivr.net/npm/comicgen         -> https://cdn.jsdelivr.net/npm/comicgen/
-//  node_modules/comicgen/dist/comicgen.min.js    -> node_modules/comicgen/
-// Handle all scenarios and get the base location
-comicgen.base = (document.currentScript.src + '/').replace(/[a-z]*\/[a-z.]*\.js\/$/, '')
+// If this script is loaded as:                         -> Then this is the base location
+//  https://cdn.jsdelivr.net/npm/comicgen               -> https://cdn.jsdelivr.net/npm/comicgen/
+//  http://unpkg.com/comicgen                           -> http://unpkg.com/comicgen/
+//  https://gramener.com/comicgen/dist/comicgen.min.js  -> https://gramener.com/comicgen/
+//  node_modules/comicgen/dist/comicgen.min.js          -> node_modules/comicgen/
+let base = document.currentScript ? document.currentScript.src : 'https://gramener.com/comicgen'
+// If there's a .js at the end, remove dist/comicgen.min.js to get the base location
+comicgen.base = (base + '/').replace(/[a-z]*\/[a-z.]*\.js\/$/, '')
 
 // Import comicgen version from package.json
 comicgen.version = version
