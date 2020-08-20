@@ -7,8 +7,8 @@ problem. Some of us can't draw a straight line for nuts.
 But why should that stop us from creating comics? So here's a gift to ourselves
 and the world &mdash; a **Comic Creator**.
 
-We are sure you'd love the company of our friends [Dee](#?name=dee),
-[Dey](#?name=dey), and our other comic friends. Go on & have some fun.
+Interested in Data Storytelling? Come join the [#ComicgenFriday](https://gramener.com/comicgenfriday) Community.
+
 <!-- end -->
 
 <!-- var usage -->

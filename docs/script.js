@@ -106,7 +106,28 @@ $('.target').on('wheel', function (e) {
 
 // Reset button reverts to defaults on size, position & scale
 $('.reset').attr('href', '?' + $.param(defaults))
-$('body').urlfilter()
+$('body')
+  .on('submit', '.gform', function(event) {
+    event.preventDefault()
+    $('.submitbtn').text('Submitted')
+    $('.submitbtn').attr('disabled', true)
+
+    fetch('https://script.google.com/macros/s/AKfycbxF_DwN74knsxREZ7TuUIl69RA77xCRPiLi0AEQlpLAKPdJm54/exec', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: $(event.target).serialize()
+      })
+      .then(function(r) {return r.json()})
+      .finally(function(res) {
+        $('.gform').get(0).reset()
+        $('.submitbtn').text('Submit')
+        $('.submitbtn').attr('disabled', false)
+        $('#feedbackModal').modal('hide')
+      })
+  })
+  .urlfilter()
 
 // Change background / stroke colors if requested
 $('.bg-color').on('input, change', function () {

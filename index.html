@@ -76,8 +76,11 @@
       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="row my-4">
           <div class="col-xl-4">
-            <h1>Make your own comic</h1>
+            <h1 class="mb-0">Make your own comic</h1>
             <md data-target="introduction"></md>
+            <button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#feedbackModal">
+              Help Improve Comicgen
+            </button>
           </div>
           <div class="col-xl-8">
             <form class="selector form-inline">
@@ -162,6 +165,46 @@
       <button class="btn btn-xs move-right" type="button" title="Move layer above" tabindex="-1"><i class="fa fa-xs fa-arrow-right"></i></button>
     </div>
   </script>
+
+  <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header modal-header d-flex align-items-center">
+          <h5 class="modal-title">Feedback to improve Comicgen</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div>
+              Hi! 👋
+            </div>
+
+          <form class="gform pt-4">
+            <div class="form-group mb-4">
+              <label for="message">What do you think will make Comicgen better?</label>
+              <textarea class="form-control" id="message" name="message" required aria-required="true" rows="3"></textarea>
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="email" class="mb-0">Email</label>
+              <small id="emailHelp" class="form-text text-muted mt-0 mb-1">(Optional) Only to follow up with update.</small>
+              <input type="email" class="form-control" id="email" name="email"  aria-describedby="emailHelp" placeholder="name@example.com">
+            </div>
+
+            <fieldset class="d-none">
+              <label for="honeypot">To help identify spam, using hidden field</label>
+              <input id="honeypot" type="text" name="honeypot" value="" />
+            </fieldset>
+
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary submitbtn">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <datalist id="slider-ticks">
     <option>0</option>
