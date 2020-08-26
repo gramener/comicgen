@@ -7,8 +7,10 @@ problem. Some of us can't draw a straight line for nuts.
 But why should that stop us from creating comics? So here's a gift to ourselves
 and the world &mdash; a **Comic Creator**.
 
-We are sure you'd love the company of our friends [Dee](#?name=dee),
-[Dey](#?name=dey), and our other comic friends. Go on & have some fun.
+----
+
+Interested in data storytelling? Come **join the [#ComicgenFriday](https://gramener.com/comicgenfriday/) community**.
+
 <!-- end -->
 
 <!-- var usage -->
@@ -782,15 +784,22 @@ Please e-mail Anand <s.anand@gramener.com> and Richie <richie.lionell@gramener.c
 <!-- end -->
 
 <!-- var social -->
-<!-- This won't appear on Github. This is just for index.html -->
 <div class="d-flex justify-content-between">
-  <div class="align-items-center">
+  <div class="align-items-center d-none d-sm-block">
     <a href="https://twitter.com/search?f=tweets&vertical=default&q=comicgen&src=typd" class="btn btn-primary btn-sm d-flex" target="_blank" rel="noopener" title="Discuss on Twitter">
       <i class="fab fa-twitter-square fa-2x mr-2"></i>
       <span class="align-items-center d-none d-md-flex mr-2">Discuss on Twitter:</span>
       <span class="align-items-center d-flex">#comicgen</span>
     </a>
   </div>
+  <div class="align-items-center d-none d-sm-block">
+    <!-- Responses at https://docs.google.com/spreadsheets/d/1BGBydJvKFDy9WsSVenkxw6Z4PK5H52ucQHJpb4IxAjA/edit#gid=378739795 managed by comicgen@gramener.com -->
+    <a href="https://forms.gle/po34LPvj3qaqy1Md7" class="btn btn-primary btn-sm d-flex" target="_blank" rel="noopener" title="Share your feedback">
+      <i class="fas fa-comments fa-2x mr-2"></i>
+      <span class="align-items-center d-none d-md-flex mr-2">Suggest improvements</span>
+    </a>
+  </div>
+  <!-- These icons won't appear on Github. This is just for index.html -->
   <div class="d-flex align-items-center">
     <a href="https://twitter.com/intent/tweet?text=Make%20your%20own%20comics%20with%20the%20%23comicgen%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F" class="btn btn-link py-0 pl-0 pr-1" target="_blank" rel="noopener" title="Share on Twitter">
       <i class="fab fa-twitter-square fa-2x"></i>
