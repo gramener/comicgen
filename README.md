@@ -702,13 +702,15 @@ Developers access comicgen through a JS library. What can we do to make it easie
 
 ### Character credits
 
-- Ava, Bean, Dee, Dey, Evan, Holmes, Jaya, Priya, Ringo, Speechbubbles & Watson: By Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
+- Ava, Bean, Biden, Dee, Dey, Evan, Holmes, Jaya, Priya, Ringo, Speechbubbles, Trump & Watson: By Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
   under [CC0 license](https://creativecommons.org/choose/zero/)
 - [Humaaans](https://www.humaaans.com/): By [Pablo Stanley](https://twitter.com/pablostanley)
   under [CC-BY license](https://creativecommons.org/licenses/by/4.0/)
-- Facesketch: By Devarani B <devarani.b@gramener.com>
+- Facesketch & Ethan: By Devarani B <devarani.b@gramener.com>
   under [CC0 license](https://creativecommons.org/choose/zero/)
 - Aryan, Zoe: By Swetha Mylavarapu
+  under [CC0 license](https://creativecommons.org/choose/zero/)
+- Ricky: By Suchismita Naik
   under [CC0 license](https://creativecommons.org/choose/zero/)
 
 <!-- end -->
