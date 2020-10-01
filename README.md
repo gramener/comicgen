@@ -2,7 +2,7 @@
 
 <!-- var introduction -->
 We love comics. We badly wanted to create comic strips. But there was one
-problem. Some of us can't draw a straight line for nuts.
+problems. Some of us can't draw a straight line for nuts.
 
 But why should that stop us from creating comics? So here's a gift to ourselves
 and the world &mdash; a **Comic Creator**.
