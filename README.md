@@ -1,4 +1,4 @@
-# Comicgen
+# Comicgen - A Comic Creator 
 
 <!-- var introduction -->
 We love comics. We badly wanted to create comic strips. But there was one
