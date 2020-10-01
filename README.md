@@ -14,7 +14,7 @@ Interested in data storytelling? Come **join the [#ComicgenFriday](https://grame
 <!-- end -->
 
 <!-- var usage -->
-## Usage
+## Usage of system
 
 A simple way to use Comicgen is from [gramener.com/comicgen/](https://gramener.com/comicgen/).
 
@@ -92,7 +92,7 @@ The raw SVGs and PNGs are at
 You can create comics by directly linking to these files.
 You can embed these files directly in your plugin.
 
-## JavaScript API
+## Used JavaScript API
 
 To explicitly run comicgen on a selector, run `comicgen(selector)`. This lets
 you dynamically create or change a a character.
