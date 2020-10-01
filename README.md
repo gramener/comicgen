@@ -842,4 +842,7 @@ If you have any questions, please contact us at [comicgen.powerbi@gramener.com](
 - [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/)
 - [Discuss on Hacker News](https://news.ycombinator.com/item?id=20049116)
 - [Fork on Github](https://github.com/gramener/comicgen)
-<!-- end -->
+
+Contributors -  
+## Contributors 
+[S Anand](https://github.com/sanand)
