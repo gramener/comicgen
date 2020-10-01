@@ -26,7 +26,7 @@ Here's a 3-minute video explaining how to create your own comic strip.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/E_2hdZuugI8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Fonts
+## FONTS
 
 For lettering, you can use comic fonts from
 [Google fonts](https://fonts.google.com/?category=Handwriting) or
