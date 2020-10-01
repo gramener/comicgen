@@ -1,4 +1,4 @@
-# Comicgen
+# Comicgen : The best Comic platform
 
 <!-- var introduction -->
 We love comics. We badly wanted to create comic strips. But there was one
