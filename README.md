@@ -149,7 +149,7 @@ comicgen('.new')
 
 <!-- var vision -->
 
-# Vision
+# Vision is?
 
 We created Comicgen to help people write better stories using comic.
 
