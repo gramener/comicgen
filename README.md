@@ -1,4 +1,4 @@
-# Comicgen
+# Comicgen: Comic Creator - Gramener
 
 <!-- var introduction -->
 We love comics. We badly wanted to create comic strips. But there was one
