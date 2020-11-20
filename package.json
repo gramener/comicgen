@@ -20,7 +20,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "fast-xml-parser": "3"
+    "cheerio": "1.0.0-rc.3"
   },
   "devDependencies": {
     "@rollup/plugin-json": "4",

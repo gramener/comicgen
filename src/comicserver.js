@@ -1,7 +1,8 @@
 // comicserver() takes a configuration object and returns a fully-rendered SVG
 const fs = require('fs')
 const path = require('path')
-const parser = require('fast-xml-parser')
+const cheerio = require('cheerio')
+
 
 let comic_root = 'svg/'   // TODO: compute this path
 
@@ -20,14 +21,24 @@ function comic(options) {
   // Else, it’s a folder that should have an `index.svg` and `index.json`
   else if (stat.isDirectory()) {
     svg = fs.readFileSync(path.join(filepath, 'index.svg'), 'utf8')
+    // TODO: replace $xxx template values
   }
   else {
     throw new Error('TODO')
   }
   // If the template contains a <comic> object, recursively replace it with comic()
   // parser.parse()
-  return svg
+  return comicparse(svg)
 }
+
+function comicparse(html) {
+  let $ = cheerio.load(html)
+  $('comic').each(function (index, el) {
+    $(el).replaceWith(comic(el.attribs))
+  })
+  return $('body').html()
+}
+
 
 
 module.exports = comic
