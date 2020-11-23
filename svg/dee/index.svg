@@ -1,4 +1,4 @@
-<svg x="$x" y="$y" width="$width" height="$height" viewBox="0 0 500 600">
-  <comic name="$name/$angle/emotion/$emotion.svg"></comic>
-  <comic name="$name/$angle/pose/$pose.svg"></comic>
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice" x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" viewBox="0 0 {{width}} {{height}}">
+  <comic name="{{name}}/{{angle}}/emotion/{{emotion}}.svg"></comic>
+  <comic name="{{name}}/{{angle}}/pose/{{pose}}.svg"></comic>
 </svg>

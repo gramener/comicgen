@@ -1,20 +1,17 @@
 const fs = require('fs')
+const process = require('process')
 const test = require('tape')
-const cheerio = require('cheerio')
+const parser = require('fast-xml-parser')
 const comic = require('../src/comicserver')
 
-function comicparse(html) {
-  let $ = cheerio.load(html)
-  $('comic').each(function (index, el) {
-    $(el).replaceWith(comic(el.attribs))
-  })
-  return $('body').html()
-}
+const argv = require('minimist')(process.argv.slice(2))
+const regenerate = argv._.indexOf('regenerate') >= 0
+
 
 function eq(t, actual, expected, msg) {
-  return t.equal(
-    cheerio.load(actual.trim()).html(),
-    cheerio.load(expected.trim()).html(),
+  return t.deepEqual(
+    parser.parse(actual.trim(), { ignoreAttributes: false }),
+    parser.parse(expected.trim(), { ignoreAttributes: false }),
     msg)
 }
 
@@ -25,14 +22,14 @@ test('comic without options returns an empty string', function (t) {
 
 test('comic loads a single SVG file', function (t) {
   eq(t,
-    comicparse('<comic name="dee/side/emotion/afraid.svg"></comic>'),
+    comic('<comic name="dee/side/emotion/afraid.svg"></comic>'),
     fs.readFileSync('svg/dee/side/emotion/afraid.svg', 'utf8'))
   t.end()
 })
 
 test('comic parses multiple SVG files', function (t) {
   eq(t,
-    comicparse([
+    comic([
       '<comic name="dee/side/emotion/afraid.svg"></comic>',
       '<comic name="dee/side/pose/shrug.svg"></comic>'
     ].join('')),
@@ -44,12 +41,15 @@ test('comic parses multiple SVG files', function (t) {
 })
 
 test('comic loads a single character', function (t) {
-  let result = comic({
+  const expected_file = 'test/results/dee-straight-cry-angry.svg'
+  const actual = comic({
     name: 'dee',
     angle: 'straight',
     emotion: 'cry',
     pose: 'angry'
   })
-  t.equal(result, fs.readFileSync('test/results/dee-straight-cry-angry.svg', 'utf8'))
+  if (regenerate)
+    fs.writeFileSync(expected_file, actual)
+  eq(t, actual, fs.readFileSync(expected_file, 'utf8'))
   t.end()
 })

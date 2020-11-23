@@ -20,7 +20,8 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "cheerio": "1.0.0-rc.3"
+    "cheerio": "1.0.0-rc.3",
+    "mustache": "4"
   },
   "devDependencies": {
     "@rollup/plugin-json": "4",
@@ -29,8 +30,10 @@
     "cli-progress": "3",
     "eslint-plugin-template": "0.3",
     "express": "4",
+    "fast-xml-parser": "3",
     "faucet": "0.0",
     "jquery": "3",
+    "minimist": "1",
     "puppeteer": "1",
     "rimraf": "2",
     "rollup": "1",
