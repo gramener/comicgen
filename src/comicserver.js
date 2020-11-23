@@ -14,7 +14,9 @@ function comic(options) {
 
   // If options are a string, treat it as a HTML template. Replace all <comic> instances
   else if (typeof options == 'string') {
-    // TODO: If there is no <comic> tag, just return the string as-is
+    // If there is no <comic> tag, just return the string as-is
+    if (!options.match(/<\s*comic\b/i))
+      return options.trim()
     // Otherwise, replace all <comic> instances via comic()
     let $ = cheerio.load(options, { xmlMode: true })
     $('comic').each(function (index, el) {
