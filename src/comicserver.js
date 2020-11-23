@@ -8,9 +8,8 @@ const mustache = require('mustache')
 let root = path.join(__dirname, '..', 'svg')
 
 function comic(options) {
-  if (!options) {
+  if (!options)
     return ''
-  }
 
   // If options are a string, treat it as a HTML template. Replace all <comic> instances
   else if (typeof options == 'string') {
@@ -25,7 +24,7 @@ function comic(options) {
     return $.html().trim()
   }
 
-  // Else,
+  // Else, if we get a dict of options...
   else if (typeof options == 'object') {
     // comic({}) return an empty string
     if (!options.name)
