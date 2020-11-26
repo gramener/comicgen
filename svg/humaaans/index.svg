@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice" x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" viewBox="0 0 {{width}} {{height}}">
+  <g transform="translate(63,0)"><comic name="{{name}}/head/{{head}}.svg"></comic></g>
+  <g transform="translate(-15,199)"><comic name="{{name}}/bottom/{{bottom}}.svg"></comic></g>
+  <g transform="translate(0,85)"><comic name="{{name}}/body/{{body}}.svg"></comic></g>
+</svg>

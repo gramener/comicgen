@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice" x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" viewBox="0 0 {{width}} {{height}}">
+  <comic name="{{name}}/face/{{face}}.svg"></comic>
+  <comic name="{{name}}/hair/{{hair}}.svg"></comic>
+  <comic name="{{name}}/eye/{{eye}}.svg"></comic>
+  <comic name="{{name}}/mouth/{{mouth}}.svg"></comic>
+  <comic name="{{name}}/nose/{{nose}}.svg"></comic>
+</svg>

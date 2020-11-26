@@ -30,10 +30,21 @@ function comic(options) {
     if (!options.name)
       return ''
     let filepath = path.join(root, options.name)
+    let stat
+    try {
+      stat = fs.lstatSync(filepath)
+    } catch(e) {
+      throw new ComicError(`Unknown character ${options.name}`, { name: options.name })
+    }
     // If it’s a directory, read the `index.svg`. Else read the file intself
-    if (fs.lstatSync(filepath).isDirectory())
+    if (stat.isDirectory())
       filepath = path.join(filepath, 'index.svg')
-    let svg = fs.readFileSync(filepath , 'utf8')
+    let svg
+    try {
+      svg = fs.readFileSync(filepath , 'utf8')
+    } catch(e) {
+      throw new ComicError(`Missing ${options.name}/index.svg`, { name: options.name })
+    }
 
     // Load all index.json files in every directory from root to filepath
     // TODO: cache this -- this is very slow
@@ -52,6 +63,14 @@ function comic(options) {
   }
   else
     throw new Error('TODO')
+}
+
+
+class ComicError extends Error {
+  constructor(message, options) {
+    super(message)
+    this.options = options
+  }
 }
 
 

@@ -40,9 +40,9 @@ test('comic parses multiple SVG files', function (t) {
   t.end()
 })
 
-test('comic loads a single character', function (t) {
+test('comic loads a single character as XML attributes or JSON config', function (t) {
   const expected_file = 'test/results/dee-straight-cry-angry.svg'
-  const actual = comic({
+  let actual = comic({
     name: 'dee',
     angle: 'straight',
     emotion: 'cry',
@@ -50,6 +50,8 @@ test('comic loads a single character', function (t) {
   })
   if (regenerate)
     fs.writeFileSync(expected_file, actual)
+  eq(t, actual, fs.readFileSync(expected_file, 'utf8'))
+  actual = comic('<comic name="dee" angle="straight" emotion="cry" pose="angry">')
   eq(t, actual, fs.readFileSync(expected_file, 'utf8'))
   t.end()
 })
