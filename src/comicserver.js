@@ -1,6 +1,7 @@
 // comicserver() takes a configuration object and returns a fully-rendered SVG
 const fs = require('fs')
 const path = require('path')
+const _ = require('lodash')
 const cheerio = require('cheerio')
 const mustache = require('mustache')
 
@@ -47,22 +48,35 @@ function comic(options) {
     }
 
     // Load all index.json files in every directory from root to filepath
-    // TODO: cache this -- this is very slow
-    let dirs = path.relative(root, filepath).split(path.sep)
-    let config = {}
-    dirs.forEach(function (dir, index) {
-      const json_path = path.join(root, ...dirs.slice(0, index), 'index.json')
-      if (fs.existsSync(json_path))
-        Object.assign(config, JSON.parse(fs.readFileSync(json_path, 'utf8')))
-    })
+    const config = getconfig(filepath, root)
     // Render the SVG as a template
-    svg = mustache.render(svg, Object.assign({}, config.defaults, options))
+    svg = mustache.render(svg, _.merge({
+      comic_width: config.defaults.width,
+      comic_height: config.defaults.height,
+      comic_width_half: config.defaults.width / 2,
+      comic_height_half: config.defaults.height / 2,
+    }, config.defaults, options))
 
     // If the template contains a <comic> object, recursively replace it with comic()
     return comic(svg)
   }
   else
     throw new Error('TODO')
+}
+
+
+function getconfig(filepath, root) {
+  let dirs = path.relative(root, filepath).split(path.sep)
+  let config = {}
+  dirs.forEach(function (dir, index) {
+    const json_path = path.join(root, ...dirs.slice(0, index), 'index.json')
+    if (fs.existsSync(json_path)) {
+      let subconfig = JSON.parse(fs.readFileSync(json_path, 'utf8'))
+      let baseconfig = subconfig.extends ? getconfig(subconfig.extends) : {}
+      _.merge(config, baseconfig, subconfig)
+    }
+  })
+  return config
 }
 
 

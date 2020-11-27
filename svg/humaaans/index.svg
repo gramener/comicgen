@@ -1,5 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice" x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" viewBox="0 0 {{width}} {{height}}">
-  <g transform="translate(63,0)"><comic name="{{name}}/head/{{head}}.svg"></comic></g>
-  <g transform="translate(-15,199)"><comic name="{{name}}/bottom/{{bottom}}.svg"></comic></g>
-  <g transform="translate(0,85)"><comic name="{{name}}/body/{{body}}.svg"></comic></g>
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" width="{{width}}" height="{{height}}" viewBox="0 0 {{comic_width}} {{comic_height}}">
+  <g transform="translate({{comic_width_half}},{{comic_height_half}}) scale({{scale}}) translate(-{{comic_width_half}},-{{comic_height_half}}) translate({{x}},{{y}})">
+    <g transform="translate(63,0)"><comic name="{{name}}/head/{{head}}.svg"></comic></g>
+    <g transform="translate(-15,199)"><comic name="{{name}}/bottom/{{bottom}}.svg"></comic></g>
+    <g transform="translate(0,85)"><comic name="{{name}}/body/{{body}}.svg"></comic></g>
+  </g>
 </svg>

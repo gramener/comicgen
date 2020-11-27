@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice" x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}" viewBox="0 0 {{width}} {{height}}">
-  <comic name="{{name}}/{{angle}}/emotion/{{emotion}}.svg"></comic>
-  <comic name="{{name}}/{{angle}}/pose/{{pose}}.svg"></comic>
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice" width="{{width}}" height="{{height}}" viewBox="0 0 {{comic_width}} {{comic_height}}">
+  <g transform="translate({{comic_width_half}},{{comic_height_half}}) scale({{scale}}) translate(-{{comic_width_half}},-{{comic_height_half}}) translate({{x}},{{y}})">
+    <comic name="{{name}}/{{angle}}/emotion/{{emotion}}.svg"></comic>
+    <comic name="{{name}}/{{angle}}/pose/{{pose}}.svg"></comic>
+  </g>
 </svg>
