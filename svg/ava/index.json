@@ -1,0 +1,7 @@
+{
+  "type": "emotionpose",
+  "defaults": {
+    "width": 500,
+    "height": 600
+  }
+}

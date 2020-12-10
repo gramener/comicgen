@@ -30,32 +30,28 @@ function comic(options) {
     // comic({}) return an empty string
     if (!options.name)
       return ''
-    let filepath = path.join(root, options.name)
+    let svg_path = path.join(root, options.name)
     let stat
     try {
-      stat = fs.lstatSync(filepath)
+      stat = fs.lstatSync(svg_path)
     } catch(e) {
       throw new ComicError(`Unknown character ${options.name}`, { name: options.name })
     }
     // If it’s a directory, read the `index.svg`. Else read the file intself
     if (stat.isDirectory())
-      filepath = path.join(filepath, 'index.svg')
-    let svg
-    try {
-      svg = fs.readFileSync(filepath , 'utf8')
-    } catch(e) {
-      throw new ComicError(`Missing ${options.name}/index.svg`, { name: options.name })
-    }
+      svg_path = path.join(svg_path, 'index.svg')
+    let svg = get_template(svg_path)
 
-    // Load all index.json files in every directory from root to filepath
-    const config = getconfig(filepath, root)
+    // Merge all index.json files in every directory from root to svg_path to get the config
+    const config = get_config(svg_path, root)
     // Render the SVG as a template
-    svg = mustache.render(svg, _.merge({
+    const comic_attrs = _.merge({
       comic_width: config.defaults.width,
       comic_height: config.defaults.height,
       comic_width_half: config.defaults.width / 2,
-      comic_height_half: config.defaults.height / 2,
-    }, config.defaults, options))
+      comic_height_half: config.defaults.height / 2
+    }, config.defaults, options)
+    svg = mustache.render(svg, comic_attrs)
 
     // If the template contains a <comic> object, recursively replace it with comic()
     return comic(svg)
@@ -65,20 +61,38 @@ function comic(options) {
 }
 
 
-function getconfig(filepath, root) {
-  let dirs = path.relative(root, filepath).split(path.sep)
+// Get config from index.json for an SVG file. Search in the svg_path directory and all parent
+// directories up to root.
+// TODO: cache this
+function get_config(svg_path, root) {
+  let dirs = path.relative(root, svg_path).split(path.sep)
   let config = {}
   dirs.forEach(function (dir, index) {
+    // Search for index.json in all folders from the filepath up to root
     const json_path = path.join(root, ...dirs.slice(0, index), 'index.json')
     if (fs.existsSync(json_path)) {
+      // Load every index.json found
       let subconfig = JSON.parse(fs.readFileSync(json_path, 'utf8'))
-      let baseconfig = subconfig.extends ? getconfig(subconfig.extends) : {}
-      _.merge(config, baseconfig, subconfig)
+      // If it has is an "import", import that configuration
+      if (subconfig.import) {
+        const extend_path = path.join(json_path, '..', subconfig.import)
+        _.merge(config, get_config(extend_path, root))
+        _.unset(subconfig, 'import')
+      }
+      // In any case, merge this index.json
+      _.merge(config, subconfig)
     }
   })
   return config
 }
 
+
+function get_template(svg_path) {
+  let svg = fs.readFileSync(svg_path, 'utf8')
+  return svg.replace(/<\?import\s+(.*?)\?>/, function(match, import_path) {
+    return get_template(path.join(svg_path, '..', import_path.replace(/^["']|["']$/g, '')))
+  })
+}
 
 class ComicError extends Error {
   constructor(message, options) {

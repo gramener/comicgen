@@ -1,9 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice" width="{{width}}" height="{{height}}" viewBox="0 0 {{comic_width}} {{comic_height}}">
   <g transform="translate({{comic_width_half}},{{comic_height_half}}) scale({{scale}}) translate(-{{comic_width_half}},-{{comic_height_half}}) translate({{x}},{{y}})">
-    <comic name="{{name}}/face/{{face}}.svg"></comic>
-    <comic name="{{name}}/hair/{{hair}}.svg"></comic>
-    <comic name="{{name}}/eye/{{eye}}.svg"></comic>
-    <comic name="{{name}}/mouth/{{mouth}}.svg"></comic>
-    <comic name="{{name}}/nose/{{nose}}.svg"></comic>
+    {{#face}}
+      <comic name="{{name}}/face/{{face}}.svg"></comic>
+    {{/face}}
+    {{#hair}}
+      <comic name="{{name}}/hair/{{hair}}.svg"></comic>
+    {{/hair}}
+    {{#eye}}
+      <comic name="{{name}}/eye/{{eye}}.svg"></comic>
+    {{/eye}}
+    {{#mouth}}
+      <comic name="{{name}}/mouth/{{mouth}}.svg"></comic>
+    {{/mouth}}
+    {{#nose}}
+      <comic name="{{name}}/nose/{{nose}}.svg"></comic>
+    {{/nose}}
   </g>
 </svg>
