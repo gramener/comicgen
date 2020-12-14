@@ -1,3 +1,6 @@
+# We use yarn.lock, not package-lock.json
+package-lock.json
+
 # Don't commit generated files
 test/tape.js
 dist/
@@ -5,7 +8,6 @@ png/
 
 # Don't commit libraries
 node_modules/
-bower_components/
 
 # Ignore other files
 TODO
