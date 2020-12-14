@@ -1,10 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice" width="{{width}}" height="{{height}}" viewBox="0 0 {{comic_width}} {{comic_height}}">
-  <g transform="translate({{comic_width_half}},{{comic_height_half}}) scale({{scale}}) translate(-{{comic_width_half}},-{{comic_height_half}}) translate({{x}},{{y}})">
-    {{#emotion}}
-      <comic name="{{name}}/{{angle}}/emotion/{{emotion}}.svg"></comic>
-    {{/emotion}}
-    {{#pose}}
-      <comic name="{{name}}/{{angle}}/pose/{{pose}}.svg"></comic>
-    {{/pose}}
-  </g>
-</svg>
+{{#emotion}}
+  <comic name="{{name}}/{{angle}}/emotion/{{emotion}}.svg"></comic>
+{{/emotion}}
+{{#pose}}
+  <comic name="{{name}}/{{angle}}/pose/{{pose}}.svg"></comic>
+{{/pose}}

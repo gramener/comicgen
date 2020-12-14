@@ -1,13 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice" width="{{width}}" height="{{height}}" viewBox="0 0 {{comic_width}} {{comic_height}}">
-  <g transform="translate({{comic_width_half}},{{comic_height_half}}) scale({{scale}}) translate(-{{comic_width_half}},-{{comic_height_half}}) translate({{x}},{{y}})">
-    {{#head}}
-      <comic x="63" name="{{name}}/head/{{head}}.svg"></comic>
-    {{/head}}
-    {{#bottom}}
-      <comic x="-15" y="199" name="{{name}}/bottom/{{bottom}}.svg"></comic>
-    {{/bottom}}
-    {{#body}}
-      <comic y="85" name="{{name}}/body/{{body}}.svg"></comic>
-    {{/body}}
-  </g>
-</svg>
+{{#head}}
+  <comic x="63" name="{{name}}/head/{{head}}.svg"></comic>
+{{/head}}
+{{#bottom}}
+  <comic x="-15" y="199" name="{{name}}/bottom/{{bottom}}.svg"></comic>
+{{/bottom}}
+{{#body}}
+  <comic y="85" name="{{name}}/body/{{body}}.svg"></comic>
+{{/body}}

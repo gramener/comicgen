@@ -45,14 +45,15 @@ function comic(options) {
     // Merge all index.json files in every directory from root to svg_path to get the config
     const config = get_config(svg_path, root)
     // Render the SVG as a template
-    const comic_attrs = _.merge({
-      comic_width: config.defaults.width,
-      comic_height: config.defaults.height,
-      comic_width_half: config.defaults.width / 2,
-      comic_height_half: config.defaults.height / 2
-    }, config.defaults, options)
-    svg = mustache.render(svg, comic_attrs)
-
+    const attrs = _.merge({}, config.defaults, options)
+    const comic_width_half = config.defaults.width / 2
+    const comic_height_half = config.defaults.height / 2
+    svg = `
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice" width="${attrs.width}" height="${attrs.height}" viewBox="0 0 ${config.defaults.width} ${config.defaults.height}">
+  <g transform="translate(${comic_width_half},${comic_height_half}) scale(${attrs.scale}) translate(-${comic_width_half},-${comic_height_half}) translate(${attrs.x},${attrs.y})">
+    ${mustache.render(svg, attrs)}
+  </g>
+</svg>`
     // If the template contains a <comic> object, recursively replace it with comic()
     return comic(svg)
   }

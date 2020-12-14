@@ -1,7 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice" width="{{width}}" height="{{height}}" viewBox="0 0 {{comic_width}} {{comic_height}}">
-  <g transform="translate({{comic_width_half}},{{comic_height_half}}) scale({{scale}}) translate(-{{comic_width_half}},-{{comic_height_half}}) translate({{x}},{{y}})">
-    {{#speechbubble}}
-      <comic name="{{name}}/{{speechbubble}}.svg"></comic>
-    {{/speechbubble}}
-  </g>
-</svg>
+{{#speechbubble}}
+  <comic name="{{name}}/{{speechbubble}}.svg"></comic>
+{{/speechbubble}}
