@@ -831,6 +831,14 @@ If you have any questions, please contact us at [comicgen.powerbi@gramener.com](
 
 <!-- end -->
 
+<!-- var Support -->
+
+### Support
+
+Please use [issues](https://github.com/gramener/comicgen/issues) link to get support for any issues.
+
+<!-- end -->
+
 
 <!-- var social_markdown -->
 <!-- Github README won't display the above share icons. So create links. Don't display this on index.html -->
