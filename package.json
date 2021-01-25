@@ -7,6 +7,9 @@
   "unpkg": "dist/comicgen.min.js",
   "repository": "git@code.gramener.com:s.anand/deedey.git",
   "author": "S Anand <s.anand@gramener.com>",
+  "bin": {
+    "comicserver": "./src/comicserver.js"
+  },
   "scripts": {
     "build": "rimraf dist && rollup -c && cleancss -O2 --source-map --output dist/comicgen.min.css src/comicgen.css",
     "build-png": "node scripts/png.js && bash scripts/compress.sh",

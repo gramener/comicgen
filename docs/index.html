@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Comicgen: Comic Creator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="description" content="Create comics for your website or app with a JavaScript library. Choose a character, angle, emotion and pose. Size the image. Embed in your page.">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:site" content="Gramener">
+  <meta property="og:url" content="https://gramener.com/comicgen/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Comicgen: Comic Creator">
+  <meta property="og:description" content="Create comics for your website or app with a JavaScript library. Choose a character, angle, emotion and pose. Size the image. Embed in your page.">
+  <meta property="og:image" content="https://gramener.com/comicgen/docs/dee-and-dey-panels.png">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+  <style>
+    :root {
+      --bs-font-sans-serif: Neucha, Chalkboard, "Comic Sans MS", sans-serif;
+    }
+    #character { min-height: 600px; }
+  </style>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/highlightjs@9.12.0/styles/github.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42126862-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || []
+    function gtag() { window.dataLayer.push(arguments) }
+    gtag('js', new Date())
+    gtag('config', 'UA-42126862-1')
+  </script>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark text-light border-bottom body-color">
+    <div class="container">
+      <a class="navbar-brand font-weight-bold" href="#">Comicgen</a>
+      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-target="#collapsibleNavId"           aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav me-auto">
+          <li class="navbar-item"><i class="far fa-smile"></i></li>
+        </ul>
+        <ul class="navbar-nav">
+          <a class="navbar-brand" href="https://gramener.com/" target="_blank" rel="noopener">
+            <img src="gramener.png" alt="Gramener" height="40">
+          </a>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-3">
+    <ul class="nav nav-tabs" id="comic-tab">
+      <li class="nav-item"><a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home">Home</a></li>
+      <li class="nav-item"><a class="nav-link" id="usage-tab" data-bs-toggle="tab" href="#usage">Usage</a></li>
+      <li class="nav-item"><a class="nav-link" id="api-tab" data-bs-toggle="tab" href="#api">API</a></li>
+      <li class="nav-item"><a class="nav-link" id="design-tab" data-bs-toggle="tab" href="#design">Design</a></li>
+      <li class="nav-item"><a class="nav-link" id="about-tab" data-bs-toggle="tab" href="#about">About</a></li>
+    </ul>
+    <div class="tab-content" id="comic-tab-content">
+      <div class="tab-pane active" id="home">
+        <div class="row my-4">
+          <div class="col-xl-4">
+            <h1>Make your own comic</h1>
+            <md data-target="introduction"></md>
+          </div>
+          <div class="col-xl-8">
+            <form class="selector form-inline">
+              <div id="menu" class="d-flex"></div>
+              <input name="x" type="hidden" value="0">
+              <input name="y" type="hidden" value="0">
+              <input name="scale" type="hidden" value="1">
+              <input name="width" type="hidden" value="500">
+              <input name="height" type="hidden" value="600">
+            </form>
+            <div id="character"></div>
+            <div class="mb-3">
+              <button type="button" class="btn btn-sm btn-light border download" data-clipboard-target="#code">
+                <i class="far fa-arrow-alt-circle-down"></i> Save image
+              </button>
+              <button type="button" class="btn btn-sm btn-light border copy" data-clipboard-target="#code">
+                <i class="far fa-copy"></i> Copy code
+              </button>
+              <label class="mx-1">
+                Background <input type="color" value="#ffffff" class="btn btn-light border p-0 bg-color">
+              </label>
+              <a class="btn btn-sm btn-light border urlfilter reset" data-target="#" href="#">
+                <i class="fa fa-arrows-alt"></i> Reset position
+              </a>
+              <span>Pinch to zoom. Pan to move</span>
+            </div>
+          </div><!-- .col -->
+        </div><!-- .row -->
+      </div><!-- .tab-pane -->
+      <div class="tab-pane" id="usage">
+        <md data-target="usage">
+      </div>
+      <div class="tab-pane" id="api">
+        <md data-target="api">
+      </div>
+      <div class="tab-pane" id="design">
+        <md data-target="design">
+      </div>
+      <div class="tab-pane" id="about">
+        <md data-target="about">
+      </div>
+    </div><!-- .tab-content -->
+    <md data-target="social"></md>
+  </div><!-- .container -->
+
+  <footer class="mt-auto text-center pt-3 bg-light border-top">
+    <p>Made by <a href="https://gramener.com/">Gramener</a>.
+      Code released under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.
+      Images under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>
+      or <a href="https://creativecommons.org/choose/zero/">CC0</a>
+    </p>
+  </footer>
+
+  <script type="text/html" id="menu-template">
+    <div class="pe-2">
+      <label for="name">name</label>
+      <select class="form-select" id="name" name="name">
+        <option></option>
+        <% if (q.name && !(q.name in chars)) q.name = Object.keys(chars)[0] %>
+        <% var info = chars[q.name] || {} %>
+        <% for (var key in chars) { %>
+          <option <%= q.name == key ? 'selected' : '' %>><%= key %></option>
+        <% } %>
+      </select>
+    </div>
+
+    <% var nodes = info.files || {} %>
+    <% for (var dir of info.dirs || []) { %>
+      <div class="pe-2">
+        <label for="<%= dir %>"><%= dir %></label>
+        <select class="form-select" id="<%= dir %>" name="<%= dir %>">
+          <option></option>
+          <% if (!(q[dir] in nodes)) q[dir] = Object.keys(nodes)[0] %>
+          <% for (var key in nodes) { %>
+            <option <%= q[dir] == key ? 'selected' : '' %>><%= key %></option>
+          <% } %>
+          <% nodes = nodes[q[dir]] %>
+        </select>
+      </div>
+    <% } %>
+
+    <% for (var [key, vals] of Object.entries(nodes)) { %>
+      <div class="pe-2">
+        <label for="<%= key %>"><%= key %></label>
+        <select class="form-select" id="<%= key %>" name="<%= key %>">
+          <option></option>
+          <% for (var val of vals) { %>
+            <option <%= q[key] == val ? 'selected' : '' %>><%= val %></option>
+          <% } %>
+        </select>
+      </div>
+    <% } %>
+  </script>
+
+
+  <script src="../node_modules/lodash/lodash.min.js"></script>
+  <script>
+    async function init() {
+      const response = await fetch('../dist/characterlist.json')
+      const chars = await response.json()
+      const template = _.template(document.querySelector('#menu-template').innerHTML)
+      const $menu = document.querySelector('#menu')
+      const $character = document.querySelector('#character')
+      await render()
+
+      async function render(q) {
+        $menu.innerHTML = template({ q: q || {}, chars, template })
+        var params = new URLSearchParams()
+        for (let node of $menu.querySelectorAll('select'))
+          params.append(node.name, node.value)
+        const response = await fetch('../comic?' + params)
+        $character.innerHTML = await response.text()
+      }
+
+      $menu.addEventListener('change', function (e) {
+        var q = {}
+        for (var node of $menu.querySelectorAll('select')) {
+          q[node.name] = node.value
+        }
+        render(q)
+      }, false)
+    }
+    init()
+  </script>
+
+  <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/g1@0.17.0/dist/g1.min.js"></script>
+  <script src="https://unpkg.com/showdown@1.9.0/dist/showdown.min.js"></script>
+  <script src="https://unpkg.com/highlightjs@9.12.0/highlight.pack.min.js"></script>
+  <script>
+    var url = g1.url.parse(location.hash.replace(/^#/, ''))
+
+    // Render part of README.md as Markdown. Sections delimited by <!-- var ... !>...<!-- end -->
+    $.get('../README.md')
+      .done(function (text) {
+        var converter = new showdown.Converter({ ghCodeBlocks: true, tables: true })
+        text.match(/<!--\s*var\s+\S*\s*-->[\s\S]*?<!--\s*end\s*-->/igm).forEach(function (match) {
+          var lines = match.split(/\n/)
+          var name = lines[0].replace(/^<!--\s*var\s+/, '').replace(/\s*-->$/, '')
+          $('md[data-target="' + name + '"]')
+            .addClass('d-block my-4')
+            .html(converter.makeHtml(lines.slice(1, -1).join('\n')))
+            .find('pre')
+            .each(function () { hljs.highlightBlock(this) })
+        })
+        $('md table').addClass('table table-sm')
+          .find('a').each(function () {
+            $(this).attr('target', '_blank')
+          })
+      })
+  </script>
+</body>
+</html>

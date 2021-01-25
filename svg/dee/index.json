@@ -4,5 +4,6 @@
     "width": 500,
     "height": 600,
     "angle": "straight"
-  }
+  },
+  "dirs": ["angle"]
 }

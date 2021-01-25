@@ -2,7 +2,7 @@ const fs = require('fs')
 const process = require('process')
 const test = require('tape')
 const parser = require('fast-xml-parser')
-const comic = require('../src/comicserver')
+const comic = require('../src/comic')
 
 const argv = require('minimist')(process.argv.slice(2))
 const regenerate = argv._.indexOf('regenerate') >= 0
