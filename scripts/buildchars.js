@@ -21,22 +21,45 @@ fs.readdirSync(svg_dir, { withFileTypes: true }).forEach(dirent => {
     const dirs = index.dirs || []
     chars[dirent.name] = {
       dirs: dirs,
-      files: getfiles(dir, dirs)
+      files: getfiles(dir, dirs, dirent.name)
     }
   }
 })
 
-function getfiles(folder, dirs) {
+function getfiles(folder, dirs, foldername) {
   const files = {}
   // If dirs is empty, just get all SVGs under the sub-folders
   if (dirs.length == 0) {
+    let directfolders = new Set(), directfiles = {}
     fs.readdirSync(folder, { withFileTypes: true }).forEach(dirent => {
-      if (!dirent.isDirectory())
+      if (!dirent.isDirectory()) {
+        if (dirent.name.search("index") < 0) {
+          if (!files[foldername]) {
+            console.log("no");
+            files[foldername] = []
+          }
+          files[foldername].push(dirent.name.replace(/\.svg$/i, ''))
+        }
+
         return
+      }
+
+
       const option = files[dirent.name] = []
+
       fs.readdirSync(path.join(folder, dirent.name)).forEach(file => {
+
         if (file.toLowerCase().endsWith('.svg'))
           option.push(file.replace(/\.svg$/i, ''))
+        else {
+          fs.readdirSync(path.join(folder, dirent.name, file)).forEach(child => {
+            if (child.toLowerCase().endsWith('.svg'))
+              if (dirent.name == "bottom" || dirent.name == "head")
+                option.push(file + "/" + child.replace(/\.svg$/i, ''))
+              else
+                option.push(child.replace(/\.svg$/i, ''))
+          })
+        }
       })
     })
   }

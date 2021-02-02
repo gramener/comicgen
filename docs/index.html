@@ -17,14 +17,21 @@
   <meta property="og:description" content="Create comics for your website or app with a JavaScript library. Choose a character, angle, emotion and pose. Size the image. Embed in your page.">
   <meta property="og:image" content="https://gramener.com/comicgen/docs/dee-and-dey-panels.png">
 
+  <style>
+    /* Ensure that this is the first rule in the first stylesheet. Used by JS */
+    #character { background-color: #ffffff; }
+    /* The rest can be any styles */
+    #character { overflow: hidden; position: relative; }
+    .navbar { background-color: #675b9e !important; }
+    :root {
+      --bs-font-sans-serif: Neucha, Chalkboard, "Comic Sans MS", sans-serif !important;
+    }
+    #code {white-space: pre-wrap;}
+    .text-centre{ text-align: centre; }
+    /* #character { min-height: 600px; } */
+  </style>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
-  <style>
-    :root {
-      --bs-font-sans-serif: Neucha, Chalkboard, "Comic Sans MS", sans-serif;
-    }
-    #character { min-height: 600px; }
-  </style>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/highlightjs@9.12.0/styles/github.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42126862-1"></script>
@@ -37,7 +44,7 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark text-light border-bottom body-color">
+  <nav class="navbar navbar-expand-md navbar-dark text-light border-bottom body-color">
     <div class="container">
       <a class="navbar-brand font-weight-bold" href="#">Comicgen</a>
       <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-target="#collapsibleNavId"           aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +56,7 @@
         </ul>
         <ul class="navbar-nav">
           <a class="navbar-brand" href="https://gramener.com/" target="_blank" rel="noopener">
-            <img src="gramener.png" alt="Gramener" height="40">
+            <img src="../docs/gramener.png" alt="Gramener" height="40">
           </a>
         </ul>
       </div>
@@ -80,22 +87,29 @@
               <input name="width" type="hidden" value="500">
               <input name="height" type="hidden" value="600">
             </form>
-            <div id="character"></div>
+            <div id="character" class="my-2">
+              <div class="target"></div>
+            </div>
             <div class="mb-3">
-              <button type="button" class="btn btn-sm btn-light border download" data-clipboard-target="#code">
+              <button type="button" class="btn btn-sm pt-0 btn-light border download" data-clipboard-target="#code">
                 <i class="far fa-arrow-alt-circle-down"></i> Save image
               </button>
-              <button type="button" class="btn btn-sm btn-light border copy" data-clipboard-target="#code">
+              <button type="button" class="btn btn-sm pt-0 btn-light border copy" data-clipboard-target="#code">
                 <i class="far fa-copy"></i> Copy code
               </button>
               <label class="mx-1">
                 Background <input type="color" value="#ffffff" class="btn btn-light border p-0 bg-color">
               </label>
-              <a class="btn btn-sm btn-light border urlfilter reset" data-target="#" href="#">
+              <a class="btn btn-sm pt-0 btn-light border urlfilter reset" data-target="#" href="#">
                 <i class="fa fa-arrows-alt"></i> Reset position
               </a>
               <span>Pinch to zoom. Pan to move</span>
             </div>
+            <div id="codetemp"></div>
+            <!-- <script type="text/html" class="codegen"> -->
+
+              <!-- <pre>template</pre> -->
+            <!-- </script> -->
           </div><!-- .col -->
         </div><!-- .row -->
       </div><!-- .tab-pane -->
@@ -123,11 +137,15 @@
     </p>
   </footer>
 
+  <script type="text/html" id="codegen">
+    <pre id="code"><%= url %></pre>
+  </script>
+
   <script type="text/html" id="menu-template">
-    <div class="pe-2">
+    <div class="pe-2 text-center">
       <label for="name">name</label>
       <select class="form-select" id="name" name="name">
-        <option></option>
+        <!-- <option></option> -->
         <% if (q.name && !(q.name in chars)) q.name = Object.keys(chars)[0] %>
         <% var info = chars[q.name] || {} %>
         <% for (var key in chars) { %>
@@ -138,10 +156,10 @@
 
     <% var nodes = info.files || {} %>
     <% for (var dir of info.dirs || []) { %>
-      <div class="pe-2">
+      <div class="pe-2 text-center">
         <label for="<%= dir %>"><%= dir %></label>
         <select class="form-select" id="<%= dir %>" name="<%= dir %>">
-          <option></option>
+          <!-- <option></option> -->
           <% if (!(q[dir] in nodes)) q[dir] = Object.keys(nodes)[0] %>
           <% for (var key in nodes) { %>
             <option <%= q[dir] == key ? 'selected' : '' %>><%= key %></option>
@@ -152,57 +170,172 @@
     <% } %>
 
     <% for (var [key, vals] of Object.entries(nodes)) { %>
-      <div class="pe-2">
+      <div class="pe-2 text-center">
         <label for="<%= key %>"><%= key %></label>
         <select class="form-select" id="<%= key %>" name="<%= key %>">
-          <option></option>
+          <!-- <option></option> -->
           <% for (var val of vals) { %>
             <option <%= q[key] == val ? 'selected' : '' %>><%= val %></option>
           <% } %>
         </select>
       </div>
     <% } %>
+
+    <!-- <div class="pe-2">
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-sm pt-0 move-left" type="button" title="Move layer below" tabindex="-1"><i class="fa fa-xs fa-arrow-left"></i></button>
+        <span for="ext">ext</span>
+        <button class="btn btn-sm pt-0 move-right" type="button" title="Move layer above" tabindex="-1"><i class="fa fa-xs fa-arrow-right"></i></button>
+      </div>
+      <select class="form-select" name="ext">
+        <option>svg</option>
+        <option>png</option>
+      </select>
+    </div> -->
+
+    <div class="pe-2 text-center">
+      <label for="mirror">mirror</label>
+      <select class="form-select" id="mirror" name="mirror">
+        <option></option>
+        <option value="mirror" <%= q.mirror == 'mirror' ? 'selected' : '' %>>mirror</option>
+      </select>
+    </div>
   </script>
 
 
   <script src="../node_modules/lodash/lodash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/plain-draggable@2.5.12/plain-draggable.min.js"></script>
+  <script src="https://cdn.statically.io/gh/zenorocha/clipboard.js/v2.0.6/dist/clipboard.min.js"></script>
+  <script src="https://unpkg.com/g1@0.17.0/dist/g1.min.js"></script>
+
   <script>
     async function init() {
+      var url = g1.url.parse(location.hash.replace(/^#/, ''))
+      var params = ''
       const response = await fetch('../dist/characterlist.json')
       const chars = await response.json()
       const template = _.template(document.querySelector('#menu-template').innerHTML)
+      const code_template = _.template(document.querySelector('#codegen').innerHTML)
+      const $codetemp = document.querySelector('#codetemp')
       const $menu = document.querySelector('#menu')
-      const $character = document.querySelector('#character')
-      await render()
+      const $download = document.querySelector('.download')
+      const $character = document.querySelector('#character .target')
+
+      if(location.hash){
+        q = g1.url.parse(location.hash.replace(/^#/, '')).searchKey;
+        await render(q)
+      }else{
+        await render()
+        $('.form-select').children('option:eq(0)').prop('selected', true)
+      }
+      change();
 
       async function render(q) {
         $menu.innerHTML = template({ q: q || {}, chars, template })
-        var params = new URLSearchParams()
+        params = new URLSearchParams()
         for (let node of $menu.querySelectorAll('select'))
           params.append(node.name, node.value)
         const response = await fetch('../comic?' + params)
         $character.innerHTML = await response.text()
       }
 
-      $menu.addEventListener('change', function (e) {
+      async function change() {
         var q = {}
-        for (var node of $menu.querySelectorAll('select')) {
+        for (var node of $menu.querySelectorAll('.form-select')) {
           q[node.name] = node.value
         }
-        render(q)
+        await render(q)
+        changeUrl()
+        if(q.mirror){
+          let svg_width = $($character).children("svg").attr("width")
+          $($character).find("svg g").eq(0).attr("transform", `translate(${svg_width},0)scale(-1,1)`)
+        }else
+          $($character).find("svg g").eq(0).removeAttr("transform")
+      }
+
+      function changeUrl(){
+        location.hash = '?' + $('.selector').serialize()
+        q = g1.url.parse(location.hash.replace(/^#/, '')).searchKey
+        $codetemp.innerHTML = code_template({ url: location.origin + '/comic?' + params || '', code_template})
+      }
+
+      $menu.addEventListener('change', function (e) {
+        change();
+        let targetid = "#" + e.target.id
+        $(targetid).focus()
       }, false)
+
+
+      $download.addEventListener('click',function(e) {
+        // var ext = $(':input[name="ext"]').val()
+        var $target = $('#character .target > svg')
+        // filename = all character attributes ...
+        var filename = $('#menu select').map(function () { return $(this).val() })
+        // ... except the last 2 (ext, mirror)
+        filename = filename.get().slice(0, -2).join('-')
+        // if (ext == 'png')
+        //   saveSvgAsPng($target.get(0), filename + '.png')
+        // else if (ext == 'svg') {
+        // Create a copy of the SVG and replace the <image>s with the actual HTML
+        var $svg = $target.clone()
+        $svg.attr('xmlns', 'http://www.w3.org/2000/svg')
+        var link = document.createElement('a')
+        link.href = URL.createObjectURL(new Blob([
+          '<?xml version="1.0" standalone="no"?>\r\n',
+          $svg.get(0).outerHTML
+        ], { type: 'image/svg+xml;charset=utf-8' }))
+        link.download = filename + '.svg'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      })
+
+      $('.bg-color').on('input, change', function () {
+        // The first rule in the first sheet defines the background color for the target-container
+        document.styleSheets[0].cssRules[0].style.backgroundColor = $(this).val()
+      })
+
+    // Arrow buttons move
+    // let buttons = [
+    //   {left_or_right: '.move-left', target: 'prev', insert: 'insertBefore'},
+    //   {left_or_right: '.move-right', target: 'next', insert: 'insertAfter'},
+    // ];
+    // buttons.forEach( function (conf) {
+    //   $('#menu').on('click', conf.left_or_right, function () {
+    //     var $this = $(this).parents('.pe-2')
+    //     var $target = $this[conf.target]()
+    //     if ($target.length) {
+    //       $this[conf.insert]($target)
+    //       location.hash = '?' + $('.selector').serialize()
+    //       $(window).trigger('#', g1.url.parse(location.hash.replace(/^#/, '')))
+    //     }
+    //   })
+    // })
+
+    // Dragging the target image changes the x, y
+    // var pos
+    // let draggable = new PlainDraggable($('.target').get(0), {
+    //   containment: {left: -10000, top: -10000, width: 50000, height: 50000},
+    //   onDragStart: function () { pos = {left: this.left, top: this.top} }
+    //   // onDragEnd: function () {
+    //   //   $('input[name="x"]').val(Math.round(+(q.x || defaults.x) + this.left - pos.left))
+    //   //   $('input[name="y"]').val(Math.round(+(q.y || defaults.y) + this.top - pos.top))
+    //   //   location.hash = '?' + $('.selector').serialize()
+    //   //   this.left = pos.left
+    //   //   this.top = pos.top
+    //   // }
+    // })
+
+    new ClipboardJS('.copy')
     }
     init()
   </script>
 
   <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
   <script src="https://unpkg.com/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/g1@0.17.0/dist/g1.min.js"></script>
   <script src="https://unpkg.com/showdown@1.9.0/dist/showdown.min.js"></script>
   <script src="https://unpkg.com/highlightjs@9.12.0/highlight.pack.min.js"></script>
   <script>
-    var url = g1.url.parse(location.hash.replace(/^#/, ''))
-
     // Render part of README.md as Markdown. Sections delimited by <!-- var ... !>...<!-- end -->
     $.get('../README.md')
       .done(function (text) {
