@@ -8,34 +8,38 @@ const mustache = require('mustache')
 // TODO: Allow users to override root in options
 let root = path.join(__dirname, '..', 'svg')
 
-function comic(options) {
-  if (!options)
+function comic(template, _replacements) {
+  if (!template)
     return ''
 
   // If options are a string, treat it as a HTML template. Replace all <comic> instances
-  else if (typeof options == 'string') {
+  else if (typeof template == 'string') {
     // If there is no <comic> tag, just return the string as-is
-    if (!options.match(/<\s*comic\b/i))
-      return options.trim()
+    if (!template.match(/<\s*comic\b/i))
+      return template.trim()
     // Otherwise, replace all <comic> instances via comic()
-    let $ = cheerio.load(options, { xmlMode: true })
+    let $ = cheerio.load(template, { xmlMode: true })
     $('comic').each(function (index, el) {
-      $(el).replaceWith(comic(el.attribs))
+      $(el).replaceWith(comic(el.attribs, _replacements))
+    })
+    _.each(_replacements, replace => {
+      if (replace.value)
+        $(replace.selector).attr(replace.attr, replace.value)
     })
     return $.html().trim()
   }
 
   // Else, if we get a dict of options...
-  else if (typeof options == 'object') {
+  else if (typeof template == 'object') {
     // comic({}) return an empty string
-    if (!options.name)
+    if (!template.name)
       return ''
-    let svg_path = path.join(root, options.name)
+    let svg_path = path.join(root, template.name)
     let stat
     try {
       stat = fs.lstatSync(svg_path)
     } catch(e) {
-      throw new ComicError(`Unknown character ${options.name}`, { name: options.name })
+      throw new ComicError(`Unknown character ${template.name}`, { name: template.name })
     }
     // If it’s a directory, read the `index.svg`. Else read the file intself
     if (stat.isDirectory())
@@ -45,7 +49,7 @@ function comic(options) {
     // Merge all index.json files in every directory from root to svg_path to get the config
     const config = get_config(svg_path, root)
     // Render the SVG as a template
-    const attrs = _.merge({}, config.defaults, options)
+    const attrs = _.merge({}, config.defaults, template)
     const comic_width_half = config.defaults.width / 2
     const comic_height_half = config.defaults.height / 2
     svg = `
@@ -55,7 +59,8 @@ function comic(options) {
   </g>
 </svg>`
     // If the template contains a <comic> object, recursively replace it with comic()
-    return comic(svg)
+    const _replacements = _.mapValues(config.replace, (v, k) => _.merge(v, { value: template[k] }))
+    return comic(svg, _replacements)
   }
   else
     throw new Error('TODO')

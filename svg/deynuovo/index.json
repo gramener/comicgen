@@ -1,3 +1,15 @@
 {
-  "import": "../dee/index.json"
+  "import": "../dee/index.json",
+  "replace": {
+    "shirt": {
+      "type": "color",
+      "selector": "path[fill='#BDC59A']",
+      "attr": "fill"
+    },
+    "face": {
+      "type": "color",
+      "selector": "path[fill='#EEDDC5']",
+      "attr": "fill"
+    }
+  }
 }
