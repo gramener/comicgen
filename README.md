@@ -16,7 +16,7 @@ Interested in data storytelling? Come **join the [#ComicgenFriday](https://grame
 <!-- var usage -->
 ## Usage
 
-A simple way to use Comicgen is from [gramener.com/comicgen/](https://gramener.com/comicgen/).
+A simple way to use Comicgen is from [gramener.com/comicgen/](https://gramener.com/comicserver/).
 
 - Choose your character
 - Save the image
@@ -36,18 +36,18 @@ Some fonts we like are:
 
 | Font                              | Example text                                                                             |
 |-----------------------------------|------------------------------------------------------------------------------------------|
-| [Architects Daughter][font-ad]    | [![Specimen](https://gramener.com/comicgen/docs/font-architects-daughter.png)][font-ad]  |
-| [Cavolini][font-ca] (Windows)     | [![Specimen](https://gramener.com/comicgen/docs/font-cavolini.png)][font-cavolini]       |
-| [Segoe Script][font-ss] (Windows) | [![Specimen](https://gramener.com/comicgen/docs/font-segoe-script.png)][font-ss]         |
-| [Segoe Print][font-sp] (Windows)  | [![Specimen](https://gramener.com/comicgen/docs/font-segoe-print.png)][font-sp]          |
-| [News Cycle][font-nc]             | [![Specimen](https://gramener.com/comicgen/docs/font-news-cycle.png)][font-nc]           |
-| [Indie Flower][font-if]           | [![Specimen](https://gramener.com/comicgen/docs/font-indie-flower.png)][font-if]         |
-| [Amatic SC][font-ac]              | [![Specimen](https://gramener.com/comicgen/docs/font-amatic-sc.png)][font-ac]            |
-| [Schoolbell][font-sb]             | [![Specimen](https://gramener.com/comicgen/docs/font-schoolbell.png)][font-sb]           |
-| [Just Another Hand][font-jah]     | [![Specimen](https://gramener.com/comicgen/docs/font-just-another-hand.png)][font-jah]   |
-| [Patrick Hand][font-ph]           | [![Specimen](https://gramener.com/comicgen/docs/font-patrick-hand.png)][font-ph]         |
-| [Neucha][font-n]                  | [![Specimen](https://gramener.com/comicgen/docs/font-neucha.png)][font-n]                |
-| [Handlee][font-h]                 | [![Specimen](https://gramener.com/comicgen/docs/font-handlee.png)][font-h]               |
+| [Architects Daughter][font-ad]    | [![Specimen](https://gramener.com/comicserver/docs/font-architects-daughter.png)][font-ad]  |
+| [Cavolini][font-ca] (Windows)     | [![Specimen](https://gramener.com/comicserver/docs/font-cavolini.png)][font-cavolini]       |
+| [Segoe Script][font-ss] (Windows) | [![Specimen](https://gramener.com/comicserver/docs/font-segoe-script.png)][font-ss]         |
+| [Segoe Print][font-sp] (Windows)  | [![Specimen](https://gramener.com/comicserver/docs/font-segoe-print.png)][font-sp]          |
+| [News Cycle][font-nc]             | [![Specimen](https://gramener.com/comicserver/docs/font-news-cycle.png)][font-nc]           |
+| [Indie Flower][font-if]           | [![Specimen](https://gramener.com/comicserver/docs/font-indie-flower.png)][font-if]         |
+| [Amatic SC][font-ac]              | [![Specimen](https://gramener.com/comicserver/docs/font-amatic-sc.png)][font-ac]            |
+| [Schoolbell][font-sb]             | [![Specimen](https://gramener.com/comicserver/docs/font-schoolbell.png)][font-sb]           |
+| [Just Another Hand][font-jah]     | [![Specimen](https://gramener.com/comicserver/docs/font-just-another-hand.png)][font-jah]   |
+| [Patrick Hand][font-ph]           | [![Specimen](https://gramener.com/comicserver/docs/font-patrick-hand.png)][font-ph]         |
+| [Neucha][font-n]                  | [![Specimen](https://gramener.com/comicserver/docs/font-neucha.png)][font-n]                |
+| [Handlee][font-h]                 | [![Specimen](https://gramener.com/comicserver/docs/font-handlee.png)][font-h]               |
 
 [font-ca]: https://www.fonts.com/font/monotype/cavolini
 [font-ad]: https://fonts.google.com/specimen/Architects+Daughter
@@ -73,78 +73,32 @@ The [Comicgen Power BI](https://github.com/gramener/comicgen-powerbi) plugin
 lets you control the characters, emotions, poses, etc from data. Happy people
 can accompany good news on charts.
 
-![Power BI Plugin example](https://gramener.com/comicgen/docs/power-bi-plugin.gif)
+![Power BI Plugin example](https://gramener.com/comicserver/docs/power-bi-plugin.gif)
 
 <!-- end -->
 
 <!-- var api -->
 
-## File API
+## REST API
 
-The raw SVGs and PNGs are at
-[gramener.com/comicgen/](https://gramener.com/comicgen/). Look under:
+Comics are rendered via the endpoint `https://gramener.com/comicserver/v1/comic`. We'll refer to
+this as `/comic` from now on.
 
-- [src/characters.json](https://gramener.com/comicgen/src/characters.json) - list of characters.
-- [src/files.json](https://gramener.com/comicgen/src/files.json) - list of files for each character
-- [svg/](https://unpkg.com/comicgen/svg/) - SVG files for each character
-- [png/](https://unpkg.com/comicgen/png/) - PNG files for each character
+Options for each character can be specified as URL query parameters. For example, to render Ethan's angling sideways, winking, we need:
+
+- `name`: `ethan`
+- `angle`: `side`
+- `emotion`: `wink`
+
+This is exposed at `/comic?name=ethan&angle=side&emotion=wink`:
+
+![Ethan side wink](v1/comic?name=ethan&angle=side&emotion=wink)
+
+The full list of options is at [dist/characterlist.json](https://gramener.com/comicserver/dist/characterlist.json).
 
 You can create comics by directly linking to these files.
 You can embed these files directly in your plugin.
 
-## JavaScript API
-
-To explicitly run comicgen on a selector, run `comicgen(selector)`. This lets
-you dynamically create or change a a character.
-
-Here's an example in jQuery showing how you can create a character dynamically:
-
-```js
-// Add the character
-$('<g class="new" name="dee" angle="straight" emotion="sad" pose="yuhoo"></g>').appendTo('body')
-// Call comicgen()
-comicgen('.new')
-```
-
-![Dynamic character rendered via JS](https://gramener.com/comicgen/docs/dee-sad-yuhoo-400-300.png)
-
-If you want to show only the face of a comic character, you can do it by skipping `pose` attribute. For example:
-
-```js
-// Add only face of character
-$('<g class="only-face" name="dee" angle="straight" emotion="smile"></g>').appendTo('body')
-// Call comicgen()
-comicgen('.only-face')
-```
-
-![Only face of character rendered via JS](https://gramener.com/comicgen/docs/dee-smile-face-only-200-200.png)
-
-
-You can pass an `options` parameter to `comicgen()` to provide default values.
-For example:
-
-```js
-$('<g class="new" name="dee" angle="straight"></g>').appendTo('body')
-comicgen('.new', {
-  name: 'dey',      // Set the default name. <g name="dee"> overrides this
-  emotion: 'sad',   // Set the default emotion
-  pose: 'yuhoo',    // Set the default pose, etc
-  width: 400,
-  height: 300
-})
-```
-
-![Dynamic character rendered via JS, with default options](https://gramener.com/comicgen/docs/dee-sad-yuhoo-400-300.png)
-
-To render a continuous character (examples: zoozoo, panda, chini),
-```js
-// Add the character
-$('<g class="new" name="zoozoo" face="0.75" body="0.50" width="500" height="600"></g>').appendTo('body')
-// Call comicgen()
-comicgen('.new')
-```
-
-![Continuous continuous character rendered via JS](https://gramener.com/comicgen/docs/zoozoo-api-300-400.png)
 <!-- end -->
 
 <!-- var vision -->
@@ -311,12 +265,12 @@ We haven't yet found tools that expose an API. This should enable developers to 
 Load the comicgen library by adding this line in your HTML page's `<head>`:
 
 ```html
-<link rel="stylesheet" href="https://gramener.com/comicgen/dist/comicgen.min.css">
-<script async src="https://gramener.com/comicgen/dist/comicgen.min.js"></script>
+<link rel="stylesheet" href="https://gramener.com/comicserver/dist/comicgen.min.css">
+<script async src="https://gramener.com/comicserver/dist/comicgen.min.js"></script>
 ```
 
 You can use [unpkg.com/comicgen/](https://unpkg.com/comicgen/) instead of
-[gramener.com](https://gramener.com/comicgen/) if you wish.
+[gramener.com](https://gramener.com/comicserver/) if you wish.
 
 You can also install comicgen locally using `npm` or `yarn`:
 
@@ -346,7 +300,7 @@ To embed a character, add:
 This inserts the following image in your HTML.
 You can embed it anywhere, including inside an `<svg>` element.
 
-![name=dee angle=straight emotion=smile pose=thumbsup](https://gramener.com/comicgen/docs/dee-straight-smile-thumbsup.png)
+![name=dee angle=straight emotion=smile pose=thumbsup](https://gramener.com/comicserver/docs/dee-straight-smile-thumbsup.png)
 
 <a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/YMGMbw">Try it on Codepen</a>
 
@@ -372,7 +326,7 @@ The character `humaaans` uses these attributes:
 - `bottom=`: what bottom to use (e.g. `sitting/baggy-pants`, `standing/shorts`)
 
 The list of all valid combinations are available on the
-[comicgen interactive gallery](https://gramener.com/comicgen/).
+[comicgen interactive gallery](https://gramener.com/comicserver/).
 
 Each character has a pre-defined canvas size. For example, `dee` and `dey` use a
 500 x 600 canvas. `humaaans` uses a 300 x 600 canvas. You can change this using:
@@ -401,7 +355,7 @@ The order of attributes decides the order of the layers. For example, this draws
 <g class="comicgen" name="dee" angle="straight" emotion="yuhoo" pose="yuhoo"></g>
 ```
 
-![Dee with emotion below, then pose on top](https://gramener.com/comicgen/docs/dee-order-emotion-pose.png)
+![Dee with emotion below, then pose on top](https://gramener.com/comicserver/docs/dee-order-emotion-pose.png)
 
 This draws `pose=` first (at the bottom), and then `emotion=` (on top):
 
@@ -409,12 +363,12 @@ This draws `pose=` first (at the bottom), and then `emotion=` (on top):
 <g class="comicgen" name="dee" angle="straight" pose="yuhoo" emotion="yuhoo"></g>
 ```
 
-![Dee with emotion below, then pose on top](https://gramener.com/comicgen/docs/dee-order-pose-emotion.png)
+![Dee with emotion below, then pose on top](https://gramener.com/comicserver/docs/dee-order-pose-emotion.png)
 
 You can re-order the attributes dynamically in the
-[comicgen interactive gallery](https://gramener.com/comicgen/) using the arrows.
+[comicgen interactive gallery](https://gramener.com/comicserver/) using the arrows.
 
-![Reorder comicgen attributes](https://gramener.com/comicgen/docs/reorder.gif)
+![Reorder comicgen attributes](https://gramener.com/comicserver/docs/reorder.gif)
 
 
 ## Composition
@@ -430,7 +384,7 @@ You can change the `x`, `y`, `width`, `height`, `mirror` and `scale` to position
 </svg>
 ```
 
-![Dee and Dey together](https://gramener.com/comicgen/docs/dee-and-dey-together.png)
+![Dee and Dey together](https://gramener.com/comicserver/docs/dee-and-dey-together.png)
 
 <a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/eqYmer">Try it on Codepen</a>
 
@@ -448,7 +402,7 @@ SVG container.
 Set `viewBox` to the width and height of the comicgen elements. Then you can set
 the outer `width` and `height` to anything.
 
-![Dee and Dey scaled down](https://gramener.com/comicgen/docs/dee-and-dey-meet.png)
+![Dee and Dey scaled down](https://gramener.com/comicserver/docs/dee-and-dey-meet.png)
 
 This normally scales the image to fit both the width and height. To fit only one
 side, use [preserveAspectRatio](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/preserveAspectRatio).
@@ -462,11 +416,11 @@ and slices the height, preserving the top (YMin) of the image.
 </svg>
 ```
 
-![Dee and Dey fit width](https://gramener.com/comicgen/docs/dee-and-dey-slice.png)
+![Dee and Dey fit width](https://gramener.com/comicserver/docs/dee-and-dey-slice.png)
 
 ## Panels
 
-[comicgen.css](https://gramener.com/comicgen/dist/comicgen.min.css)
+[comicgen.css](https://gramener.com/comicserver/dist/comicgen.min.css)
 provides 2 classes for layout:
 
 - `comic-panel`
@@ -481,7 +435,7 @@ Use `class="comic-panel"` to can embed characters in a thick grey border. For ex
 </div>
 ```
 
-![Dee in a panel](https://gramener.com/comicgen/docs/dee-panel.png)
+![Dee in a panel](https://gramener.com/comicserver/docs/dee-panel.png)
 
 Panels are typically placed inside a `class="comic-row"`:
 
@@ -504,7 +458,7 @@ Here's an example with 2 panels. The second panel has 2 characters.
 </div>
 ```
 
-![Dee and Dey in panels](https://gramener.com/comicgen/docs/dee-and-dey-panels.png)
+![Dee and Dey in panels](https://gramener.com/comicserver/docs/dee-and-dey-panels.png)
 
 <a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/ZgEYvx">Try it on Codepen</a>
 
@@ -519,12 +473,12 @@ variables in your stylesheet.
 }
 ```
 
-![Dee and Dey in panels, with CSS styling](https://gramener.com/comicgen/docs/dee-and-dey-panels-styled.png)
+![Dee and Dey in panels, with CSS styling](https://gramener.com/comicserver/docs/dee-and-dey-panels-styled.png)
 
 
 ## Captions
 
-[comicgen.css](https://gramener.com/comicgen/dist/comicgen.min.css)
+[comicgen.css](https://gramener.com/comicserver/dist/comicgen.min.css)
 provides `comic-caption-top` and `comic-caption-bottom` to add captions inside
 a `.comic-panel`.
 
@@ -537,7 +491,7 @@ For example, this defines a caption on top:
 </div>
 ```
 
-![Dee with a caption on top](https://gramener.com/comicgen/docs/dee-caption-top.png)
+![Dee with a caption on top](https://gramener.com/comicserver/docs/dee-caption-top.png)
 
 <a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/XvWJEP">Try it on Codepen</a>
 
@@ -550,7 +504,7 @@ For example, this defines a caption on top:
 </div>
 ```
 
-![Dee with a caption at the bottom](https://gramener.com/comicgen/docs/dee-caption-bottom.png)
+![Dee with a caption at the bottom](https://gramener.com/comicserver/docs/dee-caption-bottom.png)
 
 You can override the caption's background, font and padding using CSS variables
 in your stylesheet.
@@ -566,7 +520,7 @@ in your stylesheet.
 }
 ```
 
-![Dee with a caption on top, styled with CSS](https://gramener.com/comicgen/docs/dee-caption-top-styled.png)
+![Dee with a caption on top, styled with CSS](https://gramener.com/comicserver/docs/dee-caption-top-styled.png)
 
 
 ## Strips
@@ -594,7 +548,7 @@ like this:
 </div>
 ```
 
-![Dee and Dey with captions](https://gramener.com/comicgen/docs/dee-and-dey-captions.png)
+![Dee and Dey with captions](https://gramener.com/comicserver/docs/dee-and-dey-captions.png)
 
 <a class="btn btn-primary" target="_blank" rel="noopener" href="https://codepen.io/sanand0/pen/dxyPex">Try it on Codepen</a>
 
@@ -681,7 +635,7 @@ People like to use their own platforms, not switch to a new one. So let's integr
 
 ### 2. Create a comic builder UI
 
-People find it easier to create comics using a UI than programming. So let's create an [interface](https://gramener.com/comicgen/) that let people create an entire graphic novel!
+People find it easier to create comics using a UI than programming. So let's create an [interface](https://gramener.com/comicserver/) that let people create an entire graphic novel!
 
 [See **builder** issues &raquo;](https://github.com/gramener/comicgen/labels/builder)
 
@@ -734,17 +688,17 @@ Characters are made of 1 or more SVG images.
 The easiest way to create a character is to draw a dozen SVGs and save them as
 individual files **of the same dimensions**. For example:
 
-![Series of SVG images for a character](https://gramener.com/comicgen/docs/character-single-images.png)
+![Series of SVG images for a character](https://gramener.com/comicserver/docs/character-single-images.png)
 
 A better way would be to break up the character into different parts. For
 example, you could draw faces with different emotions and save them under an
 `faces/` folder:
 
-![Faces for a character](https://gramener.com/comicgen/docs/character-faces.png)
+![Faces for a character](https://gramener.com/comicserver/docs/character-faces.png)
 
 Then you could draw the bodies under a `bodies/` folder:
 
-![Bodies for a character](https://gramener.com/comicgen/docs/character-bodies.png)
+![Bodies for a character](https://gramener.com/comicserver/docs/character-bodies.png)
 
 If you do this, you must make sure that:
 
@@ -809,7 +763,7 @@ Please e-mail Anand <s.anand@gramener.com> and Richie <richie.lionell@gramener.c
     <a href="https://www.facebook.com/dialog/share?app_id=163328100435225&display=page&href=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&redirect_uri=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&quote=Make%20your%20own%20comics%20with%20the%20%23comicgen%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F" class="btn btn-link py-0 ps-0 pe-1" target="_blank" rel="noopener" title="Share on Facebook">
       <i class="fab fa-facebook-square fa-2x"></i>
     </a>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/" class="btn btn-link py-0 ps-0 pe-1" target="_blank" rel="noopener" title="Share on LinkedIn">
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicserver/" class="btn btn-link py-0 ps-0 pe-1" target="_blank" rel="noopener" title="Share on LinkedIn">
       <i class="fab fa-linkedin fa-2x"></i>
     </a>
     <a href="https://news.ycombinator.com/item?id=20049116" class="btn btn-link py-0 ps-0 pe-1" target="_blank" rel="noopener" title="Discuss on Hacker News">
@@ -839,7 +793,7 @@ If you have any questions, please contact us at [comicgen.powerbi@gramener.com](
 - [Discuss on Twitter. Hashtag #comicgen](https://twitter.com/search?f=tweets&vertical=default&q=comicgen&src=typd)
 - [Share on Twitter](https://twitter.com/intent/tweet?text=Make%20your%20own%20comics%20with%20the%20%23comicgen%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F)
 - [Share on Facebook](https://www.facebook.com/dialog/share?app_id=163328100435225&display=page&href=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&redirect_uri=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&quote=Make%20your%20own%20comics%20with%20the%20%23comicgen%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F)
-- [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/)
+- [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicserver/)
 - [Discuss on Hacker News](https://news.ycombinator.com/item?id=20049116)
 - [Fork on Github](https://github.com/gramener/comicgen)
 <!-- end -->

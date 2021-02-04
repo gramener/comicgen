@@ -100,10 +100,6 @@
               <label class="mx-1">
                 Background <input type="color" value="#ffffff" class="btn btn-light border p-0 bg-color">
               </label>
-              <a class="btn btn-sm pt-0 btn-light border urlfilter reset" data-target="#" href="#">
-                <i class="fa fa-arrows-alt"></i> Reset position
-              </a>
-              <span>Pinch to zoom. Pan to move</span>
             </div>
             <div id="codetemp"></div>
             <!-- <script type="text/html" class="codegen"> -->
@@ -203,157 +199,14 @@
   </script>
 
 
-  <script src="../node_modules/lodash/lodash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/plain-draggable@2.5.12/plain-draggable.min.js"></script>
-  <script src="https://cdn.statically.io/gh/zenorocha/clipboard.js/v2.0.6/dist/clipboard.min.js"></script>
-  <script src="https://unpkg.com/g1@0.17.0/dist/g1.min.js"></script>
-
-  <script>
-    async function init() {
-      var url = g1.url.parse(location.hash.replace(/^#/, ''))
-      var params = ''
-      const response = await fetch('../dist/characterlist.json')
-      const chars = await response.json()
-      const template = _.template(document.querySelector('#menu-template').innerHTML)
-      const code_template = _.template(document.querySelector('#codegen').innerHTML)
-      const $codetemp = document.querySelector('#codetemp')
-      const $menu = document.querySelector('#menu')
-      const $download = document.querySelector('.download')
-      const $character = document.querySelector('#character .target')
-
-      if(location.hash){
-        q = g1.url.parse(location.hash.replace(/^#/, '')).searchKey;
-        await render(q)
-      }else{
-        await render()
-        $('.form-select').children('option:eq(0)').prop('selected', true)
-      }
-      change();
-
-      async function render(q) {
-        $menu.innerHTML = template({ q: q || {}, chars, template })
-        params = new URLSearchParams()
-        for (let node of $menu.querySelectorAll('select'))
-          params.append(node.name, node.value)
-        const response = await fetch('../comic?' + params)
-        $character.innerHTML = await response.text()
-      }
-
-      async function change() {
-        var q = {}
-        for (var node of $menu.querySelectorAll('.form-select')) {
-          q[node.name] = node.value
-        }
-        await render(q)
-        changeUrl()
-        if(q.mirror){
-          let svg_width = $($character).children("svg").attr("width")
-          $($character).find("svg g").eq(0).attr("transform", `translate(${svg_width},0)scale(-1,1)`)
-        }else
-          $($character).find("svg g").eq(0).removeAttr("transform")
-      }
-
-      function changeUrl(){
-        location.hash = '?' + $('.selector').serialize()
-        q = g1.url.parse(location.hash.replace(/^#/, '')).searchKey
-        $codetemp.innerHTML = code_template({ url: location.origin + '/comic?' + params || '', code_template})
-      }
-
-      $menu.addEventListener('change', function (e) {
-        change();
-        let targetid = "#" + e.target.id
-        $(targetid).focus()
-      }, false)
-
-
-      $download.addEventListener('click',function(e) {
-        // var ext = $(':input[name="ext"]').val()
-        var $target = $('#character .target > svg')
-        // filename = all character attributes ...
-        var filename = $('#menu select').map(function () { return $(this).val() })
-        // ... except the last 2 (ext, mirror)
-        filename = filename.get().slice(0, -2).join('-')
-        // if (ext == 'png')
-        //   saveSvgAsPng($target.get(0), filename + '.png')
-        // else if (ext == 'svg') {
-        // Create a copy of the SVG and replace the <image>s with the actual HTML
-        var $svg = $target.clone()
-        $svg.attr('xmlns', 'http://www.w3.org/2000/svg')
-        var link = document.createElement('a')
-        link.href = URL.createObjectURL(new Blob([
-          '<?xml version="1.0" standalone="no"?>\r\n',
-          $svg.get(0).outerHTML
-        ], { type: 'image/svg+xml;charset=utf-8' }))
-        link.download = filename + '.svg'
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-      })
-
-      $('.bg-color').on('input, change', function () {
-        // The first rule in the first sheet defines the background color for the target-container
-        document.styleSheets[0].cssRules[0].style.backgroundColor = $(this).val()
-      })
-
-    // Arrow buttons move
-    // let buttons = [
-    //   {left_or_right: '.move-left', target: 'prev', insert: 'insertBefore'},
-    //   {left_or_right: '.move-right', target: 'next', insert: 'insertAfter'},
-    // ];
-    // buttons.forEach( function (conf) {
-    //   $('#menu').on('click', conf.left_or_right, function () {
-    //     var $this = $(this).parents('.pe-2')
-    //     var $target = $this[conf.target]()
-    //     if ($target.length) {
-    //       $this[conf.insert]($target)
-    //       location.hash = '?' + $('.selector').serialize()
-    //       $(window).trigger('#', g1.url.parse(location.hash.replace(/^#/, '')))
-    //     }
-    //   })
-    // })
-
-    // Dragging the target image changes the x, y
-    // var pos
-    // let draggable = new PlainDraggable($('.target').get(0), {
-    //   containment: {left: -10000, top: -10000, width: 50000, height: 50000},
-    //   onDragStart: function () { pos = {left: this.left, top: this.top} }
-    //   // onDragEnd: function () {
-    //   //   $('input[name="x"]').val(Math.round(+(q.x || defaults.x) + this.left - pos.left))
-    //   //   $('input[name="y"]').val(Math.round(+(q.y || defaults.y) + this.top - pos.top))
-    //   //   location.hash = '?' + $('.selector').serialize()
-    //   //   this.left = pos.left
-    //   //   this.top = pos.top
-    //   // }
-    // })
-
-    new ClipboardJS('.copy')
-    }
-    init()
-  </script>
-
-  <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
-  <script src="https://unpkg.com/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/showdown@1.9.0/dist/showdown.min.js"></script>
-  <script src="https://unpkg.com/highlightjs@9.12.0/highlight.pack.min.js"></script>
-  <script>
-    // Render part of README.md as Markdown. Sections delimited by <!-- var ... !>...<!-- end -->
-    $.get('../README.md')
-      .done(function (text) {
-        var converter = new showdown.Converter({ ghCodeBlocks: true, tables: true })
-        text.match(/<!--\s*var\s+\S*\s*-->[\s\S]*?<!--\s*end\s*-->/igm).forEach(function (match) {
-          var lines = match.split(/\n/)
-          var name = lines[0].replace(/^<!--\s*var\s+/, '').replace(/\s*-->$/, '')
-          $('md[data-target="' + name + '"]')
-            .addClass('d-block my-4')
-            .html(converter.makeHtml(lines.slice(1, -1).join('\n')))
-            .find('pre')
-            .each(function () { hljs.highlightBlock(this) })
-        })
-        $('md table').addClass('table table-sm')
-          .find('a').each(function () {
-            $(this).attr('target', '_blank')
-          })
-      })
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/g1@0.17.4/dist/g1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

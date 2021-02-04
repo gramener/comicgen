@@ -1,209 +1,107 @@
-/* globals comicgen, showdown, hljs, ClipboardJS, PlainDraggable, saveSvgAsPng */
+async function init() {
+  var params = ''
+  const response = await fetch('../dist/characterlist.json')
+  const chars = await response.json()
+  const template = _.template(document.querySelector('#menu-template').innerHTML)
+  const code_template = _.template(document.querySelector('#codegen').innerHTML)
+  const $codetemp = document.querySelector('#codetemp')
+  const $menu = document.querySelector('#menu')
+  const $download = document.querySelector('.download')
+  const $character = document.querySelector('#character .target')
 
-// If the URL hash has a path, it's a non-home tab. Change to it and exit
-var url = g1.url.parse(location.hash.replace(/^#/, ''))
-$('a[href="#' + url.pathname + '"]').tab('show')
-
-// Render part of README.md as Markdown. Sections delimited by <!-- var ... !>...<!-- end -->
-$.get('README.md')
-  .done(function (text) {
-    var converter = new showdown.Converter({ ghCodeBlocks: true, tables: true })
-    text.match(/<!--\s*var\s+\S*\s*-->[\s\S]*?<!--\s*end\s*-->/igm).forEach(function (match) {
-      var lines = match.split(/\n/)
-      var name = lines[0].replace(/^<!--\s*var\s+/, '').replace(/\s*-->$/, '')
-      $('md[data-target="' + name + '"]')
-        .addClass('d-block my-4')
-        .html(converter.makeHtml(lines.slice(1, -1).join('\n')))
-        .find('pre')
-        .each(function () { hljs.highlightBlock(this) })
-    })
-    $('md table').addClass('table table-sm')
-      .find('a').each(function () {
-        $(this).attr('target', '_blank')
-      })
-  })
-
-// q holds the current state of the application, and the comicgen parameters
-var q
-var defaults = comicgen.defaults
-$.getJSON('src/files.json')
-  .done(function (data) {
-    // Any change in selection changes the URL
-    $('.selector').on('change', ':input', function () {
-      location.hash = '?' + $('.selector').serialize()
-    })
-    // Any tab selection updates the URL path without hashchange
-    $('#comic-tab').on('shown.bs.tab', function (e) {
-      var url = g1.url.parse(location.hash.replace(/^#/, ''))
-      url.pathname = $(e.target).attr('href').replace(/^#/, '')
-      url.pathname = url.pathname == 'home' ? '' : url.pathname
-      location.hash = url.toString()
-    })
-    // Any change in URL re-renders the strip
-    $(window).on('#', function (e, url) {
-      var node = data
-      // Render the dropdowns
-      q = url.searchKey
-      $('.comicgen-attrs .attr').addClass('wip')
-      // Everything starts with a name
-      dropdown_options(q, 'name', node)
-      node = node[q.name]
-      var format = comicgen.formats[comicgen.namemap[q.name]]
-      format.dirs.forEach(function (attr) {
-        dropdown_options(q, attr, node)
-        node = node[q[attr]]
-      })
-      // Render dropdowns for each of the files. Use order in URL
-      _.each(Object.assign({}, q, format.files), function (val, attr) {
-        if (attr in format.files) {
-          format.files[attr]['continuous'] ? slider_options(q, attr, node[attr]) : dropdown_options(q, attr, node[attr])
-        }
-      })
-      dropdown_options(q, 'ext', ['svg', 'png'])
-      dropdown_options(q, 'mirror', { '': '', 'mirror': '1' })
-      $('.comicgen-attrs .wip').remove()
-      comicgen('.target', q)
-      $('.target-container').css({ width: q.width + 'px', height: q.height + 'px' })
-      for (var key in defaults) {
-        $('input[name="' + key + '"]').val(q[key] || defaults[key])
-        // If a value is the same as the default, drop it
-        if (q[key] == defaults[key])
-          delete q[key]
-      }
-      $('.codegen').template({q: q})
-    }).urlchange()
-  })
-
-// Dragging the target image changes the x, y
-var pos
-new PlainDraggable($('.target').get(0), {
-  containment: {left: -10000, top: -10000, width: 50000, height: 50000},
-  onDragStart: function () { pos = {left: this.left, top: this.top} },
-  onDragEnd: function () {
-    $('input[name="x"]').val(Math.round(+(q.x || defaults.x) + this.left - pos.left))
-    $('input[name="y"]').val(Math.round(+(q.y || defaults.y) + this.top - pos.top))
-    location.hash = '?' + $('.selector').serialize()
-    this.left = pos.left
-    this.top = pos.top
+  if (location.hash) {
+    q = g1.url.parse(location.hash.replace(/^#/, '')).searchKey;
+    await render(q)
+  } else {
+    await render()
+    $('.form-select').children('option:eq(0)').prop('selected', true)
   }
-})
+  change();
 
-// Zooming target changes scale
-$('.target').on('wheel', function (e) {
-  if (!e.ctrlKey)
-    return
-  var scale0 = +(q.scale || defaults.scale)
-  var scale = Math.round(scale0 * (1 - e.originalEvent.deltaY * 0.01) * 100, 2) / 100
-  if (scale == scale0 && e.originalEvent.deltaY < 0)
-    scale = scale0 + 0.01
-  $('input[name="scale"]').val(scale)
-  // Scale around the center
-  $('input[name="x"]').val(Math.round(+(q.x || defaults.x) + (+q.width || defaults.width) * (scale0 - scale) / 2))
-  $('input[name="y"]').val(Math.round(+(q.y || defaults.y) + (+q.height || defaults.height) * (scale0 - scale) / 2))
-  location.hash = '?' + $('.selector').serialize()
-  e.preventDefault()
-})
+  async function render(q) {
+    $menu.innerHTML = template({ q: q || {}, chars, template })
+    params = new URLSearchParams()
+    for (let node of $menu.querySelectorAll('select'))
+      params.append(node.name, node.value)
+    const response = await fetch('../comic?' + params)
+    $character.innerHTML = await response.text()
+  }
 
-// Reset button reverts to defaults on size, position & scale
-$('.reset').attr('href', '?' + $.param(defaults))
-$('body').urlfilter()
+  async function change() {
+    var q = {}
+    for (var node of $menu.querySelectorAll('.form-select')) {
+      q[node.name] = node.value
+    }
+    await render(q)
+    changeUrl()
+    if (q.mirror) {
+      let svg_width = $($character).children("svg").attr("width")
+      $($character).find("svg g").eq(0).attr("transform", `translate(${svg_width},0)scale(-1,1)`)
+    } else
+      $($character).find("svg g").eq(0).removeAttr("transform")
+  }
 
-// Change background / stroke colors if requested
-$('.bg-color').on('input, change', function () {
-  // The first rule in the first sheet defines the background color for the target-container
-  document.styleSheets[0].cssRules[0].style.backgroundColor = $(this).val()
-})
+  function changeUrl() {
+    location.hash = '?' + $('.selector').serialize()
+    q = g1.url.parse(location.hash.replace(/^#/, '')).searchKey
+    $codetemp.innerHTML = code_template({ url: location.origin + '/comic?' + params || '', code_template })
+  }
 
-// Click on copy button to copy code
-new ClipboardJS('.copy')
+  $menu.addEventListener('change', function (e) {
+    change();
+    let targetid = "#" + e.target.id
+    $(targetid).trigger('focus')
+  }, false)
 
-// Click on download button to download in the current format (SVG or PNG)
-$('.download').on('click', function () {
-  var ext = $(':input[name="ext"]').val()
-  var $target = $('.target > svg')
-  // filename = all character attributes ...
-  var filename = $('.comicgen-attrs select').map(function () { return $(this).val() })
-  // ... except the last 2 (ext, mirror)
-  filename = filename.get().slice(0, -2).join('-')
-  if (ext == 'png')
-    saveSvgAsPng($target.get(0), filename + '.png')
-  else if (ext == 'svg') {
+
+  $download.addEventListener('click', function (e) {
+    // var ext = $(':input[name="ext"]').val()
+    var $target = $('#character .target > svg')
+    // filename = all character attributes ...
+    var filename = $('#menu select').map(function () { return $(this).val() })
+    // ... except the last 2 (ext, mirror)
+    filename = filename.get().slice(0, -2).join('-')
+    // if (ext == 'png')
+    //   saveSvgAsPng($target.get(0), filename + '.png')
+    // else if (ext == 'svg') {
     // Create a copy of the SVG and replace the <image>s with the actual HTML
     var $svg = $target.clone()
     $svg.attr('xmlns', 'http://www.w3.org/2000/svg')
-    // Replace each image with the actual SVG
-    var $images = $svg.find('image')
-    $.when.apply($, $images.map(function () { return this.href.baseVal }).get().map($.get))
-      .done(function () {
-        var docs = _.map(arguments, function (v) { return v[2].responseText })
-        $images.each(function (i) {
-          var $this = $(this)
-          $this.replaceWith('<g transform="' + $this.attr('transform') + '">' + docs[i] + '</g>')
-        })
-        var link = document.createElement('a')
-        link.href = URL.createObjectURL(new Blob([
-          '<?xml version="1.0" standalone="no"?>\r\n',
-          $svg.get(0).outerHTML
-        ], { type: 'image/svg+xml;charset=utf-8' }))
-        link.download = filename + '.svg'
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-      })
-  }
-})
-
-var template_arrows = _.template($('.arrows').html())
-
-// Utility: Set a default value for q[key] using data. Render <select> dropdown using data
-function dropdown_options(q, key, data) {
-  data = _.isArray(data) ? data : _.keys(data)
-  // If q[key] is not in data, pick the first item from the data list/dict
-  q[key] = q[key] && data.indexOf(q[key]) > 0 ? q[key] : data[0]
-  var options = data.map(function (v) { return '<option>' + v + '</option>' }).join('')
-  var $el = $('.comicgen-attrs .attr.input[name="' + key + '"]').removeClass('wip')
-  if (!$el.length) {
-    $el = $('<div>').addClass('attr input mr-2 mb-2').attr('name', key)
-    $el.append($(template_arrows({ key: key })))
-    $el.append($('<select>').addClass('form-control').attr('name', key))
-    var $after = $('.comicgen-attrs .attr:not(.wip):last')
-    if ($after.length)
-      $el.insertAfter($after)
-    else
-      $el.appendTo('.comicgen-attrs')
-  }
-  $el.find('select').html(options).val(q[key])
-}
-
-function slider_options(q, key, data) {
-  q[key] = isNaN(q[key]) ? 0 : +q[key]
-  var $el = $('.comicgen-attrs .attr.slider[name="' + key + '"]').removeClass('wip')
-  if (!$el.length) {
-    $el = $('<div>').addClass('attr slider mr-2 mb-2').attr('name', key)
-    $el.append($(template_arrows({ key: key + '-' + data.join('-') })))
-    $el.append($('<input type="range" min="0" max="1" step="0.01" list="slider-ticks">').addClass('form-control-range').attr('name', key))
-    var $after = $('.comicgen-attrs .attr:not(.wip):last')
-    if ($after.length)
-      $el.insertAfter($after)
-    else
-      $el.appendTo('.comicgen-attrs')
-  }
-  $('.attr[name="' + key + '"] input').val(q[key])
-}
-
-// Arrow buttons move
-_.each(
-  [
-    {left_or_right: '.move-left', target: 'prev', insert: 'insertBefore'},
-    {left_or_right: '.move-right', target: 'next', insert: 'insertAfter'},
-  ], function (conf) {
-    $('.comicgen-attrs').on('click', conf.left_or_right, function () {
-      var $this = $(this).parents('.attr')
-      var $target = $this[conf.target]()
-      if ($target.length) {
-        $this[conf.insert]($target)
-        location.hash = '?' + $('.selector').serialize()
-        $(window).trigger('#', g1.url.parse(location.hash.replace(/^#/, '')))
-      }
-    })
+    var link = document.createElement('a')
+    link.href = URL.createObjectURL(new Blob([
+      '<?xml version="1.0" standalone="no"?>\r\n',
+      $svg.get(0).outerHTML
+    ], { type: 'image/svg+xml;charset=utf-8' }))
+    link.download = filename + '.svg'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
   })
+
+  $('.bg-color').on('input change', function () {
+    // The first rule in the first sheet defines the background color for the target-container
+    document.styleSheets[0].cssRules[0].style.backgroundColor = $(this).val()
+  })
+  new ClipboardJS('.copy')
+
+  // Render part of README.md as Markdown. Sections delimited by <!-- var ... !>...<!-- end -->
+  $.get('../README.md')
+    .done(function (text) {
+      var converter = new showdown.Converter({ ghCodeBlocks: true, tables: true })
+      text.match(/<!--\s*var\s+\S*\s*-->[\s\S]*?<!--\s*end\s*-->/igm).forEach(function (match) {
+        var lines = match.split(/\n/)
+        var name = lines[0].replace(/^<!--\s*var\s+/, '').replace(/\s*-->$/, '')
+        $('md[data-target="' + name + '"]')
+          .addClass('d-block my-4')
+          .html(converter.makeHtml(lines.slice(1, -1).join('\n')))
+          .find('pre')
+          .each(function () { hljs.highlightBlock(this) })
+      })
+      $('md table').addClass('table table-sm')
+        .find('a').each(function () {
+          $(this).attr('target', '_blank')
+        })
+    })
+}
+
+init()
