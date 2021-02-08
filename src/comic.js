@@ -1,9 +1,9 @@
 // comicserver() takes a configuration object and returns a fully-rendered SVG
-const fs = require('fs')
 const path = require('path')
 const _ = require('lodash')
 const cheerio = require('cheerio')
 const mustache = require('mustache')
+const filesystem = require('../scripts/fs.js')
 
 // TODO: Allow users to override root in options
 let root = path.join(__dirname, '..', 'svg')
@@ -37,12 +37,12 @@ function comic(template, _replacements) {
     let svg_path = path.join(root, template.name)
     let stat
     try {
-      stat = fs.lstatSync(svg_path)
+      stat = filesystem.statFile(svg_path)
     } catch(e) {
       throw new ComicError(`Unknown character ${template.name}`, { name: template.name })
     }
     // If it’s a directory, read the `index.svg`. Else read the file intself
-    if (stat.isDirectory())
+    if (stat.isDirectory)
       svg_path = path.join(svg_path, 'index.svg')
     let svg = get_template(svg_path)
 
@@ -76,9 +76,9 @@ function get_config(svg_path, root) {
   dirs.forEach(function (dir, index) {
     // Search for index.json in all folders from the filepath up to root
     const json_path = path.join(root, ...dirs.slice(0, index), 'index.json')
-    if (fs.existsSync(json_path)) {
+    if (filesystem.existsFile(json_path)) {
       // Load every index.json found
-      let subconfig = JSON.parse(fs.readFileSync(json_path, 'utf8'))
+      let subconfig = JSON.parse(filesystem.readFile(json_path))
       // If it has is an "import", import that configuration
       if (subconfig.import) {
         const extend_path = path.join(json_path, '..', subconfig.import)
@@ -94,7 +94,8 @@ function get_config(svg_path, root) {
 
 
 function get_template(svg_path) {
-  let svg = fs.readFileSync(svg_path, 'utf8')
+  console.log(svg_path);
+  let svg = filesystem.readFile(svg_path)
   return svg.replace(/<\?import\s+(.*?)\?>/, function(match, import_path) {
     return get_template(path.join(svg_path, '..', import_path.replace(/^["']|["']$/g, '')))
   })
