@@ -321,8 +321,8 @@ You can use [unpkg.com/comicgen/](https://unpkg.com/comicgen/) instead of
 You can also install comicgen locally using `npm` or `yarn`:
 
 ```bash
-yarn add comicgen     # Recommended option
-npm install comicgen  # Alternative, if you prefer npm
+yarn add comicgen@0     # Installs Comicgen v0
+npm install comicgen@0  # Alternative, if you prefer npm over yarn
 ```
 
 ... and then include:
