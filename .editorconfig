@@ -1,0 +1,24 @@
+# .editorconfig maintains consistent coding styles between different editors.
+# Get plugins at http://editorconfig.org/
+#   - Sublime text: https://github.com/sindresorhus/editorconfig-sublime
+#   - Notepad++: https://github.com/editorconfig/editorconfig-notepad-plus-plus
+
+root = true
+
+# Apply common styles for most standard code files.
+# Do not apply to * - that covers binary files as well
+[*.{js,html,php,py,css,svg,json,less,yaml,yml,scss,xml,sh,java,bat,R}]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+# Stick to 2-space indenting by default, to conserve space
+indent_style = space
+indent_size = 2
+
+[*.py]
+indent_size = 4
+
+[Makefile]
+indent_style = tab
+indent_size = 4

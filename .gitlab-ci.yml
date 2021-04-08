@@ -1,0 +1,25 @@
+# Don't re-download node_modules every time. Cache it
+cache:
+  paths:
+    - node_modules/
+
+validate:
+  stage: test
+  script:
+    - npm run lint
+    - yarn install
+    - npm test
+
+deploy:
+  stage: deploy
+  only: [v1-main, v1-dev, /^v1-dev-.*$/]
+  script:
+    - 'ssh ubuntu@gramener.com "
+        cd /mnt/gramener/apps/comicgenv1;
+        git checkout -- .;
+        git pull;
+        yarn install;
+        node src/buildchars.js;
+        pkill --oldest -f comicserver;
+        nohup node src/comicserver.js >> nohup.out 2>&1 &
+      "'

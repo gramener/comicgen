@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Comicgen: Comic Creator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="description" content="Create comics for your website or app with a JavaScript library. Choose a character, angle, emotion and pose. Size the image. Embed in your page.">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:site" content="Gramener">
+  <meta property="og:url" content="https://gramener.com/comicgen/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Comicgen: Comic Creator">
+  <meta property="og:description" content="Create comics for your website or app with a JavaScript library. Choose a character, angle, emotion and pose. Size the image. Embed in your page.">
+  <meta property="og:image" content="https://gramener.com/comicgen/docs/dee-and-dey-panels.png">
+
+  <style>
+    /* Ensure that this is the first rule in the first stylesheet. Used by JS */
+    #character { background-color: #ffffff; }
+    /* The rest can be any styles */
+    #character { overflow: hidden; position: relative; }
+    .navbar { background-color: #675b9e !important; }
+    :root {
+      --bs-font-sans-serif: Neucha, Chalkboard, "Comic Sans MS", sans-serif !important;
+    }
+    #code {white-space: pre-wrap;}
+    .text-centre { text-align: centre; }
+    .form-control.form-control-color { width: 2.5rem; padding: .31rem 0.275rem; }
+    .form-control.form-control-number { width: 4rem; padding-right: 0.275rem; }
+    .param {
+      display: inline-block;
+      vertical-align: bottom;
+    }
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/highlightjs@9.12.0/styles/github.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42126862-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || []
+    function gtag() { window.dataLayer.push(arguments) }
+    gtag('js', new Date())
+    gtag('config', 'UA-42126862-1')
+  </script>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark text-light border-bottom body-color">
+    <div class="container">
+      <a class="navbar-brand font-weight-bold" href="#">Comicgen</a>
+      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-target="#collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav me-auto">
+          <li class="navbar-item"><i class="far fa-smile"></i></li>
+        </ul>
+        <ul class="navbar-nav">
+          <a class="navbar-brand" href="https://gramener.com/" target="_blank" rel="noopener">
+            <img src="docs/gramener.png" alt="Gramener" height="40">
+          </a>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-3">
+    <ul class="nav nav-tabs" id="comic-tab">
+      <li class="nav-item"><a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home">Home</a></li>
+      <li class="nav-item"><a class="nav-link" id="usage-tab" data-bs-toggle="tab" href="#usage">Usage</a></li>
+      <li class="nav-item"><a class="nav-link" id="api-tab" data-bs-toggle="tab" href="#api">API</a></li>
+      <li class="nav-item"><a class="nav-link" id="design-tab" data-bs-toggle="tab" href="#design">Design</a></li>
+      <li class="nav-item"><a class="nav-link" id="about-tab" data-bs-toggle="tab" href="#about">About</a></li>
+    </ul>
+    <div class="tab-content" id="comic-tab-content">
+      <div class="tab-pane active" id="home">
+        <div class="row my-4">
+          <div class="col-xl-4">
+            <h1>Make your own comic</h1>
+            <md data-target="introduction"></md>
+          </div>
+          <div class="col-xl-8">
+            <form class="selector form-inline">
+              <div id="menu"></div>
+              <input name="x" type="hidden" value="0">
+              <input name="y" type="hidden" value="0">
+              <input name="scale" type="hidden" value="1">
+              <input name="width" type="hidden" value="500">
+              <input name="height" type="hidden" value="600">
+            </form>
+            <div id="character" class="my-2">
+              <div class="target"></div>
+            </div>
+            <div id="codetemp"></div>
+          </div><!-- .col -->
+        </div><!-- .row -->
+      </div><!-- .tab-pane -->
+      <div class="tab-pane" id="usage">
+        <md data-target="usage"></md>
+      </div>
+      <div class="tab-pane" id="api">
+        <md data-target="api"></md>
+      </div>
+      <div class="tab-pane" id="design">
+        <md data-target="design"></md>
+      </div>
+      <div class="tab-pane" id="about">
+        <md data-target="credits"></md>
+        <md data-target="character-credits"></md>
+      </div>
+    </div><!-- .tab-content -->
+    <md data-target="social"></md>
+  </div><!-- .container -->
+
+  <footer class="mt-auto text-center pt-3 bg-light border-top">
+    <p>Made by <a href="https://gramener.com/">Gramener</a>.
+      Code released under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.
+      Images under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>
+      or <a href="https://creativecommons.org/choose/zero/">CC0</a>
+    </p>
+  </footer>
+
+  <script type="text/html" id="codegen">
+    <div class="mb-3">
+      <a class="btn btn-sm pt-0 btn-light border" download href="<%= url %>">
+        <i class="far fa-arrow-alt-circle-down"></i> SVG
+      </a>
+      <a class="btn btn-sm pt-0 btn-light border" download href="<%= url %>&ext=png">
+        <i class="far fa-arrow-alt-circle-down"></i> PNG
+      </a>
+      <button type="button" class="btn btn-sm pt-0 btn-light border copy" data-clipboard-target="#code">
+        <i class="far fa-copy"></i> Copy link
+      </button>
+      <label class="mx-1">
+        Background <input type="color" value="<%= state.bgcolor %>" class="btn btn-light border p-0 bg-color">
+      </label>
+    </div>
+    <pre id="code"><%= url %></pre>
+  </script>
+
+  <script type="text/html" id="menu-template">
+    <div class="param pe-2 mb-2 text-center">
+      <label for="name">name</label>
+      <select class="form-select" id="name" name="name">
+        <% if (!(q.name in chars)) q.name = Object.keys(chars)[0] %>
+        <% var info = chars[q.name] %>
+        <% for (var key in chars) { %>
+          <option <%= q.name == key ? 'selected' : '' %>><%= key %></option>
+        <% } %>
+      </select>
+    </div>
+
+    <% var nodes = info.files || {} %>
+    <% for (var dir of info.dirs || []) { %>
+      <div class="param pe-2 mb-2 text-center">
+        <label for="<%= dir %>"><%= dir %></label>
+        <select class="form-select" id="<%= dir %>" name="<%= dir %>">
+          <% if (!(q[dir] in nodes)) q[dir] = Object.keys(nodes)[0] %>
+          <% for (var key in nodes) { %>
+            <option <%= q[dir] == key ? 'selected' : '' %>><%= key %></option>
+          <% } %>
+          <% nodes = nodes[q[dir]] %>
+        </select>
+      </div>
+    <% } %>
+
+    <% for (var [key, vals] of Object.entries(nodes)) { %>
+      <div class="param pe-2 mb-2 text-center">
+        <label for="<%= key %>"><%= key %></label>
+        <select class="form-select" id="<%= key %>" name="<%= key %>">
+          <% for (var val of vals) { %>
+            <option <%= q[key] == val ? 'selected' : '' %>><%= val %></option>
+          <% } %>
+        </select>
+      </div>
+    <% } %>
+
+    <% for (var [key, val] of Object.entries(info.replace || {})) { %>
+      <div class="param pe-2 mb-2 text-center">
+        <label for="<%= key %>"><%= key %></label>
+        <input type="<%= val.type %>" value="<%= q[key] || val.default %>" id="<%= key %>" name="<%= key %>" class="form-control <%= config.typeclass[val.type] || '' %>">
+      </div>
+    <% } %>
+
+    <div class="param pe-2 mb-2 text-center">
+      <label for="mirror">mirror</label>
+      <select class="form-select" id="mirror" name="mirror">
+        <option></option>
+        <option value="mirror" <%= q.mirror == 'mirror' ? 'selected' : '' %>>mirror</option>
+      </select>
+    </div>
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/plain-draggable@2.5.12/plain-draggable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/g1@0.17.4/dist/g1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

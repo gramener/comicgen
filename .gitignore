@@ -1,0 +1,13 @@
+# Don't commit generated files
+test/tape.js
+dist/
+png/
+
+# Don't commit libraries
+node_modules/
+
+# Ignore other files
+TODO
+NOTES.md
+*.log
+.DS_Store
