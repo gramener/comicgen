@@ -58,11 +58,27 @@ async function init() {
   window.addEventListener('hashchange', render, false)
   render()
 
-  // When inputs change, change location hash
+  // When inputs change, change location hash -- but no oftener than 200ms
+  let delay = 200
+  let lastUpdated = 0
+  let event, timeout
   $menu.addEventListener('input', e => {
-    location.hash = getParams()
-    trigger_id = e.target.id
+    event = { hash: getParams(), id: e.target.id }
+    let diff = +new Date() - lastUpdated
+    if (diff < delay) {
+      if (timeout)
+        clearTimeout(timeout)
+      timeout = setTimeout(updateURL, diff)
+      return
+    }
+    updateURL()
   })
+
+  function updateURL() {
+    location.hash = event.hash
+    trigger_id = event.id
+    lastUpdated = +new Date()
+  }
 
   document.body.addEventListener('input', bg_color, false)
   document.body.addEventListener('change', bg_color, false)
