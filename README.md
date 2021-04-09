@@ -92,8 +92,8 @@ The raw SVGs and PNGs are at
 
 - [src/characters.json](https://gramener.com/comicgen/src/characters.json) - list of characters.
 - [src/files.json](https://gramener.com/comicgen/src/files.json) - list of files for each character
-- [svg/](https://unpkg.com/comicgen/svg/) - SVG files for each character
-- [png/](https://unpkg.com/comicgen/png/) - PNG files for each character
+- [svg/](https://unpkg.com/comicgen@0/svg/) - SVG files for each character
+- [png/](https://unpkg.com/comicgen@0/png/) - PNG files for each character
 
 You can create comics by directly linking to these files.
 You can embed these files directly in your plugin.
@@ -321,7 +321,7 @@ Load the comicgen library by adding this line in your HTML page's `<head>`:
 <script async src="https://gramener.com/comicgen/dist/comicgen.min.js"></script>
 ```
 
-You can use [unpkg.com/comicgen/](https://unpkg.com/comicgen/) instead of
+You can use [unpkg.com/comicgen@0/](https://unpkg.com/comicgen@0/) instead of
 [gramener.com](https://gramener.com/comicgen/) if you wish.
 
 You can also install comicgen locally using `npm` or `yarn`:
