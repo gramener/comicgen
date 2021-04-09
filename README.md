@@ -9,6 +9,12 @@ and the world &mdash; a **Comic Creator**.
 
 ----
 
+This is the old version of Comicgen (v0).
+
+<a href="https://gramener.com/comicgen/v1/" class="btn btn-lg btn-danger">Try the new Comicgen v1</a>
+
+----
+
 Interested in data storytelling? Come **join the [#ComicgenFriday](https://gramener.com/comicgenfriday/) community**.
 
 <!-- end -->

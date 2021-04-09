@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Comicgen: Comic Creator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="description" content="Create comics for your website or app with a JavaScript library. Choose a character, angle, emotion and pose. Size the image. Embed in your page.">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:site" content="Gramener">
+  <meta property="og:url" content="https://gramener.com/comicgen/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Comicgen: Comic Creator">
+  <meta property="og:description" content="Create comics for your website or app with a JavaScript library. Choose a character, angle, emotion and pose. Size the image. Embed in your page.">
+  <meta property="og:image" content="https://gramener.com/comicgen/docs/dee-and-dey-panels.png">
+
+  <style>
+    /* Ensure that this is the first rule in the first stylesheet. Used by JS */
+    .target-container { background-color: #ffffff; }
+    /* The rest can be any styles */
+    .target-container { overflow: hidden; position: relative; }
+    #code { white-space: pre-wrap; }
+    img { max-width: 100%; }
+    .attr { display: inline-block; }
+    h3 { color: var(--danger); }
+  </style>
+  <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+  <link href="https://learn.gramener.com/ui/bootstraptheme.css?font-family-base=Neucha%2CChalkboard%2CComic%20Sans%20MS%2Csans-serif&dark=%23675b9e&primary=%238b8ac1" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/highlightjs@9.12.0/styles/github.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42126862-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || []
+    function gtag() { window.dataLayer.push(arguments) }
+    gtag('js', new Date())
+    gtag('config', 'UA-42126862-1')
+  </script>
+</head>
+
+<body class="d-flex flex-column h-full">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark text-light border-bottom body-color">
+    <div class="container">
+      <a class="navbar-brand font-weight-bold" href=".">Comicgen</a>
+
+      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+          aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto">
+          <li class="navbar-item"><a class="text-light" href="#">Version 0</a></li>
+        </ul>
+        <ul class="navbar-nav">
+          <a class="navbar-brand" href="https://gramener.com/" target="_blank" rel="noopener">
+            <img src="docs/gramener.png" alt="Gramener" height="40">
+          </a>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-3">
+    <ul class="nav nav-tabs" id="comic-tab" role="tablist">
+      <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a></li>
+      <li class="nav-item"><a class="nav-link" id="usage-tab" data-toggle="tab" href="#usage" role="tab" aria-controls="usage" aria-selected="false">Usage</a></li>
+      <li class="nav-item"><a class="nav-link" id="api-tab" data-toggle="tab" href="#api" role="tab" aria-controls="api" aria-selected="false">API</a></li>
+      <li class="nav-item"><a class="nav-link" id="vision-tab" data-toggle="tab" href="#vision" role="tab" aria-controls="vision" aria-selected="false">Vision</a></li>
+      <li class="nav-item"><a class="nav-link" id="gallery-tab" data-toggle="tab" href="#gallery" role="tab" aria-controls="gallery" aria-selected="false">Gallery</a></li>
+      <li class="nav-item"><a class="nav-link" id="development-tab" data-toggle="tab" href="#development" role="tab" aria-controls="development" aria-selected="false">Development</a></li>
+      <li class="nav-item"><a class="nav-link" id="design-tab" data-toggle="tab" href="#design" role="tab" aria-controls="design" aria-selected="false">Design</a></li>
+      <li class="nav-item"><a class="nav-link" id="privacy-tab" data-toggle="tab" href="#privacy" role="tab" aria-controls="privacy" aria-selected="false">Privacy</a></li>
+      <li class="nav-item"><a class="nav-link" id="support-tab" data-toggle="tab" href="#support" role="tab" aria-controls="support" aria-selected="false">Support</a></li>
+    </ul>
+    <div class="tab-content" id="comic-tab-content">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row my-4">
+          <div class="col-xl-4">
+            <h1>Make your own comic</h1>
+            <md data-target="introduction"></md>
+          </div>
+          <div class="col-xl-8">
+            <form class="selector form-inline">
+              <div class="comicgen-attrs d-inline-block"></div>
+              <input name="x" type="hidden" value="0">
+              <input name="y" type="hidden" value="0">
+              <input name="scale" type="hidden" value="1">
+              <input name="width" type="hidden" value="500">
+              <input name="height" type="hidden" value="600">
+            </form>
+            <div class="target-container my-2">
+              <div class="target"></div>
+            </div>
+            <div class="mb-3">
+              <button type="button" class="btn btn-sm btn-light border download" data-clipboard-target="#code">
+                <i class="far fa-arrow-alt-circle-down"></i> Save image
+              </button>
+              <button type="button" class="btn btn-sm btn-light border copy" data-clipboard-target="#code">
+                <i class="far fa-copy"></i> Copy code
+              </button>
+              <label class="mx-1">
+                Background <input type="color" value="#ffffff" class="btn btn-light border p-0 bg-color">
+              </label>
+              <a class="btn btn-sm btn-light border urlfilter reset" data-target="#" href="#">
+                <i class="fa fa-arrows-alt"></i> Reset position
+              </a>
+              <span>Pinch to zoom. Pan to move</span>
+            </div>
+            <script type="text/html" class="codegen">
+              <pre id="code">&lt;g class="comicgen"<% _.each(q, function(v, k) { %> <%- k %>="<%- v %>"<% }) %>&gt;&lt;/g&gt;</pre>
+            </script>
+          </div><!-- .col -->
+        </div><!-- .row -->
+      </div><!-- .tab-pane -->
+
+      <div class="tab-pane fade" id="usage" role="tabpanel" aria-labelledby="usage-tab">
+        <md data-target="usage"></md>
+      </div>
+
+      <div class="tab-pane fade" id="api" role="tabpanel" aria-labelledby="api-tab">
+        <md data-target="api"></md>
+      </div>
+
+      <div class="tab-pane fade" id="vision" role="tabpanel" aria-labelledby="vision-tab">
+        <md data-target="vision"></md>
+      </div>
+
+      <div class="tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab">
+        <md data-target="gallery"></md>
+      </div>
+
+      <div class="tab-pane fade" id="development" role="tabpanel" aria-labelledby="development-tab">
+        <md data-target="development"></md>
+      </div>
+
+      <div class="tab-pane fade" id="design" role="tabpanel" aria-labelledby="design-tab">
+        <md data-target="design"></md>
+        <md data-target="credits"></md>
+      </div>
+
+      <div class="tab-pane fade" id="privacy" role="tabpanel" aria-labelledby="privacy-tab">
+        <md data-target="privacypolicy"></md>
+      </div>
+
+      <div class="tab-pane fade" id="support" role="tabpanel" aria-labelledby="support-tab">
+        <md data-target="Support"></md>
+      </div>
+
+    </div><!-- .container -->
+
+    <md data-target="social"></md>
+  </div>
+
+  <footer class="mt-auto text-center pt-3 bg-light border-top">
+    <p>Made by <a href="https://gramener.com/">Gramener</a>.
+      Code released under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.
+      Images under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>
+      or <a href="https://creativecommons.org/choose/zero/">CC0</a>
+    </p>
+  </footer>
+
+  <script type="text/html" class="arrows">
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-xs move-left" type="button" title="Move layer below" tabindex="-1"><i class="fa fa-xs fa-arrow-left"></i></button>
+      <span><%= key %></span>
+      <button class="btn btn-xs move-right" type="button" title="Move layer above" tabindex="-1"><i class="fa fa-xs fa-arrow-right"></i></button>
+    </div>
+  </script>
+
+  <datalist id="slider-ticks">
+    <option>0</option>
+    <option>0.25</option>
+    <option>0.5</option>
+    <option>0.75</option>
+    <option>1</option>
+  </datalist>
+
+  <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/lodash@4.17.11/lodash.min.js"></script>
+  <script src="https://unpkg.com/g1@0.17.0/dist/g1.min.js"></script>
+  <script src="https://unpkg.com/showdown@1.9.0/dist/showdown.min.js"></script>
+  <script src="https://unpkg.com/highlightjs@9.12.0/highlight.pack.min.js"></script>
+  <script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js"></script>
+  <script src="https://unpkg.com/plain-draggable@2.5.12/plain-draggable.min.js"></script>
+  <script src="https://unpkg.com/save-svg-as-png@1.4.14/lib/saveSvgAsPng.js"></script>
+  <script src="https://unpkg.com/flubber@0.3.0"></script>
+  <script src="https://d3js.org/d3-color.v1.min.js"></script>
+  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+  <script src="dist/comicgen.min.js"></script>
+  <script src="docs/script.js"></script>
+</body>
+</html>
