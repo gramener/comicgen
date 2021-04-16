@@ -238,8 +238,14 @@ Developers access comicgen through a JS library. What can we do to make it easie
 
 ## Credits
 
-- Library developed by Kriti Rohilla <kriti.rohilla@gramenerit.com> and S Anand <s.anand@gramener.com>
-- Conceived & designed by Ramya Mylavarapu <ramya.mylavarapu@gramener.com> & Richie Lionell <richie.lionell@gramener.com>
+- Library developed by
+  - Kriti Rohilla <kriti.rohilla@gramenerit.com>
+  - S Anand <s.anand@gramener.com>
+  - Shamili Robbi <shamili.robbi@gramener.com>
+  - Tejesh <tejesh.p@gramener.com>
+- Conceived & designed by
+  - Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
+  - Richie Lionell <richie.lionell@gramener.com>
 
 ### Character credits
 
