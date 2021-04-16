@@ -143,32 +143,10 @@
   </script>
 
   <script type="text/html" id="menu-template">
-    <div class="param pe-2 mb-2 text-center">
-      <label for="name">name</label>
-      <select class="form-select" id="name" name="name">
-        <% if (!(q.name in chars)) q.name = Object.keys(chars)[0] %>
-        <% var info = chars[q.name] %>
-        <% for (var key in chars) { %>
-          <option <%= q.name == key ? 'selected' : '' %>><%= key %></option>
-        <% } %>
-      </select>
-    </div>
+    <% if (!(q.name in chars)) q.name = Object.keys(chars)[0] %>
+    <% var info = chars[q.name] %>
 
-    <% var nodes = info.files || {} %>
-    <% for (var dir of info.dirs || []) { %>
-      <div class="param pe-2 mb-2 text-center">
-        <label for="<%= dir %>"><%= dir %></label>
-        <select class="form-select" id="<%= dir %>" name="<%= dir %>">
-          <% if (!(q[dir] in nodes)) q[dir] = Object.keys(nodes)[0] %>
-          <% for (var key in nodes) { %>
-            <option <%= q[dir] == key ? 'selected' : '' %>><%= key %></option>
-          <% } %>
-          <% nodes = nodes[q[dir]] %>
-        </select>
-      </div>
-    <% } %>
-
-    <% for (var [key, vals] of Object.entries(nodes)) { %>
+    <% for (var [key, vals] of Object.entries(options)) { %>
       <div class="param pe-2 mb-2 text-center">
         <label for="<%= key %>"><%= key %></label>
         <select class="form-select" id="<%= key %>" name="<%= key %>">

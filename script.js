@@ -5,6 +5,31 @@
 async function init() {
   const response = await fetch('dist/characterlist.json')
   const chars = await response.json()
+
+  // Return the menu dropdowns given a selection (q).
+  // Result = {label: [option, option, ...], label: [...]}
+  const options = function (q) {
+    let result = { name: Object.keys(chars) }
+    const char = chars[q.name] || Object.values(chars)[0]
+    char.patterns.forEach(pattern => {
+      let node = char.files
+      // Split each pattern by "/" like the directory structure
+      for (const dir of pattern.split(/\s*\/\s*/)) {
+        // (Recursively) loop through each directory
+        if (dir.match(/\{/)) {
+          // If dir is a variable (e.g. "{face}" or "{face}.svg"), get all matching keys, filter by current/first option
+          let key = dir.slice(1, -1)
+          result[key] = Object.keys(node)
+          node = node[q[key]] || Object.values(node)[0]
+        } else {
+          // If dir is a value (e.g. "face"), filter all nodes
+          node = node[dir]
+        }
+      }
+    })
+    return result
+  }
+
   const menu_template = _.template(document.querySelector('#menu-template').innerHTML)
   const code_template = _.template(document.querySelector('#codegen').innerHTML)
   const $codetemp = document.querySelector('#codetemp')
@@ -12,8 +37,6 @@ async function init() {
   const $character = document.querySelector('#character .target')
   // ID of the dropdown that last triggered a change. Useful to re-focus on it if menu is redrawn
   let trigger_id = ''
-  // Current values of character name and dirs. If these change, menu should be redrawn
-  let current = {name: '', dirs: ''}
   // Current background color. When the menu is redrawn, preserve this color on the page
   let state = { bgcolor: '#ffffff' }
   const config = {
@@ -39,18 +62,13 @@ async function init() {
   // Render the document based on query parameters
   async function render() {
     let q = g1.url.parse(location.hash.replace(/^#/, '?')).searchKey
-    // If the name or dirs have changed, re-render the menu
-    const menu_change = !current.name || q.name != current.name || _.some(chars[q.name].dirs, dir => q[dir] != current[dir])
-    if (menu_change) {
-      $menu.innerHTML = menu_template({ q, chars, config })
-      current.name = q.name
-      chars[q.name].dirs.forEach(dir => current[dir] = q[dir])
-    }
+    // If the name has changed, re-render the menu (WHY?)
+    $menu.innerHTML = menu_template({ q, chars, config, options: options(q) })
     let params = getParams()
     const response = await fetch('comic?' + params)
     $character.innerHTML = await response.text()
     $codetemp.innerHTML = code_template({ url: location.origin + location.pathname + 'comic?' + params || '', state, code_template })
-    if (menu_change && trigger_id)
+    if (trigger_id)
       document.querySelector(`#${trigger_id}`).focus()
   }
 

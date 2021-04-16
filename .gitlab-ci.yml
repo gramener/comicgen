@@ -12,7 +12,7 @@ validate:
 
 deploy:
   stage: deploy
-  only: [v1-main, v1-dev, /^v1-dev-.*$/]
+  only: [v1, dev, /^dev-.*$/]
   script:
     - 'ssh ubuntu@gramener.com "
         cd /mnt/gramener/apps/comicgenv1;

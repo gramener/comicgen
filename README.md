@@ -175,10 +175,12 @@ To add a new character, or add images for an existing character:
 ## Release
 
 New versions of comicgen are released on [Github](https://github.com/gramener/comicgen/)
-and [npm](https://www.npmjs.com/package/comicgen). Here is the release process.
+and [npm](https://www.npmjs.com/package/comicgen). Here is the release process:
 
 ```bash
-# Update package.json version. Then:
+# Commit all changes into the v1 branch.
+# Update package.json version.
+# Then:
 npm upgrade
 npm run build
 npm run lint
@@ -187,12 +189,12 @@ npm run lint
 git commit . -m"DOC: Release version x.x.x"
 git push
 
-# Merge into dev branch
-git checkout master
-git merge dev
+# Merge into release branch
+git checkout release
+git merge v1
 git tag -a v0.x.x -m"Add a one-line summary"
 git push --follow-tags
-git checkout dev
+git checkout v1
 ```
 
 Then release on [npm](https://www.npmjs.com/package/comicgen)
@@ -242,6 +244,8 @@ Developers access comicgen through a JS library. What can we do to make it easie
 ### Character credits
 
 - Ava, Bean, Biden, Dee, Dey, Evan, Holmes, Jaya, Priya, Ringo, Speechbubbles, Trump & Watson: By Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
+  under [CC0 license](https://creativecommons.org/choose/zero/)
+- Bill: Renel McCullum
   under [CC0 license](https://creativecommons.org/choose/zero/)
 - [Humaaans](https://www.humaaans.com/): By [Pablo Stanley](https://twitter.com/pablostanley)
   under [CC-BY license](https://creativecommons.org/licenses/by/4.0/)
