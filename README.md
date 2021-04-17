@@ -192,7 +192,7 @@ git push
 # Merge into release branch
 git checkout release
 git merge v1
-git tag -a v0.x.x -m"Add a one-line summary"
+git tag -a v1.x.x -m"Add a one-line summary"
 git push --follow-tags
 git checkout v1
 ```

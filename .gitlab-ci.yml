@@ -18,7 +18,7 @@ deploy:
         cd /mnt/gramener/apps/comicgenv1;
         git checkout -- .;
         git pull;
-        yarn install;
+        npm install;
         node src/buildchars.js;
         pkill --oldest -f comicserver;
         nohup node src/comicserver.js >> nohup.out 2>&1 &
