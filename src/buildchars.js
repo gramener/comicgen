@@ -43,11 +43,15 @@ const chars = {}
 glob.sync(`${root}/*/`).forEach(dir_path => {
   // Load the index.json
   const index_file = path.join(dir_path, 'index.json')
+  const svg = get_template(path.join(dir_path, 'index.svg'))
+  // Fetch all "{{name}}/..." and replace {{xx}} with {xx}
+  // This constitutes the file pattern.
+  const patterns = svg.match(/\{\{name\}\}[^"]*/g).map(v => v.replace('{{name}}/', '').replace(/.svg$/i, ''))
   if (fs.existsSync(index_file)) {
     // Read the index.json and create the character definition
     let config = get_config(index_file, root, fs)
     chars[path.basename(dir_path)] = {
-      patterns: config.patterns || [],
+      patterns: patterns,
       files: getFiles(dir_path),
       replace: config.replace
     }
@@ -70,6 +74,13 @@ function getFiles(dir) {
       result[file] = getFiles(target)
   })
   return result
+}
+
+function get_template(svg_path) {
+  let svg = fs.readFileSync(svg_path, { encoding: 'utf-8' })
+  return svg.replace(/<\?import\s+(.*?)\?>/, function (match, import_path) {
+    return get_template(path.join(svg_path, '..', import_path.replace(/^["']|["']$/g, '')))
+  })
 }
 
 // Save as dist/characterlist.json. Indent for ease of reading

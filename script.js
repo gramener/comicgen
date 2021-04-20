@@ -16,9 +16,9 @@ async function init() {
       // Split each pattern by "/" like the directory structure
       for (const dir of pattern.split(/\s*\/\s*/)) {
         // (Recursively) loop through each directory
-        if (dir.match(/\{/)) {
-          // If dir is a variable (e.g. "{face}" or "{face}.svg"), get all matching keys, filter by current/first option
-          let key = dir.slice(1, -1)
+        if (dir.match(/\{\{/)) {
+          // If dir is a variable (e.g. "{{face}}" or "{{face}}.svg"), get all matching keys, filter by current/first option
+          let key = dir.slice(2, -2)
           result[key] = Object.keys(node)
           node = node[q[key]] || Object.values(node)[0]
         } else {
