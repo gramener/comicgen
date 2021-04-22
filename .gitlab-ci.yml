@@ -7,7 +7,7 @@ validate:
   stage: test
   script:
     - npm run lint
-    - yarn install
+    - npm install
     - npm test
 
 deploy:
