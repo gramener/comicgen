@@ -6,6 +6,9 @@ async function init() {
   const response = await fetch('dist/characterlist.json')
   const chars = await response.json()
 
+  // Current values of character name and parent attributes. If these change, menu should be redrawn
+  let current = {}
+
   // Return the menu dropdowns given a selection (q).
   // Result = {label: [option, option, ...], label: [...]}
   const options = function (q) {
@@ -13,6 +16,7 @@ async function init() {
     const char = chars[q.name] || Object.values(chars)[0]
     char.patterns.forEach(pattern => {
       let node = char.files
+      let hierarchy = []
       // Split each pattern by "/" like the directory structure
       for (const dir of pattern.split(/\s*\/\s*/)) {
         // (Recursively) loop through each directory
@@ -20,12 +24,17 @@ async function init() {
           // If dir is a variable (e.g. "{{face}}" or "{{face}}.svg"), get all matching keys, filter by current/first option
           let key = dir.slice(2, -2)
           result[key] = Object.keys(node)
+          hierarchy.push(key)
           node = node[q[key]] || Object.values(node)[0]
         } else {
           // If dir is a value (e.g. "face"), filter all nodes
           node = node[dir]
         }
       }
+      // When a parent in the dropdown hierarchy changes, redraw the menu.
+      // e.g. in {{angle}}/pose/{{pose}}.svg, if angle changes, redraw for new poses.
+      current = { name: char }
+      hierarchy.slice(0, -1).forEach(key => current[key] = '')
     })
     return result
   }
@@ -62,8 +71,14 @@ async function init() {
   // Render the document based on query parameters
   async function render() {
     let q = g1.url.parse(location.hash.replace(/^#/, '?')).searchKey
-    // If the name has changed, re-render the menu (WHY?)
-    $menu.innerHTML = menu_template({ q, chars, config, options: options(q) })
+    // If the name or parent keys have changed, re-render the menu
+    const menu_change = !current.name || _.some(current, (val, key) => current[key] != q[key])
+    // If the menu has changed, re-render the menu
+    if (menu_change) {
+      $menu.innerHTML = menu_template({ q, chars, config, options: options(q) })
+      for (let key in current)
+        current[key] = q[key]
+    }
     let params = getParams()
     const response = await fetch('comic?' + params)
     $character.innerHTML = await response.text()
