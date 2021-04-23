@@ -75,9 +75,10 @@ async function init() {
     const menu_change = !current.name || _.some(current, (val, key) => current[key] != q[key])
     // If the menu has changed, re-render the menu
     if (menu_change) {
-      $menu.innerHTML = menu_template({ q, chars, config, options: options(q) })
+      let opt = options(q)
+      $menu.innerHTML = menu_template({ q, chars, config, options: opt })
       for (let key in current)
-        current[key] = q[key]
+        current[key] = opt[key]
     }
     let params = getParams()
     const response = await fetch('comic?' + params)
