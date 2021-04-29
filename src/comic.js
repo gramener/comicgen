@@ -5,6 +5,7 @@ const cheerio = require('cheerio')
 const mustache = require('mustache')
 const roughjs = require('roughjs')
 const get_config = require('./getconfig').get_config
+const speechbubble = require('./speechbubble')
 
 // TODO: Allow users to override root in options
 let root = path.join(__dirname, '..', 'svg')
@@ -54,7 +55,9 @@ function comicgen(fs) {
       // Merge all index.json files in every directory from root to svg_path to get the config
       const config = get_config(svg_path, root, fs)
       // Render the SVG as a template
-      const attrs = _.merge({}, config.defaults, template, comic.functions)
+      const attrs = _.merge({
+        speechbubble: () => (text, render) => speechbubble({ ...attrs, text: render(text) })
+      }, config.defaults, template, comic.functions)
       const comic_width_half = config.defaults.width / 2
       const comic_height_half = config.defaults.height / 2
       const mirror_transform = attrs.mirror ? `translate(${config.defaults.width},0) scale(-1, 1)` : ''
