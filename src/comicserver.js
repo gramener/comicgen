@@ -14,6 +14,7 @@ app.get('/comic', async (req, res) => {
   const start = new Date()
   let result = comic(req.query)
   res.set('Cache-Control', 'public, max-age=3600')
+  res.set('Access-Control-Allow-Origin', '*')
   if (req.query.ext && req.query.ext.match(/png/i)) {
     res.set('Content-Type', 'image/png')
     result = await sharp(Buffer.from(result, 'utf8')).toFormat('png', { colors: 256 }).toBuffer()
