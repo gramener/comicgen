@@ -185,15 +185,20 @@ npm upgrade
 npm run build
 npm run lint
 
-# Ensure that there are no build errors on the server
+git push gitlab v1
+# Then: Test build at https://code.gramener.com/s.anand/deedey/-/pipelines
+# Then: Test output at https://gramener.com/comicgen/v1/
+
 git commit . -m"DOC: Release version x.x.x"
-git push
+git push origin v1
+git push gitlab v1
 
 # Merge into release branch
 git checkout release
 git merge v1
 git tag -a v1.x.x -m"Add a one-line summary"
-git push --follow-tags
+git push gitlab release --follow-tags
+git push origin release --follow-tags
 git checkout v1
 ```
 
