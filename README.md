@@ -253,19 +253,19 @@ Conceived & designed by
 
 ### Character credits
 
-- Aryan, Zoe: By Swetha Mylavarapu
+- Devarani B <devarani.b@gramener.com>: Aavatar, Ethan & Facesketch
   under [CC0 license](https://creativecommons.org/choose/zero/)
-- Ava, Bean, Biden, Dee, Dey, Evan, Holmes, Jaya, Priya, Ringo, Speechbubbles, Trump & Watson: By Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
-  under [CC0 license](https://creativecommons.org/choose/zero/)
-- Bill: Renel McCullum
-  under [CC0 license](https://creativecommons.org/choose/zero/)
-- Ethan & Facesketch: By Devarani B <devarani.b@gramener.com>
-  under [CC0 license](https://creativecommons.org/choose/zero/)
-- [Humaaans](https://www.humaaans.com/): By [Pablo Stanley](https://twitter.com/pablostanley)
+- [Pablo Stanley](https://twitter.com/pablostanley): [Humaaans](https://www.humaaans.com/)
   under [CC-BY license](https://creativecommons.org/licenses/by/4.0/)
-- Ricky: By Suchismita Naik
+- Ramya Mylavarapu <ramya.mylavarapu@gramener.com>: Aavatar, Ava, Bean, Biden, Dee, Dey, Evan, Holmes, Jaya, Priya, Ringo, Speechbubbles, Trump & Watson
   under [CC0 license](https://creativecommons.org/choose/zero/)
-- Sophie: By Shawf Designs <https://www.fiverr.com/shawf_designs>
+- Renel McCullum: Bill
+  under [CC0 license](https://creativecommons.org/choose/zero/)
+- Shawf Designs <https://www.fiverr.com/shawf_designs>: Sophie
+  under [CC0 license](https://creativecommons.org/choose/zero/)
+- Swetha Mylavarapu: Aryan & Zoe
+  under [CC0 license](https://creativecommons.org/choose/zero/)
+- Suchismita Naik <suchismita.naik@gramener.com>: Ricky
   under [CC0 license](https://creativecommons.org/choose/zero/)
 
 <!-- end -->
@@ -282,7 +282,7 @@ If you're a designer, you could help by:
 
 Here's a guide to help understand how to design and submit new characters or layers.
 
-### Add new characters
+### Design new characters
 
 Characters are made of 1 or more SVG images.
 
