@@ -1,5 +1,7 @@
 # Comicgen
 
+<!-- markdownlint-disable MD033 -->
+
 <!-- var introduction -->
 We love comics. We badly wanted to create comic strips. But there was one
 problem. Some of us can't draw a straight line for nuts.

@@ -14,6 +14,7 @@ async function init() {
   const options = function (q) {
     let result = { name: Object.keys(chars) }
     const char = chars[q.name] || Object.values(chars)[0]
+    current = { name: char }
     char.patterns.forEach(pattern => {
       let node = char.files
       let hierarchy = []
@@ -33,7 +34,6 @@ async function init() {
       }
       // When a parent in the dropdown hierarchy changes, redraw the menu.
       // e.g. in {{angle}}/pose/{{pose}}.svg, if angle changes, redraw for new poses.
-      current = { name: char }
       hierarchy.slice(0, -1).forEach(key => current[key] = '')
     })
     return result
@@ -78,7 +78,7 @@ async function init() {
       let opt = options(q)
       $menu.innerHTML = menu_template({ q, chars, config, options: opt })
       for (let key in current)
-        current[key] = opt[key]
+        current[key] = q[key]
     }
     let params = getParams()
     const response = await fetch('comic?' + params)
