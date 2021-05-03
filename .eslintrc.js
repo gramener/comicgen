@@ -1,15 +1,9 @@
 // We specify ESLint config as JS rather than JSON to enable comments
 module.exports = {
   'parserOptions': {
-    'ecmaVersion': 6,
-    'sourceType': 'module',
+    'ecmaVersion': 9,
+    'sourceType': 'module'
   },
-  'overrides': [{
-    'files': ['script.js', 'test/server.js', 'scripts/png.js', 'src/comicserver.js', 'src/comic.js'],
-    'parserOptions': {
-      'ecmaVersion': 9
-    }
-  }],
   'plugins': [
     'template'          // Handle Tornado templates and JS in HTML files
   ],

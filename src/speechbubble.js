@@ -1,5 +1,5 @@
 /* eslint-env node */
-let fontkit = require('fontkit');
+let fontkit = require('fontkit')
 let fonts = {
   'Arial': fontkit.openSync('C:/Windows/Fonts/arial.ttf'),
   'Consolas': fontkit.openSync('C:/Windows/Fonts/consola.ttf'),
@@ -121,7 +121,8 @@ function speechshape({x = 0, y = 0, width, height, pointerx, pointery, fill = '#
 }
 
 function speechbubble(options) {
-  options = Object.assign({}, options, {
+  console.log(options)
+  options = Object.assign({
     x: 0,
     y: 0,
     width: 400,
@@ -130,10 +131,11 @@ function speechbubble(options) {
     'font-size': 16,
     'line-height': 1.5,
     align: 'middle'
-  })
+  }, options)
   let font = fonts[options['font-family']]
+  let fontSize = +options['font-size']
   let lineHeight = +options['font-size'] * +options['line-height']
-  let maxWidth = options.width * font.unitsPerEm / options['font-size']
+  let maxWidth = options.width * font.unitsPerEm / fontSize
   // Get the attributes of <text...> and <path...> into attrs.text and attrs.path
   let attrs = {
     text: [`text-anchor="${options.align}"`, `dx="${dx[options.align] * options.width}"`],
@@ -145,7 +147,7 @@ function speechbubble(options) {
         attrs[type].push(`${target}="${options[attr]}"`)
   // Render the text
   let text = wrap(options.text, maxWidth, font)
-    .map((line, i) => `<text dy="${(i + 1) * lineHeight}" ${attrs.text.join(' ')}>${line}</text>`).join('\n')
+    .map((line, i) => `<text font-size="${fontSize}" dy="${(i + 1) * lineHeight}" ${attrs.text.join(' ')}>${line}</text>`).join('\n')
   // Render the path
   return speechshape(options) + text
 }
