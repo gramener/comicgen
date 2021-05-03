@@ -21,7 +21,7 @@ Interested in data storytelling? Come **join the [#ComicgenFriday](https://grame
 <!-- var usage -->
 ## Usage
 
-A simple way to use Comicgen is from [gramener.com/comicgen/](https://gramener.com/comicserver/).
+A simple way to use Comicgen is from [gramener.com/comicgen/](https://gramener.com/comicgen/).
 
 - Choose your character
 - Save the image as SVG
@@ -39,8 +39,8 @@ For lettering, you can use comic fonts from
 
 Some fonts we like are:
 
-| Font                              | Example text                                                                             |
-|-----------------------------------|------------------------------------------------------------------------------------------|
+| Font                              | Example text                                               |
+|-----------------------------------|------------------------------------------------------------|
 | [Architects Daughter][font-ad]    | [![Specimen](docs/font-architects-daughter.png)][font-ad]  |
 | [Cavolini][font-ca] (Windows)     | [![Specimen](docs/font-cavolini.png)][font-ca]             |
 | [Segoe Script][font-ss] (Windows) | [![Specimen](docs/font-segoe-script.png)][font-ss]         |
@@ -229,7 +229,7 @@ People like to use their own platforms, not switch to a new one. So let's integr
 
 ### 2. Create a comic builder UI
 
-People find it easier to create comics using a UI than programming. So let's create an [interface](https://gramener.com/comicserver/) that let people create an entire graphic novel!
+People find it easier to create comics using a UI than programming. So let's create an interface that let people create an entire graphic novel!
 
 [See **builder** issues &raquo;](https://github.com/gramener/comicgen/labels/builder)
 
@@ -371,7 +371,7 @@ Please e-mail Anand <s.anand@gramener.com> and Richie <richie.lionell@gramener.c
     <a href="https://www.facebook.com/dialog/share?app_id=163328100435225&display=page&href=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&redirect_uri=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&quote=Make%20your%20own%20comics%20with%20the%20%23comicgen%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F" class="btn btn-link py-0 ps-0 pe-1" target="_blank" rel="noopener" title="Share on Facebook">
       <i class="fab fa-facebook-square fa-2x"></i>
     </a>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicserver/" class="btn btn-link py-0 ps-0 pe-1" target="_blank" rel="noopener" title="Share on LinkedIn">
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/" class="btn btn-link py-0 ps-0 pe-1" target="_blank" rel="noopener" title="Share on LinkedIn">
       <i class="fab fa-linkedin fa-2x"></i>
     </a>
     <a href="https://news.ycombinator.com/item?id=20049116" class="btn btn-link py-0 ps-0 pe-1" target="_blank" rel="noopener" title="Discuss on Hacker News">
@@ -401,7 +401,7 @@ If you have any questions, please contact us at [comicgen.powerbi@gramener.com](
 - [Discuss on Twitter. Hashtag #comicgen](https://twitter.com/search?f=tweets&vertical=default&q=comicgen&src=typd)
 - [Share on Twitter](https://twitter.com/intent/tweet?text=Make%20your%20own%20comics%20with%20the%20%23comicgen%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F)
 - [Share on Facebook](https://www.facebook.com/dialog/share?app_id=163328100435225&display=page&href=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&redirect_uri=https%3A%2F%2Fgramener.com%2Fcomicgen%2F&quote=Make%20your%20own%20comics%20with%20the%20%23comicgen%20JS%20API%20by%20%40Gramener%20https%3A%2F%2Fgramener.com%2Fcomicgen%2F)
-- [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicserver/)
+- [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://gramener.com/comicgen/)
 - [Discuss on Hacker News](https://news.ycombinator.com/item?id=20049116)
 - [Fork on Github](https://github.com/gramener/comicgen)
 <!-- end -->
