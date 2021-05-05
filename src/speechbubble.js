@@ -5,6 +5,12 @@ let fonts = {
   'Consolas': fontkit.openSync('C:/Windows/Fonts/consola.ttf'),
   'Architects Daughter': fontkit.openSync('C:/Users/anand/AppData/Roaming/Monotype/skyfonts-google/Architects Daughter regular.ttf'),
 }
+// text-anchor uses start/middle/end but users prefer align=left/center/right. Map these
+let alignMap = {
+  'left': 'start',
+  'center': 'middle',
+  'right': 'end'
+}
 
 function width(word, font) {
   let width = 0
@@ -57,12 +63,16 @@ let attr_map = {
 }
 
 function speechshape({x = 0, y = 0, width, height, pointerx, pointery, fill = '#fff', stroke = '#000'}) {
+  // Convert to numbers
+  [x, y, width, height, pointerx, pointery] = [+x, +y, +width, +height, +pointerx, +pointery]
+  // Create main speech shape
   const paths = [
     `M ${x},${y}`,
     `L ${x + width},${y}`,
     `L ${x + width},${y + height}`,
     `L ${x},${y + height}`,
   ]
+  // Add pointer arc if present
   const dx = pointerx - (x + width / 2)
   const dy = pointery - (y + height / 2)
   let insertion
@@ -76,7 +86,7 @@ function speechshape({x = 0, y = 0, width, height, pointerx, pointery, fill = '#
       if (dx < 0) {
         p1 = { x: x + width / 6 * 1, y: y }
         p3 = { x: x + width / 6 * 2, y: y }
-      } else if (dx > 0) {
+      } else if (dx >= 0) {
         p1 = { x: x + width / 6 * 4, y: y }
         p3 = { x: x + width / 6 * 5, y: y }
       }
@@ -86,7 +96,7 @@ function speechshape({x = 0, y = 0, width, height, pointerx, pointery, fill = '#
       if (dx < 0) {
         p1 = { x: x + width / 6 * 2, y: y + height }
         p3 = { x: x + width / 6 * 1, y: y + height }
-      } else if (dx > 0) {
+      } else if (dx >= 0) {
         p1 = { x: x + width / 6 * 5, y: y + height }
         p3 = { x: x + width / 6 * 4, y: y + height }
       }
@@ -99,7 +109,7 @@ function speechshape({x = 0, y = 0, width, height, pointerx, pointery, fill = '#
       if (dy < 0) {
         p1 = { x: x, y: y + height / 6 * 2 }
         p3 = { x: x, y: y + height / 6 * 1 }
-      } else if (dy > 0) {
+      } else if (dy >= 0) {
         p1 = { x: x, y: y + height / 6 * 5 }
         p3 = { x: x, y: y + height / 6 * 4 }
       }
@@ -109,7 +119,7 @@ function speechshape({x = 0, y = 0, width, height, pointerx, pointery, fill = '#
       if (dy < 0) {
         p1 = { x: x + width, y: y + height / 6 * 1 }
         p3 = { x: x + width, y: y + height / 6 * 2 }
-      } else if (dy > 0) {
+      } else if (dy >= 0) {
         p1 = { x: x + width, y: y + height / 6 * 4 }
         p3 = { x: x + width, y: y + height / 6 * 5 }
       }
@@ -121,7 +131,6 @@ function speechshape({x = 0, y = 0, width, height, pointerx, pointery, fill = '#
 }
 
 function speechbubble(options) {
-  console.log(options)
   options = Object.assign({
     x: 0,
     y: 0,
@@ -132,13 +141,16 @@ function speechbubble(options) {
     'line-height': 1.5,
     align: 'middle'
   }, options)
+  if (!fonts[options['font-family']])
+    options['font-family'] = Object.keys(fonts)[0]
   let font = fonts[options['font-family']]
   let fontSize = +options['font-size']
   let lineHeight = +options['font-size'] * +options['line-height']
   let maxWidth = options.width * font.unitsPerEm / fontSize
+  let align = alignMap[options.align] || options.align
   // Get the attributes of <text...> and <path...> into attrs.text and attrs.path
   let attrs = {
-    text: [`text-anchor="${options.align}"`, `dx="${dx[options.align] * options.width}"`],
+    text: [`text-anchor="${align}"`, `dx="${(dx[align] || 0) * options.width}"`],
     path: [],
   }
   for (let type of Object.keys(attrs))
@@ -152,6 +164,7 @@ function speechbubble(options) {
   return speechshape(options) + text
 }
 
+// eslint-disable-next-line
 function main() {
   const express = require('express')
   const app = express()

@@ -58,12 +58,19 @@ function comicgen(fs) {
       const attrs = _.merge({
         speechbubble: () => (text, render) => speechbubble({ ...attrs, text: render(text) })
       }, config.defaults, template, comic.functions)
-      const comic_width_half = config.defaults.width / 2
-      const comic_height_half = config.defaults.height / 2
-      const mirror_transform = attrs.mirror ? `translate(${config.defaults.width},0) scale(-1, 1)` : ''
+      let width = attrs.width || config.defaults.width
+      let height = attrs.height || config.defaults.height
+      // TODO: If pointerx and pointery are set, incorporate them into the width, height, x, y
+      // TODO: Later, generalize this
+      const comic_width_half = width / 2
+      const comic_height_half = height / 2
+      const mirror_transform = attrs.mirror ? `translate(${width},0) scale(-1, 1)` : ''
       const aspect = config.aspect || 'xMidYMin slice'
+      // Characters with a default width & height are drawn to that viewBox.
+      // Others (like speechbubbles) are drawn dynamically based on width/height, and have no viewBox
+      const viewBox = config.defaults.width && config.defaults.height ? `viewBox="0 0 ${config.defaults.width} ${config.defaults.height}"` : ''
       svg = `
-  <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="${aspect}" width="${attrs.width}" height="${attrs.height}" viewBox="0 0 ${config.defaults.width} ${config.defaults.height}">
+  <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="${aspect}" width="${width}" height="${height}" ${viewBox} style="overflow:visible">
     <g transform="${mirror_transform} translate(${comic_width_half},${comic_height_half}) scale(${attrs.scale}) translate(-${comic_width_half},-${comic_height_half}) translate(${attrs.x},${attrs.y})">
       ${mustache.render(svg, attrs)}
     </g>
