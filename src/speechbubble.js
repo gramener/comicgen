@@ -76,7 +76,8 @@ function speechshape({x = 0, y = 0, width, height, pointerx, pointery, fill = '#
   const dx = pointerx - (x + width / 2)
   const dy = pointery - (y + height / 2)
   let insertion
-  let p1, p2 = {x: pointerx, y: pointery}, p3
+  let p1, p3
+  let p2 = {x: pointerx, y: pointery}
   // TODO: Write logic manually, then generalize
   if (Math.abs(dy) > Math.abs(dx)) {
     // If pointer is on top

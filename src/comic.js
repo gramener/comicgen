@@ -58,10 +58,8 @@ function comicgen(fs) {
       const attrs = _.merge({
         speechbubble: () => (text, render) => speechbubble({ ...attrs, text: render(text) })
       }, config.defaults, template, comic.functions)
-      let width = attrs.width || config.defaults.width
-      let height = attrs.height || config.defaults.height
-      // TODO: If pointerx and pointery are set, incorporate them into the width, height, x, y
-      // TODO: Later, generalize this
+      let width = +attrs.width || config.defaults.width
+      let height = +attrs.height || config.defaults.height
       const comic_width_half = width / 2
       const comic_height_half = height / 2
       const mirror_transform = attrs.mirror ? `translate(${width},0) scale(-1, 1)` : ''
