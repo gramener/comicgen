@@ -86,11 +86,6 @@
           <div class="col-xl-8">
             <form class="selector form-inline">
               <div id="menu"></div>
-              <input name="x" type="hidden" value="0">
-              <input name="y" type="hidden" value="0">
-              <input name="scale" type="hidden" value="1">
-              <input name="width" type="hidden" value="500">
-              <input name="height" type="hidden" value="600">
             </form>
             <div id="character" class="my-2">
               <div class="target"></div>
@@ -168,7 +163,12 @@
             <% } %>
           </select>
         <% } else { %>
-          <input type="<%= val.type %>" value="<%= q[key] || val.default %>" id="<%= key %>" name="<%= key %>" class="form-control <%= config.typeclass[val.type] || '' %>">
+          <input type="<%= val.type %>" value="<%= q[key] || val.default %>" id="<%= key %>" name="<%= key %>"
+            class="form-control <%= config.typeclass[val.type] || '' %>"
+            <% for (let [attr, attrval] of Object.entries(val.attrs || {})) { %>
+              <%= attr %>="<%= attrval %>"
+            <% } %>
+          >
         <% } %>
       </div>
     <% } %>
