@@ -14,6 +14,7 @@
     "build": "rimraf dist && node src/buildchars.js",
     "lint": "eclint . && eslint --ext js,html .",
     "prepublishOnly": "npm run lint && npm test",
+    "postinstall": "node src/speechbubble.js",
     "server": "node src/comicserver.js",
     "test": ""
   },
@@ -21,6 +22,8 @@
   "private": false,
   "dependencies": {
     "cheerio": "1.0.0-rc.3",
+    "fontkit": "1",
+    "get-google-fonts": "1",
     "lodash": "4",
     "mustache": "4",
     "roughjs": "4",

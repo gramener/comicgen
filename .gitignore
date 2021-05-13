@@ -2,6 +2,7 @@
 test/tape.js
 dist/
 png/
+fonts/
 
 # Don't commit libraries
 node_modules/

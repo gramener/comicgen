@@ -46,7 +46,7 @@ glob.sync(`${root}/*/`).forEach(dir_path => {
   const svg = get_template(path.join(dir_path, 'index.svg'))
   // Fetch all "{{name}}/..." and replace {{xx}} with {xx}
   // This constitutes the file pattern.
-  const patterns = svg.match(/\{\{name\}\}[^"]*/g).map(v => v.replace('{{name}}/', '').replace(/.svg$/i, ''))
+  const patterns = (svg.match(/\{\{name\}\}[^"]*/g) || []).map(v => v.replace('{{name}}/', '').replace(/.svg$/i, ''))
   if (fs.existsSync(index_file)) {
     // Read the index.json and create the character definition
     let config = get_config(index_file, root, fs)
