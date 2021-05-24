@@ -19,7 +19,7 @@ deploy:
         git checkout -- .;
         git pull;
         npm install;
-        node src/buildchars.js;
+        npm run build;
         pkill --oldest -f comicserver;
-        nohup node src/comicserver.js >> nohup.out 2>&1 &
+        nohup npm run server >> nohup.out 2>&1 &
       "'
