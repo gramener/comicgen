@@ -21,7 +21,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "cheerio": "1.0.0-rc.3",
+    "cheerio": "1.0.0-rc.10",
     "fontkit": "1",
     "get-google-fonts": "1",
     "lodash": "4",

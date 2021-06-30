@@ -105,6 +105,34 @@ The full list of options is at [dist/characterlist.json](dist/characterlist.json
 You can create comics by directly linking to these files.
 You can embed these files directly in your plugin.
 
+## HTML API
+
+To include comic as HTML components, add this to your page:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/lodash/lodash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uifactory@0.0.14/dist/uifactory.min.js" import="@comic-gen"></script>
+```
+
+Then you can add a `<comic-gen>` tag with the options for each character as attributes. For example, to render Ethan's angling sideways, winking, we need:
+
+- `name`: `ethan`
+- `angle`: `side`
+- `emotion`: `wink`
+- `pose`: `normal`
+
+This can be added as an SVG using:
+
+```html
+<comic-gen name="ethan" angle="side" emotion="wink" pose="normal" ext="svg"></comic-gen>
+```
+
+To render as a PNG, change `ext="svg"` to `ext="png"`.
+
+If you change attributes using JavaScript, the comic is re-rendered.
+
+**NOTE**: Currently, `<comic-gen>` cannot be used inside an SVG element.
+
 <!-- end -->
 
 <!-- var vision -->
