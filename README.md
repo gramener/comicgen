@@ -317,7 +317,8 @@ If you're a designer, you could help by:
 
 Here's a guide to help understand how to design and submit new characters or layers.
 
-### Design new characters
+
+## Design new characters
 
 Characters are made of 1 or more SVG images.
 
@@ -350,6 +351,124 @@ You can choose to break up the images in any number of ways. For example:
 
 The more combinations you have, the more complex your image becomes. You could
 start small and then add variety.
+
+While designing a character in Comicgen, keep these inmind:
+
+- Start with an artboard of **500 px x 600px**.
+- **Minimal anchor points** on your path. It's easy to edit and reduces file size.
+- Keep a **consistent stroke weight** across all the body parts.
+- Keep each SVG **under 10kb**.
+- Re-use the same colors. Keep it to just 5 colors per character.
+  - Use opacity for shadows/blush/tears/lighting. When the color changes, they will blend in.
+- Name each SVG file in lowercase without spaces. Avoid uppercase and special characters.
+  - E.g., `lookingdown.svg` is OK. `LookingDown.svg`, `looking-down.svg` or `looking down.svg` are not
+
+Use the below template as the base for creating your character
+
+![Base template](docs/base-template.svg)
+
+- Body must start from the horizontal line, with neck centre aligned to the vertical line. Face
+  must be positioned right on the horizontal line and must fit inside the box. Hair and ears can
+  fall out of the box.
+
+![Base template with body and face](docs/base-template-body-face.svg)
+
+- All side poses should be **slightly angled** as shown below
+
+![Side pose](docs/side-pose.svg)
+
+### Saving file in Adobe Illustrator
+
+Go to File \> Export as \> Format: SVGs - Use artboards \> Save (follow below settings while saving)
+
+![Adobe Illustrator save options](docs/adobe-illustrator-save.png){.img-fluid}
+
+### List of character emotions
+
+- `afraid`
+- `angry`
+- `annoyed`
+- `blush`
+- `confused`
+- `cry`
+- `cryingloudly`
+- `cunning`
+- `curious`
+- `disappointed`
+- `dozing`
+- `drunk`
+- `excited`
+- `facepalm`
+- `happy`
+- `hearteyes`
+- `irritated`
+- `lookingdown`
+- `lookingleft`
+- `lookingright`
+- `lookingup`
+- `mask`
+- `neutral`
+- `nevermind`
+- `ooh`
+- `rofl`
+- `rollingeyes`
+- `sad`
+- `scared`
+- `shocked`
+- `shout`
+- `smile`
+- `smirk`
+- `starstruck`
+- `surprised`
+- `thinking`
+- `tired`
+- `tongueout`
+- `whistle`
+- `wink`
+- `worried`
+
+### List of character poses
+
+| pose                     | standing | side | sitting | standing back | sitting back |
+|--------------------------|:--------:|:----:|:-------:|:-------------:|--------------|
+| explaining               |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| handsonhip               |    Yes   |  Yes |         |      Yes      |              |
+| normal                   |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| pointingdown             |    Yes   |  Yes |         |      Yes      |              |
+| pointingleft             |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| pointingright            |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| pointingup               |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| shrug                    |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| thumbsup                 |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| explaining45degreesdown  |    Yes   |  Yes |         |      Yes      |              |
+| explaining45degreesup    |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| explainingwithbothhands  |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| handsclasped             |    Yes   |  Yes |   Yes   |               |              |
+| handsfolded              |    Yes   |  Yes |         |               |              |
+| handsheldback            |    Yes   |  Yes |         |      Yes      |              |
+| handsinpocket            |    Yes   |  Yes |         |      Yes      |              |
+| handstouchingchin        |    Yes   |  Yes |   Yes   |               |              |
+| hi                       |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| holdingboard             |    Yes   |  Yes |         |      Yes      |              |
+| holdingbook              |    Yes   |  Yes |   Yes   |               |              |
+| holdingcoffee            |    Yes   |  Yes |   Yes   |               |              |
+| holdinglaptopfrontangle  |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| holdinglaptopsideangle   |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| holdingmobile            |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| holdingpaper             |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| holdingstick             |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| leaningagainst           |    Yes   |  Yes |         |               |              |
+| lookingdownatlaptop      |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| pushing                  |    Yes   |  Yes |         |               |              |
+| scratchinghead           |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| super                    |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| takingnotes              |    Yes   |  Yes |   Yes   |               |              |
+| talkingoverphone         |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| thinking                 |    Yes   |  Yes |   Yes   |               |              |
+| workinganddrinkingcoffee |    Yes   |  Yes |   Yes   |               |              |
+| writingonboard           |    Yes   |  Yes |         |      Yes      |              |
+| yes                      |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
+| yuhoo                    |    Yes   |  Yes |   Yes   |      Yes      |    Yes       |
 
 ### Submit new characters
 
