@@ -21,5 +21,5 @@ deploy:
         npm install;
         npm run build;
         pkill --oldest -f comicserver;
-        nohup npm run server >> nohup.out 2>&1 &
+        nohup npm start >> nohup.out 2>&1 &
       "'

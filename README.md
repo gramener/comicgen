@@ -229,20 +229,16 @@ New versions of comicgen are released on [Github](https://github.com/gramener/co
 and [npm](https://www.npmjs.com/package/comicgen). Here is the release process:
 
 ```bash
-# Commit all changes into the v1 branch.
-# Update package.json version.
-# Then:
+# Update package.json version. Then:
 npm upgrade
 npm run build
 npm run lint
 
-git push gitlab v1
-# Then: Test build at https://code.gramener.com/s.anand/deedey/-/pipelines
-# Then: Test output at https://gramener.com/comicgen/v1/
-
 git commit . -m"DOC: Release version x.x.x"
 git push origin v1
 git push gitlab v1
+# Then: Test build at https://code.gramener.com/s.anand/deedey/-/pipelines
+# Then: Test output at https://gramener.com/comicgen/v1/
 
 # Merge into release branch
 git checkout release
