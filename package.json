@@ -1,11 +1,11 @@
 {
   "name": "comicgen",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Create comics for your website or app",
-  "main": "dist/comicgen.min.js",
-  "jsdelivr": "dist/comicgen.min.js",
-  "unpkg": "dist/comicgen.min.js",
-  "repository": "git@code.gramener.com:s.anand/deedey.git",
+  "main": "src/comicgen.js",
+  "jsdelivr": "src/comicgen.js",
+  "unpkg": "src/comicgen.js",
+  "repository": "https://github.com/gramener/comicgen",
   "author": "S Anand <s.anand@gramener.com>",
   "bin": {
     "comicserver": "./src/comicserver.js"
@@ -15,7 +15,7 @@
     "lint": "eclint . && eslint --ext js,html .",
     "prepublishOnly": "npm run lint && npm test",
     "postinstall": "node src/speechbubble.js",
-    "server": "node src/comicserver.js",
+    "start": "node src/comicserver.js",
     "test": ""
   },
   "license": "MIT",
@@ -37,8 +37,6 @@
     "cli-progress": "3",
     "eslint-plugin-template": "0.3",
     "express": "4",
-    "fast-xml-parser": "^3.17.6",
-    "faucet": "0.0",
     "glob": "7",
     "jquery": "3",
     "minimist": "1",

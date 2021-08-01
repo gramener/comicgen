@@ -31,6 +31,27 @@ Here's a 3-minute video explaining how to create your own comic strip.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/E_2hdZuugI8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+To run your own server, run:
+
+```bash
+npm install -g comicgen   # Install Comicgen globally
+comicserver               # Run server at http://localhost:3000/
+```
+
+To include Comicgen in your own Node.js app, run:
+
+```bash
+npm install comicgen
+```
+
+Then you can insert it in your app:
+
+```js
+const comicgen = require('comicgen')
+// Returns the SVG string for the character
+const svg = comicgen({name: 'ava', emotion: 'cry', pose: 'angry'})
+```
+
 ## Fonts
 
 For lettering, you can use comic fonts from

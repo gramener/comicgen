@@ -116,6 +116,6 @@ class ComicError extends Error {
 }
 
 // Usage:
-// const comic = require('../src/comic')(require('fs'))
-// const comic = require('../src/comic')(require('fsjson'))
+// const comicgen = require('comicgen')(require('fs'))
+// const comicgen = require('comicgen')(require('fsjson'))
 module.exports = comicgen

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-const comic = require('../src/comic')(require('fs'))
+const comicgen = require('./comicgen')(require('fs'))
 const express = require('express')
 const bodyParser = require('body-parser')
 const sharp = require('sharp')
@@ -12,7 +12,7 @@ app.use(express.static('.'))
 
 app.get('/comic', async (req, res) => {
   const start = new Date()
-  let result = comic(req.query)
+  let result = comicgen(req.query)
   res.set('Cache-Control', 'public, max-age=3600')
   res.set('Access-Control-Allow-Origin', '*')
   if (req.query.ext && req.query.ext.match(/png/i)) {
@@ -28,5 +28,5 @@ app.get('/comic', async (req, res) => {
 
 
 app.listen(3000, () => {
-  console.log('Example app listening at http://localhost:3000')
+  console.log('Comicgen is running at http://localhost:3000')
 })
