@@ -35,26 +35,35 @@ characterlist.json is a dict of characters. Keys are character names. Values are
 const fs = require('fs')
 const path = require('path')
 const glob = require('glob')
+const cheerio = require('cheerio')
 const get_config = require('../src/getconfig').get_config
 const root = path.join(__dirname, '..', 'svg').split(path.sep).join(path.posix.sep)
 
 const chars = {}
-// Loop through all characters
-glob.sync(`${root}/*/`).forEach(dir_path => {
-  // Load the index.json
-  const index_file = path.join(dir_path, 'index.json')
-  const svg = get_template(path.join(dir_path, 'index.svg'))
-  // Fetch all "{{name}}/..." and replace {{xx}} with {xx}
-  // This constitutes the file pattern.
-  const patterns = (svg.match(/\{\{name\}\}[^"]*/g) || []).map(v => v.replace('{{name}}/', '').replace(/.svg$/i, ''))
-  if (fs.existsSync(index_file)) {
-    // Read the index.json and create the character definition
-    let config = get_config(index_file, root, fs)
-    chars[path.basename(dir_path)] = {
-      patterns: patterns,
-      files: getFiles(dir_path),
-      replace: config.replace
-    }
+// Loop through all immediate child folders. Each folder is a character/template
+glob.sync(`${root}/*/`).forEach(dirPath => {
+  // Each folder must have both index.svg AND index.json
+  const index_svg = path.join(dirPath, 'index.svg')
+  const index_json = path.join(dirPath, 'index.json')
+  if (!fs.existsSync(index_svg) || !fs.existsSync(index_json))
+    return
+  // Load the index.svg (svg) and index.json (config)
+  const svg = get_template(path.join(dirPath, 'index.svg'))
+  const config = get_config(index_json, root, fs)
+  // Loop through each node. Every node is a potential character
+  const $ = cheerio.load(svg, { xmlMode: true }, false)
+  const patterns = $('comic[name]').map((i, node) => {
+    const name = node.attribs['name']
+    // If the name ends with .svg, it's a file.
+    if (name.match(/\.svg$/i))
+      return name.replace('{{name}}/', '').replace(/.svg$/i, '')
+    // Else, it's a comic character lookup. It should be specified in index.json/lookup
+  }).get()
+  chars[path.basename(dirPath)] = {
+    patterns: patterns,
+    files: getFiles(dirPath),
+    lookups: config.lookups || {},
+    replace: config.replace,
   }
 })
 
