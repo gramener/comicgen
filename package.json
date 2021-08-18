@@ -30,23 +30,10 @@
     "sharp": "0.27"
   },
   "devDependencies": {
-    "@rollup/plugin-json": "4",
     "body-parser": "1",
-    "browserify": "16",
-    "clean-css-cli": "4",
     "cli-progress": "3",
-    "eslint-plugin-template": "0.3",
     "express": "4",
     "glob": "7",
-    "jquery": "3",
-    "minimist": "1",
-    "puppeteer": "1",
-    "rimraf": "2",
-    "rollup": "1",
-    "rollup-plugin-terser": "5",
-    "selenium-webdriver": "3",
-    "svgo": "1",
-    "tap-merge": "0.3",
-    "tape": "4"
+    "rimraf": "2"
   }
 }

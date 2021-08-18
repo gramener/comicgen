@@ -212,6 +212,22 @@ We succeed when more people create more and better stories with Comicgen. We mea
 
 <!-- var development -->
 
+## Run Comicgen server
+
+Install the dependencies to run Comicgen:
+
+- [Node](https://nodejs.org/en/)
+- [Git](https://git-scm.com/)
+- [Git LFS](https://git-lfs.github.com/)
+
+```bash
+git clone https://github.com/gramener/comicgen
+cd comicgen       # Go to the Comicgen folder
+npm install       # Install dependencies
+npm run build     # Compile Comicgen
+npm start         # Run Comicgen server on port 3000
+```
+
 ## Add new characters
 
 To add a new character, or add images for an existing character:

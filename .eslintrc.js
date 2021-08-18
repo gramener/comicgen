@@ -4,9 +4,6 @@ module.exports = {
     'ecmaVersion': 9,
     'sourceType': 'module'
   },
-  'plugins': [
-    'template'          // Handle Tornado templates and JS in HTML files
-  ],
   'env': {
     'node': true,       // Include node globals
     'es6': true,        // Allow ES6 in JavaScript
