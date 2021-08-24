@@ -245,7 +245,7 @@ New versions of comicgen are released on [Github](https://github.com/gramener/co
 and [npm](https://www.npmjs.com/package/comicgen). Here is the release process:
 
 ```bash
-# Update package.json version. Then:
+# Update package.json version.
 npm upgrade
 npm run build
 npm run lint
