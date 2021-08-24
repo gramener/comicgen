@@ -32,6 +32,8 @@
   "devDependencies": {
     "body-parser": "1",
     "cli-progress": "3",
+    "eslint": "7",
+    "eslint-plugin-html": "6",
     "express": "4",
     "glob": "7",
     "rimraf": "2"

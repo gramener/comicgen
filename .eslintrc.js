@@ -18,6 +18,7 @@ module.exports = {
     'tape': true
   },
   'extends': 'eslint:recommended',
+  'plugins': ['html'],
   'rules': {
     /* Override default rules */
     'indent': [2, 2, { 'VariableDeclarator': 2 }],  // Force 2 space indentation
