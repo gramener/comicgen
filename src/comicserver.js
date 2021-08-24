@@ -11,10 +11,20 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static('.'))
 
 app.get('/comic', async (req, res) => {
-  const start = new Date()
-  let result = comicgen(req.query)
-  res.set('Cache-Control', 'public, max-age=3600')
   res.set('Access-Control-Allow-Origin', '*')
+
+  const start = new Date()
+  let result, duration
+  try {
+    result = comicgen(req.query)
+  } catch(e) {
+    duration = +new Date() - start
+    console.error('E', start, duration, req.url, e.message)
+    res.set('Content-Type', 'text/plain')
+    res.send(e)
+    return
+  }
+  res.set('Cache-Control', 'public, max-age=3600')
   if (req.query.ext && req.query.ext.match(/png/i)) {
     res.set('Content-Type', 'image/png')
     result = await sharp(Buffer.from(result, 'utf8')).toFormat('png', { colors: 256 }).toBuffer()
@@ -22,8 +32,8 @@ app.get('/comic', async (req, res) => {
     res.set('Content-Type', 'image/svg+xml')
   }
   res.send(result)
-  const duration = +new Date() - start
-  console.log(start, duration, req.url)
+  duration = +new Date() - start
+  console.log('I', start, duration, req.url)
 })
 
 

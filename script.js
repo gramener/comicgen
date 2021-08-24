@@ -15,6 +15,28 @@ async function init() {
     let result = { name: Object.keys(chars) }
     const char = chars[q.name] || Object.values(chars)[0]
     current = { name: char }
+    // If the character is a template, i.e. uses other characters, index.json/lookup defines
+    // dropdowns for each parameter. For example:
+    //    "dee_emotion": { "select": "emotion", "from": "dee", "where": { "angle": "side" } }
+    // ... means that ?dee_emotion= is picked up from the "emotion" dropdown from character "dee".
+    // If the user has picked an a
+
+    _.each(char.lookups, (lookup, key) => {
+      let filter = { name: lookup.from }
+      _.each(lookup.where, (filter_val, filter_key) => {
+        if (filter_val.expr) {
+          // TODO: Don't hard-code side
+          let expr = new Function('q', `return q["${filter_val.expr}"] || 'side'`)
+          filter[filter_key] = expr(q)
+        }
+        else {
+          filter[filter_key] = filter_val
+        }
+      })
+      result[key] = options(filter)[lookup.select]
+    })
+    // If the character is a basic character, i.e. its made of files under its own directory,
+    // index.json/patterns defines dropdowns for each parameter.
     char.patterns.forEach(pattern => {
       let node = char.files
       let hierarchy = []
