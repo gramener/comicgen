@@ -63,12 +63,13 @@ function comicgen(fs) {
       const comic_width_half = width / 2
       const comic_height_half = height / 2
       const mirror_transform = attrs.mirror ? `translate(${width},0) scale(-1, 1)` : ''
+      const overflow = attrs.crop ? 'overflow="hidden"' : 'overflow="visible"'
       const aspect = config.aspect || 'xMidYMin slice'
       // Characters with a default width & height are drawn to that viewBox.
       // Others (like speechbubbles) are drawn dynamically based on width/height, and have no viewBox
       const viewBox = config.defaults.width && config.defaults.height ? `viewBox="0 0 ${config.defaults.width} ${config.defaults.height}"` : ''
       svg = `
-  <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="${aspect}" width="${width}" height="${height}" ${viewBox} style="overflow:visible">
+  <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="${aspect}" width="${width}" height="${height}" ${viewBox} ${overflow}>
     <g transform="${mirror_transform} translate(${comic_width_half},${comic_height_half}) scale(${attrs.scale}) translate(-${comic_width_half},-${comic_height_half}) translate(${attrs.x},${attrs.y})">
       ${mustache.render(svg, attrs)}
     </g>

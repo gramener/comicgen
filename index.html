@@ -89,7 +89,7 @@
               <div id="menu"></div>
             </form>
             <div id="character" class="my-2">
-              <div class="target"></div>
+              <div class="target" draggable="true"></div>
             </div>
             <div id="codetemp"></div>
           </div><!-- .col -->
@@ -181,6 +181,16 @@
         <option value="mirror" <%= q.mirror == 'mirror' ? 'selected' : '' %>>mirror</option>
       </select>
     </div>
+    <div class="param pe-2 mb-2 text-center">
+      <label for="mirror">crop</label>
+      <select class="form-select" id="crop" name="crop">
+        <option></option>
+        <option value="crop" <%= q.crop == 'crop' ? 'selected' : '' %>>crop</option>
+      </select>
+    </div>
+
+    <input type="hidden" name="x" id="x" value="<%= q.x || 0 %>">
+    <input type="hidden" name="y" id="y" value="<%= q.y || 0 %>">
   </script>
 
 

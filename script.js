@@ -91,12 +91,13 @@ async function init() {
   }
 
   // Render the document based on query parameters
-  async function render() {
+  async function render(e) {
     let q = g1.url.parse(location.hash.replace(/^#/, '?')).searchKey
     // If the name or parent keys have changed, re-render the menu
     const menu_change = !current.name || _.some(current, (val, key) => current[key] != q[key])
-    // If the menu has changed, re-render the menu
-    if (menu_change) {
+    // If the menu has changed, or the user changed the URL, re-render the menu.
+    // If the menu changes via a change in input, DO NOT RE-RENDER. It resets the focus.
+    if (menu_change || (e && e.type == 'hashchange')) {
       let opt = options(q)
       $menu.innerHTML = menu_template({ q, chars, config, options: opt })
       for (let key in current)
@@ -138,8 +139,22 @@ async function init() {
 
   document.body.addEventListener('input', bg_color, false)
   document.body.addEventListener('change', bg_color, false)
-
+  $character.addEventListener('dragstart', pan_dragstart, false)
+  $character.addEventListener('dragend', pan_dragend, false)
   new ClipboardJS('.copy')
+
+  function pan_dragend(e) {
+    let e0 = e.target._dragstart
+    let x = e.clientX - e0.clientX
+    let y = e.clientY - e0.clientY
+    $menu.querySelector('[name="x"]').value = +$menu.querySelector('[name="x"]').value + x
+    $menu.querySelector('[name="y"]').value = +$menu.querySelector('[name="y"]').value + y
+    event = { hash: getParams(), id: null }
+    updateURL()
+  }
+  function pan_dragstart(e) {
+    e.target._dragstart = e
+  }
 }
 init()
 
