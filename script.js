@@ -139,21 +139,21 @@ async function init() {
 
   document.body.addEventListener('input', bg_color, false)
   document.body.addEventListener('change', bg_color, false)
+  document.body.addEventListener('dragover', e => e.preventDefault(), false)
   $character.addEventListener('dragstart', pan_dragstart, false)
   $character.addEventListener('dragend', pan_dragend, false)
   new ClipboardJS('.copy')
 
   function pan_dragend(e) {
     let e0 = e.target._dragstart
-    let x = e.clientX - e0.clientX
-    let y = e.clientY - e0.clientY
-    $menu.querySelector('[name="x"]').value = +$menu.querySelector('[name="x"]').value + x
-    $menu.querySelector('[name="y"]').value = +$menu.querySelector('[name="y"]').value + y
+    $menu.querySelector('[name="x"]').value = +$menu.querySelector('[name="x"]').value + e.clientX - e0.clientX
+    $menu.querySelector('[name="y"]').value = +$menu.querySelector('[name="y"]').value + e.clientY - e0.clientY
     event = { hash: getParams(), id: null }
     updateURL()
   }
   function pan_dragstart(e) {
     e.target._dragstart = e
+    e.dataTransfer.effectAllowed = e.dataTransfer.dropEffect = 'move'
   }
 }
 init()
