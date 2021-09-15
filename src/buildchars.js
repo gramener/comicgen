@@ -4,7 +4,7 @@ characterlist.json is a dict of characters. Keys are character names. Values are
 
 {
   "aryan": {                    // Character name
-    "files": {                  // File structure
+    "files": {                  // Parameter structure mirrors folder structure
       "emotion": {              //  All folders are keys
         "angry": "",            //  All files are keys too
         "blush": "",            //  Files have "" as value

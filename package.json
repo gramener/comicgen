@@ -36,6 +36,7 @@
     "eslint-plugin-html": "6",
     "express": "4",
     "glob": "7",
-    "rimraf": "2"
+    "rimraf": "2",
+    "svgedit": "5"
   }
 }

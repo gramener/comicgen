@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Comicgen Builder</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <style>
+      #svgroot { overflow: hidden; }
+      .ayo{
+            color: green;
+            font: 18px serif;
+            height: 100%;
+            overflow: auto;
+            background-color: black;
+        }
+    </style>
+  </head>
+
+  <body>
+    <h1>Comicgen Builder</h1>
+
+    <div id="editorContainer" >
+
+    </div>
+
+    <div>
+      <button onclick="canvas.setMode('select')">Select</button>
+      <button id="deebtn">Dee</button>
+      <button id="deybtn">Dey</button>
+      <button onclick="canvas.setMode('rect')">Draw Panel</button>
+      <button onclick="canvas.setMode('circle')">Add circle</button>
+      <button onclick="canvas.setMode('polygon')">Add polygon</button>
+      <button onclick="canvas.setMode('line')">Add line</button>
+      <button onclick="canvas.setMode('path')">Add path</button>
+      <button id="speechbtn">Add speech</button>
+      <button id="addelements">Add elements</button>
+      <button id="addtext">Add text</button>
+      <button id="addforeignobject">Foreign Object</button>
+      <button id="addedittext">Add editable text</button>
+      <button id="animaterect">Animated rectangle</button>
+      <button onclick="fill('#ff0000')">Fill Red</button>
+      <button id="duplicate">Duplicate</button>
+      <button id="copyel">Copy</button>
+      <button id="pastel">Paste</button>
+      <button id="groupel">Group</button>
+      <button id="ungroupel">Ungroup</button>
+      <button id="bringforward">Bring forward</button>
+      <button id="sendbackward">Send backward</button>
+      <button id="alignels">Align selected</button>
+      <button onclick="canvas.deleteSelectedElements()">Delete Selected</button>
+      <button onclick="canvas.clear(); canvas.updateCanvas(width, height);">Clear All</button>
+      <button onclick="alert(canvas.getSvgString())">Get SVG</button>
+      <button id="savepng">Save as PNG</button>
+    </div>
+
+    <script type="module" src="src/comicbuilder.js"></script>
+  </body>
+</html>
