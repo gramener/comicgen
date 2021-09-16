@@ -5,21 +5,23 @@
     <title>Comicgen Builder</title>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <style>
-      #svgroot { overflow: hidden; }
-      .ayo{
-            color: green;
-            font: 18px serif;
-            height: 100%;
-            overflow: auto;
-            background-color: black;
-        }
     </style>
   </head>
 
   <body>
     <h1>Comicgen Builder</h1>
 
-    <div id="editorContainer" >
+    <template component="comicbuilder-ribbon" characterlist:urljson="dist/characterlist.json">
+      <% console.log(characterlist) %>
+      <div style="border: 1px solid black">
+        <% for (let [name, conf] of Object.entries(characterlist)) { %>
+          <comic-gen name="<%= name %>" angle="straight" emotion="angry" pose="yuhoo" width="50" height="100" style="display: inline-block; padding: 0.5rem 0"></comic-gen>
+        <% } %>
+      </div>
+    </template>
+
+    <comicbuilder-ribbon></comicbuilder-ribbon>
+    <div id="editorContainer">
 
     </div>
 
@@ -53,6 +55,8 @@
       <button id="savepng">Save as PNG</button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/lodash/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uifactory@0.0.16/dist/uifactory.min.js"  import="@comic-gen"></script>
     <script type="module" src="src/comicbuilder.js"></script>
   </body>
 </html>
