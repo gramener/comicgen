@@ -315,6 +315,8 @@ Conceived & designed by
 
 - Devarani B <devarani.b@gramener.com>: Aavatar, Ethan & Facesketch
   under [CC0 license](https://creativecommons.org/choose/zero/)
+- Google Inc.: [Noto emoji](https://github.com/googlefonts/noto-emoji)
+  under [Apache 2.0](https://github.com/googlefonts/noto-emoji/blob/main/LICENSE) license
 - Mike Hoye <mhoye@mozilla.com>: [FXEmoji](https://github.com/mozilla/fxemoji)
   under [CC-BY license](https://github.com/mozilla/fxemoji/blob/gh-pages/LICENSE.md)
 - [Pablo Stanley](https://twitter.com/pablostanley): [Humaaans](https://www.humaaans.com/)
