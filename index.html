@@ -175,6 +175,23 @@
     <% } %>
 
     <div class="param pe-2 mb-2 text-center">
+      <label for="box">box</label>
+      <select class="form-select" id="box" name="box">
+        <option></option>
+        <% for (let box of [1, 2, 3, 5, 7, 10]) { %>
+          <option value="<%= box %>" <%= q.box == box ? 'selected' : '' %>><%= box %></option>
+        <% } %>
+      </select>
+    </div>
+    <div class="param pe-2 mb-2 text-center">
+      <label for="boxcolor">boxcolor</label>
+      <input name="boxcolor" id="boxcolor" type="color" value="<%= q.boxcolor %>" class="form-control form-control-color">
+    </div>
+    <div class="param pe-2 mb-2 text-center">
+      <label for="boxgap">boxgap</label>
+      <input name="boxgap" id="boxgap" type="number" min="0" value="<%= q.boxgap %>" class="form-control form-control-number">
+    </div>
+    <div class="param pe-2 mb-2 text-center">
       <label for="mirror">mirror</label>
       <select class="form-select" id="mirror" name="mirror">
         <option></option>

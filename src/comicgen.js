@@ -67,11 +67,26 @@ function comicgen(fs) {
       // Characters with a default width & height are drawn to that viewBox.
       // Others (like speechbubbles) are drawn dynamically based on width/height, and have no viewBox
       const viewBox = config.defaults.width && config.defaults.height ? `viewBox="0 0 ${config.defaults.width} ${config.defaults.height}"` : ''
+      // If there's a ?box=<thickness>, add a panel around the strip.
+      //    ?boxcolor= defines the color. Default: black
+      //    ?boxgap= defines the box padding. Default: max(box, jitter)
+      let box = ''
+      if (attrs.box) {
+        const gen = roughjs.generator({ options: { seed: 1, bowing: 2, roughness: Math.max(2, Math.min(attrs.box / 2, 5)) } })
+        let padding = +attrs.boxgap || +attrs.box
+        let path = gen.opsToPath(gen.rectangle(padding / 2, padding / 2, width - padding, height - padding).sets[0])
+        box = `<path d="${path}" fill="none" stroke="${attrs.boxcolor || 'black'}" stroke-width="${attrs.box}"></path>`
+      }
+      // TODO: check if overflow is working
+      const overflow = attrs.box ? '' : 'style="overflow:visible"'
       svg = `
-  <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="${aspect}" width="${width}" height="${height}" ${viewBox} style="overflow:visible">
-    <g transform="${mirror_transform} translate(${comic_width_half},${comic_height_half}) scale(${attrs.scale}) translate(-${comic_width_half},-${comic_height_half}) translate(${attrs.x},${attrs.y})">
-      ${mustache.render(svg, attrs)}
-    </g>
+  <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" ${overflow}>
+    ${box}
+    <svg ${viewBox} preserveAspectRatio="${aspect}" width="${config.defaults.width}" height="${config.defaults.height}" ${overflow}>
+      <g transform="${mirror_transform} translate(${comic_width_half},${comic_height_half}) scale(${attrs.scale}) translate(-${comic_width_half},-${comic_height_half}) translate(${attrs.x},${attrs.y})">
+        ${mustache.render(svg, attrs)}
+      </g>
+    </svg>
   </svg>`
       // If the template contains a <comic> object, recursively replace it with comic()
       const _replacements = _.mapValues(config.replace, (v, k) => _.merge(v, { value: template[k] }))
@@ -89,7 +104,7 @@ function comicgen(fs) {
         r = +render(r)
         t = +render(t)
         const gap = r + t
-        const gen = roughjs.generator({options: {roughness: r}})
+        const gen = roughjs.generator({options: {roughnesss: r}})
         return gen.opsToPath(gen.rectangle(+x+gap, +y+gap, +w-2*gap, +h-2*gap).sets[0])
       }
     }
