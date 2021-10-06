@@ -96,7 +96,8 @@ function comicgen(fs) {
       throw new Error('TODO')
   }
 
-  // These functions can be used by mustache in templates
+  // These functions can be used by mustache in templates as
+  // {{#roughrect}}x y width height roughness t{{/roughrect}}
   comic.functions = {
     roughrect: function () {
       return function (shape, render) {
