@@ -238,6 +238,7 @@ and [npm](https://www.npmjs.com/package/comicgen). Here is the release process:
 
 ```bash
 # Update package.json version.
+npm install
 npm upgrade
 npm run build
 npm run lint
