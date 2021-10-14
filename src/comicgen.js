@@ -82,7 +82,7 @@ function comicgen(fs) {
       svg = `
   <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" ${overflow}>
     ${box}
-    <svg ${viewBox} preserveAspectRatio="${aspect}" width="${config.defaults.width}" height="${config.defaults.height}" ${overflow}>
+    <svg ${viewBox} preserveAspectRatio="${aspect}" width="${config.defaults.width || '100%'}" height="${config.defaults.height || '100%'}" ${overflow}>
       <g transform="${mirror_transform} translate(${comic_width_half},${comic_height_half}) scale(${attrs.scale}) translate(-${comic_width_half},-${comic_height_half}) translate(${attrs.x},${attrs.y})">
         ${mustache.render(svg, attrs)}
       </g>
