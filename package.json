@@ -1,6 +1,6 @@
 {
   "name": "comicgen",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "Create comics for your website or app",
   "main": "src/comicgen.js",
   "jsdelivr": "src/comicgen.js",
@@ -26,15 +26,15 @@
     "get-google-fonts": "1",
     "lodash": "4",
     "mustache": "4",
-    "roughjs": "4",
+    "roughjs": "^4.5.2",
     "sharp": "0.27"
   },
   "devDependencies": {
-    "body-parser": "1",
+    "body-parser": "^1.19.1",
     "cli-progress": "^3.9.1",
     "eslint": "7",
     "eslint-plugin-html": "^6.2.0",
-    "express": "4",
+    "express": "^4.17.2",
     "glob": "^7.2.0",
     "rimraf": "2"
   }
