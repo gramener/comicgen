@@ -18,16 +18,16 @@ app.get('/comic', async (req, res) => {
   try {
     result = comicgen(req.query)
   } catch(e) {
-    duration = +new Date() - start
-    console.error('E', start, duration, req.url, e.message)
-    res.set('Content-Type', 'text/plain')
-    res.send(e)
-    return
+    return handleException(e, req, res, start)
   }
   res.set('Cache-Control', 'public, max-age=3600')
   if (req.query.ext && req.query.ext.match(/png/i)) {
-    res.set('Content-Type', 'image/png')
-    result = await sharp(Buffer.from(result, 'utf8')).toFormat('png', { colors: 256 }).toBuffer()
+    try {
+      result = await sharp(Buffer.from(result, 'utf8')).toFormat('png', { colors: 256 }).toBuffer()
+      res.set('Content-Type', 'image/png')
+    } catch(e) {
+      return handleException(e, req, res, start)
+    }
   } else {
     res.set('Content-Type', 'image/svg+xml')
   }
@@ -40,3 +40,12 @@ app.get('/comic', async (req, res) => {
 app.listen(3000, () => {
   console.log('Comicgen is running at http://localhost:3000')
 })
+
+
+function handleException(e, req, res, start) {
+  let duration = +new Date() - start
+  let error = e.toString().trim()
+  console.error('E', start, duration, req.url, error)
+  res.set('Content-Type', 'text/plain')
+  res.send(error)
+}
