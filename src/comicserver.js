@@ -11,6 +11,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static('.'))
 
 app.get('/comic', async (req, res) => {
+  // In case a request results in a crash, this helps us track the request
+  console.log('    ', req.url)
   res.set('Access-Control-Allow-Origin', '*')
 
   const start = new Date()
