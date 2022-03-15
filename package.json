@@ -1,6 +1,6 @@
 {
   "name": "comicgen",
-  "version": "1.6.3",
+  "version": "1.7.0",
   "description": "Create comics for your website or app",
   "main": "src/comicgen.js",
   "jsdelivr": "src/comicgen.js",
