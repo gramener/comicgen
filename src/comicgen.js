@@ -4,6 +4,8 @@ const _ = require('lodash')
 const cheerio = require('cheerio')
 const mustache = require('mustache')
 const roughjs = require('roughjs')
+const interpolate = require('d3-interpolate-path')
+const colorInterpolate = require('color-interpolate')
 const get_config = require('./getconfig').get_config
 const speechbubble = require('./speechbubble')
 
@@ -15,7 +17,6 @@ function comicgen(fs) {
     // comic() or comic('') returns just an empty string.
     if (!template)
       return ''
-
     // If we got a string, treat it as a HTML template. Render all <comic> instances
     else if (typeof template == 'string') {
       // Replace all <comic> instances with the underlying SVG via comic({...})
@@ -23,11 +24,42 @@ function comicgen(fs) {
       $('comic').each(function (index, el) {
         $(el).replaceWith(comic(el.attribs, _replacements))
       })
+
+      // Replace interpolation elements
+      $('interpolate').each(function (index, el) {
+        let $source = $(comic({ name: path.join(el.attribs['name'], el.attribs['from']) }, _replacements))
+        let $target = $(comic({name: path.join(el.attribs['name'], el.attribs['to'])}, _replacements))
+        // TODO: we get all interpolation parameters from index.svg. But they're similar to index.json's replacements.
+        // Let's move index.json's replacements into index.svg as <param> elements.
+        $('param', el).each(function (index, param) {
+          let $param = $(param)
+          let selector = $param.attr('selector')
+          let key = $param.attr('value')
+          let method = $param.attr('method')
+          let value = (_replacements[key] || { value: 0 }).value
+          let attrs = ($param.attr('attr') || 'fill,stroke,d').split(',')
+          attrs.forEach(attr => {
+            let sourceVal = $target.find(selector).attr(attr)
+            let targetVal = $source.find(selector).attr(attr)
+            if (!sourceVal || !targetVal)
+              return
+            let interpolator = () => sourceVal
+            if (method == 'path')
+              interpolator = interpolate.interpolatePath(targetVal, sourceVal)
+            else if (method == 'color')
+              interpolator = colorInterpolate([targetVal, sourceVal])
+            else if (method == 'number')
+              interpolator = interpolateNumber(targetVal, sourceVal)
+            $(selector, $source).attr(attr, interpolator(value))
+          })
+        })
+        $(el).replaceWith($source)
+      })
       // Replace attributes of the SVG, e.g. change fill colors.
       // _replacements is like {name: {selector, attr, value}}.
       // In the SVG, we find all matching selectors and set attr=value
       // Note: Prefer case-insensitive selectors - https://caniuse.com/css-case-insensitive
-      // {selector: 'path[fill="#ccc"]'} is case-sensitive. Won't match #CCC.
+      // {selector: 'path[fill="#ccc"]'} is case-sensitive. Won't ma\tch #CCC.
       // {selector: 'path[fill="#ccc" i]'} is case-INsensitive. It will also match #CCC. Use this.
       _.each(_replacements, replace => {
         if (replace.value && replace.selector)
@@ -51,7 +83,6 @@ function comicgen(fs) {
       // If it’s a directory, read the `index.svg`. Else read the file intself
       if (stat.isDirectory())
         svg_path = path.join(svg_path, 'index.svg')
-      let svg = get_template(svg_path)
       // Merge all index.json files in every directory from root to svg_path to get the config
       const config = get_config(svg_path, root, fs)
       // Render the SVG as a template
@@ -79,12 +110,13 @@ function comicgen(fs) {
       }
       // TODO: check if overflow is working
       const overflow = attrs.box ? '' : 'style="overflow:visible"'
+      let svg = get_template(svg_path)
       svg = `
   <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" ${overflow}>
     ${box}
     <svg ${viewBox} preserveAspectRatio="${aspect}" width="${config.defaults.width || '100%'}" height="${config.defaults.height || '100%'}" ${overflow}>
       <g transform="${mirror_transform} translate(${comic_width_half},${comic_height_half}) scale(${attrs.scale}) translate(-${comic_width_half},-${comic_height_half}) translate(${attrs.x},${attrs.y})">
-        ${mustache.render(svg, attrs)}
+        ${render(svg, attrs)}
       </g>
     </svg>
   </svg>`
@@ -118,6 +150,16 @@ function comicgen(fs) {
     return svg.replace(/<\?import\s+(.*?)\?>/, function(match, import_path) {
       return get_template(path.join(svg_path, '..', import_path.replace(/^["']|["']$/g, '')))
     })
+  }
+
+  function render(svg, attrs) {
+    return mustache.render(svg, attrs)
+  }
+
+  function interpolateNumber(a, b) {
+    return a = +a, b = +b, function (t) {
+      return a * (1 - t) + b * t
+    }
   }
 
   return comic

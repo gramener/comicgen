@@ -1,30 +1,28 @@
 /*
 characterlist.json is a dict of characters. Keys are character names. Values are objects with
-{files, pattern, replace}
+{patterns, files, lookups, replace}
 
-{
-  "aryan": {                    // Character name
-    "files": {                  // File structure
-      "emotion": {              //  All folders are keys
-        "angry": "",            //  All files are keys too
-        "blush": "",            //  Files have "" as value
-        ...
-      },
-      "pose": {
-        "handsfolded": "",
-        "handsinpocket": ""
+  "dee": {                                // Character name
+    "patterns": [                         // Patterns come from index.svg
+      "{{angle}}/emotion/{{emotion}}",    // ?emotion= points to file/folder in {{angle}}/emotion/
+      "{{angle}}/pose/{{pose}}"           // ?pose= points to file/folder in {{angle}}/pose/
+    ],
+    "files": {                            // Folder & file structure
+      "side": {
+        "emotion": {
+          "afraid": "",                   // Files have "" as value
+          "angry": "",
+          ...
+        }
       }
     },
-    "patterns": [               // Patterns come from index.json
-      "emotion/{emotion}",      // ?emotion= can be any file/folder in aryan/emotion/*
-      "pose/{pose}"             // ?pose= can be any file/folder in aryan/pose/*
-    ],
-    "replace": {                // Replacements come from index.json
-      "shirt": {
-        "type": "color",
-        "selector": "path[fill='#EA9A00' i]",
-        "attr": "fill",
-        "default": "#EA9A00"
+    "lookups": {},                              // TODO: yet to implement
+    "replace": {                                // Replacements come from index.json
+      "shirt": {                                // ?shirt=
+        "type": "color",                        // is an input of type color.
+        "selector": "path[fill='#EA9A00' i]",   // It changes all selector elements
+        "attr": "fill",                         // Replacing the fill value
+        "default": "#EA9A00"                    // ?shirt=#EA9A00 by default
       },
       ...
     }
@@ -64,6 +62,7 @@ glob.sync(`${root}/*/`).forEach(dirPath => {
     files: getFiles(dirPath),
     lookups: config.lookups || {},
     replace: config.replace,
+    type: config.type
   }
 })
 

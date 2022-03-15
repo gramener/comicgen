@@ -19,8 +19,7 @@ async function init() {
     // dropdowns for each parameter. For example:
     //    "dee_emotion": { "select": "emotion", "from": "dee", "where": { "angle": "side" } }
     // ... means that ?dee_emotion= is picked up from the "emotion" dropdown from character "dee".
-    // If the user has picked an a
-
+    // TODO: Not yet implemented
     _.each(char.lookups, (lookup, key) => {
       let filter = { name: lookup.from }
       _.each(lookup.where, (filter_val, filter_key) => {
@@ -73,7 +72,8 @@ async function init() {
   const config = {
     typeclass: {
       color: 'form-control-color',
-      number: 'form-control-number'
+      number: 'form-control-number',
+      range: 'form-range d-inline-block my-2 border-0'
     }
   }
 

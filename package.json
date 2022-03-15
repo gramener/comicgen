@@ -15,13 +15,14 @@
     "lint": "eclint . && eslint --ext js,html .",
     "prepublishOnly": "npm run lint && npm test",
     "postinstall": "node src/speechbubble.js",
-    "start": "node src/comicserver.js",
-    "test": ""
+    "start": "node src/comicserver.js"
   },
   "license": "MIT",
   "private": false,
   "dependencies": {
     "cheerio": "1.0.0-rc.10",
+    "d3-interpolate-path": "2",
+    "color-interpolate": "1",
     "fontkit": "1",
     "get-google-fonts": "1",
     "lodash": "4",
