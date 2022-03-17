@@ -20,6 +20,5 @@ deploy:
         git pull;
         npm install;
         npm run build;
-        pkill --oldest -f comicserver;
-        nohup npm start >> nohup.out 2>&1 &
+        sudo systemctl restart comicgenv1;
       "'
