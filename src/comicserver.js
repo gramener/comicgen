@@ -4,15 +4,27 @@ const comicgen = require('./comicgen')(require('fs'))
 const express = require('express')
 const bodyParser = require('body-parser')
 const sharp = require('sharp')
+const winston = require('winston')
+require('winston-daily-rotate-file')
 
+const port = 3000
 const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
-
 app.use(express.static('.'))
 
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.simple(),
+  transports: [
+    new winston.transports.DailyRotateFile({
+      filename: 'comicgen-%DATE%.log',
+      datePattern: 'YYYY-MM',
+      zippedArchive: true
+    })
+  ],
+})
+
 app.get('/comic', async (req, res) => {
-  // In case a request results in a crash, this helps us track the request
-  console.log('    ', req.url)
   res.set('Access-Control-Allow-Origin', '*')
 
   const start = new Date()
@@ -35,19 +47,20 @@ app.get('/comic', async (req, res) => {
   }
   res.send(result)
   duration = +new Date() - start
-  console.log('I', start, duration, req.url)
+  logger.info(`${start.toISOString()} ${duration} ${req.url}`)
 })
 
 
-app.listen(3000, () => {
-  console.log('Comicgen is running at http://localhost:3000')
+app.listen(port, () => {
+  const start = new Date()
+  logger.info(`${start.toISOString()} Started http://localhost:${port}`)
 })
 
 
 function handleException(e, req, res, start) {
   let duration = +new Date() - start
   let error = e.toString().trim()
-  console.error('E', start, duration, req.url, error)
+  logger.error(`${start.toISOString()} ${duration} ${req.url} ${error}`)
   res.set('Content-Type', 'text/plain')
   res.send(error)
 }
