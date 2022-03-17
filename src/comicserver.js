@@ -17,9 +17,10 @@ const logger = winston.createLogger({
   format: winston.format.simple(),
   transports: [
     new winston.transports.DailyRotateFile({
-      filename: 'comicgen-%DATE%.log',
-      datePattern: 'YYYY-MM',
-      zippedArchive: true
+      filename: 'comicgen-%DATE%.log',  // Save in current folder
+      datePattern: 'YYYY-MM',   // Monthly archives
+      maxFiles: 12,             // For 12 months
+      zippedArchive: true,      // GZip the archives
     })
   ],
 })
