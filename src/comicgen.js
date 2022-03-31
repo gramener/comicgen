@@ -6,6 +6,8 @@ const mustache = require('mustache')
 const roughjs = require('roughjs')
 const interpolate = require('d3-interpolate-path')
 const colorInterpolate = require('color-interpolate')
+const interpolateNumber = require('./interpolate').number
+const interpolateString = require('./interpolate').string
 const get_config = require('./getconfig').get_config
 const speechbubble = require('./speechbubble')
 
@@ -27,8 +29,8 @@ function comicgen(fs) {
 
       // Replace interpolation elements
       $('interpolate').each(function (index, el) {
-        let $source = $(comic({ name: path.join(el.attribs['name'], el.attribs['from']) }, _replacements))
-        let $target = $(comic({name: path.join(el.attribs['name'], el.attribs['to'])}, _replacements))
+        let $source = $(comic({ name: el.attribs['from'] }, _replacements))
+        let $target = $(comic({ name: el.attribs['to'] }, _replacements))
         // TODO: we get all interpolation parameters from index.svg. But they're similar to index.json's replacements.
         // Let's move index.json's replacements into index.svg as <param> elements.
         $('param', el).each(function (index, param) {
@@ -50,6 +52,8 @@ function comicgen(fs) {
               interpolator = colorInterpolate([targetVal, sourceVal])
             else if (method == 'number')
               interpolator = interpolateNumber(targetVal, sourceVal)
+            else
+              interpolator = interpolateString(targetVal, sourceVal)
             $(selector, $source).attr(attr, interpolator(value))
           })
         })
@@ -120,9 +124,10 @@ function comicgen(fs) {
       </g>
     </svg>
   </svg>`
-      // If the template contains a <comic> object, recursively replace it with comic()
-      const _replacements = _.mapValues(config.replace, (v, k) => _.merge(v, { value: template[k] }))
-      return comic(svg, _replacements)
+      // If the template contains a <comic> object, recursively replace it with comic().
+      // Get the replacement parameters from the template object, or the parent replacements object.
+      const _new_replacements = _.mapValues(config.replace, (v, k) => _.merge(v, { value: template[k] || _replacements[k]?.value }))
+      return comic(svg, _new_replacements)
     }
     else
       throw new Error('TODO')
@@ -154,12 +159,6 @@ function comicgen(fs) {
 
   function render(svg, attrs) {
     return mustache.render(svg, attrs)
-  }
-
-  function interpolateNumber(a, b) {
-    return a = +a, b = +b, function (t) {
-      return a * (1 - t) + b * t
-    }
   }
 
   return comic
