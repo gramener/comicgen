@@ -66,8 +66,13 @@ function comicgen(fs) {
       // {selector: 'path[fill="#ccc"]'} is case-sensitive. Won't ma\tch #CCC.
       // {selector: 'path[fill="#ccc" i]'} is case-INsensitive. It will also match #CCC. Use this.
       _.each(_replacements, replace => {
-        if (replace.value && replace.selector)
-          $(replace.selector).attr(replace.attr, replace.value)
+        if (replace.value && replace.selector) {
+          let $el = $(replace.selector)
+          replace.attr.split(/[, ]+/g).forEach(attr => {
+            if ($el.is(`[${attr}]`))
+              $el.attr(attr, replace.value)
+          })
+        }
       })
       return $.html().trim()
     }
