@@ -316,13 +316,15 @@ Conceived & designed by
 
 - Devarani B <devarani.b@gramener.com>: Aavatar, Ethan & Facesketch
   under [CC0 license](https://creativecommons.org/choose/zero/)
+- Jed: Smiley
+  under [CC0 license](https://creativecommons.org/choose/zero/)
 - Google Inc.: [Noto emoji](https://github.com/googlefonts/noto-emoji)
   under [Apache 2.0](https://github.com/googlefonts/noto-emoji/blob/main/LICENSE) license
 - Mike Hoye <mhoye@mozilla.com>: [FXEmoji](https://github.com/mozilla/fxemoji)
   under [CC-BY license](https://github.com/mozilla/fxemoji/blob/gh-pages/LICENSE.md)
 - [Pablo Stanley](https://twitter.com/pablostanley): [Humaaans](https://www.humaaans.com/)
   under [CC-BY license](https://creativecommons.org/licenses/by/4.0/)
-- Ramya Mylavarapu <ramya.mylavarapu@gramener.com>: Aavatar, Ava, Bean, Biden, Dee, Dey, Evan, Holmes, Jaya, Priya, Ringo, Speechbubbles, Trump & Watson
+- Ramya Mylavarapu <ramya.mylavarapu@gramener.com>: Aavatar, Ava, Bean, Biden, Dee, Dey, Evan, Holmes, Jaya, Priya, Ringo, Smiley, Speechbubbles, Trump & Watson
   under [CC0 license](https://creativecommons.org/choose/zero/)
 - Renel McCullum: Bill
   under [CC0 license](https://creativecommons.org/choose/zero/)
