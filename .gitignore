@@ -13,3 +13,4 @@ NOTES.md
 *.log
 .DS_Store
 nohup.out
+.vscode
