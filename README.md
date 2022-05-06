@@ -537,7 +537,7 @@ Please e-mail Anand <s.anand@gramener.com> and Richie <richie.lionell@gramener.c
   </div>
   <div class="align-items-center d-none d-sm-block">
     <!-- Responses at https://docs.google.com/spreadsheets/d/1BGBydJvKFDy9WsSVenkxw6Z4PK5H52ucQHJpb4IxAjA/edit#gid=378739795 managed by comicgen@gramener.com -->
-    <a href="https://forms.gle/po34LPvj3qaqy1Md7" class="btn btn-primary btn-sm d-flex" target="_blank" rel="noopener" title="Share your feedback">
+    <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=vyw-3UKGDEidtre6VbvzMBQHJNU7k8REsXvTAREp3jJUQUpWQkIzS1BZTldaVUVaRUtPRjFDNkVGSy4u" class="btn btn-primary btn-sm d-flex" target="_blank" rel="noopener" title="Share your feedback">
       <i class="fas fa-comments fa-2x me-2"></i>
       <span class="align-items-center d-none d-md-flex me-2">Suggest improvements</span>
     </a>
