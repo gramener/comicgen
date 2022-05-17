@@ -131,7 +131,7 @@ function comicgen(fs) {
   </svg>`
       // If the template contains a <comic> object, recursively replace it with comic().
       // Get the replacement parameters from the template object, or the parent replacements object.
-      const _new_replacements = _.mapValues(config.replace, (v, k) => _.merge(v, { value: template[k] || _replacements[k]?.value }))
+      const _new_replacements = _.mapValues(config.replace, (v, k) => _.merge(v, { value: template[k] || _replacements?.[k]?.value }))
       return comic(svg, _new_replacements)
     }
     else
