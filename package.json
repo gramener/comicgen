@@ -13,7 +13,7 @@
   "scripts": {
     "build": "rimraf dist && node src/buildchars.js",
     "lint": "eclint . && eslint --ext js,html .",
-    "prepublishOnly": "npm run lint && npm test",
+    "prepublishOnly": "npm run lint",
     "postinstall": "node src/speechbubble.js",
     "start": "node src/comicserver.js"
   },
@@ -35,7 +35,8 @@
   "devDependencies": {
     "body-parser": "^1.20.0",
     "cli-progress": "^3.10.0",
-    "eslint": "7",
+    "eclint": "^2.8.1",
+    "eslint": "^7.32.0",
     "eslint-plugin-html": "^6.2.0",
     "express": "^4.18.0",
     "glob": "^7.2.0",

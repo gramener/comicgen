@@ -6,9 +6,8 @@ cache:
 validate:
   stage: test
   script:
-    - npm run lint
     - npm install
-    - npm test
+    - npm run lint
 
 deploy:
   stage: deploy
