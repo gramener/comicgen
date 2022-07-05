@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 const comicgen = require('./comicgen')(require('fs'))
+const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const sharp = require('sharp')
@@ -10,7 +11,7 @@ require('winston-daily-rotate-file')
 const port = process.env.PORT || 3000
 const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(express.static('.'))
+app.use(express.static(path.join(__dirname, '..')))
 
 const logger = winston.createLogger({
   level: 'info',
