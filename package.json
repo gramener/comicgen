@@ -1,6 +1,6 @@
 {
   "name": "comicgen",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "description": "Create comics for your website or app",
   "main": "src/comicgen.js",
   "jsdelivr": "src/comicgen.js",
@@ -12,34 +12,33 @@
   },
   "scripts": {
     "build": "rimraf dist && node src/buildchars.js",
-    "lint": "eclint . && eslint --ext js,html .",
+    "lint": "eclint . && eslint --ext js,html . && npm audit --omit=dev",
     "prepublishOnly": "npm run lint",
-    "postinstall": "node src/speechbubble.js",
+    "postinstall": "npm run build && node src/speechbubble.js",
     "start": "node src/comicserver.js"
   },
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "body-parser": "1",
     "cheerio": "1.0.0-rc.10",
     "color-interpolate": "1",
     "d3-interpolate-path": "2",
-    "fontkit": "1",
+    "express": "4",
+    "fontkit": "2",
     "get-google-fonts": "1",
+    "glob": "8",
     "lodash": "4",
     "mustache": "4",
+    "rimraf": "3",
     "roughjs": "^4.5.2",
-    "sharp": "^0.30.4",
-    "winston": "^3.7.2",
-    "winston-daily-rotate-file": "^4.6.1"
+    "sharp": "^0.30.7",
+    "winston": "^3.8.1",
+    "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
-    "body-parser": "^1.20.0",
-    "cli-progress": "^3.10.0",
     "eclint": "^2.8.1",
     "eslint": "^7.32.0",
-    "eslint-plugin-html": "^6.2.0",
-    "express": "^4.18.0",
-    "glob": "^7.2.0",
-    "rimraf": "2"
+    "eslint-plugin-html": "^6.2.0"
   }
 }

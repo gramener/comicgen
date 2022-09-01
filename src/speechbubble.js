@@ -153,23 +153,24 @@ function speechshape({x = 0, y = 0, width, height, pointerx, pointery, fill = '#
 }
 
 function speechbubble(options) {
-  /* options = {
-      text: 'Hello'
-      x: 30,
-      y: 40,
-      width: 300,
-      height: 400,
-      fill: 'white',
-      align: 'middle',
-      'font-fill': 'red',
-      'font-family': 'Consolas',
-      'font-size': 15,
-      'font-weight': 'bold',
-      'line-height': 1.3,
-      pointerx: 130, pointery: 50,
-      padding: 5,
-      rough: 2.5
-     }
+  /*
+  options = {
+    text: 'Hello'
+    x: 30,
+    y: 40,
+    width: 300,
+    height: 400,
+    fill: 'white',
+    align: 'middle',
+    'font-fill': 'red',
+    'font-family': 'Consolas',
+    'font-size': 15,
+    'font-weight': 'bold',
+    'line-height': 1.3,
+    pointerx: 130, pointery: 50,
+    padding: 5,
+    rough: 2.5
+  }
   */
 
   options = Object.assign({
