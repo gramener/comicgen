@@ -31,6 +31,8 @@ Here's a 3-minute video explaining how to create your own comic strip.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/E_2hdZuugI8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+### Using npm
+
 To run your own server, run:
 
 ```bash
@@ -50,6 +52,15 @@ Then you can insert it in your app:
 const comicgen = require('comicgen')
 // Returns the SVG string for the character
 const svg = comicgen({name: 'ava', emotion: 'cry', pose: 'angry'})
+```
+
+### Using Docker
+
+To run your own server, run:
+
+```bash
+docker run -p3000:3000 -it gramener/comicgen
+# This runs the server at http://localhost:3000/
 ```
 
 ## Fonts
@@ -258,11 +269,15 @@ git push origin release --follow-tags
 git checkout v1
 ```
 
-Then release on [npm](https://www.npmjs.com/package/comicgen)
+Then release on [npm](https://www.npmjs.com/package/comicgen) and [Docker](https://hub.docker.com/repository/docker/gramener/comicgen):
 
 ```bash
-# Maintained by @sanand0
+export VERSION=1.x.x
+# npm repo owned by @sanand0
 npm publish
+docker build --tag gramener/comicgen:latest --tag gramener/comicgen:$VERSION pkg/docker/
+docker push gramener/comicgen:latest
+docker push gramener/comicgen:$VERSION
 ```
 
 ## Help wanted (developers)
