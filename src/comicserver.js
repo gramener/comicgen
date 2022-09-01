@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /* eslint-disable no-console */
 
 const comicgen = require('./comicgen')(require('fs'))
@@ -55,7 +57,9 @@ app.get('/comic', async (req, res) => {
 
 app.listen(port, () => {
   const start = new Date()
-  logger.info(`${start.toISOString()} Started http://localhost:${port}`)
+  const welcome = `${start.toISOString()} Started http://localhost:${port}`
+  logger.info(welcome)
+  console.log(welcome)
 })
 
 
