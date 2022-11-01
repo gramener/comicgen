@@ -1,7 +1,7 @@
 {
   "name": "comicgen",
   "version": "1.9.4",
-  "description": "Create comics for your website or app",
+  "description": "Add comics to your website or app with an API. Choose a character, angle, emotion and pose. Embed on your page.",
   "main": "src/comicgen.js",
   "jsdelivr": "src/comicgen.js",
   "unpkg": "src/comicgen.js",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "rimraf dist && node src/buildchars.js",
-    "lint": "eclint . && eslint --ext js,html . && npm audit --omit=dev",
+    "lint": "npx prettier --write \"**/*.{js,css,md}\" && eslint --ext js,html . && npm audit",
     "prepublishOnly": "npm run lint",
     "postinstall": "npm run build && node src/speechbubble.js",
     "start": "node src/comicserver.js"
@@ -26,7 +26,6 @@
     "d3-interpolate-path": "2",
     "express": "4",
     "fontkit": "2",
-    "get-google-fonts": "1",
     "glob": "8",
     "lodash": "4",
     "mustache": "4",
@@ -37,8 +36,8 @@
     "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
-    "eclint": "^2.8.1",
     "eslint": "^7.32.0",
-    "eslint-plugin-html": "^6.2.0"
+    "eslint-plugin-html": "^6.2.0",
+    "get-google-fonts": "1"
   }
 }

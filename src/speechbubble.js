@@ -1,83 +1,107 @@
 /* eslint-env node */
-const path = require('path')
-const fontkit = require('fontkit')
-const fontRoot = path.join(__dirname, '..', 'fonts')
+const path = require("path");
+const fontkit = require("fontkit");
+const fontRoot = path.join(__dirname, "..", "fonts");
 
 // Map Google Fonts to the main font file to use.
 // Keep this in sync with speechbubbles/index.json
 let fonts = {
-  'Architects Daughter': path.join(fontRoot, 'Architects_Daughter-400-latin1.woff2'),
-  'News Cycle': path.join(fontRoot, 'News_Cycle-400-latin-ext1.woff2'),
-  'Indie Flower': path.join(fontRoot, 'Indie_Flower-400-latin1.woff2'),
-  'Amatic SC': path.join(fontRoot, 'Amatic_SC-400-latin-ext4.woff2'),
-  'Schoolbell': path.join(fontRoot, 'Schoolbell-400-latin1.woff2'),
-  'Just Another Hand': path.join(fontRoot, 'Just_Another_Hand-400-latin1.woff2'),
-  'Neucha': path.join(fontRoot, 'Neucha-400-latin2.woff2'),
-  'Handlee': path.join(fontRoot, 'Handlee-400-latin1.woff2'),
-  'Roboto': path.join(fontRoot, 'Roboto-400-latin7.woff2'),
-  'Inconsolata': path.join(fontRoot, 'Inconsolata-400-latin3.woff2'),
-}
+  "Architects Daughter": path.join(
+    fontRoot,
+    "Architects_Daughter-400-latin1.woff2"
+  ),
+  "News Cycle": path.join(fontRoot, "News_Cycle-400-latin-ext1.woff2"),
+  "Indie Flower": path.join(fontRoot, "Indie_Flower-400-latin1.woff2"),
+  "Amatic SC": path.join(fontRoot, "Amatic_SC-400-latin-ext4.woff2"),
+  Schoolbell: path.join(fontRoot, "Schoolbell-400-latin1.woff2"),
+  "Just Another Hand": path.join(
+    fontRoot,
+    "Just_Another_Hand-400-latin1.woff2"
+  ),
+  Neucha: path.join(fontRoot, "Neucha-400-latin2.woff2"),
+  Handlee: path.join(fontRoot, "Handlee-400-latin1.woff2"),
+  Roboto: path.join(fontRoot, "Roboto-400-latin7.woff2"),
+  Inconsolata: path.join(fontRoot, "Inconsolata-400-latin3.woff2"),
+};
 
 // text-anchor uses start/middle/end but users prefer align=left/center/right. Map these
 let alignMap = {
-  'left': 'start',
-  'center': 'middle',
-  'right': 'end'
-}
+  left: "start",
+  center: "middle",
+  right: "end",
+};
 
 function width(word, font) {
-  let width = 0
-  font.layout(word).glyphs.forEach(g => width += g._metrics.advanceWidth)
-  return width
+  let width = 0;
+  font.layout(word).glyphs.forEach((g) => (width += g._metrics.advanceWidth));
+  return width;
 }
 
 function wrap(sentence, maxWidth, font) {
-  let lines = []
-  let line = []
-  let words = sentence.split(/\s+/)
-  for (let start=0, word=0; word < words.length; ) {
-    let w = width(words[word] + ' ', font)
+  let lines = [];
+  let line = [];
+  let words = sentence.split(/\s+/);
+  for (let start = 0, word = 0; word < words.length; ) {
+    let w = width(words[word] + " ", font);
     if (start > 0 && start + w > maxWidth) {
-      start = 0
-      lines.push(line.join(' '))
-      line = []
+      start = 0;
+      lines.push(line.join(" "));
+      line = [];
     } else {
-      line.push(words[word])
-      start += w
-      word += 1
+      line.push(words[word]);
+      start += w;
+      word += 1;
     }
   }
-  lines.push(line.join(' '))
-  return lines
+  lines.push(line.join(" "));
+  return lines;
 }
 
 let dx = {
-  'start': 0,
-  'middle': 0.5,
-  'end': 1
-}
+  start: 0,
+  middle: 0.5,
+  end: 1,
+};
 let attr_map = {
   text: {
-    x: 'x',
-    y: 'y',
-    'font-size': 'font-size',
-    'font-family': 'font-family',
-    'font-weight': 'font-weight',
-    'font-fill': 'fill'
+    x: "x",
+    y: "y",
+    "font-size": "font-size",
+    "font-family": "font-family",
+    "font-weight": "font-weight",
+    "font-fill": "fill",
   },
   path: {
-    x: 'x',
-    y: 'y',
-    width: 'width',
-    height: 'height',
-    fill: 'fill',
-    stroke: 'stroke'
-  }
-}
+    x: "x",
+    y: "y",
+    width: "width",
+    height: "height",
+    fill: "fill",
+    stroke: "stroke",
+  },
+};
 
-function speechshape({x = 0, y = 0, width, height, pointerx, pointery, fill = '#fff', stroke = '#000', rough=0}) {
+function speechshape({
+  x = 0,
+  y = 0,
+  width,
+  height,
+  pointerx,
+  pointery,
+  fill = "#fff",
+  stroke = "#000",
+  rough = 0,
+}) {
   // Convert to numbers
-  [x, y, width, height, pointerx, pointery, rough] = [+x, +y, +width, +height, +pointerx, +pointery, +rough]
+  [x, y, width, height, pointerx, pointery, rough] = [
+    +x,
+    +y,
+    +width,
+    +height,
+    +pointerx,
+    +pointery,
+    +rough,
+  ];
   // Create main speech shape
   const paths = [
     [x, y],
@@ -85,71 +109,82 @@ function speechshape({x = 0, y = 0, width, height, pointerx, pointery, fill = '#
     [x + width, y + height],
     [x, y + height],
     [x, y],
-  ]
+  ];
   // Add pointer arc if present
-  const dx = pointerx - (x + width / 2)
-  const dy = pointery - (y + height / 2)
-  let insertion
-  let p1, p3
-  let p2 = [pointerx, pointery]
+  const dx = pointerx - (x + width / 2);
+  const dy = pointery - (y + height / 2);
+  let insertion;
+  let p1, p3;
+  let p2 = [pointerx, pointery];
   // TODO: Write logic manually, then generalize
   if (Math.abs(dy) > Math.abs(dx)) {
     // If pointer is on top
     if (dy < 0) {
-      insertion = 1   // insert at top
+      insertion = 1; // insert at top
       // if pointer is on left
       if (dx < 0) {
-        p1 = [x + width / 6 * 1, y ]
-        p3 = [x + width / 6 * 2, y ]
+        p1 = [x + (width / 6) * 1, y];
+        p3 = [x + (width / 6) * 2, y];
       } else if (dx >= 0) {
-        p1 = [x + width / 6 * 4, y ]
-        p3 = [x + width / 6 * 5, y ]
+        p1 = [x + (width / 6) * 4, y];
+        p3 = [x + (width / 6) * 5, y];
       }
     } else if (dy > 0) {
-      insertion = 3   // insert at bottom
+      insertion = 3; // insert at bottom
       // if pointer is on left
       if (dx < 0) {
-        p1 = [x + width / 6 * 2, y + height ]
-        p3 = [x + width / 6 * 1, y + height ]
+        p1 = [x + (width / 6) * 2, y + height];
+        p3 = [x + (width / 6) * 1, y + height];
       } else if (dx >= 0) {
-        p1 = [x + width / 6 * 5, y + height ]
-        p3 = [x + width / 6 * 4, y + height ]
+        p1 = [x + (width / 6) * 5, y + height];
+        p3 = [x + (width / 6) * 4, y + height];
       }
     }
   } else {
-  // If P2 is on left, insertion point is on left
+    // If P2 is on left, insertion point is on left
     if (dx < 0) {
-      insertion = 4   // insert at left
+      insertion = 4; // insert at left
       // if pointer is on top
       if (dy < 0) {
-        p1 = [x, y + height / 6 * 2 ]
-        p3 = [x, y + height / 6 * 1 ]
+        p1 = [x, y + (height / 6) * 2];
+        p3 = [x, y + (height / 6) * 1];
       } else if (dy >= 0) {
-        p1 = [x, y + height / 6 * 5 ]
-        p3 = [x, y + height / 6 * 4 ]
+        p1 = [x, y + (height / 6) * 5];
+        p3 = [x, y + (height / 6) * 4];
       }
     } else if (dx > 0) {
-      insertion = 2   // insert at right
+      insertion = 2; // insert at right
       // if pointer is on top
       if (dy < 0) {
-        p1 = [x + width, y + height / 6 * 1 ]
-        p3 = [x + width, y + height / 6 * 2 ]
+        p1 = [x + width, y + (height / 6) * 1];
+        p3 = [x + width, y + (height / 6) * 2];
       } else if (dy >= 0) {
-        p1 = [x + width, y + height / 6 * 4 ]
-        p3 = [x + width, y + height / 6 * 5 ]
+        p1 = [x + width, y + (height / 6) * 4];
+        p3 = [x + width, y + (height / 6) * 5];
       }
     }
   }
-  if (dx || dy)
-    paths.splice(insertion, 0, p1, p2, p3)
+  if (dx || dy) paths.splice(insertion, 0, p1, p2, p3);
 
   // Jitter the points with radius "r" to convert them into rough lines
   function jitter(point) {
-    return `${point[0] + Math.round((Math.random() - 0.5) * 2 * rough)},${point[1] + Math.round((Math.random() - 0.5) * 2 * rough)}`
+    return `${point[0] + Math.round((Math.random() - 0.5) * 2 * rough)},${
+      point[1] + Math.round((Math.random() - 0.5) * 2 * rough)
+    }`;
   }
-  let pathstr = []
-  paths.forEach((p, i) => pathstr.push(i > 0 ? `M${jitter(paths[i - 1])} L${jitter(p)} M${jitter(paths[i - 1])} L${jitter(p)}` : `M${jitter(p)}`))
-  return `<path d="${pathstr.join(' ')}" fill="${fill}" stroke="${stroke}"></path>`
+  let pathstr = [];
+  paths.forEach((p, i) =>
+    pathstr.push(
+      i > 0
+        ? `M${jitter(paths[i - 1])} L${jitter(p)} M${jitter(
+            paths[i - 1]
+          )} L${jitter(p)}`
+        : `M${jitter(p)}`
+    )
+  );
+  return `<path d="${pathstr.join(
+    " "
+  )}" fill="${fill}" stroke="${stroke}"></path>`;
 }
 
 function speechbubble(options) {
@@ -173,56 +208,63 @@ function speechbubble(options) {
   }
   */
 
-  options = Object.assign({
-    x: 0,
-    y: 0,
-    width: 400,
-    height: 200,
-    padding: 5,
-    'font-family': Object.keys(fonts)[0],
-    'font-size': 16,
-    'line-height': 1.5,
-    align: 'middle',
-    rough: 2.5
-  }, options)
-  if (!fonts[options['font-family']])
-    options['font-family'] = Object.keys(fonts)[0]
-  let font = fonts[options['font-family']]
-  let fontSize = +options['font-size']
-  let lineHeight = +options['font-size'] * +options['line-height']
-  let padding = +options['padding']
-  let width = options.width - 2 * padding
-  let maxWidth = width * font.unitsPerEm / fontSize
-  let align = alignMap[options.align] || options.align
+  options = Object.assign(
+    {
+      x: 0,
+      y: 0,
+      width: 400,
+      height: 200,
+      padding: 5,
+      "font-family": Object.keys(fonts)[0],
+      "font-size": 16,
+      "line-height": 1.5,
+      align: "middle",
+      rough: 2.5,
+    },
+    options
+  );
+  if (!fonts[options["font-family"]])
+    options["font-family"] = Object.keys(fonts)[0];
+  let font = fonts[options["font-family"]];
+  let fontSize = +options["font-size"];
+  let lineHeight = +options["font-size"] * +options["line-height"];
+  let padding = +options["padding"];
+  let width = options.width - 2 * padding;
+  let maxWidth = (width * font.unitsPerEm) / fontSize;
+  let align = alignMap[options.align] || options.align;
   // Get the attributes of <text...> and <path...> into attrs.text and attrs.path
   let attrs = {
     text: [`text-anchor="${align}"`, `dx="${(dx[align] || 0) * width}"`],
     path: [],
-  }
+  };
   for (let type of Object.keys(attrs))
     for (let [attr, target] of Object.entries(attr_map[type]))
-      if (options[attr])
-        attrs[type].push(`${target}="${options[attr]}"`)
+      if (options[attr]) attrs[type].push(`${target}="${options[attr]}"`);
   // Render the text
   let text = wrap(options.text, maxWidth, font)
-    .map((line, i) => `<text transform="translate(${padding},${padding})"
-      font-size="${fontSize}" dy="${(i + 1) * lineHeight}" ${attrs.text.join(' ')}>${line}</text>`).join('\n')
+    .map(
+      (line, i) => `<text transform="translate(${padding},${padding})"
+      font-size="${fontSize}" dy="${(i + 1) * lineHeight}" ${attrs.text.join(
+        " "
+      )}>${line}</text>`
+    )
+    .join("\n");
   // Render the path
-  return speechshape(options) + text
+  return speechshape(options) + text;
 }
 
 if (require.main === module) {
   // Download fonts
-  const GetGoogleFonts = require('get-google-fonts')
-  let ggf = new GetGoogleFonts()
+  const GetGoogleFonts = require("get-google-fonts");
+  let ggf = new GetGoogleFonts();
   for (let fontName of Object.keys(fonts))
     ggf.download(`https://fonts.googleapis.com/css?family=${fontName}`, {
-      outputDir: fontRoot
-    })
+      outputDir: fontRoot,
+    });
 } else {
   // Load downloaded fonts
   for (let [fontName, fontPath] of Object.entries(fonts)) {
-    fonts[fontName] = fontkit.openSync(fontPath)
+    fonts[fontName] = fontkit.openSync(fontPath);
   }
-  module.exports = speechbubble
+  module.exports = speechbubble;
 }

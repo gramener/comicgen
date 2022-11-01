@@ -3,6 +3,7 @@
 <!-- markdownlint-disable MD033 -->
 
 <!-- var introduction -->
+
 We love comics. We badly wanted to create comic strips. But there was one
 problem. Some of us can't draw a straight line for nuts.
 
@@ -11,14 +12,14 @@ and the world &mdash; a **Comic Creator**.
 
 We created Comicgen to help people write better stories using comic.
 
-
-----
+---
 
 Interested in data storytelling? Come **join the [#ComicgenFriday](https://gramener.com/comicgenfriday/) community**.
 
 <!-- end -->
 
 <!-- var usage -->
+
 ## Usage
 
 A simple way to use Comicgen is from [gramener.com/comicgen/](https://gramener.com/comicgen/).
@@ -49,9 +50,9 @@ npm install comicgen
 Then you can insert it in your app:
 
 ```js
-const comicgen = require('comicgen')
+const comicgen = require("comicgen");
 // Returns the SVG string for the character
-const svg = comicgen({name: 'ava', emotion: 'cry', pose: 'angry'})
+const svg = comicgen({ name: "ava", emotion: "cry", pose: "angry" });
 ```
 
 ### Using Docker
@@ -71,20 +72,20 @@ For lettering, you can use comic fonts from
 
 Some fonts we like are:
 
-| Font                              | Example text                                               |
-|-----------------------------------|------------------------------------------------------------|
-| [Architects Daughter][font-ad]    | [![Specimen](docs/font-architects-daughter.png)][font-ad]  |
-| [Cavolini][font-ca] (Windows)     | [![Specimen](docs/font-cavolini.png)][font-ca]             |
-| [Segoe Script][font-ss] (Windows) | [![Specimen](docs/font-segoe-script.png)][font-ss]         |
-| [Segoe Print][font-sp] (Windows)  | [![Specimen](docs/font-segoe-print.png)][font-sp]          |
-| [News Cycle][font-nc]             | [![Specimen](docs/font-news-cycle.png)][font-nc]           |
-| [Indie Flower][font-if]           | [![Specimen](docs/font-indie-flower.png)][font-if]         |
-| [Amatic SC][font-ac]              | [![Specimen](docs/font-amatic-sc.png)][font-ac]            |
-| [Schoolbell][font-sb]             | [![Specimen](docs/font-schoolbell.png)][font-sb]           |
-| [Just Another Hand][font-jah]     | [![Specimen](docs/font-just-another-hand.png)][font-jah]   |
-| [Patrick Hand][font-ph]           | [![Specimen](docs/font-patrick-hand.png)][font-ph]         |
-| [Neucha][font-n]                  | [![Specimen](docs/font-neucha.png)][font-n]                |
-| [Handlee][font-h]                 | [![Specimen](docs/font-handlee.png)][font-h]               |
+| Font                              | Example text                                              |
+| --------------------------------- | --------------------------------------------------------- |
+| [Architects Daughter][font-ad]    | [![Specimen](docs/font-architects-daughter.png)][font-ad] |
+| [Cavolini][font-ca] (Windows)     | [![Specimen](docs/font-cavolini.png)][font-ca]            |
+| [Segoe Script][font-ss] (Windows) | [![Specimen](docs/font-segoe-script.png)][font-ss]        |
+| [Segoe Print][font-sp] (Windows)  | [![Specimen](docs/font-segoe-print.png)][font-sp]         |
+| [News Cycle][font-nc]             | [![Specimen](docs/font-news-cycle.png)][font-nc]          |
+| [Indie Flower][font-if]           | [![Specimen](docs/font-indie-flower.png)][font-if]        |
+| [Amatic SC][font-ac]              | [![Specimen](docs/font-amatic-sc.png)][font-ac]           |
+| [Schoolbell][font-sb]             | [![Specimen](docs/font-schoolbell.png)][font-sb]          |
+| [Just Another Hand][font-jah]     | [![Specimen](docs/font-just-another-hand.png)][font-jah]  |
+| [Patrick Hand][font-ph]           | [![Specimen](docs/font-patrick-hand.png)][font-ph]        |
+| [Neucha][font-n]                  | [![Specimen](docs/font-neucha.png)][font-n]               |
+| [Handlee][font-h]                 | [![Specimen](docs/font-handlee.png)][font-h]              |
 
 [font-ca]: https://www.fonts.com/font/monotype/cavolini
 [font-ad]: https://fonts.google.com/specimen/Architects+Daughter
@@ -118,8 +119,8 @@ can accompany good news on charts.
 
 ## REST API
 
-Comics are rendered via the endpoint `https://gramener.com/comicgen/v1/comic`. We'll refer to
-this as `/comic` from now on.
+Comics are rendered via the endpoint `https://gramener.com/comicgen/v1/comic` (or wherever you installed it).
+We'll refer to this as `/comic` from now on.
 
 Options for each character can be specified as URL query parameters. For example, to render Ethan's angling sideways, winking, we need:
 
@@ -142,13 +143,22 @@ You can embed these files directly in your plugin.
 To include comic as HTML components, add this to your page:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/uifactory@1.18.0/dist/uifactory.min.js" import="@comic-gen"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/uifactory@1.18.0/dist/uifactory.min.js"
+  import="@comic-gen"
+></script>
 ```
 
 Then you can add a `<comic-gen>` tag with the options for each character as attributes, like this:
 
 ```html
-<comic-gen name="ethan" angle="side" emotion="wink" pose="normal" ext="svg"></comic-gen>
+<comic-gen
+  name="ethan"
+  angle="side"
+  emotion="wink"
+  pose="normal"
+  ext="svg"
+></comic-gen>
 ```
 
 To render as a PNG, change `ext="svg"` to `ext="png"`.
@@ -161,17 +171,27 @@ If you change attributes using JavaScript, the comic is re-rendered.
 
 <!-- var vision -->
 
-## Our audience are storytellers
+## Comicgen is for storytellers
 
 Storytellers want to share a message and change their audience. But they worry that their content is not engaging or "catchy" enough to drive the change.
 
 - **Comics are "catchy"**. That makes them a powerful way of engaging the audience.
-- **Comics are simple**. Comics are a signal that the content is simple, interesting and often funny. Authors also make comic content simpler, interesting, and funny -- making this a virtuous cycle.
-- **Comics drive emotion**. The pictures convey emotions better than just the words alone. They're funny. That helps learning, and makes the stories more memorable.
+- **Comics are simple**. Comics signal that the content is simple, interesting, and funny. Authors often write simpler content for comics -- making it come true.
+- **Comics drive emotion**. The pictures convey emotions better than just words alone. They're funny. That helps learning and makes the stories more memorable.
 
 Anyone who writes an email, a presentation, or a document, is a storyteller.
 
-Within organizations, we see this in:
+## Comicgen is for developers
+
+Developers want to build engaging apps. But design skills are not their forte. Stock images can't match the variety of their scenarios.
+
+- **Comicgen has variety**. Keeping angles, emotions, and poses independent generates thousands of combinations.
+- **Comicgen has an API**. Developers can easily add it to their applications.
+- **Comicgen is public**. No need to license characters.
+
+## Organizations use it when presenting or marketing
+
+Organizations typically use Comicgen for:
 
 - **Presenting insights**
   - **Executives' analysis**. An analyst created a poster explaining their work using comic characters. It was simple and engaging -- the entire organization understood this deep learning technique.
@@ -193,11 +213,11 @@ We do this by:
   If you have a character idea, please [add a comment](https://github.com/gramener/comicgen/issues/27).
 - [Adding layers](https://github.com/gramener/comicgen/labels/layers). We need objects like speech bubbles, panels, headings, objects, scenery, backgrounds etc.
 - [Integrate into your workflow](https://github.com/gramener/comicgen/labels/integrate). Comicgen should be easy to use in people's current workflow, with their existing tools.
-    - Designers use Illustrator / Sketch
-    - Developers use HTML / JS
-    - Analysts use Tableau /  Power BI
-    - Managers use e-mail / MS Office
-    - We want to make storytelling easy for everyone
+  - Designers use Illustrator / Sketch
+  - Developers use HTML / JS
+  - Analysts use Tableau / Power BI
+  - Managers use e-mail / MS Office
+  - We want to make storytelling easy for everyone
 - [API for developers](https://github.com/gramener/comicgen/labels/api). Comicgen automates away the drudgery in creating comics. Developers should be able to create any comic without designing, purely using an API
 - [UI for non-developers](https://github.com/gramener/comicgen/labels/builder). We want users to be able to do this without any programming. This means exposing every feature of the API should be exposed on the UI
 - [Teaching](https://github.com/gramener/comicgen/labels/teach). The ultimate aim is for people to build better stories. Let's teach them
@@ -321,7 +341,6 @@ Library developed by
 - Shamili Robbi <shamili.robbi@gramener.com>
 - Tejesh <tejesh.p@gramener.com>
 
-
 Conceived & designed by
 
 - Ramya Mylavarapu <ramya.mylavarapu@gramener.com>
@@ -353,6 +372,7 @@ Conceived & designed by
 <!-- end -->
 
 <!-- var design -->
+
 ## Help wanted (designers)
 
 Designers, we'd love your help in improving comicgen.
@@ -363,7 +383,6 @@ If you're a designer, you could help by:
 2. **Adding new layers**. Apart from characters, we need other "layers" -- things we can add to panel, like speech bubbles, background objects, etc. You can design new kinds of objects if you think people will use it. Here are some [layers people have asked for](https://github.com/gramener/comicgen/labels/layers).
 
 Here's a guide to help understand how to design and submit new characters or layers.
-
 
 ## Design new characters
 
@@ -477,45 +496,45 @@ Go to File \> Export as \> Format: SVGs - Use artboards \> Save (follow below se
 ### List of character poses
 
 | pose                     | standing | side | sitting | standing back | sitting back |
-|--------------------------|:--------:|:----:|:-------:|:-------------:|--------------|
-| explaining               |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| handsonhip               |    Yes   |  Yes |         |      Yes      |              |
-| normal                   |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| pointingdown             |    Yes   |  Yes |         |      Yes      |              |
-| pointingleft             |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| pointingright            |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| pointingup               |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| shrug                    |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| thumbsup                 |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| explaining45degreesdown  |    Yes   |  Yes |         |      Yes      |              |
-| explaining45degreesup    |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| explainingwithbothhands  |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| handsclasped             |    Yes   |  Yes |   Yes   |               |              |
-| handsfolded              |    Yes   |  Yes |         |               |              |
-| handsheldback            |    Yes   |  Yes |         |      Yes      |              |
-| handsinpocket            |    Yes   |  Yes |         |      Yes      |              |
-| handstouchingchin        |    Yes   |  Yes |   Yes   |               |              |
-| hi                       |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| holdingboard             |    Yes   |  Yes |         |      Yes      |              |
-| holdingbook              |    Yes   |  Yes |   Yes   |               |              |
-| holdingcoffee            |    Yes   |  Yes |   Yes   |               |              |
-| holdinglaptopfrontangle  |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| holdinglaptopsideangle   |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| holdingmobile            |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| holdingpaper             |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| holdingstick             |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| leaningagainst           |    Yes   |  Yes |         |               |              |
-| lookingdownatlaptop      |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| pushing                  |    Yes   |  Yes |         |               |              |
-| scratchinghead           |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| super                    |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| takingnotes              |    Yes   |  Yes |   Yes   |               |              |
-| talkingoverphone         |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| thinking                 |    Yes   |  Yes |   Yes   |               |              |
-| workinganddrinkingcoffee |    Yes   |  Yes |   Yes   |               |              |
-| writingonboard           |    Yes   |  Yes |         |      Yes      |              |
-| yes                      |    Yes   |  Yes |   Yes   |      Yes      |      Yes     |
-| yuhoo                    |    Yes   |  Yes |   Yes   |      Yes      |    Yes       |
+| ------------------------ | :------: | :--: | :-----: | :-----------: | ------------ |
+| explaining               |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| handsonhip               |   Yes    | Yes  |         |      Yes      |              |
+| normal                   |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| pointingdown             |   Yes    | Yes  |         |      Yes      |              |
+| pointingleft             |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| pointingright            |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| pointingup               |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| shrug                    |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| thumbsup                 |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| explaining45degreesdown  |   Yes    | Yes  |         |      Yes      |              |
+| explaining45degreesup    |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| explainingwithbothhands  |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| handsclasped             |   Yes    | Yes  |   Yes   |               |              |
+| handsfolded              |   Yes    | Yes  |         |               |              |
+| handsheldback            |   Yes    | Yes  |         |      Yes      |              |
+| handsinpocket            |   Yes    | Yes  |         |      Yes      |              |
+| handstouchingchin        |   Yes    | Yes  |   Yes   |               |              |
+| hi                       |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| holdingboard             |   Yes    | Yes  |         |      Yes      |              |
+| holdingbook              |   Yes    | Yes  |   Yes   |               |              |
+| holdingcoffee            |   Yes    | Yes  |   Yes   |               |              |
+| holdinglaptopfrontangle  |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| holdinglaptopsideangle   |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| holdingmobile            |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| holdingpaper             |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| holdingstick             |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| leaningagainst           |   Yes    | Yes  |         |               |              |
+| lookingdownatlaptop      |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| pushing                  |   Yes    | Yes  |         |               |              |
+| scratchinghead           |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| super                    |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| takingnotes              |   Yes    | Yes  |   Yes   |               |              |
+| talkingoverphone         |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| thinking                 |   Yes    | Yes  |   Yes   |               |              |
+| workinganddrinkingcoffee |   Yes    | Yes  |   Yes   |               |              |
+| writingonboard           |   Yes    | Yes  |         |      Yes      |              |
+| yes                      |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
+| yuhoo                    |   Yes    | Yes  |   Yes   |      Yes      | Yes          |
 
 ### Submit new characters
 
@@ -531,7 +550,6 @@ When doing this, please mention one of the following:
 
 - "I release these images under the [CC0](https://creativecommons.org/choose/zero/) license", OR
 - "I release these images under the [CC-BY](https://creativecommons.org/licenses/by/4.0/) license"
-
 
 ### Freelancing
 
@@ -587,9 +605,9 @@ If you have any questions, please contact us at [comicgen.powerbi@gramener.com](
 
 <!-- end -->
 
-
 <!-- var social_markdown -->
 <!-- Github README won't display the above share icons. So create links. Don't display this on index.html -->
+
 ## Share
 
 - [Discuss on Twitter. Hashtag #comicgen](https://twitter.com/search?f=tweets&vertical=default&q=comicgen&src=typd)
