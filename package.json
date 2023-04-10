@@ -1,6 +1,6 @@
 {
   "name": "comicgen",
-  "version": "1.9.5",
+  "version": "1.9.6",
   "description": "Add comics to your website or app with an API. Choose a character, angle, emotion and pose. Embed on your page.",
   "main": "src/comicgen.js",
   "jsdelivr": "src/comicgen.js",
