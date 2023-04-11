@@ -253,18 +253,8 @@ function speechbubble(options) {
   return speechshape(options) + text;
 }
 
-if (require.main === module) {
-  // Download fonts
-  const GetGoogleFonts = require("get-google-fonts");
-  let ggf = new GetGoogleFonts();
-  for (let fontName of Object.keys(fonts))
-    ggf.download(`https://fonts.googleapis.com/css?family=${fontName}`, {
-      outputDir: fontRoot,
-    });
-} else {
-  // Load downloaded fonts
-  for (let [fontName, fontPath] of Object.entries(fonts)) {
-    fonts[fontName] = fontkit.openSync(fontPath);
-  }
-  module.exports = speechbubble;
+// Load downloaded fonts
+for (let [fontName, fontPath] of Object.entries(fonts)) {
+  fonts[fontName] = fontkit.openSync(fontPath);
 }
+module.exports = speechbubble;
