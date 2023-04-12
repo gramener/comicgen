@@ -4,10 +4,8 @@ cache:
     - node_modules/
 
 validate:
-  stage: test
-  script:
-    - npm install
-    - npm run lint
+  image: gramener/builderrors
+  script: builderrors
 
 deploy:
   stage: deploy

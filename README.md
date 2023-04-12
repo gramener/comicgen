@@ -274,7 +274,8 @@ npm upgrade
 npm run build
 npm run lint
 
-git commit . -m"DOC: Release version x.x.x"
+export VERSION=1.x.x
+git commit . -m"DOC: Release version $VERSION"
 git push origin v1
 git push gitlab v1
 # Then: Test build at https://code.gramener.com/s.anand/deedey/-/pipelines
@@ -283,7 +284,7 @@ git push gitlab v1
 # Merge into release branch
 git checkout release
 git merge v1
-git tag -a v1.x.x -m"Add a one-line summary"
+git tag -a v$VERSION -m"Release version $VERSION"
 git push gitlab release --follow-tags
 git push origin release --follow-tags
 git checkout v1
@@ -292,7 +293,6 @@ git checkout v1
 Then release on [npm](https://www.npmjs.com/package/comicgen) and [Docker](https://hub.docker.com/repository/docker/gramener/comicgen):
 
 ```bash
-export VERSION=1.x.x
 # npm repo owned by @sanand0
 npm publish
 docker build --tag gramener/comicgen:latest --tag gramener/comicgen:$VERSION pkg/docker/
