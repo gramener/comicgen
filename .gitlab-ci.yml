@@ -5,7 +5,8 @@ cache:
 
 validate:
   image: gramener/builderrors
-  script: builderrors
+  # All templates are identical. noto, fximages, etc. have duplicate SVGs. Skip these issues
+  script: builderrors --skip=duplicate-files
 
 deploy:
   stage: deploy
