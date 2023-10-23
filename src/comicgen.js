@@ -44,12 +44,9 @@ function comicgen(fs) {
             let targetVal = $source.find(selector).attr(attr);
             if (!sourceVal || !targetVal) return;
             let interpolator = () => sourceVal;
-            if (method == "path")
-              interpolator = interpolate.interpolatePath(targetVal, sourceVal);
-            else if (method == "color")
-              interpolator = colorInterpolate([targetVal, sourceVal]);
-            else if (method == "number")
-              interpolator = interpolateNumber(targetVal, sourceVal);
+            if (method == "path") interpolator = interpolate.interpolatePath(targetVal, sourceVal);
+            else if (method == "color") interpolator = colorInterpolate([targetVal, sourceVal]);
+            else if (method == "number") interpolator = interpolateNumber(targetVal, sourceVal);
             else interpolator = interpolateString(targetVal, sourceVal);
             $(selector, $source).attr(attr, interpolator(value));
           });
@@ -93,20 +90,17 @@ function comicgen(fs) {
       // Render the SVG as a template
       const attrs = _.merge(
         {
-          speechbubble: () => (text, render) =>
-            speechbubble({ ...attrs, text: render(text) }),
+          speechbubble: () => (text, render) => speechbubble({ ...attrs, text: render(text) }),
         },
         config.defaults,
         template,
-        comic.functions
+        comic.functions,
       );
       let width = +attrs.width || config.defaults.width;
       let height = +attrs.height || config.defaults.height;
       const comic_width_half = width / 2;
       const comic_height_half = height / 2;
-      const mirror_transform = attrs.mirror
-        ? `translate(${width},0) scale(-1, 1)`
-        : "";
+      const mirror_transform = attrs.mirror ? `translate(${width},0) scale(-1, 1)` : "";
       const aspect = config.aspect || "xMidYMin slice";
       // Characters with a default width & height are drawn to that viewBox.
       // Others (like speechbubbles) are drawn dynamically based on width/height, and have no viewBox
@@ -127,17 +121,8 @@ function comicgen(fs) {
           },
         });
         let padding = +attrs.boxgap || +attrs.box;
-        let path = gen.opsToPath(
-          gen.rectangle(
-            padding / 2,
-            padding / 2,
-            width - padding,
-            height - padding
-          ).sets[0]
-        );
-        box = `<path d="${path}" fill="none" stroke="${
-          attrs.boxcolor || "black"
-        }" stroke-width="${attrs.box}"></path>`;
+        let path = gen.opsToPath(gen.rectangle(padding / 2, padding / 2, width - padding, height - padding).sets[0]);
+        box = `<path d="${path}" fill="none" stroke="${attrs.boxcolor || "black"}" stroke-width="${attrs.box}"></path>`;
       }
       // TODO: check if overflow is working
       const overflow = attrs.box ? "" : 'style="overflow:visible"';
@@ -145,14 +130,12 @@ function comicgen(fs) {
       svg = `
   <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" ${overflow}>
     ${box}
-    <svg ${viewBox} preserveAspectRatio="${aspect}" width="${
-        config.defaults.width || "100%"
-      }" height="${config.defaults.height || "100%"}" ${overflow}>
+    <svg ${viewBox} preserveAspectRatio="${aspect}" width="${config.defaults.width || "100%"}" height="${
+      config.defaults.height || "100%"
+    }" ${overflow}>
       <g transform="${mirror_transform} translate(${comic_width_half},${comic_height_half}) scale(${
         attrs.scale
-      }) translate(-${comic_width_half},-${comic_height_half}) translate(${
-        attrs.x
-      },${attrs.y})">
+      }) translate(-${comic_width_half},-${comic_height_half}) translate(${attrs.x},${attrs.y})">
         ${render(svg, attrs)}
       </g>
     </svg>
@@ -160,7 +143,7 @@ function comicgen(fs) {
       // If the template contains a <comic> object, recursively replace it with comic().
       // Get the replacement parameters from the template object, or the parent replacements object.
       const _new_replacements = _.mapValues(config.replace, (v, k) =>
-        _.merge(v, { value: template[k] || _replacements?.[k]?.value })
+        _.merge(v, { value: template[k] || _replacements?.[k]?.value }),
       );
       return comic(svg, _new_replacements);
     } else throw new Error("TODO");
@@ -175,9 +158,7 @@ function comicgen(fs) {
         t = +render(t);
         const gap = r + t;
         const gen = roughjs.generator({ options: { roughnesss: r } });
-        return gen.opsToPath(
-          gen.rectangle(+x + gap, +y + gap, +w - 2 * gap, +h - 2 * gap).sets[0]
-        );
+        return gen.opsToPath(gen.rectangle(+x + gap, +y + gap, +w - 2 * gap, +h - 2 * gap).sets[0]);
       };
     },
   };
@@ -188,9 +169,7 @@ function comicgen(fs) {
   function get_template(svg_path) {
     let svg = fs.readFileSync(svg_path, { encoding: "utf-8" });
     return svg.replace(/<\?import\s+(.*?)\?>/, function (match, import_path) {
-      return get_template(
-        path.join(svg_path, "..", import_path.replace(/^["']|["']$/g, ""))
-      );
+      return get_template(path.join(svg_path, "..", import_path.replace(/^["']|["']$/g, "")));
     });
   }
 

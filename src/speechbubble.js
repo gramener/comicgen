@@ -6,18 +6,12 @@ const fontRoot = path.join(__dirname, "..", "fonts");
 // Map Google Fonts to the main font file to use.
 // Keep this in sync with speechbubbles/index.json
 let fonts = {
-  "Architects Daughter": path.join(
-    fontRoot,
-    "Architects_Daughter-400-latin1.woff2"
-  ),
+  "Architects Daughter": path.join(fontRoot, "Architects_Daughter-400-latin1.woff2"),
   "News Cycle": path.join(fontRoot, "News_Cycle-400-latin-ext1.woff2"),
   "Indie Flower": path.join(fontRoot, "Indie_Flower-400-latin1.woff2"),
   "Amatic SC": path.join(fontRoot, "Amatic_SC-400-latin-ext4.woff2"),
   Schoolbell: path.join(fontRoot, "Schoolbell-400-latin1.woff2"),
-  "Just Another Hand": path.join(
-    fontRoot,
-    "Just_Another_Hand-400-latin1.woff2"
-  ),
+  "Just Another Hand": path.join(fontRoot, "Just_Another_Hand-400-latin1.woff2"),
   Neucha: path.join(fontRoot, "Neucha-400-latin2.woff2"),
   Handlee: path.join(fontRoot, "Handlee-400-latin1.woff2"),
   Roboto: path.join(fontRoot, "Roboto-400-latin7.woff2"),
@@ -81,27 +75,9 @@ let attr_map = {
   },
 };
 
-function speechshape({
-  x = 0,
-  y = 0,
-  width,
-  height,
-  pointerx,
-  pointery,
-  fill = "#fff",
-  stroke = "#000",
-  rough = 0,
-}) {
+function speechshape({ x = 0, y = 0, width, height, pointerx, pointery, fill = "#fff", stroke = "#000", rough = 0 }) {
   // Convert to numbers
-  [x, y, width, height, pointerx, pointery, rough] = [
-    +x,
-    +y,
-    +width,
-    +height,
-    +pointerx,
-    +pointery,
-    +rough,
-  ];
+  [x, y, width, height, pointerx, pointery, rough] = [+x, +y, +width, +height, +pointerx, +pointery, +rough];
   // Create main speech shape
   const paths = [
     [x, y],
@@ -175,16 +151,10 @@ function speechshape({
   let pathstr = [];
   paths.forEach((p, i) =>
     pathstr.push(
-      i > 0
-        ? `M${jitter(paths[i - 1])} L${jitter(p)} M${jitter(
-            paths[i - 1]
-          )} L${jitter(p)}`
-        : `M${jitter(p)}`
-    )
+      i > 0 ? `M${jitter(paths[i - 1])} L${jitter(p)} M${jitter(paths[i - 1])} L${jitter(p)}` : `M${jitter(p)}`,
+    ),
   );
-  return `<path d="${pathstr.join(
-    " "
-  )}" fill="${fill}" stroke="${stroke}"></path>`;
+  return `<path d="${pathstr.join(" ")}" fill="${fill}" stroke="${stroke}"></path>`;
 }
 
 function speechbubble(options) {
@@ -221,10 +191,9 @@ function speechbubble(options) {
       align: "middle",
       rough: 2.5,
     },
-    options
+    options,
   );
-  if (!fonts[options["font-family"]])
-    options["font-family"] = Object.keys(fonts)[0];
+  if (!fonts[options["font-family"]]) options["font-family"] = Object.keys(fonts)[0];
   let font = fonts[options["font-family"]];
   let fontSize = +options["font-size"];
   let lineHeight = +options["font-size"] * +options["line-height"];
@@ -244,9 +213,7 @@ function speechbubble(options) {
   let text = wrap(options.text, maxWidth, font)
     .map(
       (line, i) => `<text transform="translate(${padding},${padding})"
-      font-size="${fontSize}" dy="${(i + 1) * lineHeight}" ${attrs.text.join(
-        " "
-      )}>${line}</text>`
+      font-size="${fontSize}" dy="${(i + 1) * lineHeight}" ${attrs.text.join(" ")}>${line}</text>`,
     )
     .join("\n");
   // Render the path

@@ -25,10 +25,7 @@ async function init() {
       _.each(lookup.where, (filter_val, filter_key) => {
         if (filter_val.expr) {
           // TODO: Don't hard-code side
-          let expr = new Function(
-            "q",
-            `return q["${filter_val.expr}"] || 'side'`
-          );
+          let expr = new Function("q", `return q["${filter_val.expr}"] || 'side'`);
           filter[filter_key] = expr(q);
         } else {
           filter[filter_key] = filter_val;
@@ -62,12 +59,8 @@ async function init() {
     return result;
   };
 
-  const menu_template = _.template(
-    document.querySelector("#menu-template").innerHTML
-  );
-  const code_template = _.template(
-    document.querySelector("#codegen").innerHTML
-  );
+  const menu_template = _.template(document.querySelector("#menu-template").innerHTML);
+  const code_template = _.template(document.querySelector("#codegen").innerHTML);
   const $codetemp = document.querySelector("#codetemp");
   const $menu = document.querySelector("#menu");
   const $character = document.querySelector("#character .target");
@@ -85,25 +78,21 @@ async function init() {
 
   function getParams() {
     let params = new URLSearchParams();
-    for (let node of $menu.querySelectorAll("select, input"))
-      params.append(node.name, node.value);
+    for (let node of $menu.querySelectorAll("select, input")) params.append(node.name, node.value);
     return params;
   }
 
   function bg_color(e) {
     if (e.target.classList.contains("bg-color"))
       // The first rule in the first sheet defines the background color for the target-container
-      state.bgcolor =
-        document.styleSheets[0].cssRules[0].style.backgroundColor =
-          e.target.value;
+      state.bgcolor = document.styleSheets[0].cssRules[0].style.backgroundColor = e.target.value;
   }
 
   // Render the document based on query parameters
   async function render() {
     let q = g1.url.parse(location.hash.replace(/^#/, "?")).searchKey;
     // If the name or parent keys have changed, re-render the menu
-    const menu_change =
-      !current.name || _.some(current, (val, key) => current[key] != q[key]);
+    const menu_change = !current.name || _.some(current, (val, key) => current[key] != q[key]);
     // If the menu has changed, re-render the menu
     if (menu_change) {
       let opt = options(q);
@@ -156,19 +145,17 @@ init();
 // Render part of README.md as Markdown. Sections delimited by <!-- var ... !>...<!-- end -->
 $.get("README.md").done(function (text) {
   let converter = new showdown.Converter({ ghCodeBlocks: true, tables: true });
-  text
-    .match(/<!--\s*var\s+\S*\s*-->[\s\S]*?<!--\s*end\s*-->/gim)
-    .forEach(function (match) {
-      let lines = match.split(/\n/);
-      let name = lines[0].replace(/^<!--\s*var\s+/, "").replace(/\s*-->$/, "");
-      $('md[data-target="' + name + '"]')
-        .addClass("d-block my-4")
-        .html(converter.makeHtml(lines.slice(1, -1).join("\n")))
-        .find("pre")
-        .each(function () {
-          hljs.highlightBlock(this);
-        });
-    });
+  text.match(/<!--\s*var\s+\S*\s*-->[\s\S]*?<!--\s*end\s*-->/gim).forEach(function (match) {
+    let lines = match.split(/\n/);
+    let name = lines[0].replace(/^<!--\s*var\s+/, "").replace(/\s*-->$/, "");
+    $('md[data-target="' + name + '"]')
+      .addClass("d-block my-4")
+      .html(converter.makeHtml(lines.slice(1, -1).join("\n")))
+      .find("pre")
+      .each(function () {
+        hljs.highlightBlock(this);
+      });
+  });
   $("md table")
     .addClass("table table-sm")
     .find("a")

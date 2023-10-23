@@ -35,10 +35,7 @@ const path = require("path");
 const glob = require("glob");
 const cheerio = require("cheerio");
 const get_config = require("../src/getconfig").get_config;
-const root = path
-  .join(__dirname, "..", "svg")
-  .split(path.sep)
-  .join(path.posix.sep);
+const root = path.join(__dirname, "..", "svg").split(path.sep).join(path.posix.sep);
 
 const chars = {};
 // Loop through all immediate child folders. Each folder is a character/template
@@ -56,8 +53,7 @@ glob.sync(`${root}/*/`).forEach((dirPath) => {
     .map((i, node) => {
       const name = node.attribs["name"];
       // If the name ends with .svg, it's a file.
-      if (name.match(/\.svg$/i))
-        return name.replace("{{name}}/", "").replace(/.svg$/i, "");
+      if (name.match(/\.svg$/i)) return name.replace("{{name}}/", "").replace(/.svg$/i, "");
       // Else, it's a comic character lookup. It should be specified in index.json/lookup
     })
     .get();
@@ -90,9 +86,7 @@ function getFiles(dir) {
 function get_template(svg_path) {
   let svg = fs.readFileSync(svg_path, { encoding: "utf-8" });
   return svg.replace(/<\?import\s+(.*?)\?>/, function (match, import_path) {
-    return get_template(
-      path.join(svg_path, "..", import_path.replace(/^["']|["']$/g, ""))
-    );
+    return get_template(path.join(svg_path, "..", import_path.replace(/^["']|["']$/g, "")));
   });
 }
 
@@ -112,12 +106,6 @@ fs.writeFileSync(target, JSON.stringify(chars, null, 2), { encoding: "utf8" });
 // }
 const comicdata = {};
 glob.sync(`${root}/**/*`).forEach((file) => {
-  comicdata[file.replace(`${root}/`, "")] = fs.lstatSync(file).isDirectory()
-    ? ""
-    : fs.readFileSync(file, "utf8");
+  comicdata[file.replace(`${root}/`, "")] = fs.lstatSync(file).isDirectory() ? "" : fs.readFileSync(file, "utf8");
 });
-fs.writeFileSync(
-  path.join(__dirname, "..", "dist", "fs.json"),
-  JSON.stringify(comicdata, undefined, 2),
-  "utf-8"
-);
+fs.writeFileSync(path.join(__dirname, "..", "dist", "fs.json"), JSON.stringify(comicdata, undefined, 2), "utf-8");

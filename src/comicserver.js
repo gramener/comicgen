@@ -41,9 +41,7 @@ app.get("/comic", async (req, res) => {
   res.set("Cache-Control", "public, max-age=3600");
   if (req.query.ext && req.query.ext.match(/png/i)) {
     try {
-      result = await sharp(Buffer.from(result, "utf8"))
-        .toFormat("png", { colors: 256 })
-        .toBuffer();
+      result = await sharp(Buffer.from(result, "utf8")).toFormat("png", { colors: 256 }).toBuffer();
       res.set("Content-Type", "image/png");
     } catch (e) {
       return handleException(e, req, res, start);

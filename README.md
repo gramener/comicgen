@@ -143,22 +143,13 @@ You can embed these files directly in your plugin.
 To include comic as HTML components, add this to your page:
 
 ```html
-<script
-  src="https://cdn.jsdelivr.net/npm/uifactory@1.18.0/dist/uifactory.min.js"
-  import="@comic-gen"
-></script>
+<script src="https://cdn.jsdelivr.net/npm/uifactory@1.18.0/dist/uifactory.min.js" import="@comic-gen"></script>
 ```
 
 Then you can add a `<comic-gen>` tag with the options for each character as attributes, like this:
 
 ```html
-<comic-gen
-  name="ethan"
-  angle="side"
-  emotion="wink"
-  pose="normal"
-  ext="svg"
-></comic-gen>
+<comic-gen name="ethan" angle="side" emotion="wink" pose="normal" ext="svg"></comic-gen>
 ```
 
 To render as a PNG, change `ext="svg"` to `ext="png"`.
