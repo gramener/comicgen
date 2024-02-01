@@ -13,12 +13,12 @@ deploy:
   only: [v1, release]
   script:
     - 'ssh ubuntu@gramener.com "
-        cd /mnt/gramener/apps/comicgenv1;
-        git checkout -- .;
-        git pull;
-        npm install;
-        npm run build;
-        sudo systemctl restart comicgenv1;
+      cd /mnt/gramener/apps/comicgenv1;
+      git checkout -- .;
+      git pull;
+      npm install;
+      npm run build;
+      sudo systemctl restart comicgenv1;
       "'
   environment:
     name: production
