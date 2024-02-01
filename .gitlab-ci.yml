@@ -20,3 +20,6 @@ deploy:
         npm run build;
         sudo systemctl restart comicgenv1;
       "'
+  environment:
+    name: production
+    url: https://gramener.com/comicgen/v1/
