@@ -1,6 +1,6 @@
 {
   "name": "comicgen",
-  "version": "1.9.8",
+  "version": "1.9.9",
   "description": "Add comics to your website or app with an API. Choose a character, angle, emotion and pose. Embed on your page.",
   "main": "src/comicgen.js",
   "jsdelivr": "src/comicgen.js",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "rimraf dist && node src/buildchars.js",
-    "lint": "npx prettier --write \"**/*.{js,css,md}\" && eslint --ext js,html . && npm audit",
+    "lint": "npx prettier@3.2 --write \"**/*.{js,css,md}\" && eslint --ext js,html . && npm audit",
     "prepublishOnly": "npm run lint",
     "postinstall": "npm run build && node src/speechbubble.js",
     "start": "node src/comicserver.js"
@@ -31,14 +31,14 @@
     "mustache": "4",
     "rimraf": "3",
     "roughjs": "^4.5.2",
-    "sharp": "^0.30.7",
+    "sharp": "^0.33.2",
     "winston": "^3.8.1",
     "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-plugin-html": "^6.2.0",
-    "prettier": "^3.0.3"
+    "prettier": "^3.2"
   },
   "prettier": {
     "printWidth": 120

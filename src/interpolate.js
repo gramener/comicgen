@@ -42,12 +42,14 @@ function string(a, b) {
     if ((bs = bm.index) > bi) {
       // a string precedes the next number in b
       bs = b.slice(bi, bs);
-      if (s[i]) s[i] += bs; // coalesce with previous string
+      if (s[i])
+        s[i] += bs; // coalesce with previous string
       else s[++i] = bs;
     }
     if ((am = am[0]) === (bm = bm[0])) {
       // numbers in a & b match
-      if (s[i]) s[i] += bm; // coalesce with previous string
+      if (s[i])
+        s[i] += bm; // coalesce with previous string
       else s[++i] = bm;
     } else {
       // interpolate non-matching numbers
@@ -60,7 +62,8 @@ function string(a, b) {
   // Add remains of b.
   if (bi < b.length) {
     bs = b.slice(bi);
-    if (s[i]) s[i] += bs; // coalesce with previous string
+    if (s[i])
+      s[i] += bs; // coalesce with previous string
     else s[++i] = bs;
   }
 
